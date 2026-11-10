@@ -243,3 +243,11 @@ table.features td .nd { display: block; color: var(--text-muted); font-size: 11p
 .tooltip .tt-note { color: var(--text-muted); margin-top: 4px; }
 
 footer { padding: 24px 0 40px; color: var(--text-muted); font-size: 12.5px; }
+
+/* dataset selector and comparison table */
+.dataset-row { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin-top: 12px; }
+.dataset-desc { margin-top: 6px; }
+table.data.compare td:first-child { white-space: normal; min-width: 160px; }
+table.data.compare tr.selected td { background: var(--wash); font-weight: 600; }
+table.data.compare tbody tr { cursor: pointer; }
+table.data.compare th.group { text-align: center; border-bottom: 1px solid var(--grid); }

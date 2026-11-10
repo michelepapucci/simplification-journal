@@ -1,17 +1,23 @@
 (() => {
   "use strict";
 
-  const D = window.WEBVIEW_DATA;
+  const ALL = window.WEBVIEW_DATASETS || {};
+  const ORDER = ["clicit2025", "v0", "v1"].filter((k) => ALL[k]);
   const SVG_NS = "http://www.w3.org/2000/svg";
   const NF = new Intl.NumberFormat("en-US");
-  const SPLITS = { train: "Training", test: "Test" };
-  const STRATEGIES = { base: "Base", lexical: "Lexical", syntax: "Syntax" };
   const DIMS = { all: "Global", base: "Base", lexical: "Lexical", syntax: "Syntax" };
-  const FEATURES = D.features.map((f) => f.name);
-  const MIN_PAIRS = D.meta.min_pairs;
+  const COMPARE_FEATURES = ["n_tokens", "char_per_tok", "in_dict", "lexical_density", "avg_max_depth", "verbal_head_per_sent", "subordinate_proposition_dist"];
+  let D, SPLITS, STRATEGIES, FEATURES, MIN_PAIRS;
+  function useDataset(id) {
+    D = ALL[id];
+    SPLITS = D.meta.splits;
+    STRATEGIES = D.meta.strategies;
+    FEATURES = D.features.map((f) => f.name);
+    MIN_PAIRS = D.meta.min_pairs;
+  }
 
   const state = {
-    split: "train", strategy: "base", level: "all", dim: "all", topN: 40,
+    data: ORDER.includes("v1") ? "v1" : ORDER[0], split: "train", strategy: "base", level: "all", dim: "all", topN: 40,
     sort: { key: "absr", dir: "desc" }, search: "", category: "", minR: 0, sigOnly: true,
   };
 
@@ -60,7 +66,8 @@
     return p.toFixed(3);
   }
   const signed = (x, digits = 2) => (x == null ? "–" : (x < 0 ? "−" : x > 0 ? "+" : "") + Math.abs(x).toFixed(digits));
-  const levelName = (l) => (l === "all" ? "all control tokens" : `CT ${l}`);
+  const levelName = (l) => (l === "all" ? (D.levels.length ? "all levels" : "all pairs") : `${D.meta.level_label} ${l}`);
+  const levelHead = (l) => (l === "all" ? "All" : `${D.meta.level_label} ${l}`);
   const ctToken = (strategy, l) => `<|readability_${strategy}_${l}|>`;
 
   // ---------- data access ----------
@@ -240,23 +247,28 @@
   // ---------- static sections ----------
   function renderMeta() {
     const files = Object.entries(D.meta.sources).map(([f, h12]) => `${f} (${h12})`).join(", ");
+    $("dataset-desc").textContent = D.meta.description;
     $("meta").textContent = `Generated ${D.meta.generated} from ${files}.`;
   }
 
   function renderCounts() {
+    $("counts-title").textContent = D.levels.length ? `Pairs per ${D.meta.level_label === "CT" ? "control token" : "target level"}` : "Pairs";
+    $("counts-sub").textContent = `${D.meta.counts_note} Within each slice the analyses keep one simplification per original sentence ` +
+      "(the smaller “used” figure). Click a cell to inspect that slice below.";
     const table = clear($("counts"));
     const cols = ["all", ...D.levels];
     table.append(h("thead", {}, h("tr", {}, h("th", { scope: "col", text: "" }),
-      cols.map((l) => h("th", { scope: "col", text: l === "all" ? "All" : `CT ${l}` })))));
+      cols.map((l) => h("th", { scope: "col", text: levelHead(l) })))));
     const body = h("tbody");
     for (const split of Object.keys(SPLITS)) {
       for (const strategy of Object.keys(STRATEGIES)) {
-        const tr = h("tr", {}, h("th", { scope: "row", text: `${SPLITS[split]} · ${strategy}` }));
+        if (!D.strata[key(split, strategy, "all")]) continue;
+        const tr = h("tr", {}, h("th", { scope: "row", text: `${SPLITS[split]} · ${STRATEGIES[strategy]}` }));
         for (const level of cols) {
           const st = D.strata[key(split, strategy, level)];
           if (!st) { tr.append(h("td", { class: "none", text: "–" })); continue; }
           const selected = split === state.split && strategy === state.strategy && String(level) === String(state.level);
-          const label = `${SPLITS[split]}, ${strategy}, ${levelName(level)}: ${fmtInt(st.n_rows)} pairs` +
+          const label = `${SPLITS[split]}, ${STRATEGIES[strategy]}, ${levelName(level)}: ${fmtInt(st.n_rows)} pairs` +
             (st.n_pairs !== st.n_rows ? `, ${fmtInt(st.n_pairs)} used` : "");
           tr.append(h("td", {}, h("button", {
             type: "button", class: [selected && "selected", st.n_pairs < MIN_PAIRS && "sparse"].filter(Boolean).join(" ") || null,
@@ -278,6 +290,7 @@
   ];
   function renderFig1() {
     const f = D.figure1;
+    $("fig1-title").textContent = `Most, random and least simplified version of each original · ${D.meta.fig1_note}`;
     const counts = Object.keys(f.per_original).map(Number);
     $("fig1-sub").textContent = `${fmtInt(f.n_originals)} original sentences with ${Math.min(...counts)}–${Math.max(...counts)} simplifications each ` +
       `(${fmtInt(f.n_pairs)} pairs). As in the 2025 paper, the versions of each original are ranked by READ-IT global; ` +
@@ -304,11 +317,9 @@
     const box = clear($("methods"));
     const code = (t) => h("code", { text: t });
     box.append(h("ul", {},
-      h("li", {}, "Data: ", Object.keys(m.sources).map((f, i) => [i ? ", " : "", code(f)]),
-        " (dataset v0), built by ", code("scripts/build_dataset_v0.py"), " on the master branch from the Wikipedia part of the IMPaCTS release on Hugging Face (",
-        code("mpapucci/impacts"), "; original READ-IT global > 70, no READ-IT score higher after simplification, GFFF noise filters); these statistics by ", code("scripts/build_webview_data.py"),
-        ` (seed ${m.seed}). File hashes (SHA-256, first 12 characters) are in the header.`),
-      h("li", {}, "Slices: every training pair appears once per strategy, labelled with that strategy’s control token, so the three “all control tokens” training slices hold the same pairs. ",
+      h("li", {}, "Data: ", Object.keys(m.sources).map((f, i) => [i ? ", " : "", code(f)]), `: ${m.data_note} These statistics by `,
+        code("scripts/build_webview_data.py"), ` on the master branch (seed ${m.seed}). File hashes (SHA-256, first 12 characters) are in the header.`),
+      h("li", {}, `Slices: ${m.counts_note} `,
         "An original sentence can have several simplifications, so each slice keeps one per original, picked at random, as the 2025 analysis did; the test sets already have one per original. ",
         `Slices with fewer than ${MIN_PAIRS} pairs show counts and examples only.`),
       h("li", {}, "READ-IT scores are shown on a 0–100 scale (0 = most readable). Curves are Gaussian kernel density estimates (Scott’s bandwidth) evaluated from −10 to 110, so they spill past 0 and 100 as in the 2025 figure."),
@@ -322,12 +333,57 @@
         "; collinear features are removed with a rank-revealing QR. With two groups Pillai’s trace has an exact F test. Its expected value under no difference, p / (N − 1), is shown as “chance”: it grows when a slice is small relative to the number of features, so compare slices against it."),
       h("li", {}, "Features come from Profiling-UD and are averages over the sentences of each text. ", code("n_sentences"),
         " is removed from the data because that averaging makes it always 1. Also left out because they never vary in this data: ",
-        m.dropped_constant_features.length ? m.dropped_constant_features.map((f, i) => [i ? ", " : "", code(f)]) : "none", ". ",
-        "The lemma frequency-class features of the 2025 paper are not in this dataset."),
+        m.dropped_constant_features.length ? m.dropped_constant_features.map((f, i) => [i ? ", " : "", code(f)]) : "none", "."),
     ));
   }
 
+  function renderCompare() {
+    const table = clear($("compare"));
+    const dims = ["all", "base", "lexical", "syntax"];
+    table.append(h("thead", {},
+      h("tr", {}, h("th", { rowspan: 2, text: "Dataset" }), h("th", { rowspan: 2, class: "num", text: "Pairs" }),
+        h("th", { colspan: 4, class: "group", text: "READ-IT drop" }), h("th", { colspan: 3, class: "group", text: "Pillai’s trace" }),
+        h("th", { colspan: COMPARE_FEATURES.length, class: "group" }, "Rank-biserial ", h("i", { text: "r" }))),
+      h("tr", {}, dims.map((d) => h("th", { class: "num", text: DIMS[d] })),
+        ["random", "most", "least"].map((k) => h("th", { class: "num", text: k })),
+        COMPARE_FEATURES.map((f) => h("th", { class: "num", text: f })))));
+    const body = h("tbody");
+    for (const id of ORDER) {
+      const ds = ALL[id], ov = ds.strata[ds.meta.overall_key];
+      const drop = (d) => (ov.summary ? ov.summary[d].original.mean - ov.summary[d].simplified.mean : null);
+      const mv = (k) => (ds.figure1.manova[k] ? ds.figure1.manova[k].V.toFixed(3) : "–");
+      const rOf = (name) => {
+        const j = ds.features.findIndex((f) => f.name === name);
+        if (j < 0 || !ov.stats) return h("td", { class: "num muted", text: "–" });
+        const sig = ov.stats.p[j] != null && ov.stats.p[j] < 0.05;
+        return h("td", { class: `num${sig ? "" : " muted"}`, text: signed(ov.stats.r[j]) });
+      };
+      const tr = h("tr", { class: id === state.data ? "selected" : null, tabindex: 0, "aria-label": `Show ${ds.meta.title}`,
+        onclick: () => setState({ data: id }), onkeydown: (e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); setState({ data: id }); } } },
+        h("td", { text: ds.meta.title }), h("td", { class: "num", text: fmtInt(ov.n_pairs) }),
+        dims.map((d) => h("td", { class: "num", text: fmtNum(drop(d), 1) })),
+        ["random", "most", "least"].map((k) => h("td", { class: "num", text: mv(k) })),
+        COMPARE_FEATURES.map(rOf));
+      body.append(tr);
+    }
+    table.append(body);
+  }
+
   // ---------- filtered sections ----------
+  function fillSegmented(id, options, prop) {
+    const box = clear($(id));
+    for (const [value, label] of Object.entries(options)) {
+      box.append(h("button", { type: "button", role: "radio", "data-value": value, "aria-checked": "false", onclick: () => setState({ [prop]: value }) }, label));
+    }
+  }
+  function renderDatasetControls() {
+    fillSegmented("split", SPLITS, "split");
+    fillSegmented("strategy", STRATEGIES, "strategy");
+    $("strategy-label").textContent = D.meta.strategy_label;
+    $("level-label").textContent = !D.levels.length ? "Level" : D.meta.level_label === "CT" ? "Control token" : "Target level";
+    for (const b of $("dataset").children) b.setAttribute("aria-checked", String(b.dataset.value === state.data));
+  }
+
   function renderFilters() {
     for (const prop of ["split", "strategy"]) {
       for (const b of $(prop).children) b.setAttribute("aria-checked", String(b.dataset.value === state[prop]));
@@ -336,12 +392,12 @@
     const all = stratum(state.split, state.strategy, "all");
     sel.append(h("option", { value: "all", text: `All (${fmtInt(all.n_rows)} pairs)` }));
     for (const l of levelsOf(state.split, state.strategy)) {
-      sel.append(h("option", { value: String(l), text: `CT ${l} (${fmtInt(stratum(state.split, state.strategy, l).n_rows)})` }));
+      sel.append(h("option", { value: String(l), text: `${levelHead(l)} (${fmtInt(stratum(state.split, state.strategy, l).n_rows)})` }));
     }
     sel.value = String(state.level);
     $("dim").value = state.dim;
     const st = stratum();
-    $("slice-summary").textContent = `${SPLITS[state.split]} · ${state.level === "all" ? "all control tokens" : ctToken(state.strategy, state.level)} · ` +
+    $("slice-summary").textContent = `${SPLITS[state.split]} · ${STRATEGIES[state.strategy]} · ${state.level === "all" ? levelName("all") : ctToken(state.strategy, state.level)} · ` +
       `${fmtInt(st.n_pairs)} pairs` + (st.n_pairs !== st.n_rows ? ` used of ${fmtInt(st.n_rows)}` : "");
   }
 
@@ -354,7 +410,7 @@
 
   function renderKdeMain() {
     const st = stratum();
-    $("kde-title").textContent = `READ-IT ${DIMS[state.dim].toLowerCase()} · ${SPLITS[state.split]}, ${state.strategy}, ${levelName(state.level)}`;
+    $("kde-title").textContent = `READ-IT ${DIMS[state.dim].toLowerCase()} · ${SPLITS[state.split]}, ${STRATEGIES[state.strategy]}, ${levelName(state.level)}`;
     let sub = `Original sentences and their simplifications in this slice (${fmtInt(st.n_pairs)} pairs).`;
     if (state.level !== "all") {
       sub += state.dim === state.strategy
@@ -374,23 +430,24 @@
   }
 
   function renderLevels() {
-    $("levels-title").textContent = `READ-IT ${DIMS[state.dim].toLowerCase()} by control token · ${SPLITS[state.split]}, ${state.strategy}`;
+    $("levels-title").textContent = `READ-IT ${DIMS[state.dim].toLowerCase()} by ${D.meta.level_label === "CT" ? "control token" : "target level"} · ${SPLITS[state.split]}, ${STRATEGIES[state.strategy]}`;
     legend($("levels-legend"), pairSeries());
     const box = clear($("levels-chart"));
     const levels = levelsOf(state.split, state.strategy);
+    if (!levels.length) box.append(h("p", { class: "levels-empty", text: "This slice has no levels: choose a strategy or dimension that has control tokens." }));
     levels.forEach((l, i) => {
       const st = stratum(state.split, state.strategy, l);
       const last = i === levels.length - 1;
       const row = h("div", {
         class: `levels-row${String(state.level) === String(l) ? " selected" : ""}`, role: "button", tabindex: 0,
-        "aria-label": `Select CT ${l}`, onclick: () => setState({ level: l }),
+        "aria-label": `Select ${levelHead(l)}`, onclick: () => setState({ level: l }),
         onkeydown: (e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); setState({ level: l }); } },
-      }, h("div", { class: "levels-label" }, h("strong", { text: `CT ${l}` }), `${fmtInt(st.n_pairs)} pairs`));
+      }, h("div", { class: "levels-label" }, h("strong", { text: levelHead(l) }), `${fmtInt(st.n_pairs)} pairs`));
       const cell = h("div");
       row.append(cell);
       box.append(row);
       if (st.kde) {
-        kdeChart(cell, { series: pairSeries(st.kde[state.dim]), height: last ? 78 : 56, compact: true, showXAxis: last, band: bandFor(l), label: `CT ${l}: original vs simplified` });
+        kdeChart(cell, { series: pairSeries(st.kde[state.dim]), height: last ? 78 : 56, compact: true, showXAxis: last, band: bandFor(l), label: `${levelHead(l)}: original vs simplified` });
       } else {
         cell.append(h("div", { class: "levels-empty", text: "too few pairs for a distribution" }));
       }
@@ -406,7 +463,7 @@
   }
 
   function renderHeatmap() {
-    $("heat-title").textContent = `Effect sizes by control token · ${SPLITS[state.split]}, ${state.strategy}`;
+    $("heat-title").textContent = `Effect sizes by ${D.levels.length ? (D.meta.level_label === "CT" ? "control token" : "target level") : "slice"} · ${SPLITS[state.split]}, ${STRATEGIES[state.strategy]}`;
     renderHeatLegend();
     const box = clear($("heat-chart"));
     const cols = ["all", ...levelsOf(state.split, state.strategy)].filter((l) => stratum(state.split, state.strategy, l).stats);
@@ -456,7 +513,7 @@
       const st = stratum(state.split, state.strategy, l);
       const isSel = c === sel;
       svg.append(s("text", { x: cx(c) + colW / 2, y: pillaiH + 14, "text-anchor": "middle", "font-size": 12, "font-weight": isSel ? 650 : 500,
-        fill: isSel ? palette["text-primary"] : palette["text-secondary"], text: l === "all" ? "All" : `CT ${l}` }));
+        fill: isSel ? palette["text-primary"] : palette["text-secondary"], text: levelHead(l) }));
       svg.append(s("text", { class: "axis-text", x: cx(c) + colW / 2, y: pillaiH + 28, "text-anchor": "middle", "font-size": 10.5, text: fmtInt(st.n_pairs) }));
     });
 
@@ -539,7 +596,7 @@
 
   function renderTable() {
     const st = stratum();
-    $("table-title").textContent = `Features · ${SPLITS[state.split]}, ${state.strategy}, ${levelName(state.level)} · ${fmtInt(st.n_pairs)} pairs`;
+    $("table-title").textContent = `Features · ${SPLITS[state.split]}, ${STRATEGIES[state.strategy]}, ${levelName(state.level)} · ${fmtInt(st.n_pairs)} pairs`;
     const table = clear($("features"));
     if (!st.stats) {
       $("manova-line").textContent = "";
@@ -583,7 +640,7 @@
     const header = ["feature", "category", "mean_original", "sd_original", "mean_simplified", "sd_simplified", "rank_biserial_r", "p_wilcoxon", "pairs_that_differ", `spearman_rho_readit_${state.dim}`, "p_spearman"];
     const lines = [header.join(","), ...rows.map((r) => [r.name, r.cat, r.mo, r.so, r.ms, r.ss, r.r, r.p, r.nd, r.rho, r.rhop].map(esc).join(","))];
     const blob = new Blob([lines.join("\n") + "\n"], { type: "text/csv" });
-    const a = h("a", { href: URL.createObjectURL(blob), download: `profile_${state.split}_${state.strategy}_${state.level}.csv` });
+    const a = h("a", { href: URL.createObjectURL(blob), download: `profile_${state.data}_${state.split}_${state.strategy}_${state.level}.csv` });
     document.body.append(a);
     a.click();
     setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 0);
@@ -591,7 +648,7 @@
 
   function renderExamples() {
     const st = stratum();
-    $("examples-sub").textContent = `${st.examples.length} pairs drawn at random from ${SPLITS[state.split].toLowerCase()}, ${state.strategy}, ${levelName(state.level)}. ` +
+    $("examples-sub").textContent = `${st.examples.length} pairs drawn at random from ${SPLITS[state.split].toLowerCase()}, ${STRATEGIES[state.strategy]}, ${levelName(state.level)}. ` +
       `Scores are READ-IT ${DIMS[state.dim].toLowerCase()}.`;
     const box = clear($("examples"));
     for (const ex of st.examples) {
@@ -603,8 +660,12 @@
 
   // ---------- state, URL, wiring ----------
   function normalise() {
-    if (!SPLITS[state.split]) state.split = "train";
-    if (!STRATEGIES[state.strategy]) state.strategy = "base";
+    if (!ALL[state.data]) state.data = ORDER[0];
+    if (D !== ALL[state.data]) useDataset(state.data);
+    if (!SPLITS[state.split]) state.split = Object.keys(SPLITS)[0];
+    if (!STRATEGIES[state.strategy] || !stratum(state.split, state.strategy, "all")) {
+      state.strategy = Object.keys(STRATEGIES).find((k) => stratum(state.split, k, "all"));
+    }
     if (!DIMS[state.dim]) state.dim = "all";
     if (state.level !== "all") {
       state.level = Number(state.level);
@@ -612,11 +673,12 @@
     }
   }
   function writeHash() {
-    const p = new URLSearchParams({ split: state.split, strategy: state.strategy, level: state.level, score: state.dim });
+    const p = new URLSearchParams({ data: state.data, split: state.split, strategy: state.strategy, level: state.level, score: state.dim });
     history.replaceState(null, "", `#${p}`);
   }
   function readHash() {
     const p = new URLSearchParams(location.hash.slice(1));
+    if (p.get("data")) state.data = p.get("data");
     if (p.get("split")) state.split = p.get("split");
     if (p.get("strategy")) state.strategy = p.get("strategy");
     if (p.get("level")) state.level = p.get("level") === "all" ? "all" : Number(p.get("level"));
@@ -626,9 +688,18 @@
     Object.assign(state, patch);
     render();
   }
+  let shownData = null;
   function render() {
     normalise();
     readPalette();
+    if (shownData !== state.data) {
+      shownData = state.data;
+      renderDatasetControls();
+      renderMeta();
+      renderMethods();
+      renderFig1();
+    }
+    renderCompare();
     renderFilters();
     renderCounts();
     renderKdeMain();
@@ -639,19 +710,16 @@
     writeHash();
   }
   function renderAll() {
-    readPalette();
-    renderFig1();
+    shownData = null;
     render();
   }
 
-  function buildSegmented(id, options, prop) {
+  // Arrow keys move through a segmented control; the options are read at key time, since they change with the dataset.
+  function segmentedKeys(id, prop, optionsOf) {
     const box = $(id);
-    for (const [value, label] of Object.entries(options)) {
-      box.append(h("button", { type: "button", role: "radio", "data-value": value, "aria-checked": "false", onclick: () => setState({ [prop]: value }) }, label));
-    }
     box.addEventListener("keydown", (e) => {
       if (e.key !== "ArrowLeft" && e.key !== "ArrowRight") return;
-      const values = Object.keys(options), i = values.indexOf(state[prop]);
+      const values = Object.keys(optionsOf()), i = values.indexOf(state[prop]);
       const next = values[(i + (e.key === "ArrowRight" ? 1 : values.length - 1)) % values.length];
       setState({ [prop]: next });
       box.querySelector(`[data-value="${next}"]`).focus();
@@ -680,8 +748,12 @@
 
   function init() {
     initTheme();
-    buildSegmented("split", SPLITS, "split");
-    buildSegmented("strategy", STRATEGIES, "strategy");
+    if (!ORDER.length) { document.querySelector("main").textContent = "No dataset loaded."; return; }
+    useDataset(state.data);
+    fillSegmented("dataset", Object.fromEntries(ORDER.map((k) => [k, ALL[k].meta.label])), "data");
+    segmentedKeys("dataset", "data", () => Object.fromEntries(ORDER.map((k) => [k, 1])));
+    segmentedKeys("split", "split", () => SPLITS);
+    segmentedKeys("strategy", "strategy", () => STRATEGIES);
     for (const [v, label] of Object.entries(DIMS)) $("dim").append(h("option", { value: v, text: label }));
     $("level").addEventListener("change", (e) => setState({ level: e.target.value === "all" ? "all" : Number(e.target.value) }));
     $("dim").addEventListener("change", (e) => setState({ dim: e.target.value }));
@@ -694,8 +766,6 @@
     $("sig-only").addEventListener("change", (e) => { state.sigOnly = e.target.checked; renderTable(); });
     $("download").addEventListener("click", downloadCsv);
     readHash();
-    renderMeta();
-    renderMethods();
     renderAll();
     let timer;
     window.addEventListener("resize", () => { clearTimeout(timer); timer = setTimeout(renderAll, 150); });

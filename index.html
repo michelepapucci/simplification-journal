@@ -18,8 +18,13 @@
       and test the readability-controlled simplification models, taken from the Wikipedia part of
       <a href="https://huggingface.co/datasets/mpapucci/impacts">IMPaCTS</a>. The analyses are those of
       <a href="https://aclanthology.org/2025.clicit-1.82/">Papucci, Venturi &amp; Dell’Orletta (CLiC-it 2025)</a>,
-      re-run on this data and broken down by strategy and control token.
+      re-run on each dataset and broken down by control token.
     </p>
+    <div class="dataset-row">
+      <span class="filter-label" id="dataset-label">Dataset</span>
+      <div class="segmented" role="radiogroup" aria-labelledby="dataset-label" id="dataset"></div>
+    </div>
+    <p class="lede dataset-desc" id="dataset-desc"></p>
     <p class="meta" id="meta"></p>
   </header>
 
@@ -27,17 +32,13 @@
     <section class="wrap" aria-labelledby="overview-title">
       <h2 id="overview-title">The data at a glance</h2>
       <div class="card">
-        <h3>Pairs per control token</h3>
-        <p class="sub">
-          Each training pair appears once per strategy, with that strategy’s control token. The training set has
-          55,877 pairs; within each slice the analyses keep one simplification per original sentence
-          (the smaller “used” figure). Click a cell to inspect that slice below.
-        </p>
+        <h3 id="counts-title">Pairs per control token</h3>
+        <p class="sub" id="counts-sub"></p>
         <div class="scroll-x"><table class="counts" id="counts"></table></div>
       </div>
 
       <div class="card">
-        <h3>Most, random and least simplified version of each original · training set</h3>
+        <h3 id="fig1-title"></h3>
         <p class="sub" id="fig1-sub"></p>
         <div class="legend" id="fig1-legend"></div>
         <div class="chart" id="fig1-chart"></div>
@@ -52,6 +53,17 @@
           </div>
         </div>
       </div>
+
+      <div class="card">
+        <h3>Datasets compared</h3>
+        <p class="sub">
+          The same analyses on every dataset, one simplification per original. Drops are mean READ-IT of the originals minus
+          mean READ-IT of the simplifications (0–100). Pillai’s trace is from the two-group MANOVA (Table 4 of the 2025 paper) on the
+          randomly selected, most and least simplified version of each original. The feature columns give the rank-biserial <i>r</i>:
+          above 0, the feature is higher in the original. Click a row to switch dataset.
+        </p>
+        <div class="scroll-x"><table class="data compare" id="compare"></table></div>
+      </div>
     </section>
 
     <nav class="filters" aria-label="Data slice">
@@ -61,11 +73,11 @@
           <div class="segmented" role="radiogroup" aria-labelledby="split-label" id="split"></div>
         </div>
         <div class="filter">
-          <span class="filter-label" id="strategy-label">Strategy</span>
+          <span class="filter-label" id="strategy-label"></span>
           <div class="segmented" role="radiogroup" aria-labelledby="strategy-label" id="strategy"></div>
         </div>
         <div class="filter">
-          <label class="filter-label" for="level">Control token</label>
+          <label class="filter-label" for="level" id="level-label">Control token</label>
           <select id="level"></select>
         </div>
         <div class="filter">
@@ -145,7 +157,9 @@
   </main>
 
   <div class="tooltip" id="tooltip" role="tooltip" hidden></div>
-  <script src="data.js"></script>
+  <script src="data_clicit2025.js"></script>
+  <script src="data_v0.js"></script>
+  <script src="data_v1.js"></script>
   <script src="app.js"></script>
 </body>
 </html>
