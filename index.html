@@ -14,8 +14,9 @@
       <button type="button" class="theme-toggle" id="theme-toggle" aria-label="Colour theme">Theme: auto</button>
     </div>
     <p class="lede">
-      READ-IT distributions and linguistic profiles of the Wikipedia original–simplified pairs used to train
-      and test the readability-controlled simplification models. The analyses are those of
+      READ-IT distributions and linguistic profiles of the original–simplified pairs used to train
+      and test the readability-controlled simplification models, taken from the Wikipedia part of
+      <a href="https://huggingface.co/datasets/mpapucci/impacts">IMPaCTS</a>. The analyses are those of
       <a href="https://aclanthology.org/2025.clicit-1.82/">Papucci, Venturi &amp; Dell’Orletta (CLiC-it 2025)</a>,
       re-run on this data and broken down by strategy and control token.
     </p>
@@ -29,7 +30,7 @@
         <h3>Pairs per control token</h3>
         <p class="sub">
           Each training pair appears once per strategy, with that strategy’s control token. The training set has
-          57,720 pairs; within each slice the analyses keep one simplification per original sentence
+          55,877 pairs; within each slice the analyses keep one simplification per original sentence
           (the smaller “used” figure). Click a cell to inspect that slice below.
         </p>
         <div class="scroll-x"><table class="counts" id="counts"></table></div>

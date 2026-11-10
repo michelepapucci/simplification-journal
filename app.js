@@ -305,7 +305,8 @@
     const code = (t) => h("code", { text: t });
     box.append(h("ul", {},
       h("li", {}, "Data: ", Object.keys(m.sources).map((f, i) => [i ? ", " : "", code(f)]),
-        ", built by ", code("scripts/build_datasets.py"), " on the master branch; these statistics by ", code("scripts/build_webview_data.py"),
+        " (dataset v0), built by ", code("scripts/build_dataset_v0.py"), " on the master branch from the Wikipedia part of the IMPaCTS release on Hugging Face (",
+        code("mpapucci/impacts"), "; original READ-IT global > 70, no READ-IT score higher after simplification, GFFF noise filters); these statistics by ", code("scripts/build_webview_data.py"),
         ` (seed ${m.seed}). File hashes (SHA-256, first 12 characters) are in the header.`),
       h("li", {}, "Slices: every training pair appears once per strategy, labelled with that strategy’s control token, so the three “all control tokens” training slices hold the same pairs. ",
         "An original sentence can have several simplifications, so each slice keeps one per original, picked at random, as the 2025 analysis did; the test sets already have one per original. ",

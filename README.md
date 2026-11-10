@@ -9,7 +9,7 @@ simplification models, broken down by split, strategy and control token.
 
 ## Regenerating the data
 
-From a checkout of `master` that has the data built by `scripts/build_datasets.py`:
+From a checkout of `master` that has dataset v0 built by `scripts/build_dataset_v0.py` (in `data/v0/`):
 
 ```sh
 git worktree add ../simplification-journal-site gh-pages
