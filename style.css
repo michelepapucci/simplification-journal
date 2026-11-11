@@ -83,6 +83,8 @@ h3 { font-size: 16px; margin: 0 0 4px; font-weight: 600; }
 h4 { font-size: 13px; margin: 16px 0 6px; font-weight: 600; color: var(--text-secondary); }
 .lede { max-width: 78ch; color: var(--text-secondary); margin: 8px 0; }
 .meta { color: var(--text-muted); font-size: 13px; margin: 4px 0 0; }
+.findings { max-width: 78ch; margin: 10px 0 6px; padding-left: 20px; color: var(--text-secondary); }
+.findings li { margin: 4px 0; }
 .sub { color: var(--text-secondary); font-size: 13.5px; margin: 0 0 12px; max-width: 95ch; }
 
 .card {
@@ -251,3 +253,15 @@ table.data.compare td:first-child { white-space: normal; min-width: 160px; }
 table.data.compare tr.selected td { background: var(--wash); font-weight: 600; }
 table.data.compare tbody tr { cursor: pointer; }
 table.data.compare th.group { text-align: center; border-bottom: 1px solid var(--grid); }
+
+/* parts: data analysis and model generation analysis */
+.part-head { margin-top: 48px; padding-top: 24px; border-top: 2px solid var(--border); }
+.part:first-child .part-head { margin-top: 16px; }
+.eyebrow { margin: 0; font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--text-muted); }
+.part-title { font-size: 26px; margin: 4px 0 8px; }
+.gen-controls { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin: 8px auto 4px; }
+table.data.gen-example td { white-space: normal; vertical-align: top; min-width: 180px; font-size: 13px; }
+table.data.gen-example td.level { min-width: 0; white-space: nowrap; font-weight: 600; }
+table.data.gen-example .score { display: block; color: var(--text-muted); font-size: 12px; margin-top: 2px; font-variant-numeric: tabular-nums; }
+table.data td .in { color: var(--text-primary); font-weight: 600; }
+#gen-levels th.group { text-align: center; border-bottom: 1px solid var(--grid); }

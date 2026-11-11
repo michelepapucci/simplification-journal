@@ -29,6 +29,12 @@
   </header>
 
   <main>
+   <div class="part" id="data-part">
+    <header class="wrap part-head">
+      <p class="eyebrow">Part 1</p>
+      <h2 class="part-title">Data analysis of IMPaCTS</h2>
+      <p class="sub">The training and test pairs themselves: READ-IT distributions and linguistic profiles of the originals and their simplifications, by dataset, split and control token.</p>
+    </header>
     <section class="wrap" aria-labelledby="overview-title">
       <h2 id="overview-title">The data at a glance</h2>
       <div class="card">
@@ -154,12 +160,75 @@
       <h2 id="methods-title">How the numbers are computed</h2>
       <div class="card" id="methods"></div>
     </section>
+   </div>
+
+   <div class="part" id="generation-part" hidden>
+    <header class="wrap part-head">
+      <p class="eyebrow">Part 2</p>
+      <h2 class="part-title" id="generation-title">Model generation analysis</h2>
+      <p class="lede" id="gen-lede"></p>
+      <ul class="findings" id="gen-findings">
+        <li>Neither v1 model controls READ-IT better than the CLiC-it 2026 0.6B: level on base, slightly better on syntax, worse on lexical.</li>
+        <li>Giving the model the original’s own levels (source tokens) changes nothing measurable.</li>
+        <li>Lexical is still not controllable: requests from 0 to 30 all land near 40. Almost every lexical target in v1 is one level below the original.</li>
+        <li>The v1 models always simplify (at most 4% copies), so they overshoot mild requests. The CLiC-it model tracks the top levels partly by returning the original, up to a third of its outputs at syntax 80.</li>
+        <li>With all three dimensions requested, 3–5% of outputs land inside all three levels.</li>
+      </ul>
+      <p class="meta" id="gen-meta"></p>
+    </header>
+
+    <div class="wrap gen-controls">
+      <span class="filter-label" id="gen-dim-label">Test set</span>
+      <div class="segmented" role="radiogroup" aria-labelledby="gen-dim-label" id="gen-dim"></div>
+    </div>
+
+    <section class="wrap" aria-labelledby="gen-curve-title">
+      <div class="card">
+        <h3 id="gen-curve-title"></h3>
+        <p class="sub" id="gen-curve-sub"></p>
+        <div class="legend" id="gen-curve-legend"></div>
+        <div class="chart" id="gen-curve-chart"></div>
+      </div>
+      <div class="card">
+        <h3 id="gen-summary-title"></h3>
+        <p class="sub" id="gen-summary-sub"></p>
+        <div class="scroll-x"><table class="data" id="gen-summary"></table></div>
+      </div>
+      <div class="card">
+        <h3 id="gen-levels-title"></h3>
+        <p class="sub">For every requested level: the mean achieved READ-IT, the RMSE between the requested level and the achieved score (the CLiC-it 2026 tables) and the share of outputs inside the level. RMSE is about 5 even for an output inside the level, since it is measured against the bottom of the level.</p>
+        <div class="scroll-x"><table class="data" id="gen-levels"></table></div>
+      </div>
+    </section>
+
+    <section class="wrap" aria-labelledby="gen-joint-title">
+      <h2 id="gen-joint-title">All three dimensions at once</h2>
+      <div class="card">
+        <p class="sub" id="gen-joint-sub"></p>
+        <div class="scroll-x"><table class="data" id="gen-joint"></table></div>
+      </div>
+    </section>
+
+    <section class="wrap" aria-labelledby="gen-example-title">
+      <h2 id="gen-example-title">One original, every requested level</h2>
+      <div class="card">
+        <p class="sub" id="gen-example-sub"></p>
+        <div class="scroll-x"><table class="data gen-example" id="gen-example"></table></div>
+      </div>
+    </section>
+
+    <section class="wrap methods" aria-labelledby="gen-methods-title">
+      <h2 id="gen-methods-title">How the generations are evaluated</h2>
+      <div class="card" id="gen-methods"></div>
+    </section>
+   </div>
   </main>
 
   <div class="tooltip" id="tooltip" role="tooltip" hidden></div>
   <script src="data_clicit2025.js"></script>
   <script src="data_v0.js"></script>
   <script src="data_v1.js"></script>
+  <script src="data_generation.js" onerror="void 0"></script>
   <script src="app.js"></script>
 </body>
 </html>

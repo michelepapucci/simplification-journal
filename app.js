@@ -658,6 +658,202 @@
     }
   }
 
+  // ---------- part 2: model generation analysis ----------
+  const G = window.GENERATION_DATA;
+  const GEN_SLOTS = ["series-1", "series-2", "series-3"];
+  const GEN_DIMS = { base: "Base", lexical: "Lexical", syntax: "Syntax" };
+  const gen = { dim: "lexical" };
+  const pctOf = (x) => (x == null ? "–" : `${Math.round(x * 100)}%`);
+  const genModels = () => G.meta.models.map((m, i) => ({ ...m, color: palette[GEN_SLOTS[i]] })).filter((m) => G.main[gen.dim] && G.main[gen.dim][m.id]);
+
+  function genCurve(container) {
+    clear(container);
+    const models = genModels();
+    const levels = [...new Set(models.flatMap((m) => Object.keys(G.main[gen.dim][m.id].levels).map(Number)))].sort((a, b) => a - b);
+    if (!levels.length) return;
+    const width = Math.max(280, Math.floor(container.clientWidth || 720)), height = 340;
+    const m = { top: 12, right: 16, bottom: 46, left: 52 };
+    const xMax = levels[levels.length - 1] + 10;
+    const x = (v) => m.left + (v / xMax) * (width - m.left - m.right);
+    const y = (v) => height - m.bottom - (Math.max(0, Math.min(100, v)) / 100) * (height - m.top - m.bottom);
+    const svg = s("svg", { width, height, viewBox: `0 0 ${width} ${height}`, style: "max-width:100%;height:auto", role: "img", tabindex: 0,
+      "aria-label": `Achieved READ-IT ${gen.dim} against the requested level, one line per model. The tables below list the same values.` });
+    for (let v = 20; v <= 100; v += 20) {
+      svg.append(s("line", { class: "gridline", x1: m.left, x2: width - m.right, y1: y(v), y2: y(v) }));
+      svg.append(s("text", { class: "axis-text", x: m.left - 8, y: y(v) + 4, "text-anchor": "end", text: v }));
+    }
+    svg.append(s("line", { class: "baseline", x1: m.left, x2: width - m.right, y1: y(0), y2: y(0) }));
+    for (const L of levels) {   // where an output should land: [L, L + 10)
+      svg.append(s("rect", { class: "band", x: x(L) + 1, width: x(L + 10) - x(L) - 2, y: y(L + 10), height: y(L) - y(L + 10), rx: 2 }));
+      svg.append(s("text", { class: "axis-text", x: x(L + 5), y: height - m.bottom + 15, "text-anchor": "middle", text: L }));
+    }
+    svg.append(s("text", { class: "axis-title", x: m.left + (width - m.left - m.right) / 2, y: height - 8, "text-anchor": "middle", text: `Requested ${gen.dim} level` }));
+    svg.append(s("text", { class: "axis-title", x: 12, y: m.top + (height - m.top - m.bottom) / 2, "text-anchor": "middle",
+      transform: `rotate(-90 12 ${m.top + (height - m.top - m.bottom) / 2})`, text: `Achieved READ-IT ${gen.dim}` }));
+    const step = Math.min(2.4, 6 / Math.max(1, models.length));
+    models.forEach((mod, i) => {
+      const lv = G.main[gen.dim][mod.id].levels, off = (i - (models.length - 1) / 2) * step;
+      const pts = levels.filter((L) => lv[L] && lv[L].achieved_mean != null).map((L) => ({ L, cx: x(L + 5 + off), ...lv[L] }));
+      for (const p of pts) {
+        const [q1, , q3] = p.achieved_quartiles;
+        svg.append(s("line", { x1: p.cx, x2: p.cx, y1: y(q1), y2: y(q3), stroke: mod.color, "stroke-width": 2, "stroke-linecap": "round", opacity: 0.55 }));
+      }
+      svg.append(s("path", { d: `M${pts.map((p) => `${p.cx.toFixed(1)},${y(p.achieved_mean).toFixed(1)}`).join("L")}`, fill: "none",
+        stroke: mod.color, "stroke-width": 2, "stroke-linejoin": "round", "stroke-linecap": "round" }));
+      for (const p of pts) {
+        const few = (p.scored || 0) < 30;
+        svg.append(s("circle", { cx: p.cx, cy: y(p.achieved_mean), r: few ? 3.5 : 4, fill: few ? palette.surface : mod.color,
+          stroke: few ? mod.color : palette.surface, "stroke-width": 2 }));
+      }
+    });
+    for (const L of levels) {   // hover: one column per requested level
+      const hit = s("rect", { x: x(L), y: m.top, width: x(L + 10) - x(L), height: height - m.top - m.bottom, fill: "transparent" });
+      hit.addEventListener("pointermove", (e) => showTip(e.clientX, e.clientY, (t) => {
+        t.append(h("div", { class: "tt-title", text: `Requested ${gen.dim} ${L} (target ${L}–${L + 10})` }));
+        for (const mod of models) {
+          const v = G.main[gen.dim][mod.id].levels[L];
+          if (!v) continue;
+          t.append(tipRow(mod.color, fmtNum(v.achieved_mean, 1), `${mod.label} · mean`),
+            h("div", { class: "tt-note", text: `median ${fmtNum(v.achieved_quartiles[1], 1)}, middle half ${fmtNum(v.achieved_quartiles[0], 1)}–${fmtNum(v.achieved_quartiles[2], 1)}; inside ${pctOf(v.in_level)}, RMSE ${fmtNum(v.rmse, 1)}, copies of the original ${pctOf(v.copy)}, n ${fmtInt(v.scored)}` }));
+        }
+      }));
+      hit.addEventListener("pointerleave", hideTip);
+      svg.append(hit);
+    }
+    container.append(svg);
+  }
+
+  function genSummary() {
+    const models = genModels(), free = Object.keys(GEN_DIMS).filter((d) => d !== gen.dim);
+    $("gen-summary-title").textContent = `${GEN_DIMS[gen.dim]} requests · overall`;
+    $("gen-summary-sub").textContent = `Every request of the ${gen.dim} test set: each original at every level below its own ${gen.dim} level, the other two dimensions left free. ` +
+      `Inside: share of outputs inside the requested level. Bias: achieved minus requested, mean. ρ: Spearman between requested and achieved, over all requests and within each original. ` +
+      `Δ: mean change of READ-IT from the original (points, negative = simpler); the requested dimension should move, the free ones are what comes along. Meaning is measured against the original.`;
+    const t = clear($("gen-summary"));
+    t.append(h("thead", {}, h("tr", {}, ["Model", "Requests", "RMSE", "Inside", "Bias", "ρ", "ρ within",
+      `Δ ${gen.dim}`, ...free.map((d) => `Δ ${d}`), "BERTScore", "SBERT", "Copies"].map((c, i) => h("th", { class: i ? "num" : null, text: c })))));
+    const body = h("tbody");
+    for (const mod of models) {
+      const r = G.main[gen.dim][mod.id], o = r.overall;
+      body.append(h("tr", {}, h("td", {}, h("span", { class: "key", style: `border-color:${mod.color}` }), mod.label),
+        h("td", { class: "num", text: fmtInt(r.requests) }), h("td", { class: "num", text: fmtNum(o.rmse, 1) }),
+        h("td", { class: "num", text: pctOf(o.in_level) }), h("td", { class: "num", text: signed(o.bias, 1) }),
+        h("td", { class: "num", text: fmtNum(o.spearman) }), h("td", { class: "num", text: fmtNum(o.within_original_spearman) }),
+        h("td", { class: "num", text: signed(o.moved_requested, 1) }), ...free.map((d) => h("td", { class: "num", text: signed(o.moved_free[d], 1) })),
+        h("td", { class: "num", text: fmtNum(o.bertscore_f1, 3) }), h("td", { class: "num", text: fmtNum(o.sbert_cosine, 3) }),
+        h("td", { class: "num", text: pctOf(o.copy) })));
+    }
+    t.append(body);
+  }
+
+  function genLevels() {
+    const models = genModels();
+    const levels = [...new Set(models.flatMap((m) => Object.keys(G.main[gen.dim][m.id].levels).map(Number)))].sort((a, b) => a - b);
+    $("gen-levels-title").textContent = `${GEN_DIMS[gen.dim]} requests · by level`;
+    const t = clear($("gen-levels"));
+    t.append(h("thead", {},
+      h("tr", {}, h("th", { rowspan: 2, text: "Requested" }), h("th", { rowspan: 2, class: "num", text: "Requests" }),
+        models.map((m) => h("th", { colspan: 3, class: "group" }, h("span", { class: "key", style: `border-color:${m.color}` }), m.label))),
+      h("tr", {}, models.flatMap(() => ["Mean", "RMSE", "Inside"].map((c) => h("th", { class: "num", text: c }))))));
+    const body = h("tbody");
+    for (const L of levels) {
+      const n = Math.max(...models.map((m) => (G.main[gen.dim][m.id].levels[L] || {}).scored || 0));
+      body.append(h("tr", {}, h("td", { text: `${L}–${L + 10}` }), h("td", { class: "num", text: fmtInt(n) }),
+        models.flatMap((m) => {
+          const v = G.main[gen.dim][m.id].levels[L];
+          return v ? [h("td", { class: "num", text: fmtNum(v.achieved_mean, 1) }), h("td", { class: "num", text: fmtNum(v.rmse, 1) }),
+            h("td", { class: "num" }, h("span", { class: "in", text: pctOf(v.in_level) }))]
+            : [0, 1, 2].map(() => h("td", { class: "num", text: "–" }));
+        })));
+    }
+    t.append(body);
+  }
+
+  function genJoint() {
+    const t = clear($("gen-joint"));
+    const models = G.meta.models.map((m, i) => ({ ...m, color: palette[GEN_SLOTS[i]] })).filter((m) => G.joint[m.id]);
+    $("gen-joint-sub").textContent = "Requests with all three targets set, at most two per test original: “achievable” uses the levels of one of the original’s own IMPaCTS " +
+      "simplifications that lowered all three dimensions; “typical” uses the levels of a training pair whose original starts at the same levels. " +
+      "All three: share of outputs inside all three requested levels at once; within one level: all three within one level below or above the request; Base, Lexical, Syntax: share inside that level alone. " +
+      "The CLiC-it 2026 model takes one token at a time and is not part of this test.";
+    if (!models.length) { t.append(h("tbody", {}, h("tr", {}, h("td", { text: "No joint results yet." })))); return; }
+    t.append(h("thead", {}, h("tr", {}, ["Model", "Type", "Requests", "All three", "Within one level", "Base", "Lexical", "Syntax", "BERTScore", "SBERT"]
+      .map((c, i) => h("th", { class: i > 1 ? "num" : null, text: c })))));
+    const body = h("tbody");
+    for (const mod of models) {
+      for (const type of ["all", "achievable", "typical"]) {
+        const r = G.joint[mod.id][type];
+        if (!r) continue;
+        body.append(h("tr", {}, h("td", {}, type === "all" ? [h("span", { class: "key", style: `border-color:${mod.color}` }), mod.label] : ""),
+          h("td", { text: type }), h("td", { class: "num", text: fmtInt(r.requests) }),
+          h("td", { class: "num" }, h("span", { class: "in", text: `${(100 * r.all_three_in_level).toFixed(1)}%` })), h("td", { class: "num", text: pctOf(r.all_three_within_one_level) }),
+          ...["base", "lexical", "syntax"].map((d) => h("td", { class: "num", text: pctOf(r.per_dimension[d].in_level) })),
+          h("td", { class: "num", text: fmtNum(r.bertscore_f1, 3) }), h("td", { class: "num", text: fmtNum(r.sbert_cosine, 3) })));
+      }
+    }
+    t.append(body);
+  }
+
+  function genExample() {
+    const ex = G.examples[gen.dim], t = clear($("gen-example")), models = genModels();
+    if (!ex) { $("gen-example-sub").textContent = ""; return; }
+    $("gen-example-sub").textContent = `A ${gen.dim} test original (READ-IT ${gen.dim} ${fmtNum(ex.original_score, 1)}) and what each model wrote at every requested level. ` +
+      `Under each output: its achieved READ-IT ${gen.dim}. Sampling at temperature 0.7, so another run would differ.`;
+    t.append(h("thead", {}, h("tr", {}, h("th", { text: "Level" }), models.map((m) => h("th", {}, h("span", { class: "key", style: `border-color:${m.color}` }), m.label)))));
+    const body = h("tbody");
+    body.append(h("tr", {}, h("td", { class: "level", text: "Original" }), h("td", { colspan: models.length, text: ex.original })));
+    for (const row of ex.rows) {
+      body.append(h("tr", {}, h("td", { class: "level", text: `${row.level}–${row.level + 10}` }), models.map((m) => {
+        const o = row[m.id];
+        if (!o) return h("td", { text: "–" });
+        const inside = o.score != null && o.score >= row.level && o.score < row.level + 10;
+        return h("td", {}, o.text, h("span", { class: "score", text: `${gen.dim} ${o.score == null ? "–" : fmtNum(o.score, 1)}${inside ? " · inside" : ""}` }));
+      })));
+    }
+    t.append(body);
+  }
+
+  function genMethods() {
+    const box = clear($("gen-methods")), code = (x) => h("code", { text: x });
+    box.append(h("ul", {},
+      h("li", {}, "Models: Qwen3-0.6B-Base fine-tuned with LoRA on dataset v1 (", code("data/v1/"), " on master), one with three target tokens per request and one also given the original’s three READ-IT levels; and the CLiC-it 2026 Qwen3-0.6B, whose existing outputs are re-scored."),
+      h("li", {}, "Requests: each test original at every level below its own level in the test set’s dimension, the other two dimensions left free; sampling at temperature 0.7, top-p 1.0, up to 128 new tokens."),
+      h("li", {}, "READ-IT is computed exactly as the IMPaCTS labels (t2k with its default configuration, one text at a time, the custom parser under stanza 1.10, mean over sentences): re-scoring the 3,000 test originals and 3,000 references reproduces every label. Outputs, originals and requested levels share one scale."),
+      h("li", {}, "RMSE is measured against the bottom of the requested level, as in CLiC-it 2026, so an output inside the level still scores about 5; the share inside the level is the stricter, clearer measure."),
+      h("li", {}, "t2k scores only sentences of more than 5 tokens, so an output made only of shorter sentences has no READ-IT score (0.1–1.5% of the outputs of each set); these are left out of the control measures."),
+      h("li", {}, "Meaning preservation, against the original: BERTScore F1 (bert-base-multilingual-cased, layer 9) and SBERT cosine (distiluse-base-multilingual-cased-v1)."),
+      h("li", {}, "Code: ", code("data/v1/experiments/"), " on master; this section’s numbers by ", code("scripts/build_generation_webview.py"), ".")));
+  }
+
+  function renderGeneration() {
+    if (!G) return;
+    $("generation-part").hidden = false;
+    $("gen-lede").textContent = "Qwen3-0.6B models fine-tuned on dataset v1, asked to simplify the test originals to every READ-IT level below the original’s own, " +
+      "compared with the CLiC-it 2026 Qwen3-0.6B. The curves follow the CLiC-it 2026 figures: requested level against achieved READ-IT.";
+    $("gen-meta").textContent = `Generated ${G.meta.generated}.`;
+    for (const b of $("gen-dim").children) b.setAttribute("aria-checked", String(b.dataset.value === gen.dim));
+    const models = genModels();
+    $("gen-curve-title").textContent = `${GEN_DIMS[gen.dim]} requests · achieved against requested`;
+    $("gen-curve-sub").textContent = `Each point is the mean achieved READ-IT ${gen.dim} of the outputs at that requested level; the vertical line spans their middle half. ` +
+      "The shaded staircase is where an output should land. Hollow points rest on fewer than 30 outputs (few originals sit that high). Hover a level for the numbers.";
+    legend($("gen-curve-legend"), models.map((m) => ({ name: m.label, color: m.color })));
+    genCurve($("gen-curve-chart"));
+    genSummary();
+    genLevels();
+    genJoint();
+    genExample();
+    genMethods();
+  }
+
+  function initGeneration() {
+    if (!G) return;
+    const box = $("gen-dim");
+    for (const [value, label] of Object.entries(GEN_DIMS)) {
+      box.append(h("button", { type: "button", role: "radio", "data-value": value, "aria-checked": "false",
+        onclick: () => { gen.dim = value; renderGeneration(); writeHash(); } }, label));
+    }
+  }
+
   // ---------- state, URL, wiring ----------
   function normalise() {
     if (!ALL[state.data]) state.data = ORDER[0];
@@ -673,7 +869,7 @@
     }
   }
   function writeHash() {
-    const p = new URLSearchParams({ data: state.data, split: state.split, strategy: state.strategy, level: state.level, score: state.dim });
+    const p = new URLSearchParams({ data: state.data, split: state.split, strategy: state.strategy, level: state.level, score: state.dim, gen: gen.dim });
     history.replaceState(null, "", `#${p}`);
   }
   function readHash() {
@@ -683,6 +879,7 @@
     if (p.get("strategy")) state.strategy = p.get("strategy");
     if (p.get("level")) state.level = p.get("level") === "all" ? "all" : Number(p.get("level"));
     if (p.get("score")) state.dim = p.get("score");
+    if (GEN_DIMS[p.get("gen")]) gen.dim = p.get("gen");
   }
   function setState(patch) {
     Object.assign(state, patch);
@@ -712,6 +909,7 @@
   function renderAll() {
     shownData = null;
     render();
+    renderGeneration();
   }
 
   // Arrow keys move through a segmented control; the options are read at key time, since they change with the dataset.
@@ -766,6 +964,7 @@
     $("sig-only").addEventListener("change", (e) => { state.sigOnly = e.target.checked; renderTable(); });
     $("download").addEventListener("click", downloadCsv);
     readHash();
+    initGeneration();
     renderAll();
     let timer;
     window.addEventListener("resize", () => { clearTimeout(timer); timer = setTimeout(renderAll, 150); });
