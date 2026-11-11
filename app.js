@@ -2,7 +2,7 @@
   "use strict";
 
   const ALL = window.WEBVIEW_DATASETS || {};
-  const ORDER = ["clicit2025", "v0", "v1"].filter((k) => ALL[k]);
+  const ORDER = ["clicit2025", "v0", "v1", "v2"].filter((k) => ALL[k]);
   const SVG_NS = "http://www.w3.org/2000/svg";
   const NF = new Intl.NumberFormat("en-US");
   const DIMS = { all: "Global", base: "Base", lexical: "Lexical", syntax: "Syntax" };
@@ -17,7 +17,7 @@
   }
 
   const state = {
-    data: ORDER.includes("v1") ? "v1" : ORDER[0], split: "train", strategy: "base", level: "all", dim: "all", topN: 40,
+    data: ORDER[ORDER.length - 1], split: "train", strategy: "base", level: "all", dim: "all", topN: 40,
     sort: { key: "absr", dir: "desc" }, search: "", category: "", minR: 0, sigOnly: true,
   };
 
@@ -660,7 +660,7 @@
 
   // ---------- part 2: model generation analysis ----------
   const G = window.GENERATION_DATA;
-  const GEN_SLOTS = ["series-1", "series-2", "series-3"];
+  const GEN_SLOTS = ["series-1", "series-2", "series-3", "series-4"];
   const GEN_DIMS = { base: "Base", lexical: "Lexical", syntax: "Syntax" };
   const gen = { dim: "lexical" };
   const pctOf = (x) => (x == null ? "–" : `${Math.round(x * 100)}%`);
@@ -816,7 +816,7 @@
   function genMethods() {
     const box = clear($("gen-methods")), code = (x) => h("code", { text: x });
     box.append(h("ul", {},
-      h("li", {}, "Models: Qwen3-0.6B-Base fine-tuned with LoRA on dataset v1 (", code("data/v1/"), " on master), one with three target tokens per request and one also given the original’s three READ-IT levels; and the CLiC-it 2026 Qwen3-0.6B, whose existing outputs are re-scored."),
+      h("li", {}, "Models: Qwen3-0.6B-Base fine-tuned with LoRA on dataset v1 (", code("data/v1/"), " on master), one with three target tokens per request and one also given the original’s three READ-IT levels; the target-token model trained the same way on dataset v2 (", code("data/v2/"), ": v1 plus 11,752 pairs with larger lexical drops); and the CLiC-it 2026 Qwen3-0.6B, whose existing outputs are re-scored."),
       h("li", {}, "Requests: each test original at every level below its own level in the test set’s dimension, the other two dimensions left free; sampling at temperature 0.7, top-p 1.0, up to 128 new tokens."),
       h("li", {}, "READ-IT is computed exactly as the IMPaCTS labels (t2k with its default configuration, one text at a time, the custom parser under stanza 1.10, mean over sentences): re-scoring the 3,000 test originals and 3,000 references reproduces every label. Outputs, originals and requested levels share one scale."),
       h("li", {}, "RMSE is measured against the bottom of the requested level, as in CLiC-it 2026, so an output inside the level still scores about 5; the share inside the level is the stricter, clearer measure."),
@@ -828,7 +828,7 @@
   function renderGeneration() {
     if (!G) return;
     $("generation-part").hidden = false;
-    $("gen-lede").textContent = "Qwen3-0.6B models fine-tuned on dataset v1, asked to simplify the test originals to every READ-IT level below the original’s own, " +
+    $("gen-lede").textContent = "Qwen3-0.6B models fine-tuned on datasets v1 and v2, asked to simplify the test originals to every READ-IT level below the original’s own, " +
       "compared with the CLiC-it 2026 Qwen3-0.6B. The curves follow the CLiC-it 2026 figures: requested level against achieved READ-IT.";
     $("gen-meta").textContent = `Generated ${G.meta.generated}.`;
     for (const b of $("gen-dim").children) b.setAttribute("aria-checked", String(b.dataset.value === gen.dim));
