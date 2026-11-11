@@ -168,11 +168,12 @@
       <h2 class="part-title" id="generation-title">Model generation analysis</h2>
       <p class="lede" id="gen-lede"></p>
       <ul class="findings" id="gen-findings">
-        <li>No v1 or v2 model controls READ-IT better than the CLiC-it 2026 0.6B: level on base, slightly better on syntax, worse on lexical.</li>
+        <li>No v1, v2 or v3 model controls READ-IT better than the CLiC-it 2026 0.6B overall: level on base, slightly better on syntax, worse on lexical. The v3 model is the closest.</li>
         <li>Giving the model the original’s own levels (source tokens) changes nothing measurable.</li>
         <li>Lexical is still not controllable: requests from 0 to 30 all land near 40. Almost every lexical target in v1 is one level below the original.</li>
         <li>Dataset v2 adds 11,752 pairs with lexical drops of two levels or more, and lexical still does not follow the request: requests from 0 to 20 land at 38–39, and within an original requested and achieved lexical are unrelated (Spearman 0.06). Base, syntax and the joint evaluation are unchanged.</li>
         <li>The v1 and v2 models always simplify (at most 4% copies), so they overshoot mild requests. The CLiC-it model’s edits at the top levels are milder, with or without its copies: at base 60–80 its RMSE is 18.9 (18.8 without copies) against about 21.</li>
+        <li>Dataset v3 gives the light edits a token: a pair whose simplification stays in the original’s base or syntax level gets that level as target. Base requests at 70–80 then land at 66.9 instead of 62.3, and base RMSE at 60–80 falls to 19.8, without copying more (1.0% copies). Syntax does not move: a syntax drop needs 17.6 points to be labelled, more than a level, so the one-level drops it would learn from are almost all left free.</li>
         <li>With all three dimensions requested, 3–5% of outputs land inside all three levels.</li>
       </ul>
       <p class="meta" id="gen-meta"></p>
@@ -230,6 +231,7 @@
   <script src="data_v0.js"></script>
   <script src="data_v1.js"></script>
   <script src="data_v2.js"></script>
+  <script src="data_v3.js"></script>
   <script src="data_generation.js" onerror="void 0"></script>
   <script src="app.js"></script>
 </body>
