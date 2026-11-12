@@ -108,7 +108,7 @@
             <td data-label="What it contains">v3’s pairs plus 1,031 identity pairs with syntax and base targets: 267,390 training examples. The identity pairs give the CLiC-it data’s share among all examples that show each syntax token.</td>
             <td data-label="Control tokens">One token per example, as in the CLiC-it data, plus one combined example per pair with all its targets, so the model still takes all three at once. No target dropout.</td>
             <td data-label="Why we built it">Our format shows each pair once with all its tokens; the CLiC-it data shows it once per token. Our models saw the high syntax tokens 2.4 times less often than the CLiC-it model.</td>
-            <td data-label="Did it work?"><span class="verdict">Running.</span> Training started on 12 November 2026; results are expected the same evening.</td>
+            <td data-label="Did it work?"><span class="verdict">Mostly.</span> The model copies at the CLiC-it model’s rate (21.0% at the highest syntax request, against 22.1%). Syntax at 70–80 rose to 65.7 (CLiC-it: 68.1) and base to 68.3. Three of the four syntax goals are met, and the base goal too. RMSE at 60–80 is still 24.4 against 23.2: the outputs that are not copies are slightly heavier edits. The model overfits: validation loss rose after step 2,500 of 12,534.</td>
           </tr>
         </tbody>
       </table>
@@ -255,7 +255,7 @@
       <p class="lede" id="gen-lede"></p>
       <p class="lede">How the v5 model uses each of its three tokens, with the same sentences under every request: <a href="interp.html">control token interpretability</a>.</p>
       <ul class="findings" id="gen-findings">
-        <li>No model of ours controls READ-IT better than the CLiC-it 2026 0.6B overall: level on base, slightly better on syntax, worse on lexical. The v3 model is the closest on base; v5 is ahead on syntax at the top of the scale, but copies more.</li>
+        <li>No model of ours controls READ-IT better than the CLiC-it 2026 0.6B overall. The v7 model comes closest: about level on base and lexical, ahead on syntax over all requests (RMSE 25.8 against 26.9), and 1.2 points of RMSE behind it at syntax 60–80. v5 is ahead on syntax at the top of the scale, but copies more.</li>
         <li>Giving the model the original’s own levels (source tokens) changes nothing measurable.</li>
         <li>Lexical is still not controllable: requests from 0 to 30 all land near 40. Almost every lexical target in v1 is one level below the original.</li>
         <li>Dataset v2 adds 11,752 pairs with lexical drops of two levels or more, and lexical still does not follow the request: requests from 0 to 20 land at 38–39, and within an original requested and achieved lexical are unrelated (Spearman 0.06). Base, syntax and the joint evaluation are unchanged.</li>
@@ -264,6 +264,15 @@
         <li>Dataset v4 labels those syntax drops too, so every pair whose syntax did not rise has a syntax target. Syntax requests at 70–80 still land at 57.3 (v3: 56.6; CLiC-it: 68.1). In this data a simplification of an original at syntax 80 is an equally heavy edit whether its score lands at 80, 70, 60 or 50, so the labels have nothing distinct to teach. Over all syntax requests v4 is ahead of the CLiC-it model (RMSE 26.0 against 26.9, 17.9% inside against 15.5%, 1.6% copies against 5.7%). Base loses v3’s gain (60.6 at 70–80): syntax “any” used to mark the pairs whose syntax barely changed, and no longer does.</li>
         <li>Dataset v5 adds 989 identity pairs (the original as its own simplification) at syntax 60–90, at the CLiC-it 2026 data’s share. Syntax at the top moves past the CLiC-it model: requests at 70–80 land at 73.7 (CLiC-it: 68.1), RMSE at 60–80 falls to 22.4 (23.2) and ρ within rises to 0.59 (0.50). But half the outputs at 70–80 are copies, twice the CLiC-it model’s share.</li>
         <li>Dataset v6 has 240 identity pairs instead, as many as give the CLiC-it data’s share among training examples that show the syntax token alone. At that dose the model barely copies (6.2% at the highest syntax request; CLiC-it: 22.1%), and syntax at the top does not move (54.8 at 70–80). The model learns a syntax token from every example that shows it, with or without other tokens: by that measure, v5 had 1.2 times the CLiC-it data’s share of identity pairs and v6 0.4 times. In this run, a fifth of the outputs at base request 0 are near-copies, which raises base RMSE from 20.8 to 24.3; without that request, base is v3’s.</li>
+        <li>Dataset v7 is v3 in the CLiC-it format: one example per token, plus one combined example per pair. It has 1,031 identity pairs, at the CLiC-it data’s share among all examples that show each syntax token.
+          <ul>
+            <li><strong>Copies:</strong> the model copies at the CLiC-it model’s rate (21.0% at the highest syntax request; CLiC-it: 22.1%).</li>
+            <li><strong>Syntax at the top:</strong> requests at 70–80 land at 65.7 (v3: 56.6; CLiC-it: 68.1).</li>
+            <li><strong>Goals:</strong> three of the four syntax goal conditions are met, and base at 70–80 lands at 68.3. RMSE at 60–80 is still 24.4 against 23.2, because the outputs that are not copies are slightly heavier edits.</li>
+            <li><strong>Lexical:</strong> its share inside rose to 14.9% (CLiC-it: 14.4%) with the same labels.</li>
+            <li><strong>Overfitting:</strong> validation loss rose from step 2,500 to the end of the 12,534 steps.</li>
+          </ul>
+        </li>
         <li>With all three dimensions requested, 3–5% of outputs land inside all three levels.</li>
       </ul>
       <p class="meta" id="gen-meta"></p>
