@@ -1,0 +1,270 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Control Token Interpretability</title>
+  <meta name="description" content="Counterfactual experiments on how a readability-controlled Italian simplification model uses its base, lexical and syntax control tokens.">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="interp.css">
+</head>
+<body>
+  <header class="page-header wrap">
+    <div class="header-row">
+      <h1>How the model uses its control tokens</h1>
+      <button type="button" class="theme-toggle" id="theme-toggle" aria-label="Colour theme">Theme: auto</button>
+    </div>
+    <p class="lede">
+      The same sentences, simplified under every request the model accepts, with greedy decoding: any difference between
+      two outputs of one sentence comes from the control tokens alone. Two questions from the controllability report (Section 5.2):
+      <strong>does each token change <em>what</em> is edited</strong>, and <strong>are base, lexical and syntax controlled
+      separately?</strong> Back to the <a href="index.html">data explorer</a>.
+    </p>
+    <p class="meta" id="meta"></p>
+    <nav class="toc" aria-label="On this page">
+      <a href="#findings-title">Findings</a>
+      <a href="#setup-title">Experimental setup</a>
+      <a href="#q1-title">Question 1 results</a>
+      <a href="#q2-title">Question 2 results</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="wrap" aria-labelledby="findings-title">
+      <h2 id="findings-title">What we found</h2>
+      <ul class="findings" id="findings"></ul>
+    </section>
+
+    <section class="wrap setup" aria-labelledby="setup-title">
+      <h2 id="setup-title">Experimental setup</h2>
+
+      <div class="card">
+        <h3>The model</h3>
+        <p><strong>v5 · targets</strong>: Qwen3-0.6B-Base fine-tuned with LoRA on dataset v5, the best model so far on syntax. Its prompt is three
+          target tokens, one per READ-IT dimension, followed by the sentence to simplify. Each token is a level from 0 to 90 or <code>any</code> (no request on that dimension):</p>
+        <pre>&lt;|readability_base_B|&gt;&lt;|readability_lexical_L|&gt;&lt;|readability_syntax_S|&gt;
+original sentence
+</pre>
+        <p>A level is a 10-point READ-IT bin: level 40 means a score from 40 to 49.9. Higher scores mean harder text.</p>
+
+        <h3>The sentences</h3>
+        <p>1,000 originals from the test sets (never seen in training), drawn at random (seed 0) among the 2,369 whose base, lexical and syntax levels are all at
+          least 30. Every token can therefore be lowered by at least three levels on every sentence. Most originals sit at lexical 30–40, base 30–90 and syntax 60–80.</p>
+
+        <h3>The requests</h3>
+        <p>For each sentence and each token, every level below the sentence’s own level in that dimension. A sentence at syntax 80 gets syntax requests 70, 60, …, 0.
+          We write <em>k</em> for the number of levels below the original (k = 1 is the mildest request). Each request is made in two modes:</p>
+        <div class="scroll-x"><table class="data setup-table">
+          <thead><tr><th>Mode</th><th>The moved token</th><th>The other two tokens</th><th>Example: original at base 80, lexical 30, syntax 70; request syntax 40</th><th class="num">Requests</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Free</strong></td><td>level L</td><td><code>any</code></td><td><code>base_any · lexical_any · syntax_40</code></td><td class="num">16,851</td></tr>
+            <tr><td><strong>Held</strong></td><td>level L</td><td>base and syntax at the sentence’s own level; lexical <code>any</code></td><td><code>base_80 · lexical_any · syntax_40</code></td><td class="num">16,851</td></tr>
+            <tr><td><strong>Anchor</strong></td><td>none</td><td>base and syntax at the sentence’s own level; lexical <code>any</code></td><td><code>base_80 · lexical_any · syntax_70</code></td><td class="num">1,000</td></tr>
+          </tbody>
+        </table></div>
+        <ul>
+          <li><strong>Free</strong> is how the main evaluation uses the model: the other dimensions may move however the model usually moves them.</li>
+          <li><strong>Held</strong> tells the other dimensions to stay where they are, isolating the moved token’s own effect.
+            <ul>
+              <li>Lexical cannot be held: v5’s training data never has a lexical target at the original’s own level (0 pairs), while base and syntax have (11.9% and 5.9% of pairs).</li>
+              <li>Holding syntax at the original’s level is also what v5’s identity pairs look like (an original given as its own simplification), so held requests can make the model copy. Copy rates are reported with every held result.</li>
+            </ul>
+          </li>
+        </ul>
+        <p>34,702 requests in all. Each is decoded <strong>greedily</strong> (the most probable token at every step, at most 128 new tokens), so the same request
+          always gives the same output, and two outputs of one sentence differ only because their control tokens differ. The main evaluation samples instead
+          (temperature 0.7), where even two runs of the same request differ.</p>
+
+        <h3>What is recorded for every output</h3>
+        <ul>
+          <li><strong>READ-IT</strong> base, lexical, syntax and global (0–100), computed exactly as the IMPaCTS labels.</li>
+          <li><strong>Profiling-UD</strong>: about 130 linguistic features. They cover length, vocabulary (e.g. the share of words in the basic Italian vocabulary), parts of speech, verb morphology, dependency relations, parse-tree shape and subordination.</li>
+          <li><strong>Edit operations</strong> against the original. The two texts are aligned word by word (Python’s difflib), which gives:
+            <ul>
+              <li>the shares of the original’s words that are kept, deleted and replaced;</li>
+              <li>the share of the output’s words that are inserted;</li>
+              <li>the length ratio, output over original.</li>
+            </ul>
+          </li>
+          <li><strong>The model’s internal state</strong>: the residual stream (the hidden vector, 1,024 numbers) at the last prompt token, the newline after the original
+            where the model starts writing, at each of its 29 layers (the embeddings and the 28 transformer blocks). Also the trained input embeddings of the 33 control tokens.</li>
+        </ul>
+      </div>
+
+      <div class="card" id="exp-q1">
+        <p class="eyebrow">Question 1</p>
+        <h3>Does each token change <em>what</em> is edited?</h3>
+        <p>Every comparison is counterfactual: two outputs of the <strong>same sentence</strong> that differ only in one token’s level. Differences between sentences,
+          or between originals and simplifications in general, cannot enter.</p>
+        <ol class="experiments">
+          <li id="exp-1"><strong>Dose-response of the edits.</strong> For each token, mode, sentence and k, we take the output k levels below minus the output 1 level below,
+            and average it over the sentences that can go k levels down (points with fewer than 100 sentences are dropped). We measure it on the edit operations and on key
+            features. <em>Reading:</em> as a token asks for more, which kind of edit grows: deletion, rewording, insertion, sentence splitting?</li>
+          <li id="exp-2"><strong>Feature effects.</strong> For each token and each feature: the output 3 levels below against the output 1 level below, paired by sentence.
+            <ul>
+              <li><em>Effect size:</em> rank-biserial r of the paired differences, from −1 to +1. +1 means the feature went up in every sentence where it changed, and 0 means no consistent direction.</li>
+              <li><em>Significance:</em> Wilcoxon signed-rank test, with Benjamini–Hochberg q across features.</li>
+              <li>The list of r over all features is the token’s <em>profile</em>: what it changes.</li>
+            </ul>
+          </li>
+          <li id="exp-3"><strong>Same edits or different edits?</strong> If the three tokens were one “simplify more” dial at different strengths, their outputs would often coincide
+            and their profiles would be proportional. Three measurements:
+            <ul>
+              <li><em>Identical outputs:</em> how often two requests give the very same text: the same token at adjacent levels, and two different tokens at the same k.</li>
+              <li><em>Profile similarity:</em> Spearman correlation, across features, between two tokens’ profiles (experiment 2). Near 1: the same edits, with different strengths.</li>
+              <li><em>Which token was moved?</em> Each output 1–3 levels below the original is described by its change from the original (with and without copies of the original). A logistic regression
+                predicts which of the three tokens produced it (chance 33%). It uses 5-fold cross-validation, with all requests of a sentence in the same fold, so it is tested on unseen sentences.
+                It is trained twice: (i) on the change in READ-IT global alone, and (ii) on the change in the whole linguistic profile plus the edit operations (both with k).
+                The gap between (ii) and (i) measures how much the tokens differ in <em>what</em> they change, beyond <em>how much</em> they simplify.</li>
+            </ul>
+          </li>
+          <li id="exp-4"><strong>Matched outputs.</strong> For each sentence and pair of tokens, the two outputs (one per token, any levels, different texts, neither a copy of the original) whose READ-IT global scores
+            are closest, kept if within 2 points. They are compared feature by feature with the same paired test as experiment 2. Whatever still differs at equal overall readability is what distinguishes the two tokens.</li>
+        </ol>
+      </div>
+
+      <div class="card" id="exp-q2">
+        <p class="eyebrow">Question 2</p>
+        <h3>Are the three dimensions controlled separately?</h3>
+        <ol class="experiments" start="5">
+          <li id="exp-5"><strong>Specificity matrix.</strong> For each moved token and each achieved READ-IT score, the within-sentence slope of the achieved score on the requested level.
+            <ul>
+              <li><em>How:</em> a least-squares slope that uses only variation inside each sentence; each sentence’s means are subtracted from both the requested level and the achieved score.</li>
+              <li><em>Unit:</em> achieved points per requested point.</li>
+              <li><em>Separate control</em> is 1 on the diagonal (the requested dimension follows the request) and 0 off it (the other dimensions do not move).</li>
+              <li><em>Uncertainty:</em> 95% bootstrap interval over sentences (2,000 resamples).</li>
+              <li><em>Reference:</em> the same slopes on v5’s natural training pairs, i.e. how much the other scores move, per point of the moved dimension, in the data the model learned from.
+                A model whose off-diagonal matches the data’s reproduces the data’s co-movement rather than controlling each dimension.</li>
+              <li>The <em>dose-response</em> panels show the same thing as curves: each achieved score’s within-sentence change against k, next to the requested change (−10 points per level).</li>
+            </ul>
+          </li>
+          <li id="exp-6"><strong>Level directions in the token embeddings.</strong> For each dimension, we regress its ten level embeddings (levels 0 to 90) on the level. That gives one
+            direction per dimension, along which the embedding moves as the level rises. We report:
+            <ul>
+              <li>the cosine between the three directions (1: the same direction; 0: orthogonal);</li>
+              <li>a null: the same cosine with the levels shuffled, 2,000 times;</li>
+              <li>whether the first principal component of each dimension’s ten embeddings orders the levels (Spearman).</li>
+            </ul>
+          </li>
+          <li id="exp-7"><strong>Level directions in the residual stream.</strong> At each layer, for each token, we regress the state at the last prompt token on the requested level,
+            within sentence. That gives the direction along which that token’s level moves the model’s state at that layer. We report:
+            <ul>
+              <li><em>Cosine</em> between the three tokens’ directions, layer by layer.</li>
+              <li><em>Split-half reliability:</em> the cosine between directions estimated on two halves of the sentences, the ceiling for the cosines above.</li>
+              <li><em>Readout:</em> each direction is estimated on one half of the sentences. On the other half, each token’s requests are projected on it, and the projection is
+                correlated with the requested level (within sentence); the two halves are averaged.
+                <ul>
+                  <li>Along its own direction, a token’s level should be readable (high correlation).</li>
+                  <li>Along another token’s direction, a high correlation means the two tokens push the state the same way (a shared “simplify more” code), and near 0 means separate codes.</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ol>
+        <p><strong>What separate control would look like:</strong></p>
+        <ul>
+          <li>a dominant diagonal in the specificity matrix, with off-diagonal values below the training data’s;</li>
+          <li>dissimilar profiles, and a classifier well above the overall-score baseline;</li>
+          <li>near-orthogonal directions, with low readout of one token’s level along another token’s direction.</li>
+        </ul>
+      </div>
+    </section>
+
+    <div class="filters">
+      <div class="wrap filters-row">
+        <div class="filter">
+          <span class="filter-label" id="mode-label">The two dimensions not being moved</span>
+          <div class="segmented" role="radiogroup" aria-labelledby="mode-label" id="mode"></div>
+        </div>
+        <p class="slice-summary" id="mode-summary"></p>
+      </div>
+    </div>
+
+    <section class="wrap" aria-labelledby="q1-title">
+      <p class="eyebrow">Question 1 · results</p>
+      <h2 id="q1-title" class="q-title">Does each token change what is edited?</h2>
+
+      <div class="card">
+        <h3>One sentence, every request</h3>
+        <p class="sub">Each column moves one token from one level below the original down to 0. <mark class="new">Highlighted</mark> words are not in the original. Under each output: its READ-IT base · lexical · syntax.</p>
+        <div class="table-controls"><label>Sentence <select id="example-pick"></select></label></div>
+        <p class="example-original" id="example-original"></p>
+        <div class="scroll-x"><table class="data gen-example" id="example"></table></div>
+      </div>
+
+      <div class="card">
+        <h3>Edit operations by request strength</h3>
+        <p class="how">Experiment 1 · <a href="#exp-1">how it is measured</a></p>
+        <p class="sub" id="edits-sub"></p>
+        <div class="legend" id="edits-legend"></div>
+        <div class="multiples" id="edits"></div>
+      </div>
+
+      <div class="card">
+        <h3>Which features each token moves</h3>
+        <p class="how">Experiment 2 · <a href="#exp-2">how it is measured</a></p>
+        <p class="sub" id="features-sub"></p>
+        <div class="diverging-legend" id="features-legend"></div>
+        <div class="table-controls">
+          <label>Category <select id="category"></select></label>
+          <label>Search <input type="search" id="search" placeholder="feature name"></label>
+          <label class="check"><input type="checkbox" id="sig-only" checked> q &lt; 0.01 for at least one token</label>
+          <label class="check"><input type="checkbox" id="all-rows"> all rows (default: the 30 largest)</label>
+          <span class="row-count" id="row-count"></span>
+        </div>
+        <div class="scroll-x"><table class="data features" id="features"></table></div>
+      </div>
+
+      <div class="card">
+        <h3>Do the three tokens make different edits?</h3>
+        <p class="how">Experiment 3 · <a href="#exp-3">how it is measured</a></p>
+        <div class="scroll-x"><table class="data summary" id="same"></table></div>
+      </div>
+
+      <div class="card">
+        <h3>At the same overall READ-IT score</h3>
+        <p class="how">Experiment 4 · <a href="#exp-4">how it is measured</a></p>
+        <p class="sub" id="matched-sub"></p>
+        <div class="table-controls">
+          <span class="filter-label" id="pair-label">Tokens</span>
+          <div class="segmented" role="radiogroup" aria-labelledby="pair-label" id="pair"></div>
+        </div>
+        <div class="scroll-x"><table class="data features" id="matched"></table></div>
+      </div>
+    </section>
+
+    <section class="wrap" aria-labelledby="q2-title">
+      <p class="eyebrow">Question 2 · results</p>
+      <h2 id="q2-title" class="q-title">Are the three dimensions controlled separately?</h2>
+
+      <div class="card">
+        <h3>Specificity matrix</h3>
+        <p class="how">Experiment 5 · <a href="#exp-5">how it is measured</a></p>
+        <p class="sub">Achieved points per requested point, within sentence: 1 on the diagonal and 0 elsewhere would be separate control. In brackets: 95% bootstrap interval. Both modes are shown; the last rows are the training data’s own co-movement.</p>
+        <div class="scroll-x"><table class="data matrix" id="matrix"></table></div>
+      </div>
+
+      <div class="card">
+        <h3>Dose-response: what moves when one token moves</h3>
+        <p class="how">Experiment 5 · <a href="#exp-5">how it is measured</a></p>
+        <p class="sub" id="dose-sub"></p>
+        <div class="legend" id="dose-legend"></div>
+        <div class="multiples three" id="dose"></div>
+      </div>
+
+      <div class="card">
+        <h3>Where the levels live in the model</h3>
+        <p class="how">Experiments 6 and 7 · <a href="#exp-6">how they are measured</a></p>
+        <p class="sub" id="dirs-sub"></p>
+        <div class="scroll-x"><table class="data summary" id="embed"></table></div>
+        <div class="multiples two" id="dirs"></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="wrap" id="footer"></footer>
+  <div class="tooltip" id="tooltip" role="tooltip" hidden></div>
+  <script src="data_interp.js"></script>
+  <script src="interp.js"></script>
+</body>
+</html>

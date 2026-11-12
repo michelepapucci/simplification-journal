@@ -1,0 +1,39 @@
+/* Interpretability page: additions to style.css */
+.q-title { font-size: 22px; margin: 2px 0 14px; }
+section > .eyebrow { margin-top: 40px; }
+.multiples { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 250px), 1fr)); gap: 18px 28px; }
+.multiples.three { grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr)); }
+.multiples.two { grid-template-columns: repeat(auto-fill, minmax(min(100%, 420px), 1fr)); margin-top: 18px; }
+.multiple { min-width: 0; }
+.multiple h4 { margin: 0 0 2px; color: var(--text-primary); font-size: 13.5px; }
+.multiple .note { font-size: 12px; color: var(--text-muted); margin: 0 0 4px; font-variant-numeric: tabular-nums; }
+mark.new { background: color-mix(in srgb, var(--series-4) 30%, transparent); color: inherit; border-radius: 2px; padding: 0 1px; }
+.example-original { font-size: 14px; margin: 0 0 12px; max-width: 110ch; }
+.example-original .tag { display: block; font-size: 12px; color: var(--text-muted); font-variant-numeric: tabular-nums; }
+table.data.gen-example td.same { color: var(--text-muted); }
+table.data.matrix { width: auto; min-width: min(100%, 640px); }
+table.data.matrix td, table.data.matrix th { text-align: right; font-variant-numeric: tabular-nums; }
+table.data.matrix td:first-child, table.data.matrix th:first-child { text-align: left; }
+table.data.matrix td.v { min-width: 104px; }
+table.data.matrix td.v strong { font-weight: 650; }
+table.data.matrix .ci { display: block; font-size: 11px; color: var(--text-secondary); }
+table.data.matrix tr.ref td { color: var(--text-secondary); }
+table.data.matrix tr.sep td { border-top: 2px solid var(--grid); }
+table.data.summary td.wrap-text { white-space: normal; min-width: 220px; max-width: 46ch; }
+table.data.summary td.reading { white-space: normal; color: var(--text-secondary); min-width: 200px; max-width: 52ch; }
+.key-line.dashed { border-top-style: dashed; }
+.toc { display: flex; flex-wrap: wrap; gap: 4px 18px; margin: 10px 0 0; font-size: 13.5px; }
+.setup .card { font-size: 14.5px; color: var(--text-secondary); }
+.setup .card h3 { color: var(--text-primary); margin-top: 18px; }
+.setup .card h3:first-child, .setup .card .eyebrow + h3 { margin-top: 2px; }
+.setup .card p, .setup .card li { max-width: 100ch; }
+.setup .card li { margin: 4px 0; }
+.setup code, .setup pre { font-family: var(--mono); font-size: 12.5px; }
+.setup pre { background: var(--wash); border: 1px solid var(--border); border-radius: 6px; padding: 8px 10px; overflow-x: auto; color: var(--text-primary); }
+.setup .experiments > li { margin: 12px 0; }
+.setup .experiments > li > strong { color: var(--text-primary); }
+table.data.setup-table td { white-space: normal; vertical-align: top; min-width: 90px; }
+table.data.setup-table td:nth-child(4) { min-width: 240px; }
+p.how { margin: -2px 0 8px; font-size: 12.5px; color: var(--text-muted); }
+.table-controls label { max-width: 100%; min-width: 0; }
+.table-controls select { max-width: min(100%, 300px); min-width: 0; text-overflow: ellipsis; }
