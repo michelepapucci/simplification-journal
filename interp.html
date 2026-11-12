@@ -60,15 +60,17 @@ original sentence
           <thead><tr><th>Mode</th><th>The moved token</th><th>The other two tokens</th><th>Example: original at base 80, lexical 30, syntax 70; request syntax 40</th><th class="num">Requests</th></tr></thead>
           <tbody>
             <tr><td><strong>Others any</strong></td><td>level L</td><td><code>any</code> (no request)</td><td><code>base_any · lexical_any · syntax_40</code></td><td class="num">16,851</td></tr>
-            <tr><td><strong>Others held</strong></td><td>level L</td><td>base and syntax at the sentence’s own level; lexical <code>any</code></td><td><code>base_80 · lexical_any · syntax_40</code></td><td class="num">16,851</td></tr>
-            <tr><td><strong>Anchor</strong></td><td>none</td><td>base and syntax at the sentence’s own level; lexical <code>any</code></td><td><code>base_80 · lexical_any · syntax_70</code></td><td class="num">1,000</td></tr>
+            <tr><td><strong>Others held</strong></td><td>level L</td><td>both at the sentence’s own levels</td><td><code>base_80 · lexical_30 · syntax_40</code></td><td class="num">16,851</td></tr>
+            <tr><td><strong>Anchor</strong></td><td>none</td><td>all three at the sentence’s own levels</td><td><code>base_80 · lexical_30 · syntax_70</code></td><td class="num">1,000</td></tr>
           </tbody>
         </table></div>
         <ul>
           <li><strong>Others any</strong> is how the main evaluation uses the model: only one dimension is requested, and the other two are left free to move however the model usually moves them.</li>
           <li><strong>Others held</strong> asks the other dimensions to stay at the sentence’s own level, to isolate the lowered token’s own effect.
             <ul>
-              <li>Lexical cannot be held: v5’s training data never has a lexical target at the original’s own level (0 pairs), while base and syntax have (11.9% and 5.9% of pairs).</li>
+              <li>The design is symmetric: whichever token is lowered, the other two are held. Holding lexical is outside v5’s training data, though:
+                no training pair has a lexical target at the original’s own level, while base and syntax have (11.9% and 5.9% of pairs).
+                A first version of the run left lexical <code>any</code> when base or syntax was lowered; its results are in <code>data/v1/experiments/interp/README.md</code>.</li>
               <li>Holding syntax at the original’s level is also what v5’s identity pairs look like (an original given as its own simplification), so held requests can make the model copy. Copy rates are reported with every held result.</li>
             </ul>
           </li>

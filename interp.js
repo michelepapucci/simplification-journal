@@ -192,7 +192,7 @@
     for (const f of D.findings || []) ul.append(h("li", { text: f }));
     $("mode-summary").textContent = state.mode === "free"
       ? "Others any: only the lowered token is set, as in the main evaluation. Every result below is shown separately for base, lexical and syntax lowered."
-      : "Others held: base and syntax stay at the original’s own levels (lexical stays “any”: v5 never saw a same-level lexical target). Results are per lowered token.";
+      : "Others held: the two other tokens stay at the original’s own levels (a held lexical token is outside v5’s training data). Results are per lowered token.";
   }
 
   // ---------- Q1: example ----------
