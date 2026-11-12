@@ -38,7 +38,7 @@
     --wash: rgba(255, 255, 255, 0.05);
     --series-1: #3987e5;
     --series-2: #d95926;
-    --series-3: #199e70;
+    --series-3: #1aad80;
     --series-4: #c98500;
     --series-5: #d55181;
     --series-6: #008300;
@@ -63,7 +63,7 @@
   --wash: rgba(255, 255, 255, 0.05);
   --series-1: #3987e5;
   --series-2: #d95926;
-  --series-3: #199e70;
+  --series-3: #1aad80;
   --series-4: #c98500;
   --series-5: #d55181;
   --series-6: #008300;
@@ -282,3 +282,31 @@ table.data.gen-example td.level { min-width: 0; white-space: nowrap; font-weight
 table.data.gen-example .score { display: block; color: var(--text-muted); font-size: 12px; margin-top: 2px; font-variant-numeric: tabular-nums; }
 table.data td .in { color: var(--text-primary); font-weight: 600; }
 #gen-levels th.group { text-align: center; border-bottom: 1px solid var(--grid); }
+
+/* dataset overview table */
+.formats { margin: 0 0 14px; display: grid; gap: 6px; max-width: 110ch; font-size: 13.5px; color: var(--text-secondary); }
+.formats div { display: flex; gap: 8px; flex-wrap: wrap; }
+.formats dt { font-weight: 600; color: var(--text-primary); }
+.formats dt::after { content: ":"; }
+.formats dd { margin: 0; flex: 1 1 40ch; }
+.formats code, .datasets code { font-family: var(--mono); font-size: 12px; overflow-wrap: anywhere; }
+table.datasets { font-size: 13.5px; table-layout: fixed; }
+.datasets th, .datasets td { text-align: left; vertical-align: top; padding: 10px 10px 10px 0; border-bottom: 1px solid var(--grid); line-height: 1.45; }
+.datasets thead th { font-size: 12.5px; font-weight: 600; color: var(--text-secondary); padding-top: 4px; }
+.datasets td { color: var(--text-secondary); }
+.datasets tbody th { font-weight: 650; color: var(--text-primary); }
+.datasets thead th:nth-child(1) { width: 13%; }
+.datasets thead th:nth-child(2) { width: 22%; }
+.datasets thead th:nth-child(3) { width: 19%; }
+.datasets thead th:nth-child(4) { width: 21%; }
+.datasets thead th:nth-child(5) { width: 25%; }
+.datasets .ds-sub { display: block; font-weight: 400; font-size: 12.5px; color: var(--text-muted); }
+.datasets a { color: inherit; text-decoration: underline; text-decoration-color: var(--text-muted); text-underline-offset: 2px; }
+.datasets .verdict { font-weight: 650; color: var(--text-primary); }
+@media (max-width: 760px) {
+  table.datasets, .datasets tbody, .datasets tr, .datasets th, .datasets td { display: block; width: auto; }
+  .datasets thead { display: none; }
+  .datasets tr { padding: 12px 0; border-bottom: 1px solid var(--grid); }
+  .datasets th, .datasets td { border: 0; padding: 3px 0; }
+  .datasets td::before { content: attr(data-label); display: block; font-size: 11.5px; font-weight: 600; color: var(--text-muted); margin-top: 6px; }
+}

@@ -29,6 +29,92 @@
   </header>
 
   <main>
+   <section class="wrap" aria-labelledby="datasets-title" id="datasets">
+    <h2 id="datasets-title">How each dataset was built</h2>
+    <div class="card">
+      <p class="sub">Every dataset, in the order it was built: what it contains, how the control tokens are given, why it was built, and whether it worked. A dataset name switches the explorer below to it. Part 2 holds the numbers. A range like “70–80” means requests for level 70, and the value is the mean READ-IT the outputs reach.</p>
+      <dl class="formats">
+        <div><dt>One token per example</dt><dd>the CLiC-it format: each pair is repeated once per dimension, each time with that dimension’s level, e.g. <code>&lt;|readability_syntax_70|&gt;</code>.</dd></div>
+        <div><dt>Three tokens per example</dt><dd>our format: each pair appears once, with a target for every dimension, either a level or <code>any</code>, e.g. <code>&lt;|readability_base_60|&gt;&lt;|readability_lexical_any|&gt;&lt;|readability_syntax_70|&gt;</code>. During training each set target is replaced by <code>any</code> with probability 0.3.</dd></div>
+      </dl>
+      <table class="datasets">
+        <thead><tr><th scope="col">Dataset</th><th scope="col">What it contains</th><th scope="col">Control tokens</th><th scope="col">Why we built it</th><th scope="col">Did it work?</th></tr></thead>
+        <tbody>
+          <tr>
+            <th scope="row"><a href="#data=clicit2025" data-dataset="clicit2025">CLiC-it 2025</a><span class="ds-sub">Wikipedia sample</span></th>
+            <td data-label="What it contains">2,000 Wikipedia originals with 14,293 IMPaCTS simplifications, before any READ-IT selection.</td>
+            <td data-label="Control tokens">None.</td>
+            <td data-label="Why we built it">The sample analysed in the CLiC-it 2025 paper: what the simplifications change, before any selection.</td>
+            <td data-label="Did it work?"><span class="verdict">Analysis only.</span> No model was trained on it.</td>
+          </tr>
+          <tr>
+            <th scope="row">CLiC-it 2026 data<span class="ds-sub">GFFF; not in the selector</span></th>
+            <td data-label="What it contains">45,209 pairs from originals with READ-IT global above 70. 1,598 of them (3.5%) are identity pairs: the original left unchanged.</td>
+            <td data-label="Control tokens">One token per example (135,627 examples). The lexical token was computed from the base score, so it always equals the base token.</td>
+            <td data-label="Why we built it">The training data of the CLiC-it 2026 models, kept unmodified for reference.</td>
+            <td data-label="Did it work?"><span class="verdict">Reference.</span> Its Qwen3-0.6B is the model every model of ours is compared with in Part 2.</td>
+          </tr>
+          <tr>
+            <th scope="row"><a href="#data=v0" data-dataset="v0">v0</a><span class="ds-sub">CLiC-it 2026 selection, fixed</span></th>
+            <td data-label="What it contains">55,877 pairs: the same selection, rebuilt from the public IMPaCTS release. No identity pairs, because the release drops them.</td>
+            <td data-label="Control tokens">One token per example (167,631 examples), each computed from its own dimension’s score.</td>
+            <td data-label="Why we built it">A reproducible baseline of the 2026 data, with the lexical-token bug fixed.</td>
+            <td data-label="Did it work?"><span class="verdict">Not trained.</span> Kept as the baseline format.</td>
+          </tr>
+          <tr>
+            <th scope="row"><a href="#data=v1" data-dataset="v1">v1</a><span class="ds-sub">three target tokens</span></th>
+            <td data-label="What it contains">78,462 pairs from 10,800 originals with READ-IT global above 70. A dimension gets a target only if the simplification drops at least one level, by more than READ-IT’s own noise; otherwise it gets <code>any</code>.</td>
+            <td data-label="Control tokens">Three tokens per example. A second model also gets the original’s three levels as source tokens.</td>
+            <td data-label="Why we built it">To control all three dimensions in one request, and to teach only drops larger than the noise of the READ-IT score.</td>
+            <td data-label="Did it work?"><span class="verdict">Partly.</span> Level with the CLiC-it model on base, slightly better on syntax, worse on lexical. It also takes all three dimensions at once: 3.4% of outputs land inside all three levels. Lexical is not controllable: requests from 0 to 30 all land near 40. The source tokens changed nothing.</td>
+          </tr>
+          <tr>
+            <th scope="row"><a href="#data=v2" data-dataset="v2">v2</a><span class="ds-sub">v1 plus lexical support</span></th>
+            <td data-label="What it contains">89,460 pairs: v1 without its 754 non-Italian pairs, plus 11,752 pairs whose lexical score dropped two levels or more.</td>
+            <td data-label="Control tokens">Three tokens per example.</td>
+            <td data-label="Why we built it">v1’s lexical token had nothing to learn from: 94% of its lexical targets are exactly one level below the original.</td>
+            <td data-label="Did it work?"><span class="verdict">No.</span> Lexical requests from 0 to 20 still land at about 38. Base and syntax are unchanged.</td>
+          </tr>
+          <tr>
+            <th scope="row"><a href="#data=v3" data-dataset="v3">v3</a><span class="ds-sub">same-level targets</span></th>
+            <td data-label="What it contains">v2’s pairs. When base or syntax stays in the original’s level, the target is that level instead of <code>any</code> (10,767 base and 4,302 syntax targets changed).</td>
+            <td data-label="Control tokens">Three tokens per example.</td>
+            <td data-label="Why we built it">In v1 and v2, <code>any</code> also meant “stayed where it was”. No token asked for a light edit, so mild requests were over-simplified.</td>
+            <td data-label="Did it work?"><span class="verdict">Partly.</span> Base requests at 70–80 land at 66.9 instead of 62.3, without more copying. Syntax at the top did not move: 56.6 at 70–80, against the CLiC-it model’s 68.1. v3 is the starting point of v4 to v7.</td>
+          </tr>
+          <tr>
+            <th scope="row"><a href="#data=v4" data-dataset="v4">v4</a><span class="ds-sub">syntax crossings</span></th>
+            <td data-label="What it contains">v3, with a syntax target on every pair whose syntax did not rise, including drops smaller than the noise margin (9,833 pairs relabelled).</td>
+            <td data-label="Control tokens">Three tokens per example.</td>
+            <td data-label="Why we built it">The syntax noise margin (17.6 points) is wider than a level, so most one-level syntax drops were left <code>any</code>. At the top of the scale the model almost never saw “one level below”.</td>
+            <td data-label="Did it work?"><span class="verdict">No.</span> Syntax at 70–80 stayed at 57.3, and base lost v3’s gain (60.6). At the top of the scale, IMPaCTS edits are equally heavy whatever level they land in, so the new labels had nothing distinct to teach.</td>
+          </tr>
+          <tr>
+            <th scope="row"><a href="#data=v5" data-dataset="v5">v5</a><span class="ds-sub">identity pairs</span></th>
+            <td data-label="What it contains">v3 plus 989 identity pairs (an original given as its own simplification), from originals at syntax 60–90. Each has a syntax target at the original’s level, and no other target.</td>
+            <td data-label="Control tokens">Three tokens per example.</td>
+            <td data-label="Why we built it">The CLiC-it data teaches “change little” at the top of the scale through its identity pairs, and ours had none. Their number matches the CLiC-it data’s share among syntax targets.</td>
+            <td data-label="Did it work?"><span class="verdict">Partly.</span> Syntax at the top passed the CLiC-it model: 73.7 at 70–80 against 68.1, and RMSE at 60–80 of 22.4 against 23.2. But copies doubled: 8.7% of syntax outputs (CLiC-it 5.7%), and half of the outputs at 70–80.</td>
+          </tr>
+          <tr>
+            <th scope="row"><a href="#data=v6" data-dataset="v6">v6</a><span class="ds-sub">fewer identity pairs</span></th>
+            <td data-label="What it contains">v3 plus 240 identity pairs, built as in v5.</td>
+            <td data-label="Control tokens">Three tokens per example.</td>
+            <td data-label="Why we built it">To bring v5’s copies down. We assumed only the examples that show the syntax token alone, as the evaluation does, set the dose.</td>
+            <td data-label="Did it work?"><span class="verdict">No.</span> The model barely copied (6.2% at the highest request, against the CLiC-it model’s 22.1%), and syntax at the top did not move (54.8). What sets copying is the share among all examples that show the syntax token, alone or not.</td>
+          </tr>
+          <tr>
+            <th scope="row"><a href="#data=v7" data-dataset="v7">v7</a><span class="ds-sub">the CLiC-it format, plus combined examples</span></th>
+            <td data-label="What it contains">v3’s pairs plus 1,031 identity pairs with syntax and base targets: 267,390 training examples. The identity pairs give the CLiC-it data’s share among all examples that show each syntax token.</td>
+            <td data-label="Control tokens">One token per example, as in the CLiC-it data, plus one combined example per pair with all its targets, so the model still takes all three at once. No target dropout.</td>
+            <td data-label="Why we built it">Our format shows each pair once with all its tokens; the CLiC-it data shows it once per token. Our models saw the high syntax tokens 2.4 times less often than the CLiC-it model.</td>
+            <td data-label="Did it work?"><span class="verdict">Running.</span> Training started on 12 November 2026; results are expected the same evening.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+   </section>
+
    <div class="part" id="data-part">
     <header class="wrap part-head">
       <p class="eyebrow">Part 1</p>
@@ -238,6 +324,7 @@
   <script src="data_v4.js"></script>
   <script src="data_v5.js"></script>
   <script src="data_v6.js"></script>
+  <script src="data_v7.js"></script>
   <script src="data_generation.js" onerror="void 0"></script>
   <script src="app.js"></script>
 </body>

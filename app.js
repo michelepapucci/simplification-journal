@@ -2,7 +2,7 @@
   "use strict";
 
   const ALL = window.WEBVIEW_DATASETS || {};
-  const ORDER = ["clicit2025", "v0", "v1", "v2", "v3", "v4", "v5", "v6"].filter((k) => ALL[k]);
+  const ORDER = ["clicit2025", "v0", "v1", "v2", "v3", "v4", "v5", "v6", "v7"].filter((k) => ALL[k]);
   const SVG_NS = "http://www.w3.org/2000/svg";
   const NF = new Intl.NumberFormat("en-US");
   const DIMS = { all: "Global", base: "Base", lexical: "Lexical", syntax: "Syntax" };
@@ -660,11 +660,12 @@
 
   // ---------- part 2: model generation analysis ----------
   const G = window.GENERATION_DATA;
-  // One colour per model, fixed, so toggling a line in the legend never repaints the others. Six lines cannot all be
-  // told apart, so the curve starts with the CLiC-it model and our two latest models (blue, magenta, green stay apart
-  // pairwise in both themes); the legend shows the others. The tables always list every model.
-  const GEN_COLORS = { "clicit2026_0.6B": "series-1", targets: "series-2", source_targets: "series-8", v2_targets: "series-4",
-                       v3_targets: "series-5", v4_targets: "series-3", v5_targets: "series-7", v6_targets: "series-6" };
+  // One colour per model, fixed, so toggling a line in the legend never repaints the others. Nine lines cannot all be
+  // told apart, so the curve starts with the CLiC-it model and our two latest models (blue, green and aqua stay apart
+  // pairwise in both themes); the legend shows the others. v1 · source + targets, which changed nothing measurable,
+  // is drawn in muted grey: eight hues for nine models. The tables always list every model.
+  const GEN_COLORS = { "clicit2026_0.6B": "series-1", targets: "series-2", source_targets: "text-muted", v2_targets: "series-4",
+                       v3_targets: "series-5", v4_targets: "series-8", v5_targets: "series-7", v6_targets: "series-6", v7_targets: "series-3" };
   const GEN_SPARE = ["series-1", "series-2", "series-3", "series-4", "series-5", "series-6", "series-7", "series-8"];
   const GEN_DEFAULT_SHOWN = 2;
   const GEN_DIMS = { base: "Base", lexical: "Lexical", syntax: "Syntax" };
@@ -845,7 +846,7 @@
   function genMethods() {
     const box = clear($("gen-methods")), code = (x) => h("code", { text: x });
     box.append(h("ul", {},
-      h("li", {}, "Models: Qwen3-0.6B-Base fine-tuned with LoRA on dataset v1 (", code("data/v1/"), " on master), one with three target tokens per request and one also given the original’s three READ-IT levels; the target-token model trained the same way on dataset v2 (", code("data/v2/"), ": v1 plus 11,752 pairs with larger lexical drops), on dataset v3 (", code("data/v3/"), ": v2 with same-level base and syntax targets) and on dataset v4 (", code("data/v4/"), ": v3 with a syntax target on every pair whose syntax did not rise) and on dataset v5 (", code("data/v5/"), ": v3 plus 989 identity pairs at the top of the syntax scale, at the CLiC-it 2026 data’s share) and on dataset v6 (", code("data/v6/"), ": the same with 240 identity pairs, the CLiC-it share among examples that give the syntax token alone); and the CLiC-it 2026 Qwen3-0.6B, whose existing outputs are re-scored."),
+      h("li", {}, "Models: Qwen3-0.6B-Base fine-tuned with LoRA on dataset v1 (", code("data/v1/"), " on master), one with three target tokens per request and one also given the original’s three READ-IT levels; the target-token model trained the same way on dataset v2 (", code("data/v2/"), ": v1 plus 11,752 pairs with larger lexical drops), on dataset v3 (", code("data/v3/"), ": v2 with same-level base and syntax targets) and on dataset v4 (", code("data/v4/"), ": v3 with a syntax target on every pair whose syntax did not rise) and on dataset v5 (", code("data/v5/"), ": v3 plus 989 identity pairs at the top of the syntax scale, at the CLiC-it 2026 data’s share) and on dataset v6 (", code("data/v6/"), ": the same with 240 identity pairs, the CLiC-it share among examples that give the syntax token alone) and on dataset v7 (", code("data/v7/"), ": v3 in the CLiC-it format, one example per token plus a combined one, with 1,031 identity pairs at the CLiC-it share among examples that show each syntax token, no target dropout); and the CLiC-it 2026 Qwen3-0.6B, whose existing outputs are re-scored."),
       h("li", {}, "Requests: each test original at every level below its own level in the test set’s dimension, the other two dimensions left free; sampling at temperature 0.7, top-p 1.0, up to 128 new tokens."),
       h("li", {}, "READ-IT is computed exactly as the IMPaCTS labels (t2k with its default configuration, one text at a time, the custom parser under stanza 1.10, mean over sentences): re-scoring the 3,000 test originals and 3,000 references reproduces every label. Outputs, originals and requested levels share one scale."),
       h("li", {}, "RMSE is measured against the bottom of the requested level, as in CLiC-it 2026, so an output inside the level still scores about 5; the share inside the level is the stricter, clearer measure."),
@@ -857,7 +858,7 @@
   function renderGeneration() {
     if (!G) return;
     $("generation-part").hidden = false;
-    $("gen-lede").textContent = "Qwen3-0.6B models fine-tuned on datasets v1 to v6, asked to simplify the test originals to every READ-IT level below the original’s own, " +
+    $("gen-lede").textContent = "Qwen3-0.6B models fine-tuned on datasets v1 to v7, asked to simplify the test originals to every READ-IT level below the original’s own, " +
       "compared with the CLiC-it 2026 Qwen3-0.6B. The curves follow the CLiC-it 2026 figures: requested level against achieved READ-IT.";
     $("gen-meta").textContent = `Generated ${G.meta.generated}.`;
     for (const b of $("gen-dim").children) b.setAttribute("aria-checked", String(b.dataset.value === gen.dim));
@@ -993,6 +994,13 @@
     $("min-r").addEventListener("input", (e) => { state.minR = Math.max(0, Number(e.target.value) || 0); renderTable(); });
     $("sig-only").addEventListener("change", (e) => { state.sigOnly = e.target.checked; renderTable(); });
     $("download").addEventListener("click", downloadCsv);
+    // dataset names in the overview table switch the explorer, like the selector does
+    document.querySelectorAll("a[data-dataset]").forEach((link) => link.addEventListener("click", (e) => {
+      if (!ALL[link.dataset.dataset]) return;
+      e.preventDefault();
+      setState({ data: link.dataset.dataset });
+      $("data-part").scrollIntoView({ behavior: "smooth", block: "start" });
+    }));
     readHash();
     initGeneration();
     renderAll();
