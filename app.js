@@ -2,7 +2,7 @@
   "use strict";
 
   const ALL = window.WEBVIEW_DATASETS || {};
-  const ORDER = ["clicit2025", "v0", "v1", "v2", "v3"].filter((k) => ALL[k]);
+  const ORDER = ["clicit2025", "v0", "v1", "v2", "v3", "v4"].filter((k) => ALL[k]);
   const SVG_NS = "http://www.w3.org/2000/svg";
   const NF = new Intl.NumberFormat("en-US");
   const DIMS = { all: "Global", base: "Base", lexical: "Lexical", syntax: "Syntax" };
@@ -79,7 +79,7 @@
   let palette = {};
   function readPalette() {
     const cs = getComputedStyle(document.documentElement);
-    const names = ["surface", "text-primary", "text-secondary", "text-muted", "series-1", "series-2", "series-3", "series-4", "series-5", "div-neg", "div-mid", "div-pos"];
+    const names = ["surface", "text-primary", "text-secondary", "text-muted", "series-1", "series-2", "series-3", "series-4", "series-5", "series-6", "div-neg", "div-mid", "div-pos"];
     palette = Object.fromEntries(names.map((n) => [n, cs.getPropertyValue(`--${n}`).trim()]));
   }
   const hexToRgb = (hex) => { const n = parseInt(hex.slice(1), 16); return [(n >> 16) & 255, (n >> 8) & 255, n & 255].map((c) => c / 255); };
@@ -660,15 +660,44 @@
 
   // ---------- part 2: model generation analysis ----------
   const G = window.GENERATION_DATA;
-  const GEN_SLOTS = ["series-1", "series-2", "series-3", "series-4", "series-5"];
+  // One colour per model, fixed, so toggling a line in the legend never repaints the others. Six lines cannot all be
+  // told apart, so the curve starts with the CLiC-it model and our two latest models (blue, magenta, green stay apart
+  // pairwise in both themes); the legend shows the others. The tables always list every model.
+  const GEN_COLORS = { "clicit2026_0.6B": "series-1", targets: "series-2", source_targets: "series-3", v2_targets: "series-4",
+                       v3_targets: "series-5", v4_targets: "series-6" };
+  const GEN_SPARE = ["series-1", "series-2", "series-3", "series-4", "series-5", "series-6"];
+  const GEN_DEFAULT_SHOWN = 2;
   const GEN_DIMS = { base: "Base", lexical: "Lexical", syntax: "Syntax" };
-  const gen = { dim: "lexical" };
+  const gen = { dim: "lexical", shown: null };
   const pctOf = (x) => (x == null ? "–" : `${Math.round(x * 100)}%`);
-  const genModels = () => G.meta.models.map((m, i) => ({ ...m, color: palette[GEN_SLOTS[i]] })).filter((m) => G.main[gen.dim] && G.main[gen.dim][m.id]);
+  const genColor = (id, i) => palette[GEN_COLORS[id] || GEN_SPARE[i % GEN_SPARE.length]];
+  const genModels = () => G.meta.models.map((m, i) => ({ ...m, color: genColor(m.id, i) })).filter((m) => G.main[gen.dim] && G.main[gen.dim][m.id]);
+
+  function genShown() {
+    if (!gen.shown) {
+      const clic = G.meta.models.filter((m) => m.id.startsWith("clicit")).map((m) => m.id);
+      const ours = G.meta.models.filter((m) => !m.id.startsWith("clicit")).map((m) => m.id);
+      gen.shown = new Set([...clic, ...ours.slice(-GEN_DEFAULT_SHOWN)]);
+    }
+    return gen.shown;
+  }
+
+  function genLegend(container) {
+    clear(container);
+    const shown = genShown();
+    for (const mod of genModels()) {
+      const on = shown.has(mod.id);
+      container.append(h("button", { type: "button", class: "legend-item legend-toggle", "aria-pressed": String(on),
+        title: on ? "Hide this model’s line" : "Show this model’s line",
+        onclick: () => { on ? shown.delete(mod.id) : shown.add(mod.id); genLegend(container); genCurve($("gen-curve-chart")); } },
+        h("span", { class: "key-line", style: `border-color:${mod.color}` }), mod.label));
+    }
+  }
 
   function genCurve(container) {
     clear(container);
-    const models = genModels();
+    const shown = genShown();
+    const models = genModels().filter((m) => shown.has(m.id));
     const levels = [...new Set(models.flatMap((m) => Object.keys(G.main[gen.dim][m.id].levels).map(Number)))].sort((a, b) => a - b);
     if (!levels.length) return;
     const width = Math.max(280, Math.floor(container.clientWidth || 720)), height = 340;
@@ -771,7 +800,7 @@
 
   function genJoint() {
     const t = clear($("gen-joint"));
-    const models = G.meta.models.map((m, i) => ({ ...m, color: palette[GEN_SLOTS[i]] })).filter((m) => G.joint[m.id]);
+    const models = G.meta.models.map((m, i) => ({ ...m, color: genColor(m.id, i) })).filter((m) => G.joint[m.id]);
     $("gen-joint-sub").textContent = "Requests with all three targets set, at most two per test original: “achievable” uses the levels of one of the original’s own IMPaCTS " +
       "simplifications that lowered all three dimensions; “typical” uses the levels of a training pair whose original starts at the same levels. " +
       "All three: share of outputs inside all three requested levels at once; within one level: all three within one level below or above the request; Base, Lexical, Syntax: share inside that level alone. " +
@@ -816,7 +845,7 @@
   function genMethods() {
     const box = clear($("gen-methods")), code = (x) => h("code", { text: x });
     box.append(h("ul", {},
-      h("li", {}, "Models: Qwen3-0.6B-Base fine-tuned with LoRA on dataset v1 (", code("data/v1/"), " on master), one with three target tokens per request and one also given the original’s three READ-IT levels; the target-token model trained the same way on dataset v2 (", code("data/v2/"), ": v1 plus 11,752 pairs with larger lexical drops) and on dataset v3 (", code("data/v3/"), ": v2 with same-level base and syntax targets); and the CLiC-it 2026 Qwen3-0.6B, whose existing outputs are re-scored."),
+      h("li", {}, "Models: Qwen3-0.6B-Base fine-tuned with LoRA on dataset v1 (", code("data/v1/"), " on master), one with three target tokens per request and one also given the original’s three READ-IT levels; the target-token model trained the same way on dataset v2 (", code("data/v2/"), ": v1 plus 11,752 pairs with larger lexical drops), on dataset v3 (", code("data/v3/"), ": v2 with same-level base and syntax targets) and on dataset v4 (", code("data/v4/"), ": v3 with a syntax target on every pair whose syntax did not rise); and the CLiC-it 2026 Qwen3-0.6B, whose existing outputs are re-scored."),
       h("li", {}, "Requests: each test original at every level below its own level in the test set’s dimension, the other two dimensions left free; sampling at temperature 0.7, top-p 1.0, up to 128 new tokens."),
       h("li", {}, "READ-IT is computed exactly as the IMPaCTS labels (t2k with its default configuration, one text at a time, the custom parser under stanza 1.10, mean over sentences): re-scoring the 3,000 test originals and 3,000 references reproduces every label. Outputs, originals and requested levels share one scale."),
       h("li", {}, "RMSE is measured against the bottom of the requested level, as in CLiC-it 2026, so an output inside the level still scores about 5; the share inside the level is the stricter, clearer measure."),
@@ -828,15 +857,16 @@
   function renderGeneration() {
     if (!G) return;
     $("generation-part").hidden = false;
-    $("gen-lede").textContent = "Qwen3-0.6B models fine-tuned on datasets v1, v2 and v3, asked to simplify the test originals to every READ-IT level below the original’s own, " +
+    $("gen-lede").textContent = "Qwen3-0.6B models fine-tuned on datasets v1 to v4, asked to simplify the test originals to every READ-IT level below the original’s own, " +
       "compared with the CLiC-it 2026 Qwen3-0.6B. The curves follow the CLiC-it 2026 figures: requested level against achieved READ-IT.";
     $("gen-meta").textContent = `Generated ${G.meta.generated}.`;
     for (const b of $("gen-dim").children) b.setAttribute("aria-checked", String(b.dataset.value === gen.dim));
     const models = genModels();
     $("gen-curve-title").textContent = `${GEN_DIMS[gen.dim]} requests · achieved against requested`;
     $("gen-curve-sub").textContent = `Each point is the mean achieved READ-IT ${gen.dim} of the outputs at that requested level; the vertical line spans their middle half. ` +
-      "The shaded staircase is where an output should land. Hollow points rest on fewer than 30 outputs (few originals sit that high). Hover a level for the numbers.";
-    legend($("gen-curve-legend"), models.map((m) => ({ name: m.label, color: m.color })));
+      "The shaded staircase is where an output should land. Hollow points rest on fewer than 30 outputs (few originals sit that high). Hover a level for the numbers. " +
+      "The CLiC-it model and our two latest models are drawn first; click a model in the legend to show or hide its line. The tables below list every model.";
+    genLegend($("gen-curve-legend"));
     genCurve($("gen-curve-chart"));
     genSummary();
     genLevels();
