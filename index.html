@@ -168,13 +168,14 @@
       <h2 class="part-title" id="generation-title">Model generation analysis</h2>
       <p class="lede" id="gen-lede"></p>
       <ul class="findings" id="gen-findings">
-        <li>No model of ours controls READ-IT better than the CLiC-it 2026 0.6B overall: level on base, slightly better on syntax, worse on lexical. The v3 model is the closest on base, v4 on syntax.</li>
+        <li>No model of ours controls READ-IT better than the CLiC-it 2026 0.6B overall: level on base, slightly better on syntax, worse on lexical. The v3 model is the closest on base; v5 is ahead on syntax at the top of the scale, but copies more.</li>
         <li>Giving the model the original’s own levels (source tokens) changes nothing measurable.</li>
         <li>Lexical is still not controllable: requests from 0 to 30 all land near 40. Almost every lexical target in v1 is one level below the original.</li>
         <li>Dataset v2 adds 11,752 pairs with lexical drops of two levels or more, and lexical still does not follow the request: requests from 0 to 20 land at 38–39, and within an original requested and achieved lexical are unrelated (Spearman 0.06). Base, syntax and the joint evaluation are unchanged.</li>
         <li>The v1 and v2 models always simplify (at most 4% copies), so they overshoot mild requests. The CLiC-it model’s edits at the top levels are milder, with or without its copies: at base 60–80 its RMSE is 18.9 (18.8 without copies) against about 21.</li>
         <li>Dataset v3 gives the light edits a token: a pair whose simplification stays in the original’s base or syntax level gets that level as target. Base requests at 70–80 then land at 66.9 instead of 62.3, and base RMSE at 60–80 falls to 19.8, without copying more (1.0% copies). Syntax does not move: a syntax drop needs 17.6 points to be labelled, more than a level, so the one-level drops it would learn from are almost all left free.</li>
         <li>Dataset v4 labels those syntax drops too, so every pair whose syntax did not rise has a syntax target. Syntax requests at 70–80 still land at 57.3 (v3: 56.6; CLiC-it: 68.1). In this data a simplification of an original at syntax 80 is an equally heavy edit whether its score lands at 80, 70, 60 or 50, so the labels have nothing distinct to teach. Over all syntax requests v4 is ahead of the CLiC-it model (RMSE 26.0 against 26.9, 17.9% inside against 15.5%, 1.6% copies against 5.7%). Base loses v3’s gain (60.6 at 70–80): syntax “any” used to mark the pairs whose syntax barely changed, and no longer does.</li>
+        <li>Dataset v5 adds 989 identity pairs (the original as its own simplification) at syntax 60–90, at the CLiC-it 2026 data’s share. Syntax at the top moves past the CLiC-it model: requests at 70–80 land at 73.7 (CLiC-it: 68.1), RMSE at 60–80 falls to 22.4 (23.2) and ρ within rises to 0.59 (0.50). But half the outputs at 70–80 are copies, twice the CLiC-it model’s share: the identity pairs have only a syntax target, so they always appear in the syntax-only format the evaluation uses, at two to three times the CLiC-it data’s share. Dataset v6 corrects the dose.</li>
         <li>With all three dimensions requested, 3–5% of outputs land inside all three levels.</li>
       </ul>
       <p class="meta" id="gen-meta"></p>
@@ -234,6 +235,7 @@
   <script src="data_v2.js"></script>
   <script src="data_v3.js"></script>
   <script src="data_v4.js"></script>
+  <script src="data_v5.js"></script>
   <script src="data_generation.js" onerror="void 0"></script>
   <script src="app.js"></script>
 </body>
