@@ -53,18 +53,20 @@ original sentence
 
         <h3>The requests</h3>
         <p>For each sentence and each token, every level below the sentence’s own level in that dimension. A sentence at syntax 80 gets syntax requests 70, 60, …, 0.
-          We write <em>k</em> for the number of levels below the original (k = 1 is the mildest request). Each request is made in two modes:</p>
+          We write <em>k</em> for the number of levels below the original (k = 1 is the mildest request).</p>
+        <p><strong>Every request lowers exactly one token; the results are always reported separately for each of the three</strong> (“base lowered”,
+          “lexical lowered”, “syntax lowered”), never pooled across them. What changes between the two modes is what the <em>other two</em> tokens say:</p>
         <div class="scroll-x"><table class="data setup-table">
           <thead><tr><th>Mode</th><th>The moved token</th><th>The other two tokens</th><th>Example: original at base 80, lexical 30, syntax 70; request syntax 40</th><th class="num">Requests</th></tr></thead>
           <tbody>
-            <tr><td><strong>Free</strong></td><td>level L</td><td><code>any</code></td><td><code>base_any · lexical_any · syntax_40</code></td><td class="num">16,851</td></tr>
-            <tr><td><strong>Held</strong></td><td>level L</td><td>base and syntax at the sentence’s own level; lexical <code>any</code></td><td><code>base_80 · lexical_any · syntax_40</code></td><td class="num">16,851</td></tr>
+            <tr><td><strong>Others any</strong></td><td>level L</td><td><code>any</code> (no request)</td><td><code>base_any · lexical_any · syntax_40</code></td><td class="num">16,851</td></tr>
+            <tr><td><strong>Others held</strong></td><td>level L</td><td>base and syntax at the sentence’s own level; lexical <code>any</code></td><td><code>base_80 · lexical_any · syntax_40</code></td><td class="num">16,851</td></tr>
             <tr><td><strong>Anchor</strong></td><td>none</td><td>base and syntax at the sentence’s own level; lexical <code>any</code></td><td><code>base_80 · lexical_any · syntax_70</code></td><td class="num">1,000</td></tr>
           </tbody>
         </table></div>
         <ul>
-          <li><strong>Free</strong> is how the main evaluation uses the model: the other dimensions may move however the model usually moves them.</li>
-          <li><strong>Held</strong> tells the other dimensions to stay where they are, isolating the moved token’s own effect.
+          <li><strong>Others any</strong> is how the main evaluation uses the model: only one dimension is requested, and the other two are left free to move however the model usually moves them.</li>
+          <li><strong>Others held</strong> asks the other dimensions to stay at the sentence’s own level, to isolate the lowered token’s own effect.
             <ul>
               <li>Lexical cannot be held: v5’s training data never has a lexical target at the original’s own level (0 pairs), while base and syntax have (11.9% and 5.9% of pairs).</li>
               <li>Holding syntax at the original’s level is also what v5’s identity pairs look like (an original given as its own simplification), so held requests can make the model copy. Copy rates are reported with every held result.</li>
@@ -100,7 +102,7 @@ original sentence
           <li id="exp-1"><strong>Dose-response of the edits.</strong> For each token, mode, sentence and k, we take the output k levels below minus the output 1 level below,
             and average it over the sentences that can go k levels down (points with fewer than 100 sentences are dropped). We measure it on the edit operations and on key
             features. <em>Reading:</em> as a token asks for more, which kind of edit grows: deletion, rewording, insertion, sentence splitting?</li>
-          <li id="exp-2"><strong>Feature effects.</strong> For each token and each feature: the output 3 levels below against the output 1 level below, paired by sentence.
+          <li id="exp-2"><strong>Feature effects.</strong> Separately for each lowered token (base, lexical, syntax), and for each feature: the output 3 levels below against the output 1 level below, paired by sentence.
             <ul>
               <li><em>Effect size:</em> rank-biserial r of the paired differences, from −1 to +1. +1 means the feature went up in every sentence where it changed, and 0 means no consistent direction.</li>
               <li><em>Significance:</em> Wilcoxon signed-rank test, with Benjamini–Hochberg q across features.</li>
@@ -118,8 +120,16 @@ original sentence
                 The gap between (ii) and (i) measures how much the tokens differ in <em>what</em> they change, beyond <em>how much</em> they simplify.</li>
             </ul>
           </li>
-          <li id="exp-4"><strong>Matched outputs.</strong> For each sentence and pair of tokens, the two outputs (one per token, any levels, different texts, neither a copy of the original) whose READ-IT global scores
-            are closest, kept if within 2 points. They are compared feature by feature with the same paired test as experiment 2. Whatever still differs at equal overall readability is what distinguishes the two tokens.</li>
+          <li id="exp-4"><strong>One token against another.</strong> The same sentence, simplified once by lowering token A and once by lowering token B, compared feature by feature
+            (paired Wilcoxon, rank-biserial r; positive: higher when A is lowered). Two ways of pairing the outputs:
+            <ul>
+              <li><em>Same distance:</em> A and B both 1, 2 and 3 levels below the original (the three differences averaged per sentence). This is the raw comparison, but the
+                same distance is not the same strength: most sentences start at lexical 30–40 and syntax 70–80, so lexical 1–3 levels below asks for lexical 0–30, while syntax
+                1–3 levels below asks for syntax 40–70. Differences here mix <em>how much</em> and <em>what</em>.</li>
+              <li><em>Same overall READ-IT:</em> for each sentence, the A output and the B output (any levels, different texts, neither a copy of the original) whose READ-IT global
+                scores are closest, kept if within 2 points. This removes <em>how much</em>: whatever still differs is <em>what</em> each token edits.</li>
+            </ul>
+          </li>
         </ol>
       </div>
 
@@ -173,7 +183,7 @@ original sentence
     <div class="filters">
       <div class="wrap filters-row">
         <div class="filter">
-          <span class="filter-label" id="mode-label">The two dimensions not being moved</span>
+          <span class="filter-label" id="mode-label">One token is lowered; the other two are</span>
           <div class="segmented" role="radiogroup" aria-labelledby="mode-label" id="mode"></div>
         </div>
         <p class="slice-summary" id="mode-summary"></p>
@@ -222,13 +232,15 @@ original sentence
       </div>
 
       <div class="card">
-        <h3>At the same overall READ-IT score</h3>
+        <h3>Lowering one token instead of another</h3>
         <p class="how">Experiment 4 · <a href="#exp-4">how it is measured</a></p>
-        <p class="sub" id="matched-sub"></p>
         <div class="table-controls">
           <span class="filter-label" id="pair-label">Tokens</span>
           <div class="segmented" role="radiogroup" aria-labelledby="pair-label" id="pair"></div>
+          <span class="filter-label" id="cmp-label">Pairing</span>
+          <div class="segmented" role="radiogroup" aria-labelledby="cmp-label" id="cmp"></div>
         </div>
+        <p class="sub" id="matched-sub"></p>
         <div class="scroll-x"><table class="data features" id="matched"></table></div>
       </div>
     </section>

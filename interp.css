@@ -37,3 +37,5 @@ table.data.setup-table td:nth-child(4) { min-width: 240px; }
 p.how { margin: -2px 0 8px; font-size: 12.5px; color: var(--text-muted); }
 .table-controls label { max-width: 100%; min-width: 0; }
 .table-controls select { max-width: min(100%, 300px); min-width: 0; text-overflow: ellipsis; }
+table.data.features td.top .rbar { font-weight: 750; color: var(--text-primary); }
+table.data.features td.top { background: var(--wash); }

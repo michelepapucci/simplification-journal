@@ -10,7 +10,7 @@
   const DIM_COLOR = { base: "series-1", lexical: "series-2", syntax: "series-3" };
   const PAIR_COLOR = { "base-lexical": "series-4", "base-syntax": "series-8", "lexical-syntax": "series-5" };
   const cap = (s) => s[0].toUpperCase() + s.slice(1);
-  const MODES = { free: "Free (any)", keep: "Held at the original’s levels" };
+  const MODES = { free: "any (no request)", keep: "held at the original’s levels" };
   const LABEL = {
     readit_base: "READ-IT base", readit_lexical: "READ-IT lexical", readit_syntax: "READ-IT syntax", readit_all: "READ-IT global",
     n_tokens: "Tokens", n_sentences: "Sentences", tokens_per_sent: "Tokens per sentence", char_per_tok: "Characters per token",
@@ -21,7 +21,7 @@
     copy: "Copies of the original",
   };
   const label = (f) => LABEL[f] || f;
-  const state = { mode: "free", example: 0, pair: "base-syntax", category: "", search: "", sigOnly: true, allRows: false, sort: { key: "max", dir: "desc" } };
+  const state = { mode: "free", example: 0, pair: "base-syntax", cmp: "matched", category: "", search: "", sigOnly: true, allRows: false, sort: { key: "max", dir: "desc" } };
 
   // ---------- DOM helpers (all text goes through textContent) ----------
   function setAttrs(node, attrs) {
@@ -191,8 +191,8 @@
     const ul = clear($("findings"));
     for (const f of D.findings || []) ul.append(h("li", { text: f }));
     $("mode-summary").textContent = state.mode === "free"
-      ? "Free: the two other targets are “any”, as in the main evaluation."
-      : "Held: base and syntax stay at the original’s own levels (lexical stays “any”: v5 never saw a same-level lexical target).";
+      ? "Others any: only the lowered token is set, as in the main evaluation. Every result below is shown separately for base, lexical and syntax lowered."
+      : "Others held: base and syntax stay at the original’s own levels (lexical stays “any”: v5 never saw a same-level lexical target). Results are per lowered token.";
   }
 
   // ---------- Q1: example ----------
@@ -290,10 +290,13 @@
     }
     return svg;
   }
+  /** Index of the largest |r| among the three tokens (null when none is defined). */
+  const top = (rs) => { let best = null; rs.forEach((v, k) => { if (v != null && (best == null || Math.abs(v) > Math.abs(rs[best]))) best = k; }); return best; };
   function renderFeatures() {
     const q = D.q1[state.mode];
     $("features-sub").textContent = "Paired comparison, same original: the output three levels below the original against the output one level below " +
-      "(rank-biserial r of the differences; Wilcoxon, Benjamini–Hochberg q). Positive: the feature grows as the token asks for a simpler output.";
+      "(rank-biserial r of the differences; Wilcoxon, Benjamini–Hochberg q), separately for each lowered token. Positive: the feature grows as the token asks for a simpler output. " +
+      "In each row, the token with the largest effect is in bold; grey: q ≥ 0.01.";
     const lg = clear($("features-legend"));
     lg.append(h("span", { text: "r −1" }), h("span", { class: "bar", style: `background:linear-gradient(90deg, ${palette["div-neg"]}, ${palette["div-mid"]}, ${palette["div-pos"]})` }),
       h("span", { text: "+1 · blue: decreases, red: increases" }));
@@ -311,13 +314,13 @@
       th.append(h("button", { type: "button", text, onclick: () => { state.sort = { key, dir: state.sort.key === key && state.sort.dir === "desc" ? "asc" : "desc" }; renderFeatures(); } }));
       return th;
     };
-    t.append(h("thead", {}, h("tr", {}, head("name", "Feature"), DIMS.map((d) => head(d, `${cap(d)} token r`, true)), head("max", "Largest |r|", true))));
+    t.append(h("thead", {}, h("tr", {}, head("name", "Feature"), DIMS.map((d) => head(d, `${cap(d)} lowered: r`, true)), head("max", "Largest |r|", true))));
     const body = h("tbody");
     const shown = state.allRows || state.search ? rows : rows.slice(0, 30);
     for (const r of shown) {
       body.append(h("tr", {},
         h("td", { class: "feature" }, LABEL[r.f] ? `${LABEL[r.f]} ` : null, LABEL[r.f] ? h("span", { class: "cat", text: r.f }) : r.f, h("span", { class: "cat", text: r.cat })),
-        DIMS.map((d, k) => h("td", { class: `num${r.q[k] == null || r.q[k] >= 0.01 ? " muted" : ""}`, title: `mean change ${signed(r.md[k], 3)}, q ${fmtQ(r.q[k])}` },
+        DIMS.map((d, k) => h("td", { class: `num${r.q[k] == null || r.q[k] >= 0.01 ? " muted" : ""}${k === top(r.r) ? " top" : ""}`, title: `mean change ${signed(r.md[k], 3)}, q ${fmtQ(r.q[k])}` },
           h("span", { class: "rbar" }, signed(r.r[k]), rbar(r.r[k])), h("span", { class: "nd", text: `Δ ${signed(r.md[k], 3)}` }))),
         h("td", { class: "num", text: fmt(Math.max(...r.r.map((v) => Math.abs(v ?? 0)))) })));
     }
@@ -327,19 +330,24 @@
 
   // ---------- Q1: matched ----------
   function renderMatched() {
-    const m = D.q1[state.mode].matched[state.pair];
-    const [a, b] = state.pair.split("-");
-    $("matched-sub").textContent = `For each original, the ${a}-token output and the ${b}-token output (any levels, different texts, neither a copy of the original) whose overall READ-IT scores are closest, ` +
-      `kept if within 2 points: ${NF.format(m.n)} originals, mean gap ${fmt(m.mean_gap, 2)} points. What still differs is what each token edits at equal overall simplicity. ` +
-      `Positive r: higher in the ${a}-token output. Features with q < 0.01, largest |r| first.`;
+    const q = D.q1[state.mode], [a, b] = state.pair.split("-");
+    const m = q[state.cmp][state.pair];
+    $("matched-sub").textContent = state.cmp === "matched"
+      ? `Same sentence: the ${a}-lowered output and the ${b}-lowered output (any levels, different texts, neither a copy) whose overall READ-IT scores are closest, ` +
+        `kept if within 2 points: ${NF.format(m.n)} sentences, mean gap ${fmt(m.mean_gap, 2)} points. The amount of simplification is matched, so what still differs ` +
+        `is what each token edits. Positive r: higher when ${a} is lowered. Features with q < 0.01, largest |r| first.`
+      : `Same sentence, ${a} lowered and ${b} lowered by the same number of levels (1, 2 and 3 below the original, averaged): ${NF.format(m.n)} sentences; ` +
+        `the two outputs are the very same text ${pct(m.same_text)} of the time. The same distance is not the same strength (see experiment 4), so these differences ` +
+        `mix how much and what. Positive r: higher when ${a} is lowered. Features with q < 0.01, largest |r| first.`;
     const rows = D.features.map((f, i) => ({ f, i, r: m.r[i], q: m.q[i], md: m.mean_diff[i], cat: D.categories[i] }))
       .filter((r) => r.r != null && r.q != null && r.q < 0.01).sort((x, y) => Math.abs(y.r) - Math.abs(x.r)).slice(0, 30);
     const t = clear($("matched"));
-    t.append(h("thead", {}, h("tr", {}, h("th", { text: "Feature" }), h("th", { class: "num", text: "r" }), h("th", { class: "num", text: `Mean, ${a} − ${b}` }), h("th", { class: "num", text: "q" }))));
+    t.append(h("thead", {}, h("tr", {}, h("th", { text: "Feature" }), h("th", { class: "num", text: "r" }),
+      h("th", { class: "num", text: `Mean, ${a} lowered − ${b} lowered` }), h("th", { class: "num", text: "q" }))));
     const body = h("tbody");
     for (const r of rows) {
       body.append(h("tr", {},
-        h("td", { class: "feature" }, LABEL[r.f] ? `${LABEL[r.f]} ` : null, h("span", { class: "cat", text: LABEL[r.f] ? r.f : r.cat }), LABEL[r.f] ? null : null),
+        h("td", { class: "feature" }, LABEL[r.f] ? `${LABEL[r.f]} ` : null, LABEL[r.f] ? h("span", { class: "cat", text: r.f }) : r.f, h("span", { class: "cat", text: r.cat })),
         h("td", { class: "num" }, h("span", { class: "rbar" }, signed(r.r), rbar(r.r))),
         h("td", { class: "num", text: signed(r.md, 3) }), h("td", { class: "num", text: fmtQ(r.q) })));
     }
@@ -359,7 +367,7 @@
     for (const mode of ["free", "keep"]) {
       DIMS.forEach((d, k) => {
         const sl = D.q2[mode].slopes[d];
-        body.append(h("tr", { class: k === 0 ? "sep" : null }, h("td", {}, h("strong", { text: `${cap(d)}` }), ` · ${mode === "free" ? "others any" : "others held"}`),
+        body.append(h("tr", { class: k === 0 ? "sep" : null }, h("td", {}, h("strong", { text: `${cap(d)} lowered` }), ` · ${mode === "free" ? "others any" : "others held"}`),
           SCORES.map((e) => cell(sl[e].slope, e, [sl[e].lo, sl[e].hi]))));
       });
     }
@@ -454,6 +462,7 @@
     matchMedia("(prefers-color-scheme: dark)").addEventListener("change", renderAll);
     segmented("mode", MODES, "mode", renderAll);
     segmented("pair", Object.fromEntries(PAIRS.map((p) => [p, p.replace("-", " vs ")])), "pair", renderMatched);
+    segmented("cmp", { matched: "same overall READ-IT", same_distance: "same distance" }, "cmp", renderMatched);
     const pick = $("example-pick");
     D.examples.forEach((ex, i) => pick.append(h("option", { value: i, text: `${i + 1}. ${ex.original.slice(0, 60)}…` })));
     pick.addEventListener("change", (e) => { state.example = Number(e.target.value); renderExample(); });
