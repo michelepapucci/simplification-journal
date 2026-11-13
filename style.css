@@ -310,3 +310,5 @@ table.datasets { font-size: 13.5px; table-layout: fixed; }
   .datasets th, .datasets td { border: 0; padding: 3px 0; }
   .datasets td::before { content: attr(data-label); display: block; font-size: 11.5px; font-weight: 600; color: var(--text-muted); margin-top: 6px; }
 }
+
+.dataset-row[hidden] { display: none; }

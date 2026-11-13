@@ -1,0 +1,343 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Simplification Data Explorer</title>
+  <meta name="description" content="READ-IT distributions and linguistic profiles of the original–simplified pairs used to train and test readability-controlled simplification models for Italian.">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="page-header wrap">
+    <div class="header-row">
+      <h1>Simplification data explorer</h1>
+      <button type="button" class="theme-toggle" id="theme-toggle" aria-label="Colour theme">Theme: auto</button>
+    </div>
+    <p class="lede">
+      READ-IT distributions and linguistic profiles of the original–simplified pairs used to train
+      and test the readability-controlled simplification models, taken from the Wikipedia part of
+      <a href="https://huggingface.co/datasets/mpapucci/impacts">IMPaCTS</a>. The analyses are those of
+      <a href="https://aclanthology.org/2025.clicit-1.82/">Papucci, Venturi &amp; Dell’Orletta (CLiC-it 2025)</a>,
+      re-run on each dataset and broken down by control token.
+    </p>
+    <p class="meta">Archived on 2026-11-13: the work on three control tokens (datasets v0 to v7). The current explorer, with one token on READ-IT global, is <a href="../../">one level up</a>.</p>
+    <div class="dataset-row">
+      <span class="filter-label" id="dataset-label">Dataset</span>
+      <div class="segmented" role="radiogroup" aria-labelledby="dataset-label" id="dataset"></div>
+    </div>
+    <p class="lede dataset-desc" id="dataset-desc"></p>
+    <p class="meta" id="meta"></p>
+  </header>
+
+  <main>
+   <section class="wrap" aria-labelledby="datasets-title" id="datasets">
+    <h2 id="datasets-title">How each dataset was built</h2>
+    <div class="card">
+      <p class="sub">Every dataset, in the order it was built: what it contains, how the control tokens are given, why it was built, and whether it worked. A dataset name switches the explorer below to it. Part 2 holds the numbers. A range like “70–80” means requests for level 70, and the value is the mean READ-IT the outputs reach.</p>
+      <dl class="formats">
+        <div><dt>One token per example</dt><dd>the CLiC-it format: each pair is repeated once per dimension, each time with that dimension’s level, e.g. <code>&lt;|readability_syntax_70|&gt;</code>.</dd></div>
+        <div><dt>Three tokens per example</dt><dd>our format: each pair appears once, with a target for every dimension, either a level or <code>any</code>, e.g. <code>&lt;|readability_base_60|&gt;&lt;|readability_lexical_any|&gt;&lt;|readability_syntax_70|&gt;</code>. During training each set target is replaced by <code>any</code> with probability 0.3.</dd></div>
+      </dl>
+      <table class="datasets">
+        <thead><tr><th scope="col">Dataset</th><th scope="col">What it contains</th><th scope="col">Control tokens</th><th scope="col">Why we built it</th><th scope="col">Did it work?</th></tr></thead>
+        <tbody>
+          <tr>
+            <th scope="row"><a href="#data=clicit2025" data-dataset="clicit2025">CLiC-it 2025</a><span class="ds-sub">Wikipedia sample</span></th>
+            <td data-label="What it contains">2,000 Wikipedia originals with 14,293 IMPaCTS simplifications, before any READ-IT selection.</td>
+            <td data-label="Control tokens">None.</td>
+            <td data-label="Why we built it">The sample analysed in the CLiC-it 2025 paper: what the simplifications change, before any selection.</td>
+            <td data-label="Did it work?"><span class="verdict">Analysis only.</span> No model was trained on it.</td>
+          </tr>
+          <tr>
+            <th scope="row">CLiC-it 2026 data<span class="ds-sub">GFFF; not in the selector</span></th>
+            <td data-label="What it contains">45,209 pairs from originals with READ-IT global above 70. 1,598 of them (3.5%) are identity pairs: the original left unchanged.</td>
+            <td data-label="Control tokens">One token per example (135,627 examples). The lexical token was computed from the base score, so it always equals the base token.</td>
+            <td data-label="Why we built it">The training data of the CLiC-it 2026 models, kept unmodified for reference.</td>
+            <td data-label="Did it work?"><span class="verdict">Reference.</span> Its Qwen3-0.6B is the model every model of ours is compared with in Part 2.</td>
+          </tr>
+          <tr>
+            <th scope="row"><a href="#data=v0" data-dataset="v0">v0</a><span class="ds-sub">CLiC-it 2026 selection, fixed</span></th>
+            <td data-label="What it contains">55,877 pairs: the same selection, rebuilt from the public IMPaCTS release. No identity pairs, because the release drops them.</td>
+            <td data-label="Control tokens">One token per example (167,631 examples), each computed from its own dimension’s score.</td>
+            <td data-label="Why we built it">A reproducible baseline of the 2026 data, with the lexical-token bug fixed.</td>
+            <td data-label="Did it work?"><span class="verdict">Not trained.</span> Kept as the baseline format.</td>
+          </tr>
+          <tr>
+            <th scope="row"><a href="#data=v1" data-dataset="v1">v1</a><span class="ds-sub">three target tokens</span></th>
+            <td data-label="What it contains">78,462 pairs from 10,800 originals with READ-IT global above 70. A dimension gets a target only if the simplification drops at least one level, by more than READ-IT’s own noise; otherwise it gets <code>any</code>.</td>
+            <td data-label="Control tokens">Three tokens per example. A second model also gets the original’s three levels as source tokens.</td>
+            <td data-label="Why we built it">To control all three dimensions in one request, and to teach only drops larger than the noise of the READ-IT score.</td>
+            <td data-label="Did it work?"><span class="verdict">Partly.</span> Level with the CLiC-it model on base, slightly better on syntax, worse on lexical. It also takes all three dimensions at once: 3.4% of outputs land inside all three levels. Lexical is not controllable: requests from 0 to 30 all land near 40. The source tokens changed nothing.</td>
+          </tr>
+          <tr>
+            <th scope="row"><a href="#data=v2" data-dataset="v2">v2</a><span class="ds-sub">v1 plus lexical support</span></th>
+            <td data-label="What it contains">89,460 pairs: v1 without its 754 non-Italian pairs, plus 11,752 pairs whose lexical score dropped two levels or more.</td>
+            <td data-label="Control tokens">Three tokens per example.</td>
+            <td data-label="Why we built it">v1’s lexical token had nothing to learn from: 94% of its lexical targets are exactly one level below the original.</td>
+            <td data-label="Did it work?"><span class="verdict">No.</span> Lexical requests from 0 to 20 still land at about 38. Base and syntax are unchanged.</td>
+          </tr>
+          <tr>
+            <th scope="row"><a href="#data=v3" data-dataset="v3">v3</a><span class="ds-sub">same-level targets</span></th>
+            <td data-label="What it contains">v2’s pairs. When base or syntax stays in the original’s level, the target is that level instead of <code>any</code> (10,767 base and 4,302 syntax targets changed).</td>
+            <td data-label="Control tokens">Three tokens per example.</td>
+            <td data-label="Why we built it">In v1 and v2, <code>any</code> also meant “stayed where it was”. No token asked for a light edit, so mild requests were over-simplified.</td>
+            <td data-label="Did it work?"><span class="verdict">Partly.</span> Base requests at 70–80 land at 66.9 instead of 62.3, without more copying. Syntax at the top did not move: 56.6 at 70–80, against the CLiC-it model’s 68.1. v3 is the starting point of v4 to v7.</td>
+          </tr>
+          <tr>
+            <th scope="row"><a href="#data=v4" data-dataset="v4">v4</a><span class="ds-sub">syntax crossings</span></th>
+            <td data-label="What it contains">v3, with a syntax target on every pair whose syntax did not rise, including drops smaller than the noise margin (9,833 pairs relabelled).</td>
+            <td data-label="Control tokens">Three tokens per example.</td>
+            <td data-label="Why we built it">The syntax noise margin (17.6 points) is wider than a level, so most one-level syntax drops were left <code>any</code>. At the top of the scale the model almost never saw “one level below”.</td>
+            <td data-label="Did it work?"><span class="verdict">No.</span> Syntax at 70–80 stayed at 57.3, and base lost v3’s gain (60.6). At the top of the scale, IMPaCTS edits are equally heavy whatever level they land in, so the new labels had nothing distinct to teach.</td>
+          </tr>
+          <tr>
+            <th scope="row"><a href="#data=v5" data-dataset="v5">v5</a><span class="ds-sub">identity pairs</span></th>
+            <td data-label="What it contains">v3 plus 989 identity pairs (an original given as its own simplification), from originals at syntax 60–90. Each has a syntax target at the original’s level, and no other target.</td>
+            <td data-label="Control tokens">Three tokens per example.</td>
+            <td data-label="Why we built it">The CLiC-it data teaches “change little” at the top of the scale through its identity pairs, and ours had none. Their number matches the CLiC-it data’s share among syntax targets.</td>
+            <td data-label="Did it work?"><span class="verdict">Partly.</span> Syntax at the top passed the CLiC-it model: 73.7 at 70–80 against 68.1, and RMSE at 60–80 of 22.4 against 23.2. But copies doubled: 8.7% of syntax outputs (CLiC-it 5.7%), and half of the outputs at 70–80.</td>
+          </tr>
+          <tr>
+            <th scope="row"><a href="#data=v6" data-dataset="v6">v6</a><span class="ds-sub">fewer identity pairs</span></th>
+            <td data-label="What it contains">v3 plus 240 identity pairs, built as in v5.</td>
+            <td data-label="Control tokens">Three tokens per example.</td>
+            <td data-label="Why we built it">To bring v5’s copies down. We assumed only the examples that show the syntax token alone, as the evaluation does, set the dose.</td>
+            <td data-label="Did it work?"><span class="verdict">No.</span> The model barely copied (6.2% at the highest request, against the CLiC-it model’s 22.1%), and syntax at the top did not move (54.8). What sets copying is the share among all examples that show the syntax token, alone or not.</td>
+          </tr>
+          <tr>
+            <th scope="row"><a href="#data=v7" data-dataset="v7">v7</a><span class="ds-sub">the CLiC-it format, plus combined examples</span></th>
+            <td data-label="What it contains">v3’s pairs plus 1,031 identity pairs with syntax and base targets: 267,390 training examples. The identity pairs give the CLiC-it data’s share among all examples that show each syntax token.</td>
+            <td data-label="Control tokens">One token per example, as in the CLiC-it data, plus one combined example per pair with all its targets, so the model still takes all three at once. No target dropout.</td>
+            <td data-label="Why we built it">Our format shows each pair once with all its tokens; the CLiC-it data shows it once per token. Our models saw the high syntax tokens 2.4 times less often than the CLiC-it model.</td>
+            <td data-label="Did it work?"><span class="verdict">Mostly.</span> The model copies at the CLiC-it model’s rate (21.0% at the highest syntax request, against 22.1%). Syntax at 70–80 rose to 65.7 (CLiC-it: 68.1) and base to 68.3. Three of the four syntax goals are met, and the base goal too. RMSE at 60–80 is still 24.4 against 23.2: the outputs that are not copies are slightly heavier edits. Trained for one epoch instead, it does worse: its edits are no lighter, and it copies at mild requests too, so the heavy edits come from the format, not overfitting.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+   </section>
+
+   <div class="part" id="data-part">
+    <header class="wrap part-head">
+      <p class="eyebrow">Part 1</p>
+      <h2 class="part-title">Data analysis of IMPaCTS</h2>
+      <p class="sub">The training and test pairs themselves: READ-IT distributions and linguistic profiles of the originals and their simplifications, by dataset, split and control token.</p>
+    </header>
+    <section class="wrap" aria-labelledby="overview-title">
+      <h2 id="overview-title">The data at a glance</h2>
+      <div class="card">
+        <h3 id="counts-title">Pairs per control token</h3>
+        <p class="sub" id="counts-sub"></p>
+        <div class="scroll-x"><table class="counts" id="counts"></table></div>
+      </div>
+
+      <div class="card">
+        <h3 id="fig1-title"></h3>
+        <p class="sub" id="fig1-sub"></p>
+        <div class="legend" id="fig1-legend"></div>
+        <div class="chart" id="fig1-chart"></div>
+        <div class="two-tables">
+          <div>
+            <h4>READ-IT global, by version</h4>
+            <div class="scroll-x"><table class="data summary" id="fig1-summary"></table></div>
+          </div>
+          <div>
+            <h4>MANOVA, original vs each version (Table 4 of the 2025 paper)</h4>
+            <div class="scroll-x"><table class="data" id="fig1-manova"></table></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>Datasets compared</h3>
+        <p class="sub">
+          The same analyses on every dataset, one simplification per original. Drops are mean READ-IT of the originals minus
+          mean READ-IT of the simplifications (0–100). Pillai’s trace is from the two-group MANOVA (Table 4 of the 2025 paper) on the
+          randomly selected, most and least simplified version of each original. The feature columns give the rank-biserial <i>r</i>:
+          above 0, the feature is higher in the original. Click a row to switch dataset.
+        </p>
+        <div class="scroll-x"><table class="data compare" id="compare"></table></div>
+      </div>
+    </section>
+
+    <nav class="filters" aria-label="Data slice">
+      <div class="wrap filters-row">
+        <div class="filter">
+          <span class="filter-label" id="split-label">Split</span>
+          <div class="segmented" role="radiogroup" aria-labelledby="split-label" id="split"></div>
+        </div>
+        <div class="filter">
+          <span class="filter-label" id="strategy-label"></span>
+          <div class="segmented" role="radiogroup" aria-labelledby="strategy-label" id="strategy"></div>
+        </div>
+        <div class="filter">
+          <label class="filter-label" for="level" id="level-label">Control token</label>
+          <select id="level"></select>
+        </div>
+        <div class="filter">
+          <label class="filter-label" for="dim">READ-IT score</label>
+          <select id="dim"></select>
+        </div>
+        <p class="slice-summary" id="slice-summary" aria-live="polite"></p>
+      </div>
+    </nav>
+
+    <section class="wrap" aria-labelledby="readit-title">
+      <h2 id="readit-title">READ-IT distributions</h2>
+      <div class="card">
+        <h3 id="kde-title"></h3>
+        <p class="sub" id="kde-sub"></p>
+        <div class="legend" id="kde-legend"></div>
+        <div class="chart" id="kde-chart"></div>
+        <div class="scroll-x"><table class="data summary" id="kde-summary"></table></div>
+      </div>
+      <div class="card">
+        <h3 id="levels-title"></h3>
+        <p class="sub">Original and simplified READ-IT distributions for every control token of the selected strategy.
+          Each row is scaled to its own peak; click a row to select that control token.</p>
+        <div class="legend" id="levels-legend"></div>
+        <div id="levels-chart"></div>
+      </div>
+    </section>
+
+    <section class="wrap" aria-labelledby="profile-title">
+      <h2 id="profile-title">Linguistic profile</h2>
+      <div class="card">
+        <div class="card-head">
+          <h3 id="heat-title"></h3>
+          <label class="inline-control">Features shown
+            <select id="topn">
+              <option value="20">top 20</option>
+              <option value="40" selected>top 40</option>
+              <option value="0">all</option>
+            </select>
+          </label>
+        </div>
+        <p class="sub">
+          Rank-biserial <i>r</i> of the Wilcoxon signed-rank test, original vs simplified, for each control token.
+          Features are ordered by mean |<i>r</i>| across the columns; blank cells are not significant (<i>p</i> ≥ 0.05).
+          The bars above give Pillai’s trace of the MANOVA for each column, with a tick at the value expected by chance.
+          Click a cell to select that control token.
+        </p>
+        <div class="diverging-legend" id="heat-legend"></div>
+        <div class="scroll-x" id="heat-chart"></div>
+      </div>
+
+      <div class="card">
+        <h3 id="table-title"></h3>
+        <p class="sub" id="manova-line"></p>
+        <div class="table-controls">
+          <label>Search <input type="search" id="search" placeholder="feature name" autocomplete="off"></label>
+          <label>Category <select id="category"></select></label>
+          <label>|<i>r</i>| ≥ <input type="number" id="min-r" min="0" max="1" step="0.1" value="0"></label>
+          <label class="check"><input type="checkbox" id="sig-only" checked> only <i>p</i> &lt; 0.05</label>
+          <button type="button" id="download">Download CSV</button>
+          <span class="row-count" id="row-count" aria-live="polite"></span>
+        </div>
+        <div class="scroll-x"><table class="data features" id="features"></table></div>
+      </div>
+    </section>
+
+    <section class="wrap" aria-labelledby="examples-title">
+      <h2 id="examples-title">Example pairs</h2>
+      <p class="sub" id="examples-sub"></p>
+      <div class="examples" id="examples"></div>
+    </section>
+
+    <section class="wrap methods" aria-labelledby="methods-title">
+      <h2 id="methods-title">How the numbers are computed</h2>
+      <div class="card" id="methods"></div>
+    </section>
+   </div>
+
+   <div class="part" id="generation-part" hidden>
+    <header class="wrap part-head">
+      <p class="eyebrow">Part 2</p>
+      <h2 class="part-title" id="generation-title">Model generation analysis</h2>
+      <p class="lede" id="gen-lede"></p>
+      <p class="lede">How the v5 and v7 models use each of their three tokens, with the same sentences under every request: <a href="interp.html">control token interpretability</a>.</p>
+      <ul class="findings" id="gen-findings">
+        <li>No model of ours controls READ-IT better than the CLiC-it 2026 0.6B overall. The v7 model comes closest: about level on base and lexical, ahead on syntax over all requests (RMSE 25.8 against 26.9), and 1.2 points of RMSE behind it at syntax 60–80. v5 is ahead on syntax at the top of the scale, but copies more.</li>
+        <li>Giving the model the original’s own levels (source tokens) changes nothing measurable.</li>
+        <li>Lexical is still not controllable: requests from 0 to 30 all land near 40. Almost every lexical target in v1 is one level below the original.</li>
+        <li>Dataset v2 adds 11,752 pairs with lexical drops of two levels or more, and lexical still does not follow the request: requests from 0 to 20 land at 38–39, and within an original requested and achieved lexical are unrelated (Spearman 0.06). Base, syntax and the joint evaluation are unchanged.</li>
+        <li>The v1 and v2 models always simplify (at most 4% copies), so they overshoot mild requests. The CLiC-it model’s edits at the top levels are milder, with or without its copies: at base 60–80 its RMSE is 18.9 (18.8 without copies) against about 21.</li>
+        <li>Dataset v3 gives the light edits a token: a pair whose simplification stays in the original’s base or syntax level gets that level as target. Base requests at 70–80 then land at 66.9 instead of 62.3, and base RMSE at 60–80 falls to 19.8, without copying more (1.0% copies). Syntax does not move: a syntax drop needs 17.6 points to be labelled, more than a level, so the one-level drops it would learn from are almost all left free.</li>
+        <li>Dataset v4 labels those syntax drops too, so every pair whose syntax did not rise has a syntax target. Syntax requests at 70–80 still land at 57.3 (v3: 56.6; CLiC-it: 68.1). In this data a simplification of an original at syntax 80 is an equally heavy edit whether its score lands at 80, 70, 60 or 50, so the labels have nothing distinct to teach. Over all syntax requests v4 is ahead of the CLiC-it model (RMSE 26.0 against 26.9, 17.9% inside against 15.5%, 1.6% copies against 5.7%). Base loses v3’s gain (60.6 at 70–80): syntax “any” used to mark the pairs whose syntax barely changed, and no longer does.</li>
+        <li>Dataset v5 adds 989 identity pairs (the original as its own simplification) at syntax 60–90, at the CLiC-it 2026 data’s share. Syntax at the top moves past the CLiC-it model: requests at 70–80 land at 73.7 (CLiC-it: 68.1), RMSE at 60–80 falls to 22.4 (23.2) and ρ within rises to 0.59 (0.50). But half the outputs at 70–80 are copies, twice the CLiC-it model’s share.</li>
+        <li>Dataset v6 has 240 identity pairs instead, as many as give the CLiC-it data’s share among training examples that show the syntax token alone. At that dose the model barely copies (6.2% at the highest syntax request; CLiC-it: 22.1%), and syntax at the top does not move (54.8 at 70–80). The model learns a syntax token from every example that shows it, with or without other tokens: by that measure, v5 had 1.2 times the CLiC-it data’s share of identity pairs and v6 0.4 times. In this run, a fifth of the outputs at base request 0 are near-copies, which raises base RMSE from 20.8 to 24.3; without that request, base is v3’s.</li>
+        <li>Dataset v7 is v3 in the CLiC-it format: one example per token, plus one combined example per pair. It has 1,031 identity pairs, at the CLiC-it data’s share among all examples that show each syntax token.
+          <ul>
+            <li><strong>Copies:</strong> the model copies at the CLiC-it model’s rate (21.0% at the highest syntax request; CLiC-it: 22.1%).</li>
+            <li><strong>Syntax at the top:</strong> requests at 70–80 land at 65.7 (v3: 56.6; CLiC-it: 68.1).</li>
+            <li><strong>Goals:</strong> three of the four syntax goal conditions are met, and base at 70–80 lands at 68.3. RMSE at 60–80 is still 24.4 against 23.2, because the outputs that are not copies are slightly heavier edits.</li>
+            <li><strong>Lexical:</strong> its share inside rose to 14.9% (CLiC-it: 14.4%) with the same labels.</li>
+            <li><strong>Overfitting?</strong> Validation loss rose from step 2,500 to the end of the 12,534 steps. Trained for one epoch (lowest validation loss 0.705), the model does worse: at syntax request 70 its outputs that are not copies land at 58.9 (three epochs: 59.8), and it copies at mild requests too (base copies 4.6% against 1.5%; base RMSE 23.1). The heavy edits come from the format, and the extra epochs teach the model when to copy.</li>
+            <li><strong>How the tokens are used</strong> (<a href="interp.html">interpretability</a>): held requests now work for base, unlike in v5, but the three tokens are still one “simplify” dial, more so than v5’s.</li>
+          </ul>
+        </li>
+        <li>With all three dimensions requested, 3–5% of outputs land inside all three levels.</li>
+      </ul>
+      <p class="meta" id="gen-meta"></p>
+    </header>
+
+    <div class="wrap gen-controls">
+      <span class="filter-label" id="gen-dim-label">Test set</span>
+      <div class="segmented" role="radiogroup" aria-labelledby="gen-dim-label" id="gen-dim"></div>
+    </div>
+
+    <section class="wrap" aria-labelledby="gen-curve-title">
+      <div class="card">
+        <h3 id="gen-curve-title"></h3>
+        <p class="sub" id="gen-curve-sub"></p>
+        <div class="legend" id="gen-curve-legend"></div>
+        <div class="chart" id="gen-curve-chart"></div>
+      </div>
+      <div class="card">
+        <h3 id="gen-summary-title"></h3>
+        <p class="sub" id="gen-summary-sub"></p>
+        <div class="scroll-x"><table class="data" id="gen-summary"></table></div>
+      </div>
+      <div class="card">
+        <h3 id="gen-levels-title"></h3>
+        <p class="sub">For every requested level: the mean achieved READ-IT, the RMSE between the requested level and the achieved score (the CLiC-it 2026 tables) and the share of outputs inside the level. RMSE is about 5 even for an output inside the level, since it is measured against the bottom of the level.</p>
+        <div class="scroll-x"><table class="data" id="gen-levels"></table></div>
+      </div>
+    </section>
+
+    <section class="wrap" aria-labelledby="gen-joint-title">
+      <h2 id="gen-joint-title">All three dimensions at once</h2>
+      <div class="card">
+        <p class="sub" id="gen-joint-sub"></p>
+        <div class="scroll-x"><table class="data" id="gen-joint"></table></div>
+      </div>
+    </section>
+
+    <section class="wrap" aria-labelledby="gen-example-title">
+      <h2 id="gen-example-title">One original, every requested level</h2>
+      <div class="card">
+        <p class="sub" id="gen-example-sub"></p>
+        <div class="scroll-x"><table class="data gen-example" id="gen-example"></table></div>
+      </div>
+    </section>
+
+    <section class="wrap methods" aria-labelledby="gen-methods-title">
+      <h2 id="gen-methods-title">How the generations are evaluated</h2>
+      <div class="card" id="gen-methods"></div>
+    </section>
+   </div>
+  </main>
+
+  <div class="tooltip" id="tooltip" role="tooltip" hidden></div>
+  <script src="data_clicit2025.js"></script>
+  <script src="data_v0.js"></script>
+  <script src="data_v1.js"></script>
+  <script src="data_v2.js"></script>
+  <script src="data_v3.js"></script>
+  <script src="data_v4.js"></script>
+  <script src="data_v5.js"></script>
+  <script src="data_v6.js"></script>
+  <script src="data_v7.js"></script>
+  <script src="data_generation.js" onerror="void 0"></script>
+  <script src="app.js"></script>
+</body>
+</html>
