@@ -1,0 +1,9 @@
+[2026-11-11 01:15:19] train
+[2026-11-11 04:23:51] generate
+[2026-11-11 04:55:22] meaning
+[2026-11-11 04:57:14] readit+profiling
+[2026-11-11 06:11:33] readit+profiling failed: two overlapping t2k runs shared t2k's fixed /tmp files; parser fixed, resuming
+[2026-11-11 06:11:33] repair base (targets, source_targets)
+[2026-11-11 06:12:01] readit+profiling lexical syntax joint
+[2026-11-11 07:29:44] scoring done (exit 0)
+[2026-11-11 07:29:56] repair: every READ-IT file checked against its texts

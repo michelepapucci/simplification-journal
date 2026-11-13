@@ -1,0 +1,1515 @@
+{
+ "training_data": {
+  "clicit2026": {
+   "base": {
+    "pairs": 45209,
+    "originals": 11464,
+    "target_harder_than_source": 0.0,
+    "levels_per_original_mean": 2.08,
+    "originals_with_one_level": 0.292,
+    "level_span_per_original_mean": 15.2,
+    "level_counts": {
+     "0": 47,
+     "10": 3899,
+     "20": 13355,
+     "30": 12413,
+     "40": 7307,
+     "50": 4077,
+     "60": 2187,
+     "70": 1149,
+     "80": 549,
+     "90": 226
+    },
+    "original_score_quartiles": [
+     44.3,
+     57.8,
+     71.8
+    ]
+   },
+   "lexical": {
+    "pairs": 45209,
+    "originals": 11464,
+    "target_harder_than_source": 0.0,
+    "levels_per_original_mean": 2.08,
+    "originals_with_one_level": 0.292,
+    "level_span_per_original_mean": 15.2,
+    "level_counts": {
+     "0": 47,
+     "10": 3899,
+     "20": 13355,
+     "30": 12413,
+     "40": 7307,
+     "50": 4077,
+     "60": 2187,
+     "70": 1149,
+     "80": 549,
+     "90": 226
+    },
+    "original_score_quartiles": [
+     34.1,
+     37.5,
+     41.1
+    ]
+   },
+   "syntax": {
+    "pairs": 45209,
+    "originals": 11464,
+    "target_harder_than_source": 0.0,
+    "levels_per_original_mean": 2.55,
+    "originals_with_one_level": 0.21,
+    "level_span_per_original_mean": 28.5,
+    "level_counts": {
+     "0": 4032,
+     "10": 7002,
+     "20": 5331,
+     "30": 5852,
+     "40": 6154,
+     "50": 5769,
+     "60": 5266,
+     "70": 4112,
+     "80": 1659,
+     "90": 32
+    },
+    "original_score_quartiles": [
+     71.8,
+     76.7,
+     82.0
+    ]
+   }
+  },
+  "v0": {
+   "base": {
+    "pairs": 55877,
+    "originals": 11657,
+    "target_harder_than_source": 0.0,
+    "levels_per_original_mean": 2.27,
+    "originals_with_one_level": 0.229,
+    "level_span_per_original_mean": 17.0,
+    "level_counts": {
+     "0": 69,
+     "10": 5251,
+     "20": 16833,
+     "30": 15186,
+     "40": 8979,
+     "50": 4780,
+     "60": 2617,
+     "70": 1395,
+     "80": 595,
+     "90": 172
+    },
+    "original_score_quartiles": [
+     44.5,
+     58.1,
+     72.0
+    ]
+   },
+   "lexical": {
+    "pairs": 55877,
+    "originals": 11657,
+    "target_harder_than_source": 0.0,
+    "levels_per_original_mean": 1.51,
+    "originals_with_one_level": 0.521,
+    "level_span_per_original_mean": 5.2,
+    "level_counts": {
+     "0": 5,
+     "10": 330,
+     "20": 12101,
+     "30": 36043,
+     "40": 7044,
+     "50": 315,
+     "60": 31,
+     "70": 5,
+     "80": 3
+    },
+    "original_score_quartiles": [
+     34.1,
+     37.5,
+     41.1
+    ]
+   },
+   "syntax": {
+    "pairs": 55877,
+    "originals": 11657,
+    "target_harder_than_source": 0.0,
+    "levels_per_original_mean": 2.92,
+    "originals_with_one_level": 0.146,
+    "level_span_per_original_mean": 30.8,
+    "level_counts": {
+     "0": 4054,
+     "10": 8360,
+     "20": 8953,
+     "30": 8884,
+     "40": 8134,
+     "50": 6760,
+     "60": 5704,
+     "70": 3762,
+     "80": 1250,
+     "90": 16
+    },
+    "original_score_quartiles": [
+     71.8,
+     76.7,
+     82.0
+    ]
+   }
+  }
+ },
+ "test_feasibility": {
+  "base": {
+   "per_level": {
+    "10": {
+     "above": 1.0,
+     "inside": 0.0,
+     "below": 0.0
+    },
+    "20": {
+     "above": 1.0,
+     "inside": 0.0,
+     "below": 0.0
+    },
+    "30": {
+     "above": 1.0,
+     "inside": 0.0,
+     "below": 0.0
+    },
+    "40": {
+     "above": 1.0,
+     "inside": 0.0,
+     "below": 0.0
+    },
+    "50": {
+     "above": 1.0,
+     "inside": 0.0,
+     "below": 0.0
+    },
+    "60": {
+     "above": 0.988,
+     "inside": 0.012,
+     "below": 0.0
+    },
+    "70": {
+     "above": 0.785,
+     "inside": 0.203,
+     "below": 0.012
+    }
+   },
+   "overall": {
+    "above": 0.968,
+    "inside": 0.031,
+    "below": 0.002
+   },
+   "source_quartiles": [
+    80.8,
+    85.7,
+    90.6
+   ]
+  },
+  "lexical": {
+   "per_level": {
+    "10": {
+     "above": 1.0,
+     "inside": 0.0,
+     "below": 0.0
+    },
+    "20": {
+     "above": 0.991,
+     "inside": 0.009,
+     "below": 0.0
+    },
+    "30": {
+     "above": 0.681,
+     "inside": 0.31,
+     "below": 0.009
+    },
+    "40": {
+     "above": 0.155,
+     "inside": 0.526,
+     "below": 0.319
+    },
+    "50": {
+     "above": 0.023,
+     "inside": 0.132,
+     "below": 0.845
+    },
+    "60": {
+     "above": 0.007,
+     "inside": 0.016,
+     "below": 0.977
+    },
+    "70": {
+     "above": 0.003,
+     "inside": 0.004,
+     "below": 0.993
+    }
+   },
+   "overall": {
+    "above": 0.409,
+    "inside": 0.142,
+    "below": 0.449
+   },
+   "source_quartiles": [
+    39.0,
+    42.7,
+    47.3
+   ]
+  },
+  "syntax": {
+   "per_level": {
+    "10": {
+     "above": 1.0,
+     "inside": 0.0,
+     "below": 0.0
+    },
+    "20": {
+     "above": 1.0,
+     "inside": 0.0,
+     "below": 0.0
+    },
+    "30": {
+     "above": 1.0,
+     "inside": 0.0,
+     "below": 0.0
+    },
+    "40": {
+     "above": 1.0,
+     "inside": 0.0,
+     "below": 0.0
+    },
+    "50": {
+     "above": 1.0,
+     "inside": 0.0,
+     "below": 0.0
+    },
+    "60": {
+     "above": 1.0,
+     "inside": 0.0,
+     "below": 0.0
+    },
+    "70": {
+     "above": 0.859,
+     "inside": 0.141,
+     "below": 0.0
+    }
+   },
+   "overall": {
+    "above": 0.98,
+    "inside": 0.02,
+    "below": 0.0
+   },
+   "source_quartiles": [
+    81.4,
+    84.6,
+    86.9
+   ]
+  }
+ },
+ "predictions": {
+  "0.6B": {
+   "base": {
+    "rmse_per_level": {
+     "10": 19.87,
+     "20": 16.21,
+     "30": 16.58,
+     "40": 17.3,
+     "50": 20.51,
+     "60": 19.3,
+     "70": 17.64
+    },
+    "spearman_pooled": 0.699,
+    "spearman_within_original_mean": 0.74,
+    "by_region": {
+     "above": {
+      "share": 0.968,
+      "rmse": 18.4,
+      "copy_rate": 0.041,
+      "achieved_above_source": 0.023
+     },
+     "below": {
+      "share": 0.002,
+      "rmse": 12.1,
+      "copy_rate": 0.5,
+      "achieved_above_source": 0.0
+     },
+     "inside": {
+      "share": 0.031,
+      "rmse": 13.3,
+      "copy_rate": 0.265,
+      "achieved_above_source": 0.074
+     }
+    },
+    "copy_rate": 0.048,
+    "unscored_outputs": 8
+   },
+   "lexical": {
+    "rmse_per_level": {
+     "10": 26.0,
+     "20": 17.89,
+     "30": 11.77,
+     "40": 8.63,
+     "50": 13.18,
+     "60": 21.22,
+     "70": 30.02
+    },
+    "spearman_pooled": 0.3,
+    "spearman_within_original_mean": 0.405,
+    "by_region": {
+     "above": {
+      "share": 0.405,
+      "rmse": 20.1,
+      "copy_rate": 0.028,
+      "achieved_above_source": 0.121
+     },
+     "below": {
+      "share": 0.452,
+      "rmse": 22.0,
+      "copy_rate": 0.288,
+      "achieved_above_source": 0.13
+     },
+     "inside": {
+      "share": 0.143,
+      "rmse": 6.6,
+      "copy_rate": 0.111,
+      "achieved_above_source": 0.133
+     }
+    },
+    "copy_rate": 0.158,
+    "unscored_outputs": 44
+   },
+   "syntax": {
+    "rmse_per_level": {
+     "10": 27.65,
+     "20": 26.03,
+     "30": 22.72,
+     "40": 23.5,
+     "50": 25.8,
+     "60": 25.94,
+     "70": 24.36
+    },
+    "spearman_pooled": 0.4,
+    "spearman_within_original_mean": 0.446,
+    "by_region": {
+     "above": {
+      "share": 0.98,
+      "rmse": 25.1,
+      "copy_rate": 0.063,
+      "achieved_above_source": 0.028
+     },
+     "inside": {
+      "share": 0.02,
+      "rmse": 27.6,
+      "copy_rate": 0.277,
+      "achieved_above_source": 0.071
+     }
+    },
+    "copy_rate": 0.067,
+    "unscored_outputs": 16
+   }
+  },
+  "1.7B": {
+   "base": {
+    "rmse_per_level": {
+     "10": 19.15,
+     "20": 15.7,
+     "30": 15.71,
+     "40": 16.65,
+     "50": 19.55,
+     "60": 20.08,
+     "70": 18.72
+    },
+    "spearman_pooled": 0.695,
+    "spearman_within_original_mean": 0.745,
+    "by_region": {
+     "above": {
+      "share": 0.968,
+      "rmse": 18.1,
+      "copy_rate": 0.042,
+      "achieved_above_source": 0.023
+     },
+     "below": {
+      "share": 0.002,
+      "rmse": 14.5,
+      "copy_rate": 0.083,
+      "achieved_above_source": 0.25
+     },
+     "inside": {
+      "share": 0.031,
+      "rmse": 15.6,
+      "copy_rate": 0.2,
+      "achieved_above_source": 0.088
+     }
+    },
+    "copy_rate": 0.046,
+    "unscored_outputs": 3
+   },
+   "lexical": {
+    "rmse_per_level": {
+     "10": 25.99,
+     "20": 17.77,
+     "30": 11.55,
+     "40": 9.03,
+     "50": 13.18,
+     "60": 21.48,
+     "70": 30.34
+    },
+    "spearman_pooled": 0.278,
+    "spearman_within_original_mean": 0.365,
+    "by_region": {
+     "above": {
+      "share": 0.406,
+      "rmse": 20.0,
+      "copy_rate": 0.027,
+      "achieved_above_source": 0.126
+     },
+     "below": {
+      "share": 0.451,
+      "rmse": 22.3,
+      "copy_rate": 0.245,
+      "achieved_above_source": 0.137
+     },
+     "inside": {
+      "share": 0.143,
+      "rmse": 7.2,
+      "copy_rate": 0.088,
+      "achieved_above_source": 0.134
+     }
+    },
+    "copy_rate": 0.134,
+    "unscored_outputs": 40
+   },
+   "syntax": {
+    "rmse_per_level": {
+     "10": 26.59,
+     "20": 25.24,
+     "30": 22.44,
+     "40": 22.86,
+     "50": 25.62,
+     "60": 26.41,
+     "70": 25.02
+    },
+    "spearman_pooled": 0.407,
+    "spearman_within_original_mean": 0.469,
+    "by_region": {
+     "above": {
+      "share": 0.98,
+      "rmse": 24.9,
+      "copy_rate": 0.065,
+      "achieved_above_source": 0.031
+     },
+     "inside": {
+      "share": 0.02,
+      "rmse": 26.6,
+      "copy_rate": 0.262,
+      "achieved_above_source": 0.121
+     }
+    },
+    "copy_rate": 0.069,
+    "unscored_outputs": 23
+   }
+  },
+  "4B": {
+   "base": {
+    "rmse_per_level": {
+     "10": 18.28,
+     "20": 15.71,
+     "30": 15.1,
+     "40": 15.66,
+     "50": 17.56,
+     "60": 18.51,
+     "70": 17.49
+    },
+    "spearman_pooled": 0.7,
+    "spearman_within_original_mean": 0.747,
+    "by_region": {
+     "above": {
+      "share": 0.968,
+      "rmse": 17.1,
+      "copy_rate": 0.026,
+      "achieved_above_source": 0.015
+     },
+     "below": {
+      "share": 0.002,
+      "rmse": 12.3,
+      "copy_rate": 0.167,
+      "achieved_above_source": 0.0
+     },
+     "inside": {
+      "share": 0.031,
+      "rmse": 12.8,
+      "copy_rate": 0.288,
+      "achieved_above_source": 0.098
+     }
+    },
+    "copy_rate": 0.034,
+    "unscored_outputs": 9
+   },
+   "lexical": {
+    "rmse_per_level": {
+     "10": 25.19,
+     "20": 16.99,
+     "30": 10.63,
+     "40": 8.42,
+     "50": 13.18,
+     "60": 21.16,
+     "70": 29.84
+    },
+    "spearman_pooled": 0.334,
+    "spearman_within_original_mean": 0.462,
+    "by_region": {
+     "above": {
+      "share": 0.406,
+      "rmse": 19.2,
+      "copy_rate": 0.026,
+      "achieved_above_source": 0.089
+     },
+     "below": {
+      "share": 0.451,
+      "rmse": 21.9,
+      "copy_rate": 0.313,
+      "achieved_above_source": 0.111
+     },
+     "inside": {
+      "share": 0.143,
+      "rmse": 6.7,
+      "copy_rate": 0.125,
+      "achieved_above_source": 0.109
+     }
+    },
+    "copy_rate": 0.17,
+    "unscored_outputs": 37
+   },
+   "syntax": {
+    "rmse_per_level": {
+     "10": 25.01,
+     "20": 23.97,
+     "30": 21.65,
+     "40": 23.0,
+     "50": 26.39,
+     "60": 27.29,
+     "70": 28.08
+    },
+    "spearman_pooled": 0.377,
+    "spearman_within_original_mean": 0.425,
+    "by_region": {
+     "above": {
+      "share": 0.98,
+      "rmse": 25.0,
+      "copy_rate": 0.042,
+      "achieved_above_source": 0.022
+     },
+     "inside": {
+      "share": 0.02,
+      "rmse": 29.8,
+      "copy_rate": 0.227,
+      "achieved_above_source": 0.121
+     }
+    },
+    "copy_rate": 0.046,
+    "unscored_outputs": 26
+   }
+  }
+ },
+ "paper_levels": {
+  "0.6B": {
+   "base": {
+    "rmse_per_token": {
+     "0": 28.97,
+     "10": 19.87,
+     "20": 16.21,
+     "30": 16.58,
+     "40": 17.3,
+     "50": 20.51,
+     "60": 19.3,
+     "70": 17.64,
+     "80": 16.97,
+     "90": 14.8
+    },
+    "spearman_tokens_0_60": 0.661,
+    "spearman_tokens_10_70": 0.699
+   },
+   "lexical": {
+    "rmse_per_token": {
+     "0": 35.79,
+     "10": 26.0,
+     "20": 17.89,
+     "30": 11.77,
+     "40": 8.63,
+     "50": 13.18,
+     "60": 21.22,
+     "70": 30.02,
+     "80": 39.3,
+     "90": 48.54
+    },
+    "spearman_tokens_0_60": 0.288,
+    "spearman_tokens_10_70": 0.3
+   },
+   "syntax": {
+    "rmse_per_token": {
+     "0": 27.18,
+     "10": 27.65,
+     "20": 26.03,
+     "30": 22.72,
+     "40": 23.5,
+     "50": 25.8,
+     "60": 25.94,
+     "70": 24.36,
+     "80": 22.58,
+     "90": 25.38
+    },
+    "spearman_tokens_0_60": 0.369,
+    "spearman_tokens_10_70": 0.4
+   }
+  },
+  "1.7B": {
+   "base": {
+    "rmse_per_token": {
+     "0": 28.4,
+     "10": 19.15,
+     "20": 15.7,
+     "30": 15.71,
+     "40": 16.65,
+     "50": 19.55,
+     "60": 20.08,
+     "70": 18.72,
+     "80": 17.2,
+     "90": 18.43
+    },
+    "spearman_tokens_0_60": 0.657,
+    "spearman_tokens_10_70": 0.695
+   },
+   "lexical": {
+    "rmse_per_token": {
+     "0": 35.43,
+     "10": 25.99,
+     "20": 17.77,
+     "30": 11.55,
+     "40": 9.03,
+     "50": 13.18,
+     "60": 21.48,
+     "70": 30.34,
+     "80": 39.46,
+     "90": 48.76
+    },
+    "spearman_tokens_0_60": 0.265,
+    "spearman_tokens_10_70": 0.278
+   },
+   "syntax": {
+    "rmse_per_token": {
+     "0": 27.8,
+     "10": 26.59,
+     "20": 25.24,
+     "30": 22.44,
+     "40": 22.86,
+     "50": 25.62,
+     "60": 26.41,
+     "70": 25.02,
+     "80": 24.02,
+     "90": 25.32
+    },
+    "spearman_tokens_0_60": 0.378,
+    "spearman_tokens_10_70": 0.407
+   }
+  },
+  "4B": {
+   "base": {
+    "rmse_per_token": {
+     "0": 27.41,
+     "10": 18.28,
+     "20": 15.71,
+     "30": 15.1,
+     "40": 15.66,
+     "50": 17.56,
+     "60": 18.51,
+     "70": 17.49,
+     "80": 16.62,
+     "90": 18.22
+    },
+    "spearman_tokens_0_60": 0.66,
+    "spearman_tokens_10_70": 0.7
+   },
+   "lexical": {
+    "rmse_per_token": {
+     "0": 35.15,
+     "10": 25.19,
+     "20": 16.99,
+     "30": 10.63,
+     "40": 8.42,
+     "50": 13.18,
+     "60": 21.16,
+     "70": 29.84,
+     "80": 39.02,
+     "90": 48.85
+    },
+    "spearman_tokens_0_60": 0.309,
+    "spearman_tokens_10_70": 0.334
+   },
+   "syntax": {
+    "rmse_per_token": {
+     "0": 26.1,
+     "10": 25.01,
+     "20": 23.97,
+     "30": 21.65,
+     "40": 23.0,
+     "50": 26.39,
+     "60": 27.29,
+     "70": 28.08,
+     "80": 25.83,
+     "90": 27.15
+    },
+    "spearman_tokens_0_60": 0.347,
+    "spearman_tokens_10_70": 0.377
+   }
+  }
+ },
+ "memorization": {
+  "juno_ii_in_training": [],
+  "0.6B": {
+   "base": {
+    "outputs_with_training_targets": 0.934,
+    "exact_training_target": 0.021,
+    "near_duplicate_training_target": 0.078
+   },
+   "lexical": {
+    "outputs_with_training_targets": 0.983,
+    "exact_training_target": 0.068,
+    "near_duplicate_training_target": 0.188
+   },
+   "syntax": {
+    "outputs_with_training_targets": 0.956,
+    "exact_training_target": 0.043,
+    "near_duplicate_training_target": 0.137
+   }
+  },
+  "1.7B": {
+   "base": {
+    "outputs_with_training_targets": 0.934,
+    "exact_training_target": 0.021,
+    "near_duplicate_training_target": 0.069
+   },
+   "lexical": {
+    "outputs_with_training_targets": 0.983,
+    "exact_training_target": 0.073,
+    "near_duplicate_training_target": 0.195
+   },
+   "syntax": {
+    "outputs_with_training_targets": 0.956,
+    "exact_training_target": 0.044,
+    "near_duplicate_training_target": 0.139
+   }
+  },
+  "4B": {
+   "base": {
+    "outputs_with_training_targets": 0.934,
+    "exact_training_target": 0.085,
+    "near_duplicate_training_target": 0.194
+   },
+   "lexical": {
+    "outputs_with_training_targets": 0.983,
+    "exact_training_target": 0.158,
+    "near_duplicate_training_target": 0.326
+   },
+   "syntax": {
+    "outputs_with_training_targets": 0.956,
+    "exact_training_target": 0.154,
+    "near_duplicate_training_target": 0.299
+   }
+  }
+ },
+ "embeddings": {
+  "0.6B": {
+   "tokens_with_mean_initialisation": [
+    "<|readability_base_50|>",
+    "<|readability_base_60|>",
+    "<|readability_base_70|>",
+    "<|readability_base_80|>",
+    "<|readability_base_90|>",
+    "<|readability_lexical_0|>",
+    "<|readability_lexical_10|>",
+    "<|readability_lexical_20|>",
+    "<|readability_lexical_30|>",
+    "<|readability_lexical_40|>",
+    "<|readability_lexical_50|>",
+    "<|readability_lexical_60|>",
+    "<|readability_lexical_70|>",
+    "<|readability_lexical_80|>",
+    "<|readability_lexical_90|>",
+    "<|readability_syntax_0|>",
+    "<|readability_syntax_10|>",
+    "<|readability_syntax_20|>",
+    "<|readability_syntax_30|>",
+    "<|readability_syntax_40|>",
+    "<|readability_syntax_50|>",
+    "<|readability_syntax_60|>",
+    "<|readability_syntax_70|>",
+    "<|readability_syntax_80|>",
+    "<|readability_syntax_90|>"
+   ],
+   "same_level_cosine": {
+    "base~lexical": 0.6,
+    "base~syntax": 0.306,
+    "lexical~syntax": 0.447
+   },
+   "adjacent_level_cosine": {
+    "base": 0.579,
+    "lexical": 0.653,
+    "syntax": 0.66
+   },
+   "ordinality": {
+    "base": {
+     "pc1_vs_level_spearman": 0.77,
+     "pc1_variance_share": 0.532
+    },
+    "lexical": {
+     "pc1_vs_level_spearman": 0.988,
+     "pc1_variance_share": 0.58
+    },
+    "syntax": {
+     "pc1_vs_level_spearman": 0.952,
+     "pc1_variance_share": 0.468
+    }
+   },
+   "drift_vs_log_training_count_spearman": -0.068,
+   "drift_norm": {
+    "<|readability_base_0|>": 0.0371,
+    "<|readability_base_10|>": 0.0492,
+    "<|readability_base_20|>": 0.0276,
+    "<|readability_base_30|>": 0.0254,
+    "<|readability_base_40|>": 0.0298,
+    "<|readability_base_50|>": 0.0203,
+    "<|readability_base_60|>": 0.0189,
+    "<|readability_base_70|>": 0.0213,
+    "<|readability_base_80|>": 0.0229,
+    "<|readability_base_90|>": 0.0328,
+    "<|readability_lexical_0|>": 0.0396,
+    "<|readability_lexical_10|>": 0.045,
+    "<|readability_lexical_20|>": 0.0345,
+    "<|readability_lexical_30|>": 0.024,
+    "<|readability_lexical_40|>": 0.0214,
+    "<|readability_lexical_50|>": 0.0215,
+    "<|readability_lexical_60|>": 0.0188,
+    "<|readability_lexical_70|>": 0.0214,
+    "<|readability_lexical_80|>": 0.0254,
+    "<|readability_lexical_90|>": 0.0323,
+    "<|readability_syntax_0|>": 0.0421,
+    "<|readability_syntax_10|>": 0.028,
+    "<|readability_syntax_20|>": 0.0204,
+    "<|readability_syntax_30|>": 0.0255,
+    "<|readability_syntax_40|>": 0.0243,
+    "<|readability_syntax_50|>": 0.0253,
+    "<|readability_syntax_60|>": 0.0238,
+    "<|readability_syntax_70|>": 0.0239,
+    "<|readability_syntax_80|>": 0.0238,
+    "<|readability_syntax_90|>": 0.0257
+   }
+  },
+  "1.7B": {
+   "tokens_with_mean_initialisation": [
+    "<|readability_base_50|>",
+    "<|readability_base_60|>",
+    "<|readability_base_70|>",
+    "<|readability_base_80|>",
+    "<|readability_base_90|>",
+    "<|readability_lexical_0|>",
+    "<|readability_lexical_10|>",
+    "<|readability_lexical_20|>",
+    "<|readability_lexical_30|>",
+    "<|readability_lexical_40|>",
+    "<|readability_lexical_50|>",
+    "<|readability_lexical_60|>",
+    "<|readability_lexical_70|>",
+    "<|readability_lexical_80|>",
+    "<|readability_lexical_90|>",
+    "<|readability_syntax_0|>",
+    "<|readability_syntax_10|>",
+    "<|readability_syntax_20|>",
+    "<|readability_syntax_30|>",
+    "<|readability_syntax_40|>",
+    "<|readability_syntax_50|>",
+    "<|readability_syntax_60|>",
+    "<|readability_syntax_70|>",
+    "<|readability_syntax_80|>",
+    "<|readability_syntax_90|>"
+   ],
+   "same_level_cosine": {
+    "base~lexical": 0.509,
+    "base~syntax": 0.261,
+    "lexical~syntax": 0.384
+   },
+   "adjacent_level_cosine": {
+    "base": 0.521,
+    "lexical": 0.56,
+    "syntax": 0.499
+   },
+   "ordinality": {
+    "base": {
+     "pc1_vs_level_spearman": 0.806,
+     "pc1_variance_share": 0.528
+    },
+    "lexical": {
+     "pc1_vs_level_spearman": 0.988,
+     "pc1_variance_share": 0.632
+    },
+    "syntax": {
+     "pc1_vs_level_spearman": 0.964,
+     "pc1_variance_share": 0.513
+    }
+   },
+   "drift_vs_log_training_count_spearman": -0.367,
+   "drift_norm": {
+    "<|readability_base_0|>": 0.0541,
+    "<|readability_base_10|>": 0.0682,
+    "<|readability_base_20|>": 0.0456,
+    "<|readability_base_30|>": 0.0372,
+    "<|readability_base_40|>": 0.054,
+    "<|readability_base_50|>": 0.0253,
+    "<|readability_base_60|>": 0.029,
+    "<|readability_base_70|>": 0.0338,
+    "<|readability_base_80|>": 0.035,
+    "<|readability_base_90|>": 0.046,
+    "<|readability_lexical_0|>": 0.0389,
+    "<|readability_lexical_10|>": 0.0532,
+    "<|readability_lexical_20|>": 0.034,
+    "<|readability_lexical_30|>": 0.0243,
+    "<|readability_lexical_40|>": 0.0262,
+    "<|readability_lexical_50|>": 0.0275,
+    "<|readability_lexical_60|>": 0.0292,
+    "<|readability_lexical_70|>": 0.0337,
+    "<|readability_lexical_80|>": 0.0354,
+    "<|readability_lexical_90|>": 0.0395,
+    "<|readability_syntax_0|>": 0.0472,
+    "<|readability_syntax_10|>": 0.034,
+    "<|readability_syntax_20|>": 0.027,
+    "<|readability_syntax_30|>": 0.0234,
+    "<|readability_syntax_40|>": 0.0231,
+    "<|readability_syntax_50|>": 0.0221,
+    "<|readability_syntax_60|>": 0.0258,
+    "<|readability_syntax_70|>": 0.0319,
+    "<|readability_syntax_80|>": 0.0378,
+    "<|readability_syntax_90|>": 0.0353
+   }
+  },
+  "4B": {
+   "tokens_with_mean_initialisation": [
+    "<|readability_base_50|>",
+    "<|readability_base_60|>",
+    "<|readability_base_70|>",
+    "<|readability_base_80|>",
+    "<|readability_base_90|>",
+    "<|readability_lexical_0|>",
+    "<|readability_lexical_10|>",
+    "<|readability_lexical_20|>",
+    "<|readability_lexical_30|>",
+    "<|readability_lexical_40|>",
+    "<|readability_lexical_50|>",
+    "<|readability_lexical_60|>",
+    "<|readability_lexical_70|>",
+    "<|readability_lexical_80|>",
+    "<|readability_lexical_90|>",
+    "<|readability_syntax_0|>",
+    "<|readability_syntax_10|>",
+    "<|readability_syntax_20|>",
+    "<|readability_syntax_30|>",
+    "<|readability_syntax_40|>",
+    "<|readability_syntax_50|>",
+    "<|readability_syntax_60|>",
+    "<|readability_syntax_70|>",
+    "<|readability_syntax_80|>",
+    "<|readability_syntax_90|>"
+   ],
+   "same_level_cosine": {
+    "base~lexical": 0.552,
+    "base~syntax": 0.165,
+    "lexical~syntax": 0.201
+   },
+   "adjacent_level_cosine": {
+    "base": 0.471,
+    "lexical": 0.501,
+    "syntax": 0.471
+   },
+   "ordinality": {
+    "base": {
+     "pc1_vs_level_spearman": 0.915,
+     "pc1_variance_share": 0.4
+    },
+    "lexical": {
+     "pc1_vs_level_spearman": 0.976,
+     "pc1_variance_share": 0.437
+    },
+    "syntax": {
+     "pc1_vs_level_spearman": 0.976,
+     "pc1_variance_share": 0.399
+    }
+   },
+   "drift_vs_log_training_count_spearman": -0.547,
+   "drift_norm": {
+    "<|readability_base_0|>": 0.0531,
+    "<|readability_base_10|>": 0.0557,
+    "<|readability_base_20|>": 0.0411,
+    "<|readability_base_30|>": 0.0386,
+    "<|readability_base_40|>": 0.0469,
+    "<|readability_base_50|>": 0.0342,
+    "<|readability_base_60|>": 0.0364,
+    "<|readability_base_70|>": 0.039,
+    "<|readability_base_80|>": 0.0484,
+    "<|readability_base_90|>": 0.0563,
+    "<|readability_lexical_0|>": 0.045,
+    "<|readability_lexical_10|>": 0.0484,
+    "<|readability_lexical_20|>": 0.0396,
+    "<|readability_lexical_30|>": 0.0374,
+    "<|readability_lexical_40|>": 0.0335,
+    "<|readability_lexical_50|>": 0.0339,
+    "<|readability_lexical_60|>": 0.034,
+    "<|readability_lexical_70|>": 0.04,
+    "<|readability_lexical_80|>": 0.0499,
+    "<|readability_lexical_90|>": 0.0543,
+    "<|readability_syntax_0|>": 0.0507,
+    "<|readability_syntax_10|>": 0.04,
+    "<|readability_syntax_20|>": 0.0359,
+    "<|readability_syntax_30|>": 0.0323,
+    "<|readability_syntax_40|>": 0.0336,
+    "<|readability_syntax_50|>": 0.036,
+    "<|readability_syntax_60|>": 0.0375,
+    "<|readability_syntax_70|>": 0.0464,
+    "<|readability_syntax_80|>": 0.0469,
+    "<|readability_syntax_90|>": 0.0507
+   }
+  }
+ },
+ "label_noise": {
+  "near_duplicate_pairs": 20993,
+  "median_abs_difference": {
+   "base": 1.3,
+   "lexical": 1.0,
+   "syntax": 3.2
+  },
+  "share_at_least_20_points": {
+   "base": 0.008,
+   "lexical": 0.0,
+   "syntax": 0.068
+  }
+ },
+ "release_provenance": {
+  "release_pairs": 764061,
+  "release_originals": 106680,
+  "release_harder_globally": 0,
+  "release_exact_copies": 0,
+  "gfff_source_pairs": 146130,
+  "gfff_source_pairs_missing_from_release": 4146,
+  "missing_pairs_that_are_exact_copies": 1.0,
+  "release_selection_equals_gfff_source_without_copies": true,
+  "exact_copies_in_clicit2026_training": 1598,
+  "exact_copies_in_clicit2026_training_share": 0.035,
+  "noise_list_pairs_still_in_release": {
+   "langdetect": 3154,
+   "double_filter": 80198
+  },
+  "lrec2026_wikipedia": {
+   "pairs": 1058960,
+   "removed": 294899,
+   "removed_global_score_higher": 275849,
+   "removed_exact_copy_only": 19050,
+   "rule_matches_release_membership": 1.0
+  }
+ },
+ "release_double_filter": {
+  "pairs_removed_in_selection": 80198,
+  "originals_entirely_removed": 0.509,
+  "originals_partly_removed": 0.024,
+  "median_original_chars": {
+   "removed": 250,
+   "kept": 199
+  },
+  "proxy_quotes_parentheses_or_over_400_chars_agreement": 0.923,
+  "pairs_never_checked": 622077
+ },
+ "release_pools": {
+  "held_out_originals": 2575,
+  "all_sources": {
+   "pairs": 764061,
+   "originals": 106680,
+   "pairs_per_original_mean": 7.16,
+   "harder_in": {
+    "base": 0.151,
+    "lexical": 0.373,
+    "syntax": 0.042
+   },
+   "harder_in_any_dimension": 0.452,
+   "source_quartiles": {
+    "base": [
+     33.3,
+     44.5,
+     60.4
+    ],
+    "lexical": [
+     33.1,
+     37.2,
+     41.7
+    ],
+    "syntax": [
+     28.1,
+     48.3,
+     68.5
+    ],
+    "all": [
+     28.7,
+     49.4,
+     70.2
+    ]
+   },
+   "held_out_test_originals": {
+    "pairs": 740563,
+    "originals": 104105,
+    "pairs_no_dimension_harder": 402897
+   }
+  },
+  "global_above_70": {
+   "pairs": 237201,
+   "originals": 26930,
+   "pairs_per_original_mean": 8.81,
+   "harder_in": {
+    "base": 0.112,
+    "lexical": 0.341,
+    "syntax": 0.022
+   },
+   "harder_in_any_dimension": 0.401,
+   "source_quartiles": {
+    "base": [
+     51.2,
+     67.0,
+     81.8
+    ],
+    "lexical": [
+     35.5,
+     39.1,
+     43.4
+    ],
+    "syntax": [
+     73.1,
+     79.2,
+     85.7
+    ],
+    "all": [
+     75.4,
+     81.1,
+     87.4
+    ]
+   },
+   "held_out_test_originals": {
+    "pairs": 213703,
+    "originals": 24355,
+    "pairs_no_dimension_harder": 126088
+   }
+  },
+  "clicit_selection": {
+   "pairs": 141984,
+   "originals": 25739,
+   "after_noise_lists": 58632,
+   "training_pairs": 55877,
+   "training_pairs_held_out": 42907,
+   "training_originals_held_out": 9145,
+   "lost_by_holding_out": 12970
+  }
+ },
+ "release_level_coverage": {
+  "base": {
+   "clicit_selection": {
+    "pairs": 55877,
+    "share_20_40": 0.734,
+    "levels_with_1000_pairs": 7,
+    "levels_per_original_mean": 2.27,
+    "originals_with_one_level": 0.229,
+    "counts": {
+     "0": 69,
+     "10": 5251,
+     "20": 16833,
+     "30": 15186,
+     "40": 8979,
+     "50": 4780,
+     "60": 2617,
+     "70": 1395,
+     "80": 595,
+     "90": 172
+    }
+   },
+   "release_all_sources": {
+    "pairs": 740563,
+    "share_20_40": 0.738,
+    "levels_with_1000_pairs": 10,
+    "levels_per_original_mean": 2.77,
+    "originals_with_one_level": 0.103,
+    "counts": {
+     "0": 2839,
+     "10": 79347,
+     "20": 241787,
+     "30": 198236,
+     "40": 106172,
+     "50": 54183,
+     "60": 28323,
+     "70": 15456,
+     "80": 9024,
+     "90": 5196
+    }
+   },
+   "release_all_sources_dimension_not_harder": {
+    "pairs": 627145,
+    "share_20_40": 0.747,
+    "levels_with_1000_pairs": 10,
+    "levels_per_original_mean": 2.45,
+    "originals_with_one_level": 0.186,
+    "counts": {
+     "0": 2827,
+     "10": 77634,
+     "20": 220356,
+     "30": 165870,
+     "40": 82492,
+     "50": 39688,
+     "60": 19503,
+     "70": 9754,
+     "80": 5556,
+     "90": 3465
+    }
+   }
+  },
+  "lexical": {
+   "clicit_selection": {
+    "pairs": 55877,
+    "share_20_40": 0.988,
+    "levels_with_1000_pairs": 3,
+    "levels_per_original_mean": 1.51,
+    "originals_with_one_level": 0.521,
+    "counts": {
+     "0": 5,
+     "10": 330,
+     "20": 12101,
+     "30": 36043,
+     "40": 7044,
+     "50": 315,
+     "60": 31,
+     "70": 5,
+     "80": 3
+    }
+   },
+   "release_all_sources": {
+    "pairs": 740563,
+    "share_20_40": 0.954,
+    "levels_with_1000_pairs": 6,
+    "levels_per_original_mean": 2.07,
+    "originals_with_one_level": 0.204,
+    "counts": {
+     "0": 662,
+     "10": 8538,
+     "20": 127809,
+     "30": 411293,
+     "40": 167125,
+     "50": 21673,
+     "60": 2846,
+     "70": 516,
+     "80": 81,
+     "90": 20
+    }
+   },
+   "release_all_sources_dimension_not_harder": {
+    "pairs": 461785,
+    "share_20_40": 0.967,
+    "levels_with_1000_pairs": 5,
+    "levels_per_original_mean": 1.61,
+    "originals_with_one_level": 0.475,
+    "counts": {
+     "0": 659,
+     "10": 8391,
+     "20": 111322,
+     "30": 266586,
+     "40": 68488,
+     "50": 5675,
+     "60": 556,
+     "70": 97,
+     "80": 9,
+     "90": 2
+    }
+   }
+  },
+  "syntax": {
+   "clicit_selection": {
+    "pairs": 55877,
+    "share_20_40": 0.465,
+    "levels_with_1000_pairs": 9,
+    "levels_per_original_mean": 2.92,
+    "originals_with_one_level": 0.146,
+    "counts": {
+     "0": 4054,
+     "10": 8360,
+     "20": 8953,
+     "30": 8884,
+     "40": 8134,
+     "50": 6760,
+     "60": 5704,
+     "70": 3762,
+     "80": 1250,
+     "90": 16
+    }
+   },
+   "release_all_sources": {
+    "pairs": 740563,
+    "share_20_40": 0.425,
+    "levels_with_1000_pairs": 10,
+    "levels_per_original_mean": 3.26,
+    "originals_with_one_level": 0.112,
+    "counts": {
+     "0": 139595,
+     "10": 166661,
+     "20": 137745,
+     "30": 103200,
+     "40": 73639,
+     "50": 50205,
+     "60": 33520,
+     "70": 21612,
+     "80": 11772,
+     "90": 2614
+    }
+   },
+   "release_all_sources_dimension_not_harder": {
+    "pairs": 708960,
+    "share_20_40": 0.423,
+    "levels_with_1000_pairs": 10,
+    "levels_per_original_mean": 3.13,
+    "originals_with_one_level": 0.133,
+    "counts": {
+     "0": 138072,
+     "10": 162499,
+     "20": 132580,
+     "30": 98213,
+     "40": 69300,
+     "50": 46536,
+     "60": 30357,
+     "70": 19197,
+     "80": 10178,
+     "90": 2028
+    }
+   }
+  }
+ },
+ "release_clusters": {
+  "clicit_selection": {
+   "original_to_simplification": 42907,
+   "between_simplifications_distinct_text": 211254,
+   "between_simplifications_global_not_higher": 106569,
+   "of_which_simpler_in": {
+    "base": 72482,
+    "lexical": 62779,
+    "syntax": 96393
+   },
+   "of_which_simpler_in_any_dimension": 102915,
+   "of_which_same_bin_all_three": 13082
+  },
+  "global_above_70": {
+   "original_to_simplification": 213703,
+   "between_simplifications_distinct_text": 1720986,
+   "between_simplifications_global_not_higher": 865588,
+   "of_which_simpler_in": {
+    "base": 616346,
+    "lexical": 499135,
+    "syntax": 792167
+   },
+   "of_which_simpler_in_any_dimension": 844288,
+   "of_which_same_bin_all_three": 77629
+  },
+  "all_sources": {
+   "original_to_simplification": 740563,
+   "between_simplifications_distinct_text": 5196310,
+   "between_simplifications_global_not_higher": 2614990,
+   "of_which_simpler_in": {
+    "base": 1774167,
+    "lexical": 1494732,
+    "syntax": 2350199
+   },
+   "of_which_simpler_in_any_dimension": 2539860,
+   "of_which_same_bin_all_three": 289827
+  }
+ },
+ "release_independence": {
+  "clicit_selection": {
+   "pairs": 141984,
+   "spearman_outputs": {
+    "base-lexical": 0.45,
+    "base-syntax": 0.61,
+    "lexical-syntax": 0.2
+   },
+   "spearman_changes": {
+    "base-lexical": 0.3,
+    "base-syntax": 0.54,
+    "lexical-syntax": 0.29
+   },
+   "lexical_only_share": 0.003,
+   "lexical_only_pairs": 489,
+   "syntax_only_share": 0.048,
+   "joint_cells_with_20_pairs": 252,
+   "pairs_in_those_cells": 0.99
+  },
+  "global_above_70": {
+   "pairs": 237201,
+   "spearman_outputs": {
+    "base-lexical": 0.37,
+    "base-syntax": 0.63,
+    "lexical-syntax": 0.14
+   },
+   "spearman_changes": {
+    "base-lexical": 0.26,
+    "base-syntax": 0.56,
+    "lexical-syntax": 0.16
+   },
+   "lexical_only_share": 0.003,
+   "lexical_only_pairs": 792,
+   "syntax_only_share": 0.082,
+   "joint_cells_with_20_pairs": 319,
+   "pairs_in_those_cells": 0.993
+  },
+  "all_sources_no_dimension_harder": {
+   "pairs": 418793,
+   "spearman_outputs": {
+    "base-lexical": 0.53,
+    "base-syntax": 0.59,
+    "lexical-syntax": 0.22
+   },
+   "spearman_changes": {
+    "base-lexical": 0.31,
+    "base-syntax": 0.57,
+    "lexical-syntax": 0.2
+   },
+   "lexical_only_share": 0.005,
+   "lexical_only_pairs": 1966,
+   "syntax_only_share": 0.063,
+   "joint_cells_with_20_pairs": 286,
+   "pairs_in_those_cells": 0.997
+  },
+  "all_sources": {
+   "pairs": 764061,
+   "spearman_outputs": {
+    "base-lexical": 0.44,
+    "base-syntax": 0.59,
+    "lexical-syntax": 0.14
+   },
+   "spearman_changes": {
+    "base-lexical": 0.31,
+    "base-syntax": 0.53,
+    "lexical-syntax": 0.08
+   },
+   "lexical_only_share": 0.005,
+   "lexical_only_pairs": 3440,
+   "syntax_only_share": 0.1,
+   "joint_cells_with_20_pairs": 387,
+   "pairs_in_those_cells": 0.998
+  }
+ },
+ "release_label_noise": {
+  "near_duplicate_pairs": 350441,
+  "median_abs_difference": {
+   "base": 1.8,
+   "lexical": 1.4,
+   "syntax": 3.2
+  },
+  "share_at_least_20_points": {
+   "base": 0.009,
+   "lexical": 0.001,
+   "syntax": 0.053
+  }
+ }
+}

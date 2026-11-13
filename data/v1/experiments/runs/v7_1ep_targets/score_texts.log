@@ -1,0 +1,16 @@
+8054 texts: analysis 1277s, readability 50s; 0 failed; 5 unscored; wrote /home/mpapucci/text-simplification-experiments/simplification-journal/data/v1/experiments/outputs/v7_1ep_targets/readit-base.csv
+/home/mpapucci/text-simplification-experiments/.venv/lib/python3.10/site-packages/torch/cuda/__init__.py:829: UserWarning: Can't initialize NVML
+  warnings.warn("Can't initialize NVML")
+8054 texts: parse 130s, profiling 5s; 0 empty; wrote /home/mpapucci/text-simplification-experiments/simplification-journal/data/v1/experiments/outputs/v7_1ep_targets/profiling-base.csv
+3862 texts: analysis 493s, readability 21s; 0 failed; 26 unscored; wrote /home/mpapucci/text-simplification-experiments/simplification-journal/data/v1/experiments/outputs/v7_1ep_targets/readit-lexical.csv
+/home/mpapucci/text-simplification-experiments/.venv/lib/python3.10/site-packages/torch/cuda/__init__.py:829: UserWarning: Can't initialize NVML
+  warnings.warn("Can't initialize NVML")
+3862 texts: parse 28s, profiling 1s; 0 empty; wrote /home/mpapucci/text-simplification-experiments/simplification-journal/data/v1/experiments/outputs/v7_1ep_targets/profiling-lexical.csv
+7905 texts: analysis 1081s, readability 46s; 0 failed; 25 unscored; wrote /home/mpapucci/text-simplification-experiments/simplification-journal/data/v1/experiments/outputs/v7_1ep_targets/readit-syntax.csv
+/home/mpapucci/text-simplification-experiments/.venv/lib/python3.10/site-packages/torch/cuda/__init__.py:829: UserWarning: Can't initialize NVML
+  warnings.warn("Can't initialize NVML")
+7905 texts: parse 50s, profiling 3s; 0 empty; wrote /home/mpapucci/text-simplification-experiments/simplification-journal/data/v1/experiments/outputs/v7_1ep_targets/profiling-syntax.csv
+4553 texts: analysis 676s, readability 25s; 0 failed; 31 unscored; wrote /home/mpapucci/text-simplification-experiments/simplification-journal/data/v1/experiments/outputs/v7_1ep_targets/readit-joint.csv
+/home/mpapucci/text-simplification-experiments/.venv/lib/python3.10/site-packages/torch/cuda/__init__.py:829: UserWarning: Can't initialize NVML
+  warnings.warn("Can't initialize NVML")
+4553 texts: parse 41s, profiling 2s; 0 empty; wrote /home/mpapucci/text-simplification-experiments/simplification-journal/data/v1/experiments/outputs/v7_1ep_targets/profiling-joint.csv

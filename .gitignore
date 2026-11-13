@@ -1,0 +1,19 @@
+# local Python packages installed outside the old repo's virtualenvs (envs/requirements-*.txt list them)
+envs/pydeps/
+
+# t2k resources are a symlink to the old repository (read only); t2k writes temp files next to its code
+tools/readit/t2k_v3/t2k/resources
+tools/readit/t2k_v3/t2k/*.tmp
+tools/readit/t2k_v3/t2k/analized.*
+__pycache__/
+
+# v1 experiments: adapters (~2 GB each) and parser/scorer working folders
+data/v1/experiments/runs/*/adapter/
+data/v1/experiments/outputs/**/*.work/
+
+envs/pydeps-t2k/
+tools/readit/**/itwac-tokenized
+
+# too large for GitHub (> 100 MB): kept on disk only, in archive/multidim/ next to the master checkout
+data/v1/experiments/runs/*/adapter_best/
+data/v1/experiments/outputs/**/states.npy

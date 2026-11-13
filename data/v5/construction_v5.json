@@ -1,0 +1,110 @@
+{
+ "based_on": "data/v3/training_set_v3.zip (same pairs, splits, labels and columns)",
+ "rules": {
+  "identity_pairs": "for syntax levels 60-90: original -> original, from distinct training originals at that syntax level, as many as give the CLiC-it data's share of identical pairs among syntax tokens",
+  "identity_targets": "syntax = the original's level; base = any; lexical = any",
+  "seed": 0,
+  "levels": [
+   60,
+   70,
+   80,
+   90
+  ]
+ },
+ "pairs": 90449,
+ "train": 89588,
+ "validation": 861,
+ "identity_pairs": 989,
+ "identity_idx_from": 1071354,
+ "by_level": {
+  "60": {
+   "clicit_identical": 261,
+   "clicit_syntax_tokens": 5266,
+   "clicit_share": 0.0496,
+   "v3_syntax_targets": 3771,
+   "identity_pairs": 197,
+   "candidate_originals": 2251
+  },
+  "70": {
+   "clicit_identical": 765,
+   "clicit_syntax_tokens": 4112,
+   "clicit_share": 0.186,
+   "v3_syntax_targets": 1605,
+   "identity_pairs": 367,
+   "candidate_originals": 5319
+  },
+  "80": {
+   "clicit_identical": 555,
+   "clicit_syntax_tokens": 1659,
+   "clicit_share": 0.3345,
+   "v3_syntax_targets": 629,
+   "identity_pairs": 316,
+   "candidate_originals": 3431
+  },
+  "90": {
+   "clicit_identical": 16,
+   "clicit_syntax_tokens": 32,
+   "clicit_share": 0.5,
+   "v3_syntax_targets": 109,
+   "identity_pairs": 109,
+   "candidate_originals": 953
+  }
+ },
+ "identity_share_of_syntax_targets_after": {
+  "60": 0.0496,
+  "70": 0.1861,
+  "80": 0.3344,
+  "90": 0.5
+ },
+ "train_syntax_targets_by_level": {
+  "v3": {
+   "0": 7776,
+   "10": 13465,
+   "20": 14460,
+   "30": 14448,
+   "40": 13188,
+   "50": 8697,
+   "60": 3771,
+   "70": 1605,
+   "80": 629,
+   "90": 109
+  },
+  "v5": {
+   "0": 7776,
+   "10": 13465,
+   "20": 14460,
+   "30": 14448,
+   "40": 13188,
+   "50": 8697,
+   "60": 3968,
+   "70": 1972,
+   "80": 945,
+   "90": 218
+  }
+ },
+ "epoch_composition_with_dropout": {
+  "v3": {
+   "base+syntax": 0.3175,
+   "base": 0.2385,
+   "syntax": 0.2267,
+   "base+lexical+syntax": 0.0807,
+   "base+lexical": 0.0608,
+   "lexical+syntax": 0.0391,
+   "lexical": 0.0367
+  },
+  "v5": {
+   "base+syntax": 0.314,
+   "base": 0.2359,
+   "syntax": 0.2352,
+   "base+lexical+syntax": 0.0798,
+   "base+lexical": 0.0601,
+   "lexical+syntax": 0.0386,
+   "lexical": 0.0363
+  }
+ },
+ "test_sets": {
+  "base": "identical to data/v3/base_test_set_v3.csv",
+  "lexical": "identical to data/v3/lexical_test_set_v3.csv",
+  "syntax": "identical to data/v3/syntax_test_set_v3.csv"
+ }
+}

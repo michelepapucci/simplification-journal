@@ -1,0 +1,166 @@
+{
+ "source": {
+  "repo": "mpapucci/impacts",
+  "revision": "489c78edec079421b2c0d777cd3393ad04c96f2c",
+  "config": "wikipedia_profiling"
+ },
+ "rules": {
+  "base": "dataset v1 (scripts/build_dataset_v1.py), same margins",
+  "margins": {
+   "base": 5.7,
+   "lexical": 3.8,
+   "syntax": 17.6
+  },
+  "language": "langdetect 1.0.9, seed 0, on original and simplification; both must be 'it'",
+  "lexical_supplement": {
+   "outside": "v1's selection (original global > 0.7 and passes the double-filter proxy)",
+   "min_lexical_drop_levels": 2,
+   "max_similarity": 0.9,
+   "more_than_names_changed": true,
+   "no_line_break": true,
+   "min_token_ratio": 0.5
+  },
+  "validation_share_of_supplement_originals": 0.01,
+  "seed": 42
+ },
+ "steps": [
+  {
+   "step": "release, Wikipedia",
+   "pairs": 764061,
+   "originals": 106680
+  },
+  {
+   "step": "1a. test originals held out",
+   "pairs": 740563,
+   "originals": 104105
+  },
+  {
+   "step": "1b. langdetect list removed",
+   "pairs": 737580,
+   "originals": 104063
+  },
+  {
+   "step": "1c. exact duplicates removed",
+   "pairs": 737108,
+   "originals": 104063
+  },
+  {
+   "step": "3. v1 part (= training_set_v1.zip)",
+   "pairs": 78462,
+   "originals": 10800
+  },
+  {
+   "step": "5a. outside v1's selection, lexical target >= 2 levels below the original",
+   "pairs": 27076,
+   "originals": 13141
+  },
+  {
+   "step": "4. v1 part, original and simplification detected as Italian",
+   "pairs": 77708,
+   "originals": 10748
+  },
+  {
+   "step": "5b. supplement: original and simplification detected as Italian",
+   "pairs": 24827,
+   "originals": 12106
+  },
+  {
+   "step": "5c. supplement: not a near-copy (similarity < 0.9)",
+   "pairs": 24511,
+   "originals": 12011
+  },
+  {
+   "step": "5d. supplement: more than names changed",
+   "pairs": 24473,
+   "originals": 12004
+  },
+  {
+   "step": "5e. supplement: no line break in the simplification",
+   "pairs": 22836,
+   "originals": 11451
+  },
+  {
+   "step": "5f. supplement: simplification has >= 0.5x the original's tokens",
+   "pairs": 11752,
+   "originals": 6314
+  },
+  {
+   "step": "6. lexical_supplement, train",
+   "pairs": 11643,
+   "originals": 6251
+  },
+  {
+   "step": "6. lexical_supplement, validation",
+   "pairs": 109,
+   "originals": 63
+  },
+  {
+   "step": "6. v1, train",
+   "pairs": 76956,
+   "originals": 10641
+  },
+  {
+   "step": "6. v1, validation",
+   "pairs": 752,
+   "originals": 107
+  },
+  {
+   "step": "v2",
+   "pairs": 89460,
+   "originals": 17062
+  }
+ ],
+ "held_out_test_originals": 2575,
+ "test_sets": {
+  "base": {
+   "pairs": 1000,
+   "identical_to": "data/v1/base_test_set_v1.csv",
+   "original_not_italian": 0,
+   "reference_not_italian": 3
+  },
+  "lexical": {
+   "pairs": 1000,
+   "identical_to": "data/v1/lexical_test_set_v1.csv",
+   "original_not_italian": 0,
+   "reference_not_italian": 3
+  },
+  "syntax": {
+   "pairs": 1000,
+   "identical_to": "data/v1/syntax_test_set_v1.csv",
+   "original_not_italian": 0,
+   "reference_not_italian": 9
+  }
+ },
+ "lexical_targets_train": {
+  "v1_part": {
+   "pairs": 15090,
+   "two_or_more_levels_below": 837,
+   "by_level": {
+    "0": 10,
+    "10": 238,
+    "20": 6802,
+    "30": 7478,
+    "40": 533,
+    "50": 27,
+    "60": 1,
+    "70": 1
+   },
+   "lexical_only": 803
+  },
+  "v2": {
+   "pairs": 26733,
+   "two_or_more_levels_below": 12480,
+   "by_level": {
+    "0": 104,
+    "10": 1420,
+    "20": 13141,
+    "30": 11068,
+    "40": 943,
+    "50": 53,
+    "60": 3,
+    "70": 1
+   },
+   "lexical_only": 1493
+  }
+ }
+}

@@ -1,0 +1,138 @@
+/home/mpapucci/text-simplification-experiments/LREC/evaluation/.venv_t2k/lib/python3.10/site-packages/torch/cuda/__init__.py:628: UserWarning: Can't initialize NVML
+  warnings.warn("Can't initialize NVML")
+[ Second_Order_Features ] Unknown parameter... Skip!
+[ Second_Order_Features ] Unknown parameter... Skip!
+[ Second_Order_Features ] Unknown parameter... Skip!
+[ Second_Order_Features ] Unknown parameter... Skip!
+[ Second_Order_Features ] Unknown parameter... Skip!
+[ Second_Order_Features ] Unknown parameter... Skip!
+[ Second_Order_Features ] Unknown parameter... Skip!
+[ Second_Order_Features ] Unknown parameter... Skip!
+di has no FEATS, setting to _
+e has no FEATS, setting to _
+per has no FEATS, setting to _
+in has no FEATS, setting to _
+. has no FEATS, setting to _
+in has no FEATS, setting to _
+a has no FEATS, setting to _
+da has no FEATS, setting to _
+SHODAN has no FEATS, setting to _
+in has no FEATS, setting to _
+di has no FEATS, setting to _
+. has no FEATS, setting to _
+più has no FEATS, setting to _
+. has no FEATS, setting to _
+solamente has no FEATS, setting to _
+con has no FEATS, setting to _
+. has no FEATS, setting to _
+Anche has no FEATS, setting to _
+se has no FEATS, setting to _
+ancora has no FEATS, setting to _
+molto has no FEATS, setting to _
+, has no FEATS, setting to _
+di has no FEATS, setting to _
+Dale has no FEATS, setting to _
+e has no FEATS, setting to _
+di has no FEATS, setting to _
+. has no FEATS, setting to _
+Nel has no FEATS, setting to _
+a has no FEATS, setting to _
+di has no FEATS, setting to _
+. has no FEATS, setting to _
+Nel has no FEATS, setting to _
+a has no FEATS, setting to _
+di has no FEATS, setting to _
+. has no FEATS, setting to _
+Nel has no FEATS, setting to _
+a has no FEATS, setting to _
+di has no FEATS, setting to _
+più has no FEATS, setting to _
+di has no FEATS, setting to _
+. has no FEATS, setting to _
+Nel has no FEATS, setting to _
+a has no FEATS, setting to _
+di has no FEATS, setting to _
+. has no FEATS, setting to _
+Nel has no FEATS, setting to _
+, has no FEATS, setting to _
+e has no FEATS, setting to _
+poi has no FEATS, setting to _
+in has no FEATS, setting to _
+, has no FEATS, setting to _
+a has no FEATS, setting to _
+, has no FEATS, setting to _
+a has no FEATS, setting to _
+di has no FEATS, setting to _
+, has no FEATS, setting to _
+, has no FEATS, setting to _
+, has no FEATS, setting to _
+e has no FEATS, setting to _
+a has no FEATS, setting to _
+di has no FEATS, setting to _
+, has no FEATS, setting to _
+, has no FEATS, setting to _
+e has no FEATS, setting to _
+poi has no FEATS, setting to _
+di has no FEATS, setting to _
+, has no FEATS, setting to _
+in has no FEATS, setting to _
+. has no FEATS, setting to _
+di has no FEATS, setting to _
+Frates has no FEATS, setting to _
+, has no FEATS, setting to _
+soprattutto has no FEATS, setting to _
+in has no FEATS, setting to _
+, has no FEATS, setting to _
+e has no FEATS, setting to _
+per has no FEATS, setting to _
+di has no FEATS, setting to _
+Coppa has no FEATS, setting to _
+Italia has no FEATS, setting to _
+di has no FEATS, setting to _
+. has no FEATS, setting to _
+Frates has no FEATS, setting to _
+anche has no FEATS, setting to _
+di has no FEATS, setting to _
+e has no FEATS, setting to _
+, has no FEATS, setting to _
+e has no FEATS, setting to _
+, has no FEATS, setting to _
+ma has no FEATS, setting to _
+per has no FEATS, setting to _
+contro has no FEATS, setting to _
+. has no FEATS, setting to _
+Enrico has no FEATS, setting to _
+da has no FEATS, setting to _
+, has no FEATS, setting to _
+, has no FEATS, setting to _
+poi has no FEATS, setting to _
+e has no FEATS, setting to _
+, has no FEATS, setting to _
+infine has no FEATS, setting to _
+, has no FEATS, setting to _
+da has no FEATS, setting to _
+Elisabetta has no FEATS, setting to _
+a has no FEATS, setting to _
+in has no FEATS, setting to _
+di has no FEATS, setting to _
+per has no FEATS, setting to _
+di has no FEATS, setting to _
+Francia has no FEATS, setting to _
+. has no FEATS, setting to _
+Nel has no FEATS, setting to _
+, has no FEATS, setting to _
+perché has no FEATS, setting to _
+in has no FEATS, setting to _
+. has no FEATS, setting to _
+in has no FEATS, setting to _
+. has no FEATS, setting to _
+documents base
+documents lexic
+documents syntax
+documents all
+sentences base
+sentences lexic
+sentences syntax
+sentences all
+{'documents': {'base': [('0', 0, [0.844898645831339, 0.15510135416866097]), ('1', 0, [0.5258119780188529, 0.47418802198114707]), ('2', 0, [0.9467699656416413, 0.05323003435835868]), ('3', 0, [0.7660580806948141, 0.23394191930518599]), ('4', 0, [0.7691795153979172, 0.2308204846020828]), ('5', 1, [0.0236166247122368, 0.9763833752877632]), ('6', 1, [0.47162902771198156, 0.5283709722880184]), ('7', 1, [0.15402118747609228, 0.8459788125239077]), ('8', 0, [0.7261496314997453, 0.27385036850025474]), ('9', 0, [0.8950181287220081, 0.10498187127799181])], 'lexic': [('0', 0, [0.5134947604908024, 0.4865052395091975]), ('1', 1, [0.22606195061865553, 0.7739380493813445]), ('2', 0, [0.6020800341928718, 0.3979199658071282]), ('3', 0, [0.9121639176832503, 0.08783608231674966]), ('4', 1, [0.22909936997920355, 0.7709006300207965]), ('5', 1, [0.07307269509948278, 0.9269273049005172]), ('6', 0, [0.6242663624380269, 0.3757336375619731]), ('7', 0, [0.7015920680813161, 0.2984079319186838]), ('8', 1, [0.2368440282693508, 0.7631559717306492]), ('9', 0, [0.790175162164998, 0.20982483783500203])], 'syntax': [('0', 0, [0.8286711282459054, 0.17132887175409459]), ('1', 1, [0.06979997734686405, 0.930200022653136]), ('2', 0, [0.9205211649643475, 0.07947883503565244]), ('3', 1, [0.00627893868573548, 0.9937210613142645]), ('4', 0, [0.5108003616515517, 0.4891996383484482]), ('5', 1, [0.0005268467879571137, 0.9994731532120429]), ('6', 1, [0.2571203575388403, 0.7428796424611597]), ('7', 1, [0.17805553145861353, 0.8219444685413865]), ('8', 0, [0.5764896479303246, 0.42351035206967536]), ('9', 0, [0.581729902166658, 0.418270097833342])], 'all': [('0', 1, [0.37992456716420897, 0.620075432835791]), ('1', 1, [0.0939295893962725, 0.9060704106037275]), ('2', 0, [0.6556904702448232, 0.34430952975517687]), ('3', 1, [0.0708509941874863, 0.9291490058125137]), ('4', 1, [0.2399920131419211, 0.7600079868580789]), ('5', 1, [0.004205458279043173, 0.9957945417209568]), ('6', 1, [0.31252404935927836, 0.6874759506407216]), ('7', 1, [0.2312917517424784, 0.7687082482575216]), ('8', 1, [0.34819549765863156, 0.6518045023413684]), ('9', 0, [0.8229593155566357, 0.17704068444336435])]}, 'sentences': {'base': [('0_0', 0, [0.7520370022055842, 0.24796299779441583]), ('1_0', 0, [0.5783954543700678, 0.42160454562993216]), ('2_0', 0, [0.8166423897166019, 0.18335761028339817]), ('2_1', 0, [0.8592318431581456, 0.1407681568418544]), ('3_0', 0, [0.7191840164259777, 0.28081598357402227]), ('4_0', 0, [0.7342063419908778, 0.2657936580091222]), ('4_1', 0, [0.6973483355823453, 0.3026516644176546]), ('4_2', 0, [0.6837764040151598, 0.3162235959848402]), ('4_3', 0, [0.7535208148074886, 0.2464791851925114]), ('5_0', 1, [0.1771432961495797, 0.8228567038504203]), ('6_0', 0, [0.5690629167337726, 0.43093708326622737]), ('6_1', 0, [0.5631182582968239, 0.436881741703176]), ('7_0', 1, [0.35345932929365587, 0.6465406707063441]), ('8_0', 0, [0.6765434096030674, 0.3234565903969326]), ('9_0', 0, [0.7956541467930807, 0.2043458532069194])], 'lexic': [('0_0', 0, [0.6552984737455689, 0.34470152625443107]), ('1_0', 0, [0.5786435950457839, 0.4213564049542161]), ('2_0', 0, [0.6822448216961183, 0.31775517830388167]), ('2_1', 0, [0.6394703507042133, 0.3605296492957867]), ('3_0', 0, [0.7114972008233542, 0.2885027991766458]), ('4_0', 0, [0.6034281467894529, 0.3965718532105471]), ('4_1', 0, [0.548411257522563, 0.45158874247743697]), ('4_2', 0, [0.6164650175803614, 0.3835349824196386]), ('4_3', 0, [0.6499914445307338, 0.3500085554692663]), ('5_0', 0, [0.5218168092665648, 0.4781831907334352]), ('6_0', 0, [0.6764442036087466, 0.3235557963912535]), ('6_1', 0, [0.6396482179885257, 0.36035178201147433]), ('7_0', 0, [0.6491245722913459, 0.35087542770865415]), ('8_0', 0, [0.5932174033405937, 0.4067825966594063]), ('9_0', 0, [0.6747717531113016, 0.3252282468886984])], 'syntax': [('0_0', 0, [0.7815307091938883, 0.21846929080611172]), ('1_0', 0, [0.6652934398050319, 0.33470656019496814]), ('2_0', 0, [0.7377466252849613, 0.26225337471503873]), ('2_1', 0, [0.5191318440809694, 0.48086815591903065]), ('3_0', 0, [0.7428027129119444, 0.25719728708805556]), ('4_0', 0, [0.8890028061298292, 0.11099719387017086]), ('4_1', 0, [0.8223896962798184, 0.17761030372018163]), ('4_2', 0, [0.7287442512772442, 0.2712557487227558]), ('4_3', 0, [0.7235776204372657, 0.27642237956273435]), ('5_0', 1, [0.12092209285135047, 0.8790779071486495]), ('6_0', 1, [0.3944170947296488, 0.6055829052703512]), ('6_1', 0, [0.6445266885919707, 0.35547331140802935]), ('7_0', 1, [0.48386236766272683, 0.5161376323372732]), ('8_0', 0, [0.7237706968469177, 0.2762293031530822]), ('9_0', 0, [0.9454982499818464, 0.054501750018153564])], 'all': [('0_0', 0, [0.7543490188982936, 0.24565098110170633]), ('1_0', 0, [0.6503824451256547, 0.3496175548743453]), ('2_0', 0, [0.7403115760876648, 0.2596884239123351]), ('2_1', 1, [0.4238389054598236, 0.5761610945401764]), ('3_0', 0, [0.8117000280330965, 0.1882999719669035]), ('4_0', 0, [0.8355125266298196, 0.16448747337018038]), ('4_1', 0, [0.7759452398785353, 0.22405476012146472]), ('4_2', 0, [0.7020760201678397, 0.29792397983216035]), ('4_3', 0, [0.6997307294567816, 0.30026927054321845]), ('5_0', 1, [0.11059044425242837, 0.8894095557475716]), ('6_0', 0, [0.5111809002848995, 0.48881909971510046]), ('6_1', 0, [0.6415785078340357, 0.35842149216596425]), ('7_0', 0, [0.5084312550922073, 0.4915687449077927]), ('8_0', 0, [0.7268347065775357, 0.2731652934224643]), ('9_0', 0, [0.9407069422541721, 0.05929305774582793])]}}
+10 texts: analysis 4s, readability 0s; 0 failed; 0 unscored; wrote /home/mpapucci/text-simplification-experiments/simplification-journal/data/v1/experiments/outputs/source_targets/repairs/readit-base.csv

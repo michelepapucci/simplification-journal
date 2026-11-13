@@ -1,0 +1,14 @@
+8054 texts: analysis 3010s, readability 59s; 0 failed; 19 unscored; wrote /home/mpapucci/text-simplification-experiments/simplification-journal/data/v1/experiments/outputs/targets/readit-base.csv
+/home/mpapucci/text-simplification-experiments/.venv/lib/python3.10/site-packages/torch/cuda/__init__.py:829: UserWarning: Can't initialize NVML
+  warnings.warn("Can't initialize NVML")
+8054 texts: parse 138s, profiling 5s; 0 empty; wrote /home/mpapucci/text-simplification-experiments/simplification-journal/data/v1/experiments/outputs/targets/profiling-base.csv
+Traceback (most recent call last):
+  File "/home/mpapucci/text-simplification-experiments/simplification-journal/data/v1/experiments/score_texts.py", line 69, in <module>
+    main()
+  File "/home/mpapucci/text-simplification-experiments/simplification-journal/data/v1/experiments/score_texts.py", line 63, in main
+    readit(src, column, folder / f"readit-{name}.csv")
+  File "/home/mpapucci/text-simplification-experiments/simplification-journal/data/v1/experiments/score_texts.py", line 33, in readit
+    subprocess.run([str(T2K_PYTHON), str(READIT_DIR / "score_readit.py"), str(csv.resolve()), "--column", column,
+  File "/usr/lib/python3.10/subprocess.py", line 526, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command '['/home/mpapucci/text-simplification-experiments/LREC/evaluation/.venv_t2k/bin/python', '/home/mpapucci/text-simplification-experiments/simplification-journal/tools/readit/score_readit.py', '/home/mpapucci/text-simplification-experiments/simplification-journal/data/v1/experiments/outputs/targets/predictions-lexical.csv', '--column', 'prediction', '--out', '/home/mpapucci/text-simplification-experiments/simplification-journal/data/v1/experiments/outputs/targets/readit-lexical.csv']' returned non-zero exit status 1.

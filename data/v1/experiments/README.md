@@ -1,0 +1,1036 @@
+# v1 experiments: Qwen3-0.6B with target tokens vs source + target tokens
+
+**Status:** both v1 models trained and evaluated (2026-11-11). Results are [below](#results). A third model, trained on [dataset v2](../../v2/README.md) (v1 plus lexical support), was trained and evaluated the same way on 2026-11-11: [Dataset v2: lexical support](#dataset-v2-lexical-support). It did not make lexical controllable. A fourth model, trained on [dataset v3](../../v3/README.md) (v2 plus same-level base and syntax targets), followed on the same day: [Dataset v3: same-level targets](#dataset-v3-same-level-targets). It improved mild base requests; syntax did not change. A fifth, trained on [dataset v4](../../v4/README.md) (v3 plus syntax targets on every crossing), followed on 2026-11-12: [Dataset v4: syntax crossings](#dataset-v4-syntax-crossings). Syntax over the whole test set is now ahead of the CLiC-it model, but not at the top of the scale, and base lost v3's gain. A sixth, trained on [dataset v5](../../v5/README.md) (v3 plus identity pairs at the top of the syntax scale), followed on 2026-11-12: [Dataset v5: identity pairs](#dataset-v5-identity-pairs). It moved syntax at the top past the CLiC-it model but copies more than it. A seventh, trained on [dataset v6](../../v6/README.md) (v5 with 240 identity pairs instead of 989), followed on 2026-11-12: [Dataset v6: identity pairs, dosed for syntax-only requests](#dataset-v6-identity-pairs-dosed-for-syntax-only-requests). At that dose the model barely copies, and syntax at the top did not move. An eighth, trained on [dataset v7](../../v7/README.md) (v3 in the CLiC-it format, one example per token plus a combined one, with 1,031 identity pairs), followed on 2026-11-12: [Dataset v7: the CLiC-it format, plus combined examples](#dataset-v7-the-clic-it-format-plus-combined-examples). It copies at the CLiC-it model's rate and meets three of the four syntax goal conditions and the base goal; syntax RMSE at 60–80 is still 1.2 points behind. The same data trained for one epoch, on 2026-11-13, does worse ([One epoch](#one-epoch-is-the-heavy-editing-overfitting)): its edits are no lighter, and it copies at mild requests too.
+
+## What is compared
+
+Two Qwen3-0.6B-Base models trained identically on dataset v1 (`data/v1/training_set_v1.zip`, 77,696 training pairs). Only the control string differs:
+
+| Model | Control string (example) |
+|---|---|
+| **targets** | `<|readability_base_any|><|readability_lexical_30|><|readability_syntax_20|>` |
+| **source_targets** | `<|original_readability_base_60|><|original_readability_lexical_40|><|original_readability_syntax_80|>` + the same three target tokens |
+
+Both are compared with the CLiC-it 2026 Qwen3-0.6B (one token per strategy, trained on the GFFF data). Its outputs are reused from `GFFF/metrics/06/` and scored exactly like the new models'.
+
+## Training
+
+The CLiC-it 2026 recipe (`GFFF/controlled_text_simplification_ft.py`), implemented in [`train.py`](train.py):
+- LoRA r 32, α 64, dropout 0.05 on q/k/v/o/gate/up/down, with `embed_tokens` and `lm_head` trained in full;
+- learning rate 2.5e-5, linear decay, 2 warm-up steps, effective batch 64, 3 epochs (3,642 steps), bf16, fused AdamW, gradient checkpointing;
+- prompt `{ctrl}\n{original}\n`, loss on the simplification only.
+
+Changes from the CLiC-it script:
+- **Batch split:** the effective batch is split 4 × 16 instead of 16 × 4. Another user's job on GPU0 takes up to 13 GB, and this split peaks at 8.6 GB. The optimisation is the same. Each run took about 3 hours (3.1 h and 3.0 h); the two ran side by side once GPU0 had room.
+- **Initialisation:** new tokens (33 or 63) are mean-initialised by token id.
+- **Validation:** uses v1's `split` column (766 pairs, originals disjoint from training).
+- **Target dropout:** each set target becomes `any` with p = 0.3, re-drawn every epoch. At least one target is kept, and source tokens are never dropped. Per epoch, the targets a model sees are:
+
+  | Targets set | Examples per epoch | Share |
+  |---|---|---|
+  | syntax only (`any any x`) | about 25,700 | 33% |
+  | base + syntax | about 21,900 | 28% |
+  | base only (`x any any`) | about 18,900 | 24% |
+  | all three | about 3,900 | 5% |
+  | base + lexical | about 2,500 | 3% |
+  | lexical only (`any x any`) | about 2,400 | 3% |
+  | lexical + syntax | about 2,400 | 3% |
+
+  So one-dimension requests, as in the main evaluation, are well represented, and fully specified requests, as in the joint evaluation, are present but less frequent.
+- **Truncation:** examples over 256 tokens lose the end of the target rather than the control tokens.
+- **Padding:** dynamic, which changes speed, not results.
+
+All runs use GPU0 only (`CUDA_VISIBLE_DEVICES=0`) and CPUs 9–25 (`taskset --cpu-list 9-25`). [`run_variant.sh`](run_variant.sh) runs one variant end to end.
+
+## Evaluation
+
+Requests are built once by [`build_requests.py`](build_requests.py) (in `eval_requests/`) and generated by [`generate.py`](generate.py). Decoding follows CLiC-it 2026: sampling at temperature 0.7, top-p 1.0, up to 128 new tokens, fixed seed. The source_targets model also receives the original's three source levels, taken from its IMPaCTS labels.
+
+**Main evaluation: one dimension.** For each original of a test set, every level from 0 up to one level below the original's own level in that dimension, with the other two dimensions `any`:
+
+| Test set | Requests | Levels per original |
+|---|---|---|
+| base | 8,054 | 6–9 |
+| lexical | 3,862 | mostly 3–4 |
+| syntax | 7,905 | 7–9 |
+
+Each dimension is analysed on its own. The CLiC-it 0.6B generated levels 0–90 for every original; only these requests are kept.
+
+**Joint evaluation: all three dimensions.** Every target is set, to measure whether a model meets all three at once. Each of the 2,575 test originals gets at most two requests (4,553 in all):
+- **achievable** (1,978): the three levels of one of its own IMPaCTS simplifications that lowers all three dimensions beyond READ-IT's noise. The generator has already reached this combination for this sentence.
+- **typical** (2,575): the three levels of a training pair whose original starts at the same three levels (94% exact match, otherwise the nearest), all below this original's own levels.
+
+The CLiC-it 0.6B takes one token at a time, so it is not part of the joint evaluation.
+
+**Metrics** ([`analyze.py`](analyze.py)):
+- **READ-IT** of every output, computed exactly as the IMPaCTS labels (next section), so outputs, originals and requested levels share one scale.
+- **Main, per test set and level:**
+  - RMSE against the requested level, the CLiC-it convention: about 5 even for an output inside the level;
+  - share of outputs inside the requested level, and signed bias;
+  - pooled and within-original Spearman;
+  - how far the requested dimension and the two free dimensions move (output minus the original's label).
+- **Joint:**
+  - each dimension's share inside its level, RMSE and bias;
+  - the share with all three inside their levels at once;
+  - the share with all three within one level of the request.
+- **Meaning preservation** ([`meaning.py`](meaning.py)), against the original: BERTScore P/R/F1 (`bert-base-multilingual-cased`, layer 9), SBERT cosine (`distiluse-base-multilingual-cased-v1`), sacreBLEU, ROUGE, copy and empty rates.
+- **Linguistic profile** ([`tools/profiling/profile_texts.py`](../../../tools/profiling/profile_texts.py)): Profiling-UD (stanza parse, `DizionarioFondamentale` dictionary) of every sentence of each output, averaged per output, compared with the original.
+
+### READ-IT, reproduced exactly
+
+The IMPaCTS READ-IT columns were produced by `code/local_readability_measuring.py`:
+1. the t2k analyser with its default configuration (sentence splitting, tokenization, tagging, parsing), one text at a time;
+2. t2k's readability models;
+3. the mean of the text's sentence scores.
+
+The dependency parser is t2k's `it_custom_parser.pt`, a stanza model, and it must run under **stanza 1.10**. With that, the labels are reproduced exactly in all four dimensions.
+
+How each component was pinned down:
+- **Splitting, tokenization and tagging:** reproduce base and lexical exactly under any parser.
+- **Parser model:** a single version in the `t2k_res` git history (commit `a9299bd`, 2024-06-04), with the same SHA-256 as the installed file.
+- **Readability models:** uploaded once, on 2024-06-14. The analyser-configuration commit of 2025-06-07 only moved file paths.
+- **Word vectors:** the parser was trained with stanza's Italian `isdt` vectors, and the cached `conll17.pt` holds the same vectors and vocabulary.
+- **Stanza version:** t2k's own environment has stanza 1.5.0, which builds different trees with the same model and inputs. Under stanza 1.10.1 the trees, and so the labels, are reproduced.
+- **Aggregation:** on 155 multi-sentence texts, the labels equal the mean over sentences. First sentence, last sentence, maximum and the document-level score never match.
+
+### Validation of the pipeline
+
+| Check | Result |
+|---|---|
+| READ-IT of all 3,000 test originals and 3,000 references, re-scored | identical to the IMPaCTS labels for every text, in base, lexical, syntax and global |
+| READ-IT on 100 originals and 100 references (development check) | identical to the IMPaCTS labels, 100% in base, lexical, syntax and global |
+| BLEU / BERTScore P, R, F1 of the CLiC-it 0.6B outputs, recomputed | identical to `GFFF/metrics/06/metrics-*.json` (4 decimals); ROUGE within 0.0003 (its aggregator resamples) |
+| Profiling-UD of single-sentence CLiC-it 0.6B outputs | structural features identical; vocabulary features identical with `DizionarioFondamentale` (not with `NVdB_DeMauro.txt`) |
+| Every READ-IT parse belongs to its own text ([`check_parses.py`](../../../tools/readit/check_parses.py)) | yes, for all 83,000+ scored texts (after the repair below) |
+| Files under `LREC/` changed by the runs | none |
+
+**A concurrency bug in t2k, found and repaired.** t2k's dependency parser used two fixed temporary files (`/tmp/pre_processed_tags.tmp`, `/tmp/post_processed_tags.tmp`). While the two models' scoring ran side by side, the processes swapped a few parses without any error, and one run crashed. A text is scored with its own parse only if the parse's tokens spell the text, so every run can be checked after the fact:
+- 19 texts had been scored with the other run's parse (7 + 10 in the base sets, 2 in source_targets' lexical set). They were re-scored on their own and patched in ([`score_texts.py --repair`](score_texts.py); the rows are listed in `outputs/<model>/repairs/`).
+- The reference and CLiC-it baseline runs never overlapped, and every one of their parses matches.
+- The t2k copy now uses per-process temporary files, and [`score_readit.py`](../../../tools/readit/score_readit.py) checks each parse as it goes. A text whose parse fails twice is left unscored; none did.
+
+**The RMSE convention has a floor.** RMSE is measured against the bottom of the requested level, so an output landing anywhere inside the level still scores about 5. The share of outputs inside the requested level is reported next to it.
+
+## Results
+
+All numbers come from [`analyze.py`](analyze.py) (`results/summary.json`). Generations use one sample per request at temperature 0.7.
+
+**In short:**
+- **Neither v1 model controls READ-IT better than the CLiC-it 2026 0.6B.** They are level with it on base, slightly better on syntax and worse on lexical.
+- **The source tokens make no measurable difference.** The two v1 models are within two points of each other on every measure, with no consistent winner.
+- **Lexical is still not controllable.** Whatever lexical level is requested from 0 to 30, outputs land at about 39–40. Within an original, requested and achieved lexical levels are unrelated (Spearman 0.02–0.05).
+- **The v1 models always simplify.** They copy the original at most 4.3% of the time at any level, so they overshoot requests for mild simplification. The CLiC-it model's top-level outputs are milder in general, not just its copies: at base 60–80 its RMSE is 18.9 against 20.9–21.4, and 18.8 with its copies left out, while the share inside is about the same (13% against 12–14%). A copy is never inside on this grid, since every request is below the original's level. CLiC-it learned mild edits because 18% of its base tokens are at the original's own level; v1 has none by construction.
+- **Requested dimensions are more specific in v1 on lexical requests.** v1 changes base and syntax less, keeps more meaning (BERTScore 0.853–0.861 against 0.821) and changes the profile more lexically (shorter words, more basic vocabulary). READ-IT lexical still barely moves.
+- **All three dimensions at once:** 3.4–3.5% of outputs land inside all three requested levels (5% for combinations an IMPaCTS simplification already reached), and about 39% are within one level in all three. Hitting each dimension independently would give 2.1–2.2%.
+
+Column guide: *Scored* = outputs with a READ-IT score (t2k only scores sentences of more than 5 tokens, so a few very short outputs have none); *Inside* = share inside the requested level; *Bias* = achieved minus requested; *ρ* = Spearman between requested and achieved levels, pooled and within each original; *Δ* = mean change from the original's READ-IT, in points (negative = simpler); meaning against the original.
+
+### Base (one dimension requested)
+
+| Model | Scored | RMSE | Inside | Bias | ρ | ρ within | Δ base | Δ lexical | Δ syntax | BERTScore | SBERT | Copies |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| CLiC-it 2026 0.6B | 8,048 / 8,054 | 20.4 | 20.2% | +10.4 | 0.72 | 0.76 | −40.0 | −2.3 | −38.1 | 0.840 | 0.757 | 3.9% |
+| v1 · targets | 8,035 / 8,054 | 21.0 | 19.5% | +8.8 | 0.68 | 0.70 | −41.5 | −1.1 | −39.3 | 0.836 | 0.743 | 0.8% |
+| v1 · source + targets | 8,028 / 8,054 | 21.1 | 21.1% | +8.2 | 0.66 | 0.70 | −42.1 | −1.1 | −40.2 | 0.832 | 0.738 | 0.6% |
+
+| Requested | n | CLiC-it 2026 0.6B | v1 · targets | v1 · source + targets |
+|---|---|---|---|---|
+| 0–10 | 998 | 27.9 · 0.2% | 28.3 · 0.3% | 28.7 · 0.2% |
+| 10–20 | 997 | 27.9 · 17.8% | 27.2 · 16.9% | 27.7 · 17.5% |
+| 20–30 | 999 | 32.1 · 42.0% | 31.8 · 42.4% | 30.4 · 44.9% |
+| 30–40 | 1,000 | 38.9 · 33.2% | 39.3 · 31.3% | 38.9 · 35.5% |
+| 40–50 | 1,000 | 45.4 · 24.7% | 48.0 · 21.7% | 47.2 · 26.7% |
+| 50–60 | 1,000 | 56.6 · 17.7% | 55.9 · 19.8% | 55.9 · 17.2% |
+| 60–70 | 988 | 63.8 · 11.7% | 61.5 · 12.0% | 59.6 · 13.8% |
+| 70–80 | 785 | 71.7 · 13.8% | 62.2 · 11.7% | 61.7 · 14.4% |
+| 80–90 | 281 | 79.7 · 15.7% | 64.2 · 13.9% | 60.5 · 11.4% |
+
+The three models follow the same curve up to level 60: almost no output reaches levels 0–10 (they bottom out near 28), and 20–30 is the most reliable level. Above 60 the v1 models flatten at about 60–64, while the CLiC-it model keeps tracking the request with milder edits, with or without its copies (see above). v1 training has few mild base targets: 697 pairs at level 70 and 74 at 80, out of 61,373 with a base target. Syntax, left free, falls about as much as base.
+
+### Lexical (one dimension requested)
+
+| Model | Scored | RMSE | Inside | Bias | ρ | ρ within | Δ lexical | Δ base | Δ syntax | BERTScore | SBERT | Copies |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| CLiC-it 2026 0.6B | 3,805 / 3,862 | 26.1 | 14.4% | +22.3 | 0.25 | 0.13 | −7.5 | −23.7 | −42.8 | 0.821 | 0.710 | 2.1% |
+| v1 · targets | 3,845 / 3,862 | 29.0 | 10.5% | +25.4 | 0.18 | 0.05 | −4.5 | −16.4 | −34.4 | 0.853 | 0.775 | 1.6% |
+| v1 · source + targets | 3,850 / 3,862 | 29.0 | 10.0% | +25.6 | 0.17 | 0.02 | −4.3 | −14.6 | −31.9 | 0.861 | 0.792 | 1.9% |
+
+| Requested | n | CLiC-it 2026 0.6B | v1 · targets | v1 · source + targets |
+|---|---|---|---|---|
+| 0–10 | 994 | 35.7 · 0.3% | 39.0 · 0.2% | 39.4 · 0.1% |
+| 10–20 | 996 | 35.5 · 1.3% | 39.6 · 0.8% | 40.1 · 0.5% |
+| 20–30 | 990 | 36.4 · 19.9% | 39.9 · 9.4% | 39.2 · 9.8% |
+| 30–40 | 681 | 40.9 · 40.9% | 42.1 · 37.1% | 42.7 · 33.2% |
+| 40–50 | 155 | 48.6 · 34.4% | 49.4 · 27.5% | 49.3 · 32.3% |
+| 50–60 | 23 | 61.8 · 8.7% | 56.8 · 13.0% | 57.8 · 8.7% |
+| 60–70 | 7 | 70.0 · 28.6% | 68.8 · 14.3% | 60.9 · 28.6% |
+| 70–80 | 3 | 69.6 · 0.0% | 52.2 · 0.0% | 75.2 · 0.0% |
+| 80–90 | 2 | 92.4 · 0.0% | 91.7 · 50.0% | 90.9 · 50.0% |
+
+Lexical is where v1 was meant to help, and it does not. Requests from 0 to 30 all give about 39–40 (84% of this test set's originals sit at 30–50), and v1 is further from the requested level than the CLiC-it model. v1's training data explains much of it: 94% of its 15,226 lexical targets are at levels 20–30, almost all exactly one level below the original, and levels 0–10 appear 265 times in all. So requests for 0–20 lie outside what the models have seen. What changes is specificity: v1 moves base and syntax less, keeps more meaning and changes word length and basic vocabulary in the right direction, but READ-IT lexical moves by only 4 points.
+
+Levels 50–90 rest on 35 requests in all and are noisy.
+
+### Syntax (one dimension requested)
+
+| Model | Scored | RMSE | Inside | Bias | ρ | ρ within | Δ syntax | Δ base | Δ lexical | BERTScore | SBERT | Copies |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| CLiC-it 2026 0.6B | 7,889 / 7,905 | 26.9 | 15.5% | +8.3 | 0.47 | 0.50 | −41.4 | −22.6 | −2.7 | 0.853 | 0.781 | 5.7% |
+| v1 · targets | 7,879 / 7,905 | 26.5 | 17.7% | +8.7 | 0.47 | 0.51 | −41.0 | −20.1 | −1.3 | 0.851 | 0.778 | 1.4% |
+| v1 · source + targets | 7,884 / 7,905 | 26.0 | 17.9% | +7.1 | 0.46 | 0.50 | −42.6 | −20.8 | −1.4 | 0.847 | 0.770 | 1.6% |
+
+| Requested | n | CLiC-it 2026 0.6B | v1 · targets | v1 · source + targets |
+|---|---|---|---|---|
+| 0–10 | 995 | 24.4 · 28.3% | 24.0 · 27.2% | 22.0 · 31.4% |
+| 10–20 | 999 | 31.8 · 21.4% | 28.8 · 25.3% | 28.8 · 24.1% |
+| 20–30 | 999 | 36.7 · 16.2% | 35.3 · 18.0% | 35.0 · 19.2% |
+| 30–40 | 999 | 38.4 · 12.1% | 43.0 · 14.9% | 40.5 · 15.6% |
+| 40–50 | 1,000 | 41.4 · 11.1% | 48.4 · 14.0% | 46.5 · 13.1% |
+| 50–60 | 1,000 | 48.3 · 10.1% | 54.1 · 12.0% | 52.0 · 10.9% |
+| 60–70 | 999 | 56.2 · 9.9% | 55.6 · 13.7% | 54.4 · 13.4% |
+| 70–80 | 858 | 68.1 · 14.6% | 59.8 · 16.7% | 56.4 · 15.5% |
+| 80–90 | 46 | 81.1 · 17.4% | 38.3 · 8.7% | 48.0 · 8.7% |
+
+v1 is slightly better than the CLiC-it model from 10 to 70 (share inside +1 to +4 points) and copies much less. At 70–80 it simplifies more than asked, and level 80–90 (46 requests) is out of reach. As with base, lowering syntax also lowers base by about 20 points, while lexical barely moves.
+
+### All three dimensions at once (joint evaluation)
+
+| Model | Requests | Scored | All three inside | All three within one level | Base inside | Lexical inside | Syntax inside | BERTScore | SBERT | Copies |
+|---|---|---|---|---|---|---|---|---|---|---|
+| v1 · targets · all | 4,553 | 4,495 | 3.4% | 39.4% | 37.2% | 27.6% | 21.0% | 0.816 | 0.703 | 0.4% |
+| v1 · targets · achievable | 1,978 | 1,943 | 5.0% | 42.5% | 38.2% | 29.9% | 25.5% | 0.806 | 0.680 | 0.4% |
+| v1 · targets · typical | 2,575 | 2,552 | 2.2% | 37.1% | 36.4% | 25.9% | 17.6% | 0.823 | 0.721 | 0.4% |
+| v1 · source + targets · all | 4,553 | 4,507 | 3.5% | 38.9% | 36.3% | 26.8% | 21.3% | 0.814 | 0.702 | 0.5% |
+| v1 · source + targets · achievable | 1,978 | 1,950 | 5.1% | 42.4% | 37.4% | 28.6% | 24.5% | 0.806 | 0.682 | 0.5% |
+| v1 · source + targets · typical | 2,575 | 2,557 | 2.3% | 36.2% | 35.4% | 25.5% | 18.9% | 0.821 | 0.716 | 0.5% |
+
+The CLiC-it model is not in this table: it takes one token at a time. Combinations an IMPaCTS simplification of the same original already reached ("achievable") are met more often than typical training combinations, but only about 1 output in 20 meets all three. Each dimension alone is met 21–37% of the time. Lexical does much better than in the main evaluation (27% against 10%) because 87% of joint lexical requests are one level below the original, where the models land anyway. The all-three rate is only a little above what independent hits would give (2.1–2.2%), so the three tokens are not yet steering the output jointly.
+
+### What this suggests for v1
+
+- **Lexical:** the limit looked like the data, not the control string. In v1, 94% of lexical targets are exactly one level below the original (14,333 of 15,226), so the models never learn to go further. Lexical needs either pairs with larger lexical drops or a coarser lexical scale. *Dataset v2 tested the first option: 15 times more targets two or more levels below the original changed almost nothing ([below](#dataset-v2-lexical-support)).*
+- **Top of the scale:** few originals sit at base or syntax 80–90, and v1 keeps only drops of at least one level plus the noise margin, so targets at 70–80 are rare (base: 771 of 61,373). The models over-simplify mild requests. More pairs from high originals would cover them; until then, a request grid restricted to the training support separates control from coverage. *Dataset v3 added same-level targets: base at 70–80 improved by 4.6 points, syntax did not change ([below](#dataset-v3-same-level-targets)).*
+- **Source tokens:** at this data size they add nothing. They could matter once the data covers more source–target combinations.
+- **Evaluation:** for every model, most of the error comes from levels outside the training support (lexical 0–20, base 0–10, the top levels). Reporting the share inside the level alongside RMSE keeps that visible.
+
+## Dataset v2: lexical support
+
+[Dataset v2](../../v2/README.md) tests whether v1's lexical failure comes from the data. It is v1 plus 11,752 pairs from the rest of the release whose READ-IT lexical score dropped by two levels or more, with non-Italian pairs removed. Lexical targets two or more levels below the original go from 837 to 12,480, and lexical-only examples per epoch from about 2,400 to about 4,800.
+
+One model, **v2 · targets**, was trained on it with exactly the recipe of v1 · targets and evaluated on the same requests:
+- **Run:** [`run_v2_targets.sh`](run_v2_targets.sh); 4,155 steps, 2.8 hours.
+- **Validation loss:** best 0.7015 at step 2,500, 0.7052 at the end. This is not comparable with v1's 0.695, because v2's validation split also holds 109 supplement pairs.
+- **Not repeated:** the source-token variant, which made no difference in v1.
+
+**In short:**
+- **More lexical data did not make lexical controllable.**
+  - Requests from 0 to 20 land at 37.7–38.8 instead of 39.0–39.9.
+  - Within an original, requested and achieved lexical are still unrelated (Spearman 0.06; v1 0.05).
+  - The share inside the requested level goes from 10.5% to 11.6%, still below the CLiC-it model's 14.4%.
+- **Base, syntax and the joint evaluation are unchanged** (within about one point on every measure).
+- **The failure is not specific to the test originals.** On held-out originals from the supplement's own pool, lexical requests from 0 to 20 give 37–38. The IMPaCTS references of the same originals reach about 28.
+- **The model reads the lexical token, but not as a lexical instruction.**
+  - With base and syntax also given, the lexical token tells the model nothing about the reference.
+  - Given alone, it shifts the output's likelihood about as much as the base token does.
+  - In generation it then moves base more than lexical: within an original, the requested lexical level correlates 0.18 with achieved base and 0.06 with achieved lexical.
+
+### Predicted before the run, and observed
+
+The predictions were written down while the model was training. They also named the result that would falsify them: within-original ρ below 0.1 with Δ lexical around −5. That is what happened.
+
+| Lexical requests | Predicted | v2 · targets | v1 · targets | CLiC-it 2026 0.6B |
+|---|---|---|---|---|
+| ρ within original | 0.20–0.30 | **0.06** | 0.05 | 0.13 |
+| Δ lexical | −9 to −12 | **−5.7** | −4.5 | −7.5 |
+| Achieved lexical at requests 0–20 | 31–34 | **37.7–38.8** | 39.0–39.9 | 35.5–36.4 |
+| Inside at 20–30 | 20–28% | **11.7%** | 9.4% | 19.9% |
+| Inside / RMSE, all requests | 15–19% / 24–26 | **11.6% / 28.0** | 10.5% / 29.0 | 14.4% / 26.1 |
+| Δ base (side effect) | −18 to −22 | −18.1 | −16.4 | −23.7 |
+| BERTScore | 0.835–0.850 | 0.840 | 0.853 | 0.821 |
+
+Other predictions:
+- **Base and syntax within 1.5 points inside and 1 RMSE of v1:** observed. Base is +0.8 inside and +0.6 RMSE; syntax is +0.1 and +0.1.
+- **All three inside in the joint evaluation, 4–5%:** observed 3.3%, against 3.4% for v1.
+
+The side effects were predicted correctly. The lexical control itself was not.
+
+### Results on the test sets
+
+| Test set | Model | Scored | RMSE | Inside | Bias | ρ | ρ within | Δ requested | Δ free | BERTScore | SBERT | Copies |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| base | CLiC-it 2026 0.6B | 8,048 / 8,054 | 20.4 | 20.2% | +10.4 | 0.72 | 0.76 | −40.0 | lexical −2.3, syntax −38.1 | 0.840 | 0.757 | 3.9% |
+| base | v1 · targets | 8,035 / 8,054 | 21.0 | 19.5% | +8.8 | 0.68 | 0.70 | −41.5 | lexical −1.1, syntax −39.3 | 0.836 | 0.743 | 0.8% |
+| base | v2 · targets | 8,051 / 8,054 | 21.6 | 20.3% | +9.4 | 0.65 | 0.68 | −41.0 | lexical −1.2, syntax −39.0 | 0.837 | 0.750 | 0.8% |
+| lexical | CLiC-it 2026 0.6B | 3,805 / 3,862 | 26.1 | 14.4% | +22.3 | 0.25 | 0.13 | −7.5 | base −23.7, syntax −42.8 | 0.821 | 0.710 | 2.1% |
+| lexical | v1 · targets | 3,845 / 3,862 | 29.0 | 10.5% | +25.4 | 0.18 | 0.05 | −4.5 | base −16.4, syntax −34.4 | 0.853 | 0.775 | 1.6% |
+| lexical | v2 · targets | 3,840 / 3,862 | 28.0 | 11.6% | +24.2 | 0.18 | 0.06 | −5.7 | base −18.1, syntax −37.2 | 0.840 | 0.753 | 1.0% |
+| syntax | CLiC-it 2026 0.6B | 7,889 / 7,905 | 26.9 | 15.5% | +8.3 | 0.47 | 0.50 | −41.4 | base −22.6, lexical −2.7 | 0.853 | 0.781 | 5.7% |
+| syntax | v1 · targets | 7,879 / 7,905 | 26.5 | 17.7% | +8.7 | 0.47 | 0.51 | −41.0 | base −20.1, lexical −1.3 | 0.851 | 0.778 | 1.4% |
+| syntax | v2 · targets | 7,883 / 7,905 | 26.6 | 17.8% | +8.3 | 0.46 | 0.48 | −41.4 | base −19.9, lexical −1.6 | 0.851 | 0.780 | 1.5% |
+
+Lexical requests by level (mean achieved READ-IT lexical · share inside the level):
+
+| Requested | n | CLiC-it 2026 0.6B | v1 · targets | v2 · targets |
+|---|---|---|---|---|
+| 0–10 | 998 | 35.7 · 0.3% | 39.0 · 0.2% | 38.1 · 0.1% |
+| 10–20 | 995 | 35.5 · 1.3% | 39.6 · 0.8% | 37.7 · 1.6% |
+| 20–30 | 990 | 36.4 · 19.9% | 39.9 · 9.4% | 38.8 · 11.7% |
+| 30–40 | 680 | 40.9 · 40.9% | 42.1 · 37.1% | 41.3 · 37.5% |
+| 40–50 | 154 | 48.6 · 34.4% | 49.4 · 27.5% | 48.0 · 37.5% |
+
+Per original lexical level, v2 is flat: from originals at 40–50 (2,095 requests), requests 0/10/20/30 give 38.6/38.0/39.1/39.5. v2 does lower lexical by 10 points or more more often than v1 (22–29% of outputs at requests 0–20, against 16–21%), but just as often whatever level is requested.
+
+Joint evaluation, all three requested:
+
+| Model | All three inside: all / achievable / typical | Within one level (all) | Base / Lexical / Syntax inside (all) |
+|---|---|---|---|
+| v1 · targets | 3.4% / 5.0% / 2.2% | 39.4% | 37.2% / 27.6% / 21.0% |
+| v2 · targets | 3.3% / 4.6% / 2.3% | 39.2% | 36.0% / 28.4% / 21.2% |
+
+### Why: two diagnostics
+
+Both use the v2 validation split, whose originals no v1 or v2 model was trained on. Code is in [`diagnostics/`](diagnostics/) and output in `results/diagnostics/`.
+
+**1. Held-out originals from the supplement's pool** ([`validation_probe.py`](diagnostics/validation_probe.py)). Each validation original gets the main evaluation's lexical requests (every level below its own, base and syntax `any`). Requests are generated and scored exactly like the test sets, one sample each.
+
+| Originals | Model | Original lexical | Achieved at requests 0 / 10 / 20 / 30 | Δ lexical | Δ base | ρ within: lexical | ρ within: base |
+|---|---|---|---|---|---|---|---|
+| supplement, 63 | v1 · targets | 41.3 | 38.8 / 40.4 / 39.1 / 40.6 | −2.1 | −5.8 | 0.10 | 0.25 |
+| supplement, 63 | v2 · targets | 41.3 | 37.1 / 36.8 / 38.3 / 38.6 | −4.1 | −8.6 | 0.12 | 0.23 |
+| v1 part, 107 | v1 · targets | 32.7 | 36.6 / 37.3 / 36.7 / 41.8 | +3.5 | −13.2 | 0.02 | 0.23 |
+| v1 part, 107 | v2 · targets | 32.7 | 35.1 / 35.7 / 37.1 / 40.0 | +2.5 | −16.1 | 0.09 | 0.09 |
+
+On originals like the ones the supplement was drawn from, v2 behaves as on the test set: about 37–38 whatever level is requested. The 109 IMPaCTS simplifications of these originals in v2 reach lexical 28 on average, with a median drop of 15.6 points. So the test originals are not the problem.
+
+With 63 originals, ρ moves by about ±0.07 between sampling runs: an earlier run with a different batch order gave 0.05 for v2 and −0.02 for v1.
+
+**2. Does the model read the lexical token?** ([`token_probe.py`](diagnostics/token_probe.py)) This measures the teacher-forced loss of each held-out reference under its own control string, then again with one target altered: set to `any`, or to a wrong level. The wrong level is one level below the original when the true target is two or more below, otherwise 0. The table shows how much the reference's NLL rises when the token is altered, in millinats per token, and in brackets the share of pairs where the true token gives the lower NLL.
+
+| Supplement validation pairs | Others as in the reference: `any` | Others as in the reference: wrong level | Token alone: all `any` | Token alone: wrong level |
+|---|---|---|---|---|
+| lexical token, v1 · targets (109 pairs) | +2.4 (50%) | +2.2 (57%) | +13.3 (63%) | +13.9 (73%) |
+| lexical token, v2 · targets (109 pairs) | −0.1 (48%) | −1.6 (42%) | +26.0 (80%) | +22.2 (83%) |
+| base token, v1 · targets (98 pairs) | +13.1 (57%) | +7.8 (52%) | +49.6 (68%) | +19.5 (60%) |
+| base token, v2 · targets (98 pairs) | +13.3 (62%) | +14.6 (60%) | +59.6 (82%) | +27.8 (67%) |
+
+- **Next to base and syntax, the lexical token carries nothing.** Replacing it with `any` or a wrong level does not change how likely the reference is. The base token, tested the same way, adds 13–15 millinats. In the training pairs a lexical drop comes with a base drop (supplement pairs: −16.4 lexical, −18.4 base, medians), so once base is given, the lexical level adds little, and the model treats it that way.
+- **Alone, the level is read, and v2 reads it better than v1.** The true level makes the reference more likely than a wrong one by 22 millinats (83% of pairs), against 14 for v1, about as much as the base token alone (28).
+- **That knowledge does not reach READ-IT lexical in generation.** On lexical requests the requested level moves achieved base more than achieved lexical: within-original ρ 0.18 against 0.06 on the test set, 0.23 against 0.12 on the validation originals. What the token learned is closer to "how much to simplify" than "which words to use".
+
+### What this suggests
+
+- **The amount of lexical data is not the bottleneck.** v2 has 15 times more targets two or more levels below the original and twice as many lexical-only examples, and lexical control did not move.
+- **IMPaCTS lexical drops are not separable from overall simplification.** The pairs that lower lexical also lower base, so the token is learned as a general simplification signal. Two directions follow:
+  - train on pairs where lexical drops while base stays (they are rare: lexical is the only target in 1,493 v2 pairs);
+  - or check, without training, whether lexically simpler outputs are in the model's distribution at all: sample several outputs per request and see how often one reaches the requested lexical level.
+- **v2 costs little elsewhere.** Base, syntax and the joint evaluation are within noise of v1. On lexical requests v2 simplifies a little more overall (Δ base −18.1 against −16.4) and keeps a little less meaning (BERTScore 0.840 against 0.853).
+
+## Dataset v3: same-level targets
+
+[Dataset v3](../../v3/README.md) tests whether the CLiC-it model's advantage on mild base requests comes from its same-level tokens. It is v2 with one change: base and syntax get the original's own level as target when the simplification stays in that level, instead of `any`. That relabels 10,767 base and 4,302 syntax pairs. Pairs, lexical targets and test sets are v2's.
+
+One model, **v3 · targets**, was trained with exactly the recipe of v2 · targets and evaluated on the same requests:
+- **Run:** [`run_v3_targets.sh`](run_v3_targets.sh); 4,155 steps, 2.6 hours.
+- **Validation loss:** best 0.7015 at step 2,500, 0.7050 at the end, the same as v2. The validation targets changed too, so this is only a sanity check.
+
+**In short:**
+- **Mild base requests improved, and nothing else got worse.**
+  - Base requests at 70–80 land at 66.9 instead of 62.3 (+4.6; 95% interval +3.0 to +6.1).
+  - At base 60–80, RMSE falls from 20.8 to 19.8 and the share inside rises from 12.1% to 14.2%.
+  - Within-original ρ rises from 0.68 to 0.73. Copies stay at 1.0%.
+- **v3 closes about half the gap to the CLiC-it model at the top of base, without copying.**
+  - Base RMSE at 60–80: 19.8 against 18.9 (v2: 20.8).
+  - On the 141 requests from test originals CLiC-it never saw: 20.4 against 19.0 (v1 and v2: 22.3).
+  - Base 80–90 did not move (68.6; CLiC-it 79.7). v3 has only 26 targets at 90 and 90 pairs that go from 90 to 80.
+- **Syntax did not change.** Requests at 70–80 land at 56.6 (v2: 57.0). The cause is the margin rule:
+  - a syntax drop is labelled only if it exceeds 17.6 points, which is wider than a level;
+  - so at the top almost no one-level syntax drop gets a target (originals at 80: 77 of 1,483 drops to 70; originals at 90: none of 417).
+  - v3 teaches "stay at 80" but still almost never "go to 70".
+- **Lexical and the joint evaluation are unchanged.** Lexical: inside 12.8% (v2: 11.6%), ρ within 0.05. All three inside: 3.6% (v2: 3.3%).
+- **v3 is the best of our models, and level with the CLiC-it model overall.**
+  - Base, all requests: inside 20.6% against 20.2%, RMSE 20.8 against 20.4.
+  - Better on syntax inside (17.7% against 15.5%).
+  - Worse on lexical, and on base at 70–90.
+
+### Predicted before the run, and observed
+
+The predictions were written in [`data/v3/README.md`](../../v3/README.md#predicted-before-the-run-2026-11-11-while-training) while the model was training.
+
+| Main evaluation | Predicted | v3 · targets | v2 · targets | CLiC-it 2026 0.6B |
+|---|---|---|---|---|
+| Base: mean achieved at requests 70–80 / 80–90 | 65–69 / 70–76 | **66.9** / **68.6** | 62.3 / 67.8 | 71.7 / 79.7 |
+| Base 60–80: RMSE / inside | 19–20 / 12–16% | **19.8 / 14.2%** | 20.8 / 12.1% | 18.9 / 13.0% |
+| Base: ρ within original | 0.70–0.74 | **0.73** | 0.68 | 0.76 |
+| Syntax: mean achieved at requests 70–80 / 80–90 (46 requests) | 60–64 / 58–70 | **56.6** / **60.0** | 57.0 / 53.4 | 68.1 / 81.1 |
+| Inside at requests 0–50: base / syntax | within 1.5 points of v2 | 22.7% / 19.0% | 23.1% / 18.8% | 22.6% / 16.5% |
+| Copies, base requests | 1–3% | 1.0% | 0.8% | 3.9% |
+| Lexical: inside / ρ within | 10–12% / ≤ 0.08 | 12.8% / 0.05 | 11.6% / 0.06 | 14.4% / 0.13 |
+| Joint: all three inside | 3–4.5% | 3.6% | 3.3% | – |
+
+- **Right:**
+  - Base at 70–80 rose by 4.6 points. The prediction was a rise of at least 3, with about 60% confidence.
+  - The falsifier (base at 70–80 ≤ 64 *and* syntax ≤ 59) was not met.
+  - Base 60–80, base ρ, levels 0–50, copies and the joint evaluation are all inside the predicted ranges.
+- **Wrong:**
+  - Base 80–90: +0.9, interval −2.0 to +3.7.
+  - Syntax 70–80: −0.4, interval −2.2 to +1.4.
+  - Syntax 80–90 rose by 6.6, inside the predicted range, but on 46 requests (interval −2.0 to +15.3).
+- **Lexical inside:** 0.8 points above the predicted range. The gain over v2 (+1.2, interval +0.1 to +2.2) is about what v2 gained over v1 (+1.1).
+- **The named risk did not show.** That risk was light edits turning into near-copies. At the highest request for each original, base copies are 2.6% (v2: 3.5%), and outputs with character similarity ≥ 0.9 to the original are 19.4% (v2: 18.8%; CLiC-it: 38.4%).
+
+The intervals come from a paired bootstrap over test originals (2,000 resamples, v3 minus v2). They cover the choice of test originals and the one sample per request, not training noise. For scale, v1 and v2, trained on nearly the same base data, differ by 0.1 points at base 70–80.
+
+### Results on the test sets
+
+| Test set | Model | Scored | RMSE | Inside | Bias | ρ | ρ within | Δ requested | Δ free | BERTScore | SBERT | Copies |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| base | CLiC-it 2026 0.6B | 8,048 / 8,054 | 20.4 | 20.2% | +10.4 | 0.72 | 0.76 | −40.0 | lexical −2.3, syntax −38.1 | 0.840 | 0.757 | 3.9% |
+| base | v2 · targets | 8,051 / 8,054 | 21.6 | 20.3% | +9.4 | 0.65 | 0.68 | −41.0 | lexical −1.2, syntax −39.0 | 0.837 | 0.750 | 0.8% |
+| base | v3 · targets | 8,046 / 8,054 | 20.8 | 20.6% | +9.7 | 0.70 | 0.73 | −40.7 | lexical −1.2, syntax −38.9 | 0.835 | 0.745 | 1.0% |
+| lexical | CLiC-it 2026 0.6B | 3,805 / 3,862 | 26.1 | 14.4% | +22.3 | 0.25 | 0.13 | −7.5 | base −23.7, syntax −42.8 | 0.821 | 0.710 | 2.1% |
+| lexical | v2 · targets | 3,840 / 3,862 | 28.0 | 11.6% | +24.2 | 0.18 | 0.06 | −5.7 | base −18.1, syntax −37.2 | 0.840 | 0.753 | 1.0% |
+| lexical | v3 · targets | 3,842 / 3,862 | 28.0 | 12.8% | +24.2 | 0.17 | 0.05 | −5.7 | base −18.9, syntax −37.8 | 0.837 | 0.746 | 0.8% |
+| syntax | CLiC-it 2026 0.6B | 7,889 / 7,905 | 26.9 | 15.5% | +8.3 | 0.47 | 0.50 | −41.4 | base −22.6, lexical −2.7 | 0.853 | 0.781 | 5.7% |
+| syntax | v2 · targets | 7,883 / 7,905 | 26.6 | 17.8% | +8.3 | 0.46 | 0.48 | −41.4 | base −19.9, lexical −1.6 | 0.851 | 0.780 | 1.5% |
+| syntax | v3 · targets | 7,889 / 7,905 | 26.6 | 17.7% | +7.8 | 0.45 | 0.48 | −41.9 | base −20.5, lexical −1.8 | 0.849 | 0.776 | 1.3% |
+
+Base and syntax requests by level (mean achieved READ-IT · share inside the level). Below 50 our three models are within about 3 points of each other (the CLiC-it model is up to 7 points lower on syntax 30–50); the full tables are in `results/summary.json` and on the [data explorer](https://michelepapucci.github.io/simplification-journal/#gen=base).
+
+| Requested | n | CLiC-it 2026 0.6B | v1 · targets | v2 · targets | v3 · targets |
+|---|---|---|---|---|---|
+| base 50–60 | 1,000 | 56.6 · 17.7% | 55.9 · 19.8% | 54.7 · 19.6% | 57.3 · 18.6% |
+| base 60–70 | 988 | 63.8 · 11.7% | 61.5 · 12.0% | 61.1 · 10.2% | 61.4 · 12.3% |
+| base 70–80 | 785 | 71.7 · 13.8% | 62.2 · 11.7% | 62.3 · 13.4% | **66.9 · 16.3%** |
+| base 80–90 | 281 | 79.7 · 15.7% | 64.2 · 13.9% | 67.8 · 15.3% | 68.6 · 14.9% |
+| syntax 50–60 | 1,000 | 48.3 · 10.1% | 54.1 · 12.0% | 54.0 · 14.0% | 51.0 · 12.9% |
+| syntax 60–70 | 1,000 | 56.2 · 9.9% | 55.6 · 13.7% | 55.2 · 13.6% | 54.1 · 11.9% |
+| syntax 70–80 | 859 | 68.1 · 14.6% | 59.8 · 16.7% | 57.0 · 16.2% | 56.6 · 15.8% |
+| syntax 80–90 | 46 | 81.1 · 17.4% | 38.3 · 8.7% | 53.4 · 15.2% | 60.0 · 21.7% |
+
+**Where the base gain is.** It is at requested level 70, from originals at 80 and at 90 alike. That is the top level where v3 added the most targets (717 → 1,177). At level 80 it has 272.
+
+| Original's base level (originals) | Request | CLiC-it 2026 0.6B | v1 · targets | v2 · targets | v3 · targets |
+|---|---|---|---|---|---|
+| 80–90 (504) | 70 | 71.4 | 59.9 | 61.1 | **65.3** |
+| 80–90 | 60 | 63.9 | 59.5 | 59.9 | 59.9 |
+| 90–100 (281) | 80 | 79.7 | 64.2 | 67.8 | 68.6 |
+| 90–100 | 70 | 72.3 | 66.1 | 64.5 | **69.7** |
+| 90–100 | 60 | 64.3 | 67.2 | 65.2 | 65.9 |
+
+**At the highest request for each original** (one level below it), v3 edits less than v2 but does not copy more:
+
+| Base, highest request (1,000 originals) | Δ base | Inside | Stays at or above the original’s level | Copies | Character similarity ≥ 0.9 |
+|---|---|---|---|---|---|
+| CLiC-it 2026 0.6B | −13.7 | 16.3% | 49.6% | 16.0% | 38.4% |
+| v1 · targets | −24.8 | 13.9% | 23.8% | 2.3% | 17.5% |
+| v2 · targets | −23.1 | 15.2% | 26.7% | 3.5% | 18.8% |
+| v3 · targets | −20.8 | 17.3% | 28.9% | 2.6% | 19.4% |
+
+Half of the CLiC-it model's outputs at its highest base request stay in the original's level, and 38% are near-copies. Its means at the top are closer to the request partly because it barely edits.
+
+**Why syntax did not move.** Same-level targets only tell the model what "stay here" looks like. Each evaluation request is one level or more below the original, so the model also needs to see one-level drops at the top of the scale. For base it has them. For syntax the v1 rule labels almost none, because the syntax noise margin (17.6 points) is wider than a level:
+
+| Training pairs | Drops one level: labelled | Drops one level: within the margin (`any`) | Same level (v3 target) |
+|---|---|---|---|
+| base, original at 80 | 607 | 55 | 182 |
+| base, original at 90 | 90 | 32 | 26 |
+| syntax, original at 70 | 145 | 2,244 | 1,094 |
+| syntax, original at 80 | 77 | 1,406 | 629 |
+| syntax, original at 90 | 0 | 417 | 109 |
+
+The CLiC-it data labels these crossings with the lower level (it has 4,112 syntax tokens at 70 and 1,659 at 80). Its syntax means at the top still come with copies: at its highest syntax request, 22% of outputs are copies and 48% are near-copies. Its share inside at syntax 60–80 (12.2%) is below v3's (13.9%).
+
+### What this suggests
+
+- **Same-level targets work where the scale is also covered one level below.** They cost nothing: no new pairs, only labels. They are worth keeping.
+- **Syntax at the top needs the one-level crossings labelled.** These are drops of less than 17.6 points into the next level down: about 1,800 pairs at 70 and 80, and 2,200 more at 60. They lie within READ-IT's noise margin, so some of these labels will be noise. A smaller syntax margin for crossings is a compromise worth testing.
+- **Base 80–90 needs more pairs from originals at 90.** There are 26 same-level and 90 one-level pairs; labels alone cannot add more.
+- **Lexical is unchanged.** The v2 diagnosis stands: the lexical token is learned as "simplify more".
+
+## Dataset v4: syntax crossings
+
+[Dataset v4](../../v4/README.md) tests the v3 diagnosis: syntax did not move because the 17.6-point margin leaves almost every one-level syntax drop at the top unlabelled. It is v3 with one change. A pair whose syntax falls into a lower level by less than the margin gets that level as target, instead of `any`. That relabels 9,833 syntax pairs. Pairs, base and lexical targets and test sets are v3's.
+
+One model, **v4 · targets**, was trained with exactly the recipe of v3 · targets and evaluated on the same requests:
+- **Run:** [`run_v4_targets.sh`](run_v4_targets.sh); 4,155 steps, 2.5 hours.
+- **Validation loss:** best 0.7010 at step 2,500, 0.7038 at the end (v3: 0.7015 and 0.7050). The validation targets changed too, so this is only a sanity check.
+
+**In short:**
+- **Syntax at the top did not move, so the v3 diagnosis was wrong.**
+  - Requests at 70–80 land at 57.3 (v3: 56.6; +0.7, 95% interval −1.2 to +2.6). The prediction is falsified: its threshold was 59.6.
+  - The model now sees 12 to 19 times more one-level drops from originals at 60–80 (from 80: 1,483 instead of 77), and 417 instead of none from originals at 90. Its output at the top does not change.
+- **On the whole syntax test set, v4 meets three of the four goal conditions.**
+  - Against the CLiC-it model: RMSE 26.0 against 26.9 (interval −1.5 to −0.3); inside 17.9% against 15.5%; ρ within 0.504 against 0.503; copies 1.6% against 5.7%.
+  - The miss is RMSE at requests 60–80: 25.1 against 23.2 (v3: 25.3). Yet more of v4's outputs land inside the requested level there: 14.6% against 12.2%.
+  - This level is not new. The v1 source + targets model had the same RMSE and share inside (26.0, 17.9%), and v1 · targets a ρ within of 0.51. Against v3, v4 gains RMSE −0.65 (interval −1.17 to −0.14) and ρ within +0.02 (−0.00 to +0.05).
+- **Base lost v3's gain.** Requests at 70–80 land at 60.6 (v3: 66.9; −6.3, interval −7.8 to −4.8), below v2 (62.3). Base RMSE at 60–80 is back at 20.8 (v3: 19.8).
+- **Lexical and the joint evaluation are within the predicted ranges.** Lexical inside is 13.5% (v3: 12.8%); ρ within is 0.01. All three inside: 3.9% (v3: 3.6%).
+- **Why the top did not move:** in the training data, simplifications of originals at syntax 80 look the same whatever level their syntax score lands in. Labels at 80, 70, 60 and 50 do not mark different edits, so there is nothing distinct to learn.
+- **Why base fell:** `any` used to mean something. In v3, syntax `any` marked 10,451 pairs whose syntax barely changed. v4 labels them, so `any` now mostly means a dropped target, and the base and lexical evaluations (which request syntax `any`) simplify syntax more.
+
+### Predicted before the run, and observed
+
+The predictions were written in [`data/v4/README.md`](../../v4/README.md#predicted-before-the-run-2026-11-11-while-training) while the model was training.
+
+| Main evaluation | Predicted | v4 · targets | v3 · targets | CLiC-it 2026 0.6B |
+|---|---|---|---|---|
+| Syntax: mean achieved at requests 60–70 / 70–80 / 80–90 (46 requests) | 56–60 / 62–68 / 62–80 | 53.6 / 57.3 / **63.2** | 54.1 / 56.6 / 60.0 | 56.2 / 68.1 / 81.1 |
+| Syntax 60–80: RMSE / inside | 22.5–24.5 / 14–19% | 25.1 / **14.6%** | 25.3 / 13.9% | 23.2 / 12.2% |
+| Syntax: ρ within original | 0.50–0.56 | **0.50** | 0.48 | 0.50 |
+| Syntax, all requests: RMSE / inside | 25.0–26.5 / 17–20% | **26.0 / 17.9%** | 26.6 / 17.7% | 26.9 / 15.5% |
+| Syntax: inside at requests 0–50 | within 2 points of v3 | **19.0%** | 19.0% | 16.5% |
+| Copies, syntax requests | 1.5–4% | **1.6%** | 1.3% | 5.7% |
+| Base: mean achieved at requests 70–80 / RMSE at 60–80 | 64–69 / 19.3–20.5 | 60.6 / 20.8 | 66.9 / 19.8 | 71.7 / 18.9 |
+| Lexical: inside / ρ within | 11–13.5% / ≤ 0.08 | **13.5% / 0.01** | 12.8% / 0.05 | 14.4% / 0.13 |
+| Joint: all three inside / syntax inside | 3–4.5% / 21–25% | **3.9% / 21.7%** | 3.6% / 21.7% | – |
+
+Bold marks an observation inside its predicted range.
+
+| Goal (syntax at or above the CLiC-it model, without more copies) | v4 · targets | CLiC-it 2026 0.6B | Met |
+|---|---|---|---|
+| RMSE at requests 60–80 at most 23.2 | 25.1 | 23.2 | no |
+| ρ within original at least 0.50 | 0.504 | 0.503 | yes |
+| Share inside, all requests, at least 15.5% | 17.9% | 15.5% | yes |
+| Copies below 5.7% | 1.6% | 5.7% | yes |
+
+- **Wrong:** the central prediction. About 65% confidence that syntax at 70–80 rises by at least 3 points; it rose by 0.7. The 60–70 range was missed too (53.6 against 56–60).
+- **A named risk showed:** fewer base-only examples might cost base control. Base at 70–80 fell 6.3 points, past the predicted range.
+- **Right:** the whole-test syntax numbers, the low levels, copies, lexical and the joint evaluation. Syntax 80–90 rose by 3.2, inside its range, but on 46 requests (interval −6.2 to +12.1).
+- **The 40% for all four goal conditions:** three were met. The fourth, RMSE at 60–80, moved by −0.25 (interval −1.25 to +0.70).
+
+Intervals: paired bootstrap over test originals, 2,000 resamples, as for v3.
+
+### Results on the test sets
+
+| Test set | Model | Scored | RMSE | Inside | Bias | ρ | ρ within | Δ requested | Δ free | BERTScore | SBERT | Copies |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| base | CLiC-it 2026 0.6B | 8,048 / 8,054 | 20.4 | 20.2% | +10.4 | 0.72 | 0.76 | −40.0 | lexical −2.3, syntax −38.1 | 0.840 | 0.757 | 3.9% |
+| base | v3 · targets | 8,046 / 8,054 | 20.8 | 20.6% | +9.7 | 0.70 | 0.73 | −40.7 | lexical −1.2, syntax −38.9 | 0.835 | 0.745 | 1.0% |
+| base | v4 · targets | 8,044 / 8,054 | 20.8 | 20.6% | +8.3 | 0.68 | 0.72 | −42.1 | lexical −1.3, syntax −40.4 | 0.829 | 0.734 | 0.4% |
+| lexical | CLiC-it 2026 0.6B | 3,805 / 3,862 | 26.1 | 14.4% | +22.3 | 0.25 | 0.13 | −7.5 | base −23.7, syntax −42.8 | 0.821 | 0.710 | 2.1% |
+| lexical | v3 · targets | 3,842 / 3,862 | 28.0 | 12.8% | +24.2 | 0.17 | 0.05 | −5.7 | base −18.9, syntax −37.8 | 0.837 | 0.746 | 0.8% |
+| lexical | v4 · targets | 3,840 / 3,862 | 28.0 | 13.5% | +24.1 | 0.15 | 0.01 | −5.8 | base −19.1, syntax −39.1 | 0.833 | 0.736 | 0.7% |
+| syntax | CLiC-it 2026 0.6B | 7,889 / 7,905 | 26.9 | 15.5% | +8.3 | 0.47 | 0.50 | −41.4 | base −22.6, lexical −2.7 | 0.853 | 0.781 | 5.7% |
+| syntax | v3 · targets | 7,889 / 7,905 | 26.6 | 17.7% | +7.8 | 0.45 | 0.48 | −41.9 | base −20.5, lexical −1.8 | 0.849 | 0.776 | 1.3% |
+| syntax | v4 · targets | 7,891 / 7,905 | 26.0 | 17.9% | +6.9 | 0.47 | 0.50 | −42.8 | base −21.3, lexical −1.7 | 0.848 | 0.772 | 1.6% |
+
+v4 simplifies more than v3 in every evaluation: the Δ columns are larger and BERTScore and SBERT lower; on base and lexical it also copies less.
+
+| Requested | n | CLiC-it 2026 0.6B | v2 · targets | v3 · targets | v4 · targets |
+|---|---|---|---|---|---|
+| base 60–70 | 988 | 63.8 · 11.7% | 61.1 · 10.2% | 61.4 · 12.3% | 59.2 · 11.7% |
+| base 70–80 | 785 | 71.7 · 13.8% | 62.3 · 13.4% | 66.9 · 16.3% | 60.6 · 13.0% |
+| base 80–90 | 281 | 79.7 · 15.7% | 67.8 · 15.3% | 68.6 · 14.9% | 65.3 · 13.5% |
+| syntax 10–20 | 999 | 31.8 · 21.4% | 28.6 · 26.4% | 30.2 · 23.5% | 27.6 · 24.1% |
+| syntax 20–30 | 999 | 36.7 · 16.2% | 37.1 · 18.5% | 35.1 · 18.4% | **32.7 · 22.1%** |
+| syntax 50–60 | 1,000 | 48.3 · 10.1% | 54.0 · 14.0% | 51.0 · 12.9% | 50.8 · 11.8% |
+| syntax 60–70 | 1,000 | 56.2 · 9.9% | 55.2 · 13.6% | 54.1 · 11.9% | 53.6 · 14.1% |
+| syntax 70–80 | 859 | 68.1 · 14.6% | 57.0 · 16.2% | 56.6 · 15.8% | 57.3 · 15.1% |
+| syntax 80–90 | 46 | 81.1 · 17.4% | 53.4 · 15.2% | 60.0 · 21.7% | 63.2 · 15.2% |
+
+Mean achieved READ-IT · share inside the level. The syntax gain over v3 is at the low requests (20–30 in particular), where every model lands above the request.
+
+**At the highest syntax request for each original** (one level below it), v4 behaves like v3:
+
+| Syntax, highest request (1,000 originals) | Δ syntax | Inside | Stays at or above the original’s level | Copies | Character similarity ≥ 0.9 |
+|---|---|---|---|---|---|
+| CLiC-it 2026 0.6B | −17.9 | 14.0% | 42.8% | 22.1% | 48.1% |
+| v3 · targets | −29.0 | 15.8% | 19.2% | 2.6% | 21.6% |
+| v4 · targets | −27.8 | 14.9% | 20.2% | 3.1% | 24.0% |
+
+### Why the top did not move
+
+v4 made the one-level crossings visible to the model. But for originals at the top, IMPaCTS simplifications that land one level below look like those that land three levels below. Training pairs from originals at syntax 80 (600 sampled per target):
+
+| v4 syntax target | Pairs | Syntax change (median) | Character similarity to the original (median) | Similarity ≥ 0.9 | Length ratio (median) |
+|---|---|---|---|---|---|
+| 80 (same level, v3) | 629 | −2.3 | 0.73 | 9.7% | 0.80 |
+| 70 (new in v4) | 1,483 | −10.1 | 0.71 | 8.2% | 0.79 |
+| 60 | 2,772 | −20.1 | 0.65 | 7.7% | 0.85 |
+| 50 | 3,595 | −29.3 | 0.67 | 7.3% | 0.88 |
+| 40 | 3,927 | −38.8 | 0.55 | 3.7% | 0.85 |
+
+Down to target 50 the edits are equally heavy: about 70% of characters kept, under 10% near-copies. Only at 40 do they get heavier. The syntax score of a heavy rewrite of an 80 sentence lands anywhere between 80 and 50, and much of that spread is within READ-IT's 17.6-point noise margin. So the token says "70" but the model is shown the same rewrite it is shown for "50". It learns the average, and requests from 60 to 80 all land around 54–57.
+
+The CLiC-it model gets its top means a different way. At its highest syntax request, 22% of outputs are copies and 48% near-copies, and 43% stay in the original's level. Its data has identity pairs (a third of its same-level syntax tokens), which give "high target" a distinct behaviour: change little. IMPaCTS has none: no training pair is an identical copy.
+
+The same holds by the original's level. For the 813 test originals at syntax 80, requests at 70 / 60 land at 57.3 / 54.1 with v4 and 56.1 / 54.8 with v3; CLiC-it reaches 67.6 / 56.5.
+
+### Why base fell
+
+In v1 to v3, `any` was not only "no target". It was also given to every pair whose syntax dropped by less than the margin, and the model learned that too:
+
+| Training pairs with syntax `any` (not counting dropout) | Pairs | Median syntax change | Median base change |
+|---|---|---|---|
+| v3 | 10,451 | −11.4 | −15.4 |
+| v4 | 717 (the rises) | +6.3 | −13.4 |
+| all pairs, for reference | 88,599 | | −18.9 |
+
+The base and lexical evaluations request syntax `any`. A v3 model reads that partly as "keep syntax close", which suits mild base requests. In v4, `any` mostly comes from target dropout, which hides targets at random. The model then reads it as "any amount", and simplifies syntax more:
+- Δ syntax on the base test set is −40.4 (v3: −38.9).
+- At base requests 60–80 it is −24.9 (v3: −21.5).
+
+Base pairs with targets at 60–80 are also shown with syntax `any` less often: about 1,370 times per epoch instead of 2,170.
+
+### What this suggests
+
+- **Relabelling has reached its limit for syntax.** v4 labels every pair whose syntax did not rise. The remaining gap to the CLiC-it model at 60–80 is not about missing labels: our data has no edit that distinguishes a high syntax target from a low one. Closing it needs examples where a high target comes with a light edit. The CLiC-it data supplies these through identity pairs, and its outputs copy accordingly.
+- **v4 is level with our best earlier syntax model (v1 source + targets) on the whole test set; v3 stays the best base model.** Neither v3 nor v4 dominates. v4's syntax gain over v3 is small and sits at low requests; its base loss at 70–80 is large.
+- **`any` carries information.** Removing the margin rule for one dimension changes what the other evaluations ask for. A future dataset that labels all crossings should give "free" its own meaning: either a separate token for "keep close to the original", or the base and lexical evaluations requesting syntax at the original's level instead of `any`.
+- **Lexical stays as it was**, as asked: inside 13.5%, ρ within 0.01.
+
+## Dataset v5: identity pairs
+
+[Dataset v5](../../v5/README.md) tests whether the CLiC-it model's syntax at the top comes from the identity pairs in its data. It is v3 plus 989 identity pairs: training originals at syntax 60–90 given as their own simplification, with a syntax target at the original's level and base and lexical `any`. Their number gives v3's syntax targets at 60 / 70 / 80 / 90 the CLiC-it data's share of identical pairs (5% / 19% / 33% / 50%). Everything else is v3's.
+
+One model, **v5 · targets**, was trained with exactly the recipe of v3 · targets and evaluated on the same requests:
+- **Run:** [`run_v5_targets.sh`](run_v5_targets.sh); 4,200 steps, 2.4 hours.
+- **Validation loss:** best 0.7025 at step 2,500, 0.7031 at the end. The validation split is v3's, so this compares directly with v3's 0.7015 and 0.7050.
+
+**In short:**
+- **Syntax at the top moved, and overshot.** Requests at 70–80 land at 73.7 (v3: 56.6; +17.1, interval +15.3 to +19.0; CLiC-it: 68.1), requests at 80–90 at 84.1 (CLiC-it: 81.1).
+- **Three of the four goal conditions are met:**
+  - RMSE at 60–80 is 22.4, against 23.2 for CLiC-it (−0.8, interval −1.7 to +0.2);
+  - ρ within is 0.59, against 0.50 (+0.08, interval +0.06 to +0.11), the highest of any model;
+  - the share inside is 16.6%, against 15.5%;
+  - RMSE over all syntax requests is 25.8, the lowest of any model.
+- **Copies miss the goal.** 8.7% of all syntax outputs are copies (CLiC-it: 5.7%). At the highest request per original it is 46.8% (CLiC-it: 22.1%), and half the outputs at requests 70–80 are copies. A copy stays in the original's level, so the share inside at 60–80 falls to 9.5% (v3: 13.9%; CLiC-it: 12.2%).
+- **Why it copies twice as much as CLiC-it: the dose was wrong for the format** (an explanation that v6 later showed to be wrong; see [Why the dose fell short](#why-the-dose-fell-short)). The syntax evaluation requests the syntax token alone. v3's pairs show it alone only when target dropout removes their other targets, while the identity pairs, which have no other target, always do. Among syntax-only training examples, identity pairs were 48% at token 70 and 70% at 80, against the CLiC-it data's 19% and 33%.
+- **Base slipped.** Requests at 70–80 land at 64.0 (v3: 66.9; −2.9, interval −4.4 to −1.3), right at the goal's floor of 64 but outside the predicted noise. Lexical (inside 12.5%, ρ within 0.08) and the joint evaluation (all three inside 3.5%) are unchanged.
+- **Follow-up:** [dataset v6](../../v6/README.md) has the dose corrected to 240 identity pairs, so that their share among syntax-only examples equals the CLiC-it data's. It was trained right after v5: [Dataset v6](#dataset-v6-identity-pairs-dosed-for-syntax-only-requests).
+
+### Predicted before the run, and observed
+
+The predictions were written in [`data/v5/README.md`](../../v5/README.md#predicted-before-the-run-2026-11-12-while-training) while the model was training.
+
+| Main evaluation | Predicted | v5 · targets | v3 · targets | CLiC-it 2026 0.6B |
+|---|---|---|---|---|
+| Syntax: mean achieved at requests 60–70 / 70–80 / 80–90 (46 requests) | 54–58 / 60–66 / 60–78 | 58.8 / 73.7 / 84.1 | 54.1 / 56.6 / 60.0 | 56.2 / 68.1 / 81.1 |
+| Syntax 60–80: RMSE / inside | 23–25 / 12–16% | **22.4** / 9.5% | 25.3 / 13.9% | 23.2 / 12.2% |
+| Syntax: ρ within original | 0.48–0.53 | 0.59 | 0.48 | 0.50 |
+| Syntax, all requests: RMSE / inside | 25.8–27.0 / 16.5–19% | **25.8 / 16.6%** | 26.6 / 17.7% | 26.9 / 15.5% |
+| Syntax: inside at requests 0–50 | within 2 points of v3 | **18.8%** | 19.0% | 16.5% |
+| Syntax copies: all requests / highest request per original | 2.5–5.5% / 8–20% | 8.7% / 46.8% | 1.3% / 2.6% | 5.7% / 22.1% |
+| Base: mean achieved at 70–80 / RMSE 60–80 / copies | 64–69 / 19.3–20.5 / ≤ 2% | **64.0** / 20.6 / **1.3%** | 66.9 / 19.8 / 1.0% | 71.7 / 18.9 / 3.9% |
+| Lexical: inside / ρ within | 11–14% / ≤ 0.08 | **12.5% / 0.08** | 12.8% / 0.05 | 14.4% / 0.13 |
+| Joint: all three inside | 3–4.5% | **3.5%** | 3.6% | – |
+
+Bold marks an observation inside its predicted range.
+
+| Goal | v5 · targets | CLiC-it 2026 0.6B | Met |
+|---|---|---|---|
+| Syntax RMSE at requests 60–80 at most 23.2 | 22.4 | 23.2 | yes |
+| Syntax ρ within original at least 0.50 | 0.59 | 0.50 | yes |
+| Syntax share inside, all requests, at least 15.5% | 16.6% | 15.5% | yes |
+| Syntax copies below 5.7% | 8.7% | 5.7% | **no** |
+| Base at requests 70–80 at least 64 | 64.0 | 71.7 | just |
+
+- **The direction was right:** a rise of 17.1 points, where 3 counted as a confirmation (predicted with about 60% confidence).
+- **The size was wrong.** Every top-of-scale prediction was too low: the means, ρ within (0.59 against at most 0.53), and the copies (46.8% against at most 20% at the highest request). The identity pairs act much more strongly than their count suggested, for the reason in the next section.
+- **Three of the four syntax goals.** About 35% had been put on all four.
+
+### Results on the test sets
+
+| Test set | Model | Scored | RMSE | Inside | Bias | ρ | ρ within | Δ requested | Δ free | BERTScore | SBERT | Copies |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| base | CLiC-it 2026 0.6B | 8,048 / 8,054 | 20.4 | 20.2% | +10.4 | 0.72 | 0.76 | −40.0 | lexical −2.3, syntax −38.1 | 0.840 | 0.757 | 3.9% |
+| base | v3 · targets | 8,046 / 8,054 | 20.8 | 20.6% | +9.7 | 0.70 | 0.73 | −40.7 | lexical −1.2, syntax −38.9 | 0.835 | 0.745 | 1.0% |
+| base | v5 · targets | 8,042 / 8,054 | 20.9 | 20.3% | +9.2 | 0.69 | 0.73 | −41.2 | lexical −1.3, syntax −39.0 | 0.834 | 0.742 | 1.2% |
+| lexical | CLiC-it 2026 0.6B | 3,805 / 3,862 | 26.1 | 14.4% | +22.3 | 0.25 | 0.13 | −7.5 | base −23.7, syntax −42.8 | 0.821 | 0.710 | 2.1% |
+| lexical | v3 · targets | 3,842 / 3,862 | 28.0 | 12.8% | +24.2 | 0.17 | 0.05 | −5.7 | base −18.9, syntax −37.8 | 0.837 | 0.746 | 0.8% |
+| lexical | v5 · targets | 3,828 / 3,862 | 27.7 | 12.5% | +23.9 | 0.19 | 0.08 | −5.9 | base −20.7, syntax −40.1 | 0.828 | 0.723 | 1.2% |
+| syntax | CLiC-it 2026 0.6B | 7,889 / 7,905 | 26.9 | 15.5% | +8.3 | 0.47 | 0.50 | −41.4 | base −22.6, lexical −2.7 | 0.853 | 0.781 | 5.7% |
+| syntax | v3 · targets | 7,889 / 7,905 | 26.6 | 17.7% | +7.8 | 0.45 | 0.48 | −41.9 | base −20.5, lexical −1.8 | 0.849 | 0.776 | 1.3% |
+| syntax | v5 · targets | 7,887 / 7,905 | 25.8 | 16.6% | +10.4 | 0.56 | 0.59 | −39.3 | base −19.8, lexical −1.6 | 0.858 | 0.785 | 8.7% |
+
+| Requested | n | CLiC-it 2026 0.6B | v3 · targets | v4 · targets | v5 · targets |
+|---|---|---|---|---|---|
+| base 60–70 | 988 | 63.8 · 11.7% | 61.4 · 12.3% | 59.2 · 11.7% | 63.3 · 12.2% |
+| base 70–80 | 785 | 71.7 · 13.8% | 66.9 · 16.3% | 60.6 · 13.0% | 64.0 · 11.7% |
+| base 80–90 | 281 | 79.7 · 15.7% | 68.6 · 14.9% | 65.3 · 13.5% | 63.5 · 10.3% |
+| syntax 0–50 (share inside) | 4,991 | 16.5% | 19.0% | 19.0% | 18.8% |
+| syntax 50–60 | 1,000 | 48.3 · 10.1% | 51.0 · 12.9% | 50.8 · 11.8% | 52.7 · 13.8% |
+| syntax 60–70 | 1,000 | 56.2 · 9.9% | 54.1 · 11.9% | 53.6 · 14.1% | 58.8 · 11.3% |
+| syntax 70–80 | 859 | 68.1 · 14.6% | 56.6 · 15.8% | 57.3 · 15.1% | 73.7 · 7.5% |
+| syntax 80–90 | 46 | 81.1 · 17.4% | 60.0 · 21.7% | 63.2 · 15.2% | 84.1 · 6.5% |
+
+Mean achieved READ-IT · share inside the level.
+
+**Where the outputs land at syntax requests 70–80** (859 requests, almost all from originals at 80):
+
+| Model | Copies | Other outputs at or above the original's level | Inside the requested level | Below it | Mean | Mean without copies |
+|---|---|---|---|---|---|---|
+| CLiC-it 2026 0.6B | 22.8% | 20.3% | 14.6% | 40.9% | 68.1 | 63.0 |
+| v3 · targets | 2.0% | 16.8% | 15.8% | 64.3% | 56.6 | 56.0 |
+| v5 · targets | 51.3% | 15.5% | 7.5% | 25.1% | 73.7 | 61.5 |
+
+v5 does two things here. Half of its outputs are copies, where CLiC-it has a fifth. When it does not copy, it also edits more lightly than v3 (mean 61.5 against 56.0), close to CLiC-it's non-copies (63.0). A copy is never inside the requested level, so the share inside halves.
+
+**Copies by requested level.** Up to request 60, v5 copies as often as the CLiC-it model. From 70 up it copies twice as often:
+
+| Requested syntax level | 30 | 40 | 50 | 60 | 70 | 80 |
+|---|---|---|---|---|---|---|
+| CLiC-it 2026 0.6B | 2.2% | 3.2% | 5.1% | 10.7% | 22.8% | 32.6% |
+| v3 · targets | 0.9% | 1.4% | 2.4% | 3.1% | 2.0% | 6.5% |
+| v5 · targets | 1.3% | 3.0% | 5.2% | 10.9% | 51.3% | 69.6% |
+
+### Why v5 copies more than the CLiC-it model
+
+> **Corrected by v6.** The explanation below did not hold. Dosed on syntax-only examples, v6 copied a quarter as often as the CLiC-it model. The share that fits both runs is among all examples that show the syntax token, where v5 was slightly above the CLiC-it data's share. See [Why the dose fell short](#why-the-dose-fell-short).
+
+The count matched the CLiC-it data's share among all syntax targets. The share that matters is among the examples that look like the evaluation's requests, which give the syntax token alone. The CLiC-it data shows every pair under a single token, so for it the two shares coincide. In v3, a pair carries up to three targets. It shows the syntax token alone only when target dropout removes the others: with probability 0.255 for two targets, 0.072 for three. The identity pairs have only the syntax target and always show it alone:
+
+| Syntax token | 60 | 70 | 80 | 90 |
+|---|---|---|---|---|
+| CLiC-it 2026 data | 5.0% | 18.6% | 33.5% | 50.0% |
+| v5, all examples with a syntax token | 6.4% | 23.4% | 40.6% | 57.6% |
+| v5, syntax-only examples | 14.6% | 48.4% | 70.4% | 82.7% |
+
+In the format of the syntax evaluation, v5 saw identity pairs two to three times as often as the CLiC-it model did. Its copies at requests 70 and 80 are 2.2 and 2.1 times the CLiC-it model's.
+
+### What this suggests
+
+- **Identity pairs are what lifts the top of the syntax scale.** Labels (v3, v4) did not move it; 989 identity pairs moved it by 17 points. The CLiC-it model's advantage at the top most likely came from its identity pairs, not from its labelling rule, which v4 reproduced without effect.
+- **They also teach lighter edits.** Outputs that are not copies land 5.5 points higher than v3's at requests 70–80, and ρ within rises from 0.48 to 0.59.
+- **The dose has to be set in the format of the requests.** [Dataset v6](../../v6/README.md) has 240 identity pairs, so that their share among syntax-only examples equals the CLiC-it data's at every level. (This did not hold: see [Dataset v6](#dataset-v6-identity-pairs-dosed-for-syntax-only-requests).)
+
+## Dataset v6: identity pairs, dosed for syntax-only requests
+
+[Dataset v6](../../v6/README.md) is v5 with fewer identity pairs: v3 plus 240 instead of 989 (60 / 90 / 67 / 23 at syntax 60 / 70 / 80 / 90). Their number gives the CLiC-it data's share of identical pairs among the training examples that show the syntax token alone, the format of the syntax evaluation. Everything else is v3's.
+
+One model, **v6 · targets**, was trained with exactly the recipe of v3 · targets and v5 · targets and evaluated on the same requests:
+- **Run:** [`run_v6_targets.sh`](run_v6_targets.sh); 4,167 steps, 2.4 hours.
+- **Validation loss:** best 0.7026 at step 2,500, 0.7047 at the end (v3: 0.7015 / 0.7050; v5: 0.7025 / 0.7031).
+
+**In short:**
+- **Syntax at the top did not move.** Requests at 70–80 land at 54.8 (v3: 56.6; −1.8, interval −3.8 to +0.3; CLiC-it: 68.1). The prediction (62–70) is wrong.
+- **240 identity pairs barely taught copying.** 6.2% of the outputs at the highest request per original are copies (v3: 2.6%; v5: 46.8%; CLiC-it: 22.1%). This is below the 8–35% band set as the prediction's falsification test, so the prediction is falsified.
+- **Two of the four goal conditions are met:** the share inside (17.0%) and the copies (2.2%). RMSE at 60–80 is 27.5, worse than v3's 25.3 (+2.2, interval +1.2 to +3.1), and ρ within is 0.47.
+- **Why: the syntax-only share was the wrong measure.** Among all training examples that show a syntax token, alone or with base and lexical tokens, v6's identity share is about a third of the CLiC-it data's (12.6% against 33.5% at token 80); v5's was slightly above it (40.6%). Copies follow that share. So the explanation given for v5's copies was wrong: the model does not learn the syntax token alone as a separate format.
+- **Base request 0 broke.** At base request 0, 20% of v6's outputs are near-copies of the original (character similarity at least 0.7; v3: 2.6%), and they land at 42.2 on average instead of 28.4. This one request raises base RMSE from 20.8 to 24.3 and lowers base ρ within from 0.73 to 0.59. Without it, v6's base is v3's: RMSE 19.3 against 19.1, ρ within 0.72 against 0.71. Base 0 is the rarest base target (343 training pairs), and the identity pairs never show it. So this is most likely training variance on a rarely seen token rather than an effect of the identity pairs. It was not tested.
+- **Base at 70–80** lands at 63.7 (v3: 66.9; v5: 64.0), just under the goal's floor of 64.
+
+### Predicted before the run, and observed
+
+The predictions were written in [`data/v6/README.md`](../../v6/README.md#predicted-before-the-run-2026-11-12-while-training) while the model was training.
+
+| Main evaluation | Predicted | v6 · targets | v5 · targets | v3 · targets | CLiC-it 2026 0.6B |
+|---|---|---|---|---|---|
+| Syntax: mean achieved at requests 60–70 / 70–80 / 80–90 (46 requests) | 55–59 / 62–70 / 65–82 | 53.1 / 54.8 / **65.5** | 58.8 / 73.7 / 84.1 | 54.1 / 56.6 / 60.0 | 56.2 / 68.1 / 81.1 |
+| Syntax 60–80: RMSE / inside | 22.8–24.5 / 10.5–14% | 27.5 / **11.8%** | 22.4 / 9.5% | 25.3 / 13.9% | 23.2 / 12.2% |
+| Syntax: ρ within original | 0.51–0.57 | 0.47 | 0.59 | 0.48 | 0.50 |
+| Syntax, all requests: RMSE / inside | 25.7–26.7 / 16.5–18.5% | **26.5 / 17.0%** | 25.8 / 16.6% | 26.6 / 17.7% | 26.9 / 15.5% |
+| Syntax copies: all requests / highest request per original | 3–6% / 12–30% | 2.2% / 6.2% | 8.7% / 46.8% | 1.3% / 2.6% | 5.7% / 22.1% |
+| Base: mean achieved at 70–80 / RMSE 60–80 | 64–68 / 19.5–20.7 | 63.7 / **20.5** | 64.0 / 20.6 | 66.9 / 19.8 | 71.7 / 18.9 |
+| Lexical: inside / ρ within | 11–14% / ≤ 0.10 | **12.3% / 0.04** | 12.5% / 0.08 | 12.8% / 0.05 | 14.4% / 0.13 |
+| Joint: all three inside | 3–4.5% | **3.8%** | 3.5% | 3.6% | – |
+
+Bold marks an observation inside its predicted range.
+
+| Goal | v6 · targets | CLiC-it 2026 0.6B | Met |
+|---|---|---|---|
+| Syntax RMSE at requests 60–80 at most 23.2 | 27.5 | 23.2 | no |
+| Syntax ρ within original at least 0.50 | 0.47 | 0.50 | no |
+| Syntax share inside, all requests, at least 15.5% | 17.0% | 15.5% | yes |
+| Syntax copies below 5.7% | 2.2% | 5.7% | yes |
+| Base at requests 70–80 at least 64 | 63.7 | 71.7 | no (by 0.3) |
+
+- **Falsified.** Copies at the highest syntax request are 6.2%, outside the 8–35% band. Matching the share among syntax-only examples does not reproduce the CLiC-it model's copying.
+- **The predictions were set between v3 and v5,** and v6 landed on v3's side or beyond it everywhere at the top of the scale. The confidences were about 70% that copies stay below 5.7% (they did), 45% that RMSE at 60–80 is at most 23.2 (it is not) and 35% on all four syntax conditions (not met).
+
+### Results on the test sets
+
+| Test set | Model | Scored | RMSE | Inside | Bias | ρ | ρ within | Δ requested | Δ free | BERTScore | SBERT | Copies |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| base | CLiC-it 2026 0.6B | 8,048 / 8,054 | 20.4 | 20.2% | +10.4 | 0.72 | 0.76 | −40.0 | lexical −2.3, syntax −38.1 | 0.840 | 0.757 | 3.9% |
+| base | v3 · targets | 8,046 / 8,054 | 20.8 | 20.6% | +9.7 | 0.70 | 0.73 | −40.7 | lexical −1.2, syntax −38.9 | 0.835 | 0.745 | 1.0% |
+| base | v5 · targets | 8,042 / 8,054 | 20.9 | 20.3% | +9.2 | 0.69 | 0.73 | −41.2 | lexical −1.3, syntax −39.0 | 0.834 | 0.742 | 1.2% |
+| base | v6 · targets | 8,043 / 8,054 | 24.3 | 20.1% | +11.2 | 0.57 | 0.59 | −39.2 | lexical −1.2, syntax −37.2 | 0.841 | 0.753 | 1.5% |
+| lexical | CLiC-it 2026 0.6B | 3,805 / 3,862 | 26.1 | 14.4% | +22.3 | 0.25 | 0.13 | −7.5 | base −23.7, syntax −42.8 | 0.821 | 0.710 | 2.1% |
+| lexical | v3 · targets | 3,842 / 3,862 | 28.0 | 12.8% | +24.2 | 0.17 | 0.05 | −5.7 | base −18.9, syntax −37.8 | 0.837 | 0.746 | 0.8% |
+| lexical | v5 · targets | 3,828 / 3,862 | 27.7 | 12.5% | +23.9 | 0.19 | 0.08 | −5.9 | base −20.7, syntax −40.1 | 0.828 | 0.723 | 1.2% |
+| lexical | v6 · targets | 3,843 / 3,862 | 27.8 | 12.3% | +24.0 | 0.17 | 0.04 | −5.9 | base −19.7, syntax −40.0 | 0.830 | 0.733 | 1.0% |
+| syntax | CLiC-it 2026 0.6B | 7,889 / 7,905 | 26.9 | 15.5% | +8.3 | 0.47 | 0.50 | −41.4 | base −22.6, lexical −2.7 | 0.853 | 0.781 | 5.7% |
+| syntax | v3 · targets | 7,889 / 7,905 | 26.6 | 17.7% | +7.8 | 0.45 | 0.48 | −41.9 | base −20.5, lexical −1.8 | 0.849 | 0.776 | 1.3% |
+| syntax | v5 · targets | 7,887 / 7,905 | 25.8 | 16.6% | +10.4 | 0.56 | 0.59 | −39.3 | base −19.8, lexical −1.6 | 0.858 | 0.785 | 8.7% |
+| syntax | v6 · targets | 7,882 / 7,905 | 26.5 | 17.0% | +6.6 | 0.44 | 0.47 | −43.1 | base −21.6, lexical −1.8 | 0.845 | 0.766 | 2.2% |
+
+| Requested | n | CLiC-it 2026 0.6B | v3 · targets | v5 · targets | v6 · targets |
+|---|---|---|---|---|---|
+| base 0–10 | 1,000 | 27.9 · 0.2% | 28.4 · 0.4% | 28.2 · 0.3% | 42.2 · 0.5% |
+| base 60–70 | 988 | 63.8 · 11.7% | 61.4 · 12.3% | 63.3 · 12.2% | 63.4 · 11.2% |
+| base 70–80 | 785 | 71.7 · 13.8% | 66.9 · 16.3% | 64.0 · 11.7% | 63.7 · 11.6% |
+| base 80–90 | 281 | 79.7 · 15.7% | 68.6 · 14.9% | 63.5 · 10.3% | 67.0 · 14.2% |
+| syntax 0–50 (share inside) | 4,991 | 16.5% | 19.0% | 18.8% | 18.7% |
+| syntax 50–60 | 1,000 | 48.3 · 10.1% | 51.0 · 12.9% | 52.7 · 13.8% | 50.8 · 10.6% |
+| syntax 60–70 | 1,000 | 56.2 · 9.9% | 54.1 · 11.9% | 58.8 · 11.3% | 53.1 · 10.5% |
+| syntax 70–80 | 859 | 68.1 · 14.6% | 56.6 · 15.8% | 73.7 · 7.5% | 54.8 · 13.1% |
+| syntax 80–90 | 46 | 81.1 · 17.4% | 60.0 · 21.7% | 84.1 · 6.5% | 65.5 · 17.4% |
+
+Mean achieved READ-IT · share inside the level.
+
+**Where the outputs land at syntax requests 70–80** (859 requests, almost all from originals at 80):
+
+| Model | Copies | Other outputs at or above the original's level | Inside the requested level | Below it | Mean | Mean without copies |
+|---|---|---|---|---|---|---|
+| CLiC-it 2026 0.6B | 22.8% | 20.3% | 14.6% | 40.9% | 68.1 | 63.0 |
+| v3 · targets | 2.0% | 16.8% | 15.8% | 64.3% | 56.6 | 56.0 |
+| v5 · targets | 51.3% | 15.5% | 7.5% | 25.1% | 73.7 | 61.5 |
+| v6 · targets | 6.0% | 15.6% | 13.1% | 64.4% | 54.8 | 52.9 |
+
+v6 copies three times as often as v3 here, still a quarter of the CLiC-it model's rate. Its other outputs are, if anything, heavier edits than v3's (mean 52.9 against 56.0). v5's lighter non-copy edits did not carry over at this dose.
+
+**Copies by requested level:**
+
+| Requested syntax level | 30 | 40 | 50 | 60 | 70 | 80 |
+|---|---|---|---|---|---|---|
+| CLiC-it 2026 0.6B | 2.2% | 3.2% | 5.1% | 10.7% | 22.8% | 32.6% |
+| v3 · targets | 0.9% | 1.4% | 2.4% | 3.1% | 2.0% | 6.5% |
+| v5 · targets | 1.3% | 3.0% | 5.2% | 10.9% | 51.3% | 69.6% |
+| v6 · targets | 0.7% | 3.3% | 2.6% | 4.4% | 5.9% | 10.9% |
+
+### Why the dose fell short
+
+v6 assumed that the model learns the syntax token shown alone as its own format, so that only syntax-only examples set what it does on a syntax-only request. If that were so, v6 would copy about as often as the CLiC-it model. It copies a quarter as often. The share among all examples that show the syntax token fits both runs:
+
+| Syntax token | 60 | 70 | 80 | 90 | Copies at the highest request |
+|---|---|---|---|---|---|
+| CLiC-it 2026 data (one token per example) | 5.0% | 18.6% | 33.5% | 50.0% | 22.1% |
+| v5, all examples showing a syntax token | 6.4% | 23.4% | 40.6% | 57.6% | 46.8% |
+| v5, syntax-only examples | 14.6% | 48.4% | 70.4% | 82.7% | |
+| v6, all examples showing a syntax token | 2.0% | 7.0% | 12.6% | 22.3% | 6.2% |
+| v6, syntax-only examples | 4.9% | 18.7% | 33.5% | 50.2% | |
+
+By the share among all examples that show the token, v5 had about 1.2 times the CLiC-it data's dose and v6 about 0.4 times. Their copies at the highest request are 2.1 and 0.3 times the CLiC-it model's. So the model learns what a syntax token means from every example that shows it, with or without other tokens, and copies respond more than proportionally to that share.
+
+Two other differences may also play a part:
+- **Overall share:** the CLiC-it data also shows each identity pair under its base and lexical tokens, so 3.6% of its training rows are copies (v5: 1.1% of examples; v6: 0.27%).
+- **Training variance:** the paired bootstrap intervals cover the sampling of test originals, not the training run. v6 adds 0.27% of examples to v3, which changes the data order. Base request 0 shows that this alone can move a rarely trained token sharply. How much of v6's other differences from v3 (RMSE at 60–80 +2.2, syntax at 70–80 −1.8) comes from training variance has not been measured.
+
+### What this suggests
+
+- **The dose should be set on all examples that show the syntax token.** Matching the CLiC-it data's share there takes 738 identity pairs (151 / 274 / 233 / 80 at 60 / 70 / 80 / 90), three quarters of v5's.
+- **The four syntax conditions may not all be reachable this way.** Moving from v3 towards v5, copies and accuracy at the top rise together. A straight line from v3 to v5 reaches CLiC-it's 5.7% copies at an RMSE at 60–80 of about 23.6. The line from v6 to v5 reaches it at about 24.8. Both are above 23.2. A dose near 738 would show whether the curve bends favourably.
+- **Training variance should be measured** before reading differences of one or two points between runs. A second seed of v3 takes 2.4 hours.
+
+## Dataset v7: the CLiC-it format, plus combined examples
+
+[Dataset v7](../../v7/README.md) is v3 in the CLiC-it data's format, with a different identity-pair dose:
+- **Examples:** one training example per target, with that token alone, plus one combined example per pair with all its targets. That is 267,390 examples from 89,630 pairs.
+- **Identity pairs:** 1,031, with syntax and base targets. They give the CLiC-it data's identity share among all examples that show each syntax token, the measure that fitted v5 and v6.
+- **Recipe:** target dropout is off. v3's pairs, labels and validation split are unchanged.
+
+One model, **v7 · targets**, was trained with the recipe of v3 · targets and evaluated on the same requests:
+- **Run:** [`run_v7_targets.sh`](run_v7_targets.sh); 12,534 steps (3 epochs of about three examples per pair), 8.2 hours.
+- **Validation loss:** best 0.7076 at step 2,500, then rising steadily to 0.8150 at the end (v3: 0.7015 / 0.7050). Training loss ended at 0.38 (v3: 0.58). The model overfits its training pairs, which it sees about nine times. The validation examples carry all of a pair's targets at once, like v7's combined examples.
+
+**In short:**
+- **The model copies like the CLiC-it model:**
+  - 21.0% of the outputs at the highest syntax request per original are copies (CLiC-it: 22.1%; v5: 46.8%; v6: 6.2%);
+  - 23.1% at requests 70–80 (CLiC-it: 22.8%);
+  - 4.2% over all syntax requests (CLiC-it: 5.7%).
+
+  This is inside the 8–40% band set as the falsification test. The identity share among all examples that show the syntax token sets copying in this format too.
+- **Syntax at the top rose:** requests at 70–80 land at 65.7 (v3: 56.6; +9.1, interval +7.2 to +11.0). That is 2.4 points under the CLiC-it model's 68.1 (interval −4.2 to −0.7).
+- **Three of the four syntax goal conditions are met:** ρ within 0.52, share inside 16.5%, copies 4.2%. v1 · targets also met these three, but with syntax at 70–80 at 59.8 and base at 62.2.
+  - RMSE at 60–80 is 24.4, still above the CLiC-it model's 23.2 (+1.2, interval +0.3 to +2.2); v3's is 25.3.
+  - Over all syntax requests v7 is ahead of the CLiC-it model: RMSE 25.8 against 26.9 (interval −1.6 to −0.5).
+- **The remaining gap is in the outputs that are not copies.** At request 70, v7 copies as often as the CLiC-it model, but its other outputs land at 59.8 against 63.0. At request 60, it copies half as often (5.9% against 10.7%), and 61.8% of its other outputs fall below the requested level (CLiC-it: 57.5%).
+- **Base meets its goal:** requests at 70–80 land at 68.3 (v3: 66.9; CLiC-it: 71.7), at 80–90 at 75.5 (v3: 68.6; +6.9, interval +4.0 to +9.9). Requests at 50–60 and 60–70 land lower than v3's: 51.7 and 59.2 against 57.3 and 61.4. Base RMSE over all requests is 20.2, the lowest of all models (CLiC-it: 20.4).
+- **Lexical moved, although its labels did not change.** Lexical targets alone are now 26,733 examples per epoch instead of 3,252.
+  - The share inside rose to 14.9% (v3: 12.8%; +2.2, interval +0.9 to +3.3), level with the CLiC-it model's 14.4%.
+  - Lexical requests now also move base and syntax as much as the CLiC-it model's do (−22.8 and −43.0, against −23.7 and −42.8).
+  - Within an original, lexical still barely follows the request (ρ 0.10; v3: 0.05; CLiC-it: 0.13), and requests at 0–20 still land near 36.
+- **Meaning is slightly less preserved** than v3's (syntax BERTScore 0.844 against 0.849; lexical SBERT 0.701 against 0.746), in line with heavier edits. The outputs are not degenerate: unscored outputs are short sentences, and repeated phrases are no more frequent than in v3.
+
+### Predicted before the run, and observed
+
+The predictions were written in [`data/v7/README.md`](../../v7/README.md#predicted-before-the-run-2026-11-12-while-training) while the model was training.
+
+| Main evaluation | Predicted | v7 · targets | v6 · targets | v5 · targets | v3 · targets | CLiC-it 2026 0.6B |
+|---|---|---|---|---|---|---|
+| Syntax: mean achieved at requests 60–70 / 70–80 / 80–90 (46 requests) | 55–60 / 63–72 / 65–85 | 53.0 / **65.7** / **73.5** | 53.1 / 54.8 / 65.5 | 58.8 / 73.7 / 84.1 | 54.1 / 56.6 / 60.0 | 56.2 / 68.1 / 81.1 |
+| Syntax 60–80: RMSE / inside | 22.5–25 / 10–14% | **24.4 / 11.3%** | 27.5 / 11.8% | 22.4 / 9.5% | 25.3 / 13.9% | 23.2 / 12.2% |
+| Syntax: ρ within original | 0.49–0.58 | **0.52** | 0.47 | 0.59 | 0.48 | 0.50 |
+| Syntax, all requests: RMSE / inside | 25.5–27 / 15.5–18.5% | **25.8 / 16.5%** | 26.5 / 17.0% | 25.8 / 16.6% | 26.6 / 17.7% | 26.9 / 15.5% |
+| Syntax copies: all requests / highest request per original | 3.5–7.5% / 12–35% | **4.2% / 21.0%** | 2.2% / 6.2% | 8.7% / 46.8% | 1.3% / 2.6% | 5.7% / 22.1% |
+| Base: mean achieved at 70–80 / RMSE 60–80 | 65–72 / 18.8–20.5 | **68.3 / 19.1** | 63.7 / 20.5 | 64.0 / 20.6 | 66.9 / 19.8 | 71.7 / 18.9 |
+| Base copies: all requests / highest request per original | 1.5–4% / 6–18% | **1.5% / 6.8%** | 1.5% / 3.6% | 1.2% / 3.7% | 1.0% / 2.6% | 3.9% / 16.0% |
+| Base: mean achieved at requests 0–10 | 26–31 | **28.0** | 42.2 | 28.2 | 28.4 | 27.9 |
+| Lexical: inside / ρ within | 11–15% / ≤ 0.12 | **14.9% / 0.10** | 12.3% / 0.04 | 12.5% / 0.08 | 12.8% / 0.05 | 14.4% / 0.13 |
+| Joint: all three inside | 3–5% | **3.8%** | 3.8% | 3.5% | 3.6% | – |
+
+Bold marks an observation inside its predicted range. Only syntax at requests 60–70 falls outside it: v7 lands lower than predicted.
+
+| Goal | v7 · targets | CLiC-it 2026 0.6B | Met |
+|---|---|---|---|
+| Syntax RMSE at requests 60–80 at most 23.2 | 24.4 | 23.2 | no |
+| Syntax ρ within original at least 0.50 | 0.52 | 0.50 | yes |
+| Syntax share inside, all requests, at least 15.5% | 16.5% | 15.5% | yes |
+| Syntax copies below 5.7% | 4.2% | 5.7% | yes |
+| Base at requests 70–80 at least 64 | 68.3 | 71.7 | yes |
+
+- **Not falsified.** Copies at the highest syntax request are 21.0%, inside the 8–40% band.
+- **Confidences:**
+  - about 60% that syntax at 70–80 rises at least 5 points over v3 (it rose 9.1);
+  - about 55% that copies at the highest request land between 11% and 33% (21.0%);
+  - about 30% that all four syntax goal conditions are met (three are);
+  - about 70% that base at 70–80 is at least 64 (68.3).
+- **Risks named before the run:** both came true. The model overfits (validation loss +0.11 from its best), and lexical changed although its labels did not.
+
+### Results on the test sets
+
+| Test set | Model | Scored | RMSE | Inside | Bias | ρ | ρ within | Δ requested | Δ free | BERTScore | SBERT | Copies |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| base | CLiC-it 2026 0.6B | 8,048 / 8,054 | 20.4 | 20.2% | +10.4 | 0.72 | 0.76 | −40.0 | lexical −2.3, syntax −38.1 | 0.840 | 0.757 | 3.9% |
+| base | v3 · targets | 8,046 / 8,054 | 20.8 | 20.6% | +9.7 | 0.70 | 0.73 | −40.7 | lexical −1.2, syntax −38.9 | 0.835 | 0.745 | 1.0% |
+| base | v5 · targets | 8,042 / 8,054 | 20.9 | 20.3% | +9.2 | 0.69 | 0.73 | −41.2 | lexical −1.3, syntax −39.0 | 0.834 | 0.742 | 1.2% |
+| base | v6 · targets | 8,043 / 8,054 | 24.3 | 20.1% | +11.2 | 0.57 | 0.59 | −39.2 | lexical −1.2, syntax −37.2 | 0.841 | 0.753 | 1.5% |
+| base | v7 · targets | 8,044 / 8,054 | 20.2 | 20.2% | +8.9 | 0.70 | 0.73 | −41.5 | lexical −1.6, syntax −39.5 | 0.831 | 0.743 | 1.5% |
+| lexical | CLiC-it 2026 0.6B | 3,805 / 3,862 | 26.1 | 14.4% | +22.3 | 0.25 | 0.13 | −7.5 | base −23.7, syntax −42.8 | 0.821 | 0.710 | 2.1% |
+| lexical | v3 · targets | 3,842 / 3,862 | 28.0 | 12.8% | +24.2 | 0.17 | 0.05 | −5.7 | base −18.9, syntax −37.8 | 0.837 | 0.746 | 0.8% |
+| lexical | v5 · targets | 3,828 / 3,862 | 27.7 | 12.5% | +23.9 | 0.19 | 0.08 | −5.9 | base −20.7, syntax −40.1 | 0.828 | 0.723 | 1.2% |
+| lexical | v6 · targets | 3,843 / 3,862 | 27.8 | 12.3% | +24.0 | 0.17 | 0.04 | −5.9 | base −19.7, syntax −40.0 | 0.830 | 0.733 | 1.0% |
+| lexical | v7 · targets | 3,811 / 3,862 | 26.6 | 14.9% | +22.5 | 0.20 | 0.10 | −7.3 | base −22.8, syntax −43.0 | 0.816 | 0.701 | 0.7% |
+| syntax | CLiC-it 2026 0.6B | 7,889 / 7,905 | 26.9 | 15.5% | +8.3 | 0.47 | 0.50 | −41.4 | base −22.6, lexical −2.7 | 0.853 | 0.781 | 5.7% |
+| syntax | v3 · targets | 7,889 / 7,905 | 26.6 | 17.7% | +7.8 | 0.45 | 0.48 | −41.9 | base −20.5, lexical −1.8 | 0.849 | 0.776 | 1.3% |
+| syntax | v5 · targets | 7,887 / 7,905 | 25.8 | 16.6% | +10.4 | 0.56 | 0.59 | −39.3 | base −19.8, lexical −1.6 | 0.858 | 0.785 | 8.7% |
+| syntax | v6 · targets | 7,882 / 7,905 | 26.5 | 17.0% | +6.6 | 0.44 | 0.47 | −43.1 | base −21.6, lexical −1.8 | 0.845 | 0.766 | 2.2% |
+| syntax | v7 · targets | 7,878 / 7,905 | 25.8 | 16.5% | +6.9 | 0.48 | 0.52 | −42.8 | base −22.0, lexical −2.1 | 0.844 | 0.764 | 4.2% |
+
+| Requested | n | CLiC-it 2026 0.6B | v3 · targets | v5 · targets | v6 · targets | v7 · targets |
+|---|---|---|---|---|---|---|
+| base 0–10 | 1,000 | 27.9 · 0.2% | 28.4 · 0.4% | 28.2 · 0.3% | 42.2 · 0.5% | 28.0 · 0.3% |
+| base 50–60 | 1,000 | 56.6 · 17.7% | 57.3 · 18.6% | 56.1 · 19.2% | 57.9 · 18.7% | 51.7 · 19.8% |
+| base 60–70 | 988 | 63.8 · 11.7% | 61.4 · 12.3% | 63.3 · 12.2% | 63.4 · 11.2% | 59.2 · 11.1% |
+| base 70–80 | 785 | 71.7 · 13.8% | 66.9 · 16.3% | 64.0 · 11.7% | 63.7 · 11.6% | 68.3 · 12.4% |
+| base 80–90 | 281 | 79.7 · 15.7% | 68.6 · 14.9% | 63.5 · 10.3% | 67.0 · 14.2% | 75.5 · 20.6% |
+| syntax 0–50 (share inside) | 4,991 | 16.5% | 19.0% | 18.8% | 18.7% | 18.1% |
+| syntax 50–60 | 1,000 | 48.3 · 10.1% | 51.0 · 12.9% | 52.7 · 13.8% | 50.8 · 10.6% | 46.9 · 10.2% |
+| syntax 60–70 | 1,000 | 56.2 · 9.9% | 54.1 · 11.9% | 58.8 · 11.3% | 53.1 · 10.5% | 53.0 · 10.2% |
+| syntax 70–80 | 859 | 68.1 · 14.6% | 56.6 · 15.8% | 73.7 · 7.5% | 54.8 · 13.1% | 65.7 · 12.0% |
+| syntax 80–90 | 46 | 81.1 · 17.4% | 60.0 · 21.7% | 84.1 · 6.5% | 65.5 · 17.4% | 73.5 · 21.7% |
+
+Mean achieved READ-IT · share inside the level.
+
+**Where the outputs land at syntax requests 70–80** (859 requests, almost all from originals at 80):
+
+| Model | Copies | Other outputs at or above the original's level | Inside the requested level | Below it | Mean | Mean without copies |
+|---|---|---|---|---|---|---|
+| CLiC-it 2026 0.6B | 22.8% | 20.3% | 14.6% | 40.9% | 68.1 | 63.0 |
+| v3 · targets | 2.0% | 16.8% | 15.8% | 64.3% | 56.6 | 56.0 |
+| v5 · targets | 51.3% | 15.5% | 7.5% | 25.1% | 73.7 | 61.5 |
+| v6 · targets | 6.0% | 15.6% | 13.1% | 64.4% | 54.8 | 52.9 |
+| v7 · targets | 23.1% | 20.5% | 12.0% | 43.6% | 65.7 | 59.8 |
+
+v7's outputs land almost where the CLiC-it model's do. The difference is that its edits are a little heavier: 3.2 points lower without copies, and 2.7 points more of them below the requested level.
+
+**Copies by requested level:**
+
+| Requested syntax level | 30 | 40 | 50 | 60 | 70 | 80 |
+|---|---|---|---|---|---|---|
+| CLiC-it 2026 0.6B | 2.2% | 3.2% | 5.1% | 10.7% | 22.8% | 32.6% |
+| v3 · targets | 0.9% | 1.4% | 2.4% | 3.1% | 2.0% | 6.5% |
+| v5 · targets | 1.3% | 3.0% | 5.2% | 10.9% | 51.3% | 69.6% |
+| v6 · targets | 0.7% | 3.3% | 2.6% | 4.4% | 5.9% | 10.9% |
+| v7 · targets | 0.8% | 1.8% | 3.3% | 5.9% | 23.1% | 26.1% |
+
+### Where the RMSE at 60–80 is lost
+
+The goal is the one condition v7 misses. Split by request, against the CLiC-it model:
+
+| Request | Model | RMSE | Copies | Mean of the other outputs | Other outputs below the requested level |
+|---|---|---|---|---|---|
+| 60 | CLiC-it 2026 0.6B | 24.7 | 10.7% | 53.0 | 57.5% |
+| 60 | v3 · targets | 23.8 | 3.1% | 53.2 | 57.9% |
+| 60 | v5 · targets | 23.6 | 10.9% | 55.7 | 52.1% |
+| 60 | v7 · targets | 25.0 | 5.9% | 51.1 | 61.8% |
+| 70 | CLiC-it 2026 0.6B | 21.6 | 22.8% | 63.0 | 53.0% |
+| 70 | v3 · targets | 26.6 | 2.0% | 56.0 | 65.6% |
+| 70 | v5 · targets | 21.3 | 51.3% | 61.5 | 51.7% |
+| 70 | v7 · targets | 23.8 | 23.1% | 59.8 | 56.7% |
+
+- **At request 70,** v7 copies as often as the CLiC-it model, and its copies cost the same (RMSE 15.6 against 15.5). The difference is in the other outputs: they land 3.2 points lower (RMSE 25.7 against 23.2).
+- **At request 60,** v7 copies half as often as the CLiC-it model, even though the identity share among examples showing syntax token 60 is the CLiC-it data's (5.0%). Its other outputs again land lower.
+
+So v7 is not short of copies at the top: it over-edits. Its edits are heavier than v3's on base 50–70 and syntax 50–70 too. Two causes are possible, and neither was tested:
+- **Overfitting:** v7 trains for three times v3's steps, and its validation loss rises from step 2,500 on.
+- **Format:** an example with one token and the others `any` may push towards heavier edits. The CLiC-it model was trained in this format and its edits are lighter, but on different pairs.
+
+### What this suggests
+
+- **v7 is the closest model to the goal so far.** It is the first to copy at the CLiC-it model's rate, and the first to meet the ρ, share-inside and copy conditions together with the base goal. The remaining condition misses by 1.2 points of RMSE at 60–80.
+- **The dose rule is confirmed.** Two formats now agree, ours (v5, v6) and the CLiC-it data's (v7): the identity share among all examples that show a syntax token sets how often the model copies at that request.
+- **Training for one epoch of v7 is the next cheap test.** That is 4,178 steps, about as many as v3's 4,155, and about 2.7 hours.
+  - It ends nearer the point where the validation loss was lowest (step 2,500).
+  - It separates the format from the three times longer training.
+  - If the edits get lighter at 60–70, RMSE at 60–80 could reach 23.2.
+- **Training variance is still unmeasured.** Most of v7's differences from the CLiC-it model at the top are 1–3 points.
+
+### One epoch: is the heavy editing overfitting?
+
+**v7 · 1 epoch** (`v7_1ep_targets`) is v7 trained for one epoch: 4,178 steps, about v3's, with each pair seen about three times. Validation loss is measured every 250 steps, and the adapter at the lowest one is evaluated.
+- **Run:** [`run_v7_1ep_targets.sh`](run_v7_1ep_targets.sh); `train.py --epochs 1 --eval-steps 250 --keep-best`; 2.6 hours, started 2026-11-13 01:56.
+- **Validation loss:** lowest at step 3,000 (0.7054), then flat at about 0.707 to the end (v3: 0.7015; v7 · 3 epochs: 0.708 at step 2,500, then up to 0.815).
+- **Predictions:** written in [`data/v7/README.md`](../../v7/README.md#predicted-before-the-run-2026-11-13-while-training) while it trained.
+
+**In short:**
+- **The edits do not get lighter.** At syntax request 70, the outputs that are not copies land at 58.9 (three epochs: 59.8; CLiC-it: 63.0). The test set before the run was 61 or above, so the heavy edits come from the format, not from overfitting.
+- **One epoch copies without regard to the request.**
+  - Syntax copies reach 3.1% at requests 0–50 (three epochs: 1.1%; interval of the difference +1.5 to +2.5).
+  - Base copies reach 4.6% over all requests (1.5%) and 15.1% at the highest request per original (6.8%).
+  - Base ρ within falls to 0.67 (0.73) and base RMSE rises to 23.1 (20.2).
+- **Syntax is slightly worse:** ρ within 0.47 (0.52, interval −0.08 to −0.02), RMSE over all requests 27.6 (25.8). At the top, requests at 70–80 land at 64.1 (65.7) and RMSE at 60–80 is 25.0 (24.4); neither difference is significant (both intervals include 0).
+- **Lexical goes back to v3's level:** share inside 12.5% (three epochs: 14.9%), ρ within 0.04.
+- **What the extra epochs teach is when to copy,** and the validation loss does not measure it. The three-epoch run stays the v7 model.
+
+| Main evaluation | Predicted | v7 · 1 epoch | v7 · 3 epochs | CLiC-it 2026 0.6B |
+|---|---|---|---|---|
+| Best validation loss / its step | 0.700–0.712 / after step 2,000 | **0.7054 / 3,000** | 0.708 / 2,500 | – |
+| Syntax: mean achieved at requests 60–70 / 70–80 / 80–90 | 53–58 / 60–68 / 65–80 | **54.3 / 64.1 / 78.2** | 53.0 / 65.7 / 73.5 | 56.2 / 68.1 / 81.1 |
+| Syntax 60–80: RMSE / inside | 23–25 / 10–14% | 25.0 / **11.8%** | 24.4 / 11.3% | 23.2 / 12.2% |
+| Syntax: ρ within original | 0.48–0.55 | 0.47 | 0.52 | 0.50 |
+| Syntax copies: all requests / highest request per original | 2.5–5.5% / 12–25% | 5.9% / **18.5%** | 4.2% / 21.0% | 5.7% / 22.1% |
+| Syntax request 70: mean of the outputs that are not copies | 59–63 | 58.9 | 59.8 | 63.0 |
+| Base: mean achieved at 70–80 / RMSE 60–80 | 64–70 / 19–20.5 | **68.5** / 21.0 | 68.3 / 19.1 | 71.7 / 18.9 |
+| Lexical: inside / ρ within | 12.5–15% / ≤ 0.12 | **12.5% / 0.04** | 14.9% / 0.10 | 14.4% / 0.13 |
+| Joint: all three inside | 3–5% | **3.1%** | 3.8% | – |
+| Syntax BERTScore | 0.844–0.852 | **0.851** | 0.844 | 0.853 |
+
+Bold marks an observation inside its predicted range. The confidences were about 55% that the outputs that are not copies at request 70 land at 61 or above (no), 60% that copies at the highest request land between 12% and 25% (yes, 18.5%), and 35% that RMSE at 60–80 reaches 23.2 (no). One of the four syntax goal conditions is met (share inside 15.9%).
+
+| Test set | Model | Scored | RMSE | Inside | Bias | ρ | ρ within | Δ requested | Δ free | BERTScore | SBERT | Copies |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| base | v7 · 3 epochs | 8,044 / 8,054 | 20.2 | 20.2% | +8.9 | 0.70 | 0.73 | −41.5 | lexical −1.6, syntax −39.5 | 0.831 | 0.743 | 1.5% |
+| base | v7 · 1 epoch | 8,049 / 8,054 | 23.1 | 17.8% | +11.5 | 0.64 | 0.67 | −38.9 | lexical −1.3, syntax −37.5 | 0.842 | 0.757 | 4.6% |
+| lexical | v7 · 3 epochs | 3,811 / 3,862 | 26.6 | 14.9% | +22.5 | 0.20 | 0.10 | −7.3 | base −22.8, syntax −43.0 | 0.816 | 0.701 | 0.7% |
+| lexical | v7 · 1 epoch | 3,836 / 3,862 | 27.6 | 12.5% | +23.8 | 0.17 | 0.04 | −6.1 | base −19.3, syntax −39.5 | 0.834 | 0.737 | 1.7% |
+| syntax | v7 · 3 epochs | 7,878 / 7,905 | 25.8 | 16.5% | +6.9 | 0.48 | 0.52 | −42.8 | base −22.0, lexical −2.1 | 0.844 | 0.764 | 4.2% |
+| syntax | v7 · 1 epoch | 7,880 / 7,905 | 27.6 | 15.9% | +8.9 | 0.45 | 0.47 | −40.8 | base −20.7, lexical −1.8 | 0.851 | 0.773 | 5.8% |
+
+**Copies by requested syntax level:**
+
+| Requested syntax level | 30 | 40 | 50 | 60 | 70 | 80 |
+|---|---|---|---|---|---|---|
+| CLiC-it 2026 0.6B | 2.2% | 3.2% | 5.1% | 10.7% | 22.8% | 32.6% |
+| v7 · 3 epochs | 0.8% | 1.8% | 3.3% | 5.9% | 23.1% | 26.1% |
+| v7 · 1 epoch | 3.0% | 5.2% | 7.3% | 9.3% | 19.4% | 39.1% |
+
+So what remains is the format. Two candidates for the heavy edits, neither tested:
+- **Examples with one token and the others `any`:** they are 71% of v7's examples. In them, the simplification of a pair with a base target also brings along whatever syntax drop the pair has.
+- **Different pairs:** the CLiC-it model was trained in this format on different pairs, and edits more lightly.
+
+## Interpretability: how the models use their control tokens
+
+Questions 1 and 2 of the [controllability report, Section 5.2](../../../reports/improving_controllability.md#52-experiments-from-cheapest-to-most-involved), run on `v5_targets` on 2026-11-12: the same 1,000 test originals under every request, greedy decoding. Design, predictions and results: [`interp/README.md`](interp/README.md).
+
+In short: the three dimensions are not controlled separately. The base token moves achieved syntax as much as achieved base, the lexical token moves base and syntax but not READ-IT lexical, and holding the other tokens at the original's levels either makes the model copy (syntax held) or does not stop the leakage (base held). The tokens make mostly the same edits at different strengths. Inside the model, the three tokens' embeddings are unrelated, but from layer 8 on their levels are carried on largely one direction.
+
+The same experiments on the two v7 models (2026-11-13; [`interp/README.md`](interp/README.md#v7--targets-1-epoch)):
+- **Held mode now works for base.** In v7 a syntax target at the original's level is no longer a copy signal, so lowering base with syntax held moves base (0.51 points per point, 18% copies; v5: no effect, 50% copies).
+- **The dimensions are still not separate.** With syntax held, the base token moves syntax just as much as base (0.52). With the other tokens `any`, the matrix is v5's.
+- **The tokens are more alike than v5's:**
+  - profile similarity between the base and syntax tokens is 0.84 (v5: 0.73);
+  - which token was moved is told apart from the overall READ-IT change 44.5% of the time (v5: 48.8%);
+  - base and syntax share one direction at layers 8–16 (cosine 0.85–0.93; v5: 0.75–0.82).
+- **The one-epoch model is the extreme case:** base and syntax cosine 0.97–0.99 from layer 8 to the last layer.

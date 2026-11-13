@@ -1,0 +1,6 @@
+34702 generations, 7969 distinct texts (997 originals)
+7969 texts: analysis 970s, readability 42s; 0 failed; 18 unscored; wrote /home/mpapucci/text-simplification-experiments/simplification-journal/data/v1/experiments/outputs/v5_targets/interp/readit-texts.csv
+readit-texts.csv: every parse matches its text
+/home/mpapucci/text-simplification-experiments/.venv/lib/python3.10/site-packages/torch/cuda/__init__.py:829: UserWarning: Can't initialize NVML
+  warnings.warn("Can't initialize NVML")
+7969 texts: parse 119s, profiling 3s; 0 empty; wrote outputs/v5_targets/interp/profiling-texts.csv

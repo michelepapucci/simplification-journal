@@ -1,0 +1,6063 @@
+{
+ "overview": {
+  "pairs": 78462,
+  "originals": 10800,
+  "per_split": {
+   "train": {
+    "pairs": 77696,
+    "originals": 10692
+   },
+   "validation": {
+    "pairs": 766,
+    "originals": 108
+   }
+  },
+  "pairs_per_original_mean": 7.26,
+  "source_global_quartiles": {
+   "v1": [
+    74.0,
+    78.6,
+    84.6
+   ],
+   "v0": [
+    74.1,
+    78.4,
+    83.4
+   ]
+  },
+  "original_chars_median": {
+   "v1": 200,
+   "v0": 200
+  },
+  "v0_pairs": 55877,
+  "v0_originals": 11657
+ },
+ "patterns": {
+  "patterns": {
+   "B+S": {
+    "pairs": 41650,
+    "share": 0.531
+   },
+   "S": {
+    "pairs": 14233,
+    "share": 0.181
+   },
+   "B+L+S": {
+    "pairs": 11474,
+    "share": 0.146
+   },
+   "B": {
+    "pairs": 7186,
+    "share": 0.092
+   },
+   "B+L": {
+    "pairs": 1620,
+    "share": 0.021
+   },
+   "L+S": {
+    "pairs": 1456,
+    "share": 0.019
+   },
+   "L": {
+    "pairs": 843,
+    "share": 0.011
+   }
+  },
+  "per_dimension_state": {
+   "base": {
+    "lower": 0.789,
+    "same_bin": 0.135,
+    "higher_bin": 0.045
+   },
+   "lexical": {
+    "lower": 0.196,
+    "same_bin": 0.608,
+    "higher_bin": 0.145
+   },
+   "syntax": {
+    "lower": 0.877,
+    "same_bin": 0.031,
+    "higher_bin": 0.003
+   }
+  }
+ },
+ "per_dimension": {
+  "base": {
+   "targeted_pairs": 61930,
+   "targeted_share": 0.789,
+   "target_level_counts": {
+    "0": 57,
+    "10": 4775,
+    "20": 19557,
+    "30": 19247,
+    "40": 10587,
+    "50": 4795,
+    "60": 2132,
+    "70": 704,
+    "80": 76,
+    "90": 0
+   },
+   "v0_level_counts": {
+    "0": 69,
+    "10": 5251,
+    "20": 16833,
+    "30": 15186,
+    "40": 8979,
+    "50": 4780,
+    "60": 2617,
+    "70": 1395,
+    "80": 595,
+    "90": 172
+   },
+   "source_level_counts": {
+    "0": 6,
+    "10": 288,
+    "20": 4421,
+    "30": 9489,
+    "40": 13116,
+    "50": 15368,
+    "60": 15213,
+    "70": 12673,
+    "80": 6682,
+    "90": 1206
+   },
+   "bins_lowered": {
+    "1": 15828,
+    "2": 16003,
+    "3": 13759,
+    "4+": 16340
+   },
+   "target_levels_per_original_mean": 2.37,
+   "originals_with_one_target_level": 0.205,
+   "v0_levels_per_original_mean": 2.27
+  },
+  "lexical": {
+   "targeted_pairs": 15393,
+   "targeted_share": 0.196,
+   "target_level_counts": {
+    "0": 14,
+    "10": 255,
+    "20": 6914,
+    "30": 7606,
+    "40": 574,
+    "50": 27,
+    "60": 2,
+    "70": 1,
+    "80": 0,
+    "90": 0
+   },
+   "v0_level_counts": {
+    "0": 5,
+    "10": 330,
+    "20": 12101,
+    "30": 36043,
+    "40": 7044,
+    "50": 315,
+    "60": 31,
+    "70": 5,
+    "80": 3,
+    "90": 0
+   },
+   "source_level_counts": {
+    "0": 0,
+    "10": 53,
+    "20": 5470,
+    "30": 50201,
+    "40": 21300,
+    "50": 1279,
+    "60": 108,
+    "70": 24,
+    "80": 21,
+    "90": 6
+   },
+   "bins_lowered": {
+    "1": 14491,
+    "2": 823,
+    "3": 54,
+    "4+": 25
+   },
+   "target_levels_per_original_mean": 1.09,
+   "originals_with_one_target_level": 0.914,
+   "v0_levels_per_original_mean": 1.51
+  },
+  "syntax": {
+   "targeted_pairs": 68813,
+   "targeted_share": 0.877,
+   "target_level_counts": {
+    "0": 5295,
+    "10": 11376,
+    "20": 13207,
+    "30": 13755,
+    "40": 12960,
+    "50": 8577,
+    "60": 3131,
+    "70": 512,
+    "80": 0,
+    "90": 0
+   },
+   "v0_level_counts": {
+    "0": 4054,
+    "10": 8360,
+    "20": 8953,
+    "30": 8884,
+    "40": 8134,
+    "50": 6760,
+    "60": 5704,
+    "70": 3762,
+    "80": 1250,
+    "90": 16
+   },
+   "source_level_counts": {
+    "0": 0,
+    "10": 0,
+    "20": 9,
+    "30": 6,
+    "40": 21,
+    "50": 686,
+    "60": 11741,
+    "70": 36319,
+    "80": 23206,
+    "90": 6474
+   },
+   "bins_lowered": {
+    "1": 335,
+    "2": 8693,
+    "3": 13188,
+    "4+": 46597
+   },
+   "target_levels_per_original_mean": 3.32,
+   "originals_with_one_target_level": 0.067,
+   "v0_levels_per_original_mean": 2.92
+  }
+ },
+ "co_targeting": {
+  "p_row_targets_column_given_row": {
+   "base": {
+    "base": 1.0,
+    "lexical": 0.211,
+    "syntax": 0.858
+   },
+   "lexical": {
+    "base": 0.851,
+    "lexical": 1.0,
+    "syntax": 0.84
+   },
+   "syntax": {
+    "base": 0.772,
+    "lexical": 0.188,
+    "syntax": 1.0
+   }
+  },
+  "single_target_share_of_targeted": {
+   "base": 0.116,
+   "lexical": 0.055,
+   "syntax": 0.207
+  }
+ },
+ "test_requests": {
+  "margins": {
+   "base": 5.7,
+   "lexical": 3.8,
+   "syntax": 17.6
+  },
+  "base": {
+   "in_training_rule": 0.968,
+   "below_source_level": 0.968,
+   "at_source_level": 0.031,
+   "above_source_level": 0.002,
+   "originals_the_proxy_would_remove": 0.199,
+   "originals_longer_than_400_chars": 0.164,
+   "original_chars_median": 338,
+   "source_level_counts": {
+    "60": 12,
+    "70": 203,
+    "80": 504,
+    "90": 281
+   }
+  },
+  "lexical": {
+   "in_training_rule": 0.409,
+   "below_source_level": 0.409,
+   "at_source_level": 0.142,
+   "above_source_level": 0.449,
+   "originals_the_proxy_would_remove": 0.063,
+   "originals_longer_than_400_chars": 0.014,
+   "original_chars_median": 156,
+   "source_level_counts": {
+    "20": 9,
+    "30": 310,
+    "40": 526,
+    "50": 132,
+    "60": 16,
+    "70": 4,
+    "80": 1,
+    "90": 2
+   }
+  },
+  "syntax": {
+   "in_training_rule": 0.878,
+   "below_source_level": 0.98,
+   "at_source_level": 0.02,
+   "above_source_level": 0.0,
+   "originals_the_proxy_would_remove": 0.055,
+   "originals_longer_than_400_chars": 0.017,
+   "original_chars_median": 196,
+   "source_level_counts": {
+    "70": 141,
+    "80": 813,
+    "90": 46
+   }
+  }
+ },
+ "comparison": {
+  "features_compared": 145,
+  "datasets": {
+   "clicit2025_sample": {
+    "pairs": 14293,
+    "originals": 2000,
+    "readit_original_mean": {
+     "all": 49.0,
+     "base": 47.4,
+     "lexical": 37.6,
+     "syntax": 48.1
+    },
+    "readit_drop_mean": {
+     "all": 22.5,
+     "base": 13.1,
+     "lexical": 1.73,
+     "syntax": 21.6
+    },
+    "share_harder_in": {
+     "base": 0.167,
+     "lexical": 0.399,
+     "syntax": 0.059
+    },
+    "original_chars_median": 144,
+    "manova_one_per_original": {
+     "V": 0.254,
+     "F": 9.814,
+     "df1": 134,
+     "df2": 3865,
+     "p": 3.9e-161,
+     "chance": 0.0335
+    },
+    "manova_most_random_least": {
+     "most": {
+      "V": 0.438,
+      "F": 22.48,
+      "df1": 134,
+      "df2": 3865,
+      "p": 0.0,
+      "chance": 0.0335
+     },
+     "random": {
+      "V": 0.249,
+      "F": 9.572,
+      "df1": 134,
+      "df2": 3865,
+      "p": 2.2e-156,
+      "chance": 0.0335
+     },
+     "least": {
+      "V": 0.125,
+      "F": 4.142,
+      "df1": 133,
+      "df2": 3866,
+      "p": 9.5e-48,
+      "chance": 0.0333
+     }
+    },
+    "r": {
+     "n_tokens": 0.882,
+     "tokens_per_sent": 0.882,
+     "char_per_tok": 0.147,
+     "in_dict": -0.0515,
+     "in_dict_types": -0.17,
+     "in_FO": -0.109,
+     "in_AD": 0.0679,
+     "in_AU": 0.1,
+     "in_FO_types": -0.115,
+     "in_AD_types": -0.261,
+     "in_AU_types": 0.112,
+     "upos_dist_CCONJ": 0.105,
+     "upos_dist_X": 0.299,
+     "upos_dist_SCONJ": 0.292,
+     "upos_dist_DET": -0.127,
+     "upos_dist_NOUN": -0.0782,
+     "upos_dist_PROPN": -0.15,
+     "upos_dist_SYM": 0.0851,
+     "upos_dist_ADJ": 0.0227,
+     "upos_dist_PUNCT": 0.346,
+     "upos_dist_PART": 1.0,
+     "upos_dist_VERB": -0.0865,
+     "upos_dist_ADV": 0.359,
+     "upos_dist_ADP": 0.174,
+     "upos_dist_INTJ": -0.333,
+     "upos_dist_AUX": -0.591,
+     "upos_dist_NUM": -0.104,
+     "upos_dist_PRON": 0.312,
+     "lexical_density": 0.0731,
+     "verbs_mood_dist_Sub": 0.757,
+     "verbs_mood_dist_Ind": 0.669,
+     "verbs_mood_dist_Cnd": 1.0,
+     "verbs_mood_dist_Imp": -0.286,
+     "verbs_tense_dist_Fut": 0.513,
+     "verbs_tense_dist_Pres": 0.409,
+     "verbs_tense_dist_Past": 0.0768,
+     "verbs_tense_dist_Imp": 0.162,
+     "verbs_form_dist_Part": -0.174,
+     "verbs_form_dist_Ger": 0.606,
+     "verbs_form_dist_Inf": 0.0453,
+     "verbs_form_dist_Fin": 0.416,
+     "verbs_num_pers_dist_Sing+1": 1.0,
+     "verbs_num_pers_dist_Plur+3": 0.417,
+     "verbs_num_pers_dist_Plur+1": 0.333,
+     "verbs_num_pers_dist_Sing+": 0.607,
+     "verbs_num_pers_dist_Sing+3": 0.592,
+     "verbs_num_pers_dist_Plur+2": -1.0,
+     "verbs_num_pers_dist_+": 1.0,
+     "verbs_num_pers_dist_Sing+2": -0.222,
+     "verbs_num_pers_dist_Plur+": 0.0,
+     "aux_mood_dist_Cnd": 0.201,
+     "aux_mood_dist_Ind": -0.295,
+     "aux_mood_dist_Sub": 0.748,
+     "aux_tense_dist_Past": 0.303,
+     "aux_tense_dist_Pres": -0.455,
+     "aux_tense_dist_Imp": 0.339,
+     "aux_tense_dist_Fut": 0.964,
+     "aux_form_dist_Part": -0.545,
+     "aux_form_dist_Fin": -0.163,
+     "aux_form_dist_Ger": 1.0,
+     "aux_form_dist_Inf": 0.478,
+     "aux_num_pers_dist_Sing+2": -1.0,
+     "aux_num_pers_dist_Plur+3": -0.0604,
+     "aux_num_pers_dist_Sing+1": -1.0,
+     "aux_num_pers_dist_Plur+1": -0.357,
+     "aux_num_pers_dist_Sing+3": -0.218,
+     "verbal_head_per_sent": 0.815,
+     "verbal_root_perc": 0.123,
+     "avg_token_per_clause": 0.324,
+     "avg_links_len": 0.588,
+     "max_links_len": 0.726,
+     "avg_max_links_len": 0.726,
+     "avg_max_depth": 0.805,
+     "dep_dist_root": -0.87,
+     "dep_dist_flat": -0.029,
+     "dep_dist_det:predet": -0.3,
+     "dep_dist_appos": 0.467,
+     "dep_dist_aux:pass": -0.259,
+     "dep_dist_parataxis:hashtag": -1.0,
+     "dep_dist_acl:relcl": 0.296,
+     "dep_dist_flat:name": -0.0242,
+     "dep_dist_obl:agent": 0.131,
+     "dep_dist_fixed": 0.238,
+     "dep_dist_case": 0.185,
+     "dep_dist_advmod": 0.37,
+     "dep_dist_nsubj": -0.282,
+     "dep_dist_nmod": 0.119,
+     "dep_dist_det": -0.128,
+     "dep_dist_compound": 0.209,
+     "dep_dist_vocative": null,
+     "dep_dist_obj": -0.0595,
+     "dep_dist_dep": -0.59,
+     "dep_dist_amod": 0.0537,
+     "dep_dist_xcomp": 0.0628,
+     "dep_dist_obl": 0.136,
+     "dep_dist_aux": -0.638,
+     "dep_dist_discourse": 0.714,
+     "dep_dist_nsubj:pass": -0.279,
+     "dep_dist_ccomp": 0.294,
+     "dep_dist_conj": 0.121,
+     "dep_dist_list": null,
+     "dep_dist_mark": 0.144,
+     "dep_dist_expl:pass": 0.667,
+     "dep_dist_cc": 0.109,
+     "dep_dist_acl": 0.386,
+     "dep_dist_parataxis": 0.452,
+     "dep_dist_det:poss": 0.0632,
+     "dep_dist_iobj": 0.659,
+     "dep_dist_csubj": -0.596,
+     "dep_dist_expl:impers": 0.167,
+     "dep_dist_nummod": 0.0369,
+     "dep_dist_advcl": 0.26,
+     "dep_dist_flat:foreign": 0.264,
+     "dep_dist_cop": -0.347,
+     "dep_dist_punct": 0.354,
+     "dep_dist_expl": 0.23,
+     "subj_pre": -0.0302,
+     "subj_post": 0.468,
+     "obj_pre": 0.702,
+     "obj_post": 0.378,
+     "n_prepositional_chains": 0.699,
+     "avg_prepositional_chain_len": 0.501,
+     "prep_dist_5": 0.143,
+     "prep_dist_3": 0.238,
+     "prep_dist_4": 0.35,
+     "prep_dist_1": 0.282,
+     "prep_dist_2": 0.338,
+     "subordinate_dist_4": 0.622,
+     "subordinate_dist_3": 0.681,
+     "subordinate_dist_5": 0.167,
+     "subordinate_dist_1": 0.595,
+     "subordinate_dist_2": 0.357,
+     "avg_subordinate_chain_len": 0.699,
+     "principal_proposition_dist": -0.607,
+     "subordinate_proposition_dist": 0.754,
+     "subordinate_pre": 0.37,
+     "subordinate_post": 0.662,
+     "verb_edges_dist_3": -0.0803,
+     "verb_edges_dist_0": 0.113,
+     "verb_edges_dist_5": 0.395,
+     "verb_edges_dist_1": 0.331,
+     "verb_edges_dist_2": -0.11,
+     "verb_edges_dist_6": 0.614,
+     "verb_edges_dist_4": 0.206,
+     "avg_verb_edges": 0.351
+    },
+    "p": {
+     "n_tokens": 2e-242,
+     "tokens_per_sent": 2e-242,
+     "char_per_tok": 2.1e-08,
+     "in_dict": 0.055,
+     "in_dict_types": 4e-10,
+     "in_FO": 4.1e-05,
+     "in_AD": 0.013,
+     "in_AU": 0.00032,
+     "in_FO_types": 2.1e-05,
+     "in_AD_types": 8.1e-21,
+     "in_AU_types": 6.8e-05,
+     "upos_dist_CCONJ": 0.0021,
+     "upos_dist_X": 0.014,
+     "upos_dist_SCONJ": 4.3e-07,
+     "upos_dist_DET": 1.9e-06,
+     "upos_dist_NOUN": 0.0034,
+     "upos_dist_PROPN": 5.3e-07,
+     "upos_dist_SYM": 0.69,
+     "upos_dist_ADJ": 0.43,
+     "upos_dist_PUNCT": 1.1e-38,
+     "upos_dist_PART": 0.11,
+     "upos_dist_VERB": 0.0015,
+     "upos_dist_ADV": 3.2e-25,
+     "upos_dist_ADP": 6.8e-11,
+     "upos_dist_INTJ": 0.65,
+     "upos_dist_AUX": 2e-88,
+     "upos_dist_NUM": 0.0057,
+     "upos_dist_PRON": 1.6e-18,
+     "lexical_density": 0.0067,
+     "verbs_mood_dist_Sub": 0.0011,
+     "verbs_mood_dist_Ind": 2e-63,
+     "verbs_mood_dist_Cnd": 0.039,
+     "verbs_mood_dist_Imp": 0.47,
+     "verbs_tense_dist_Fut": 0.026,
+     "verbs_tense_dist_Pres": 3.3e-17,
+     "verbs_tense_dist_Past": 0.08,
+     "verbs_tense_dist_Imp": 0.082,
+     "verbs_form_dist_Part": 5.2e-06,
+     "verbs_form_dist_Ger": 1.1e-13,
+     "verbs_form_dist_Inf": 0.43,
+     "verbs_form_dist_Fin": 4.1e-29,
+     "verbs_num_pers_dist_Sing+1": 0.11,
+     "verbs_num_pers_dist_Plur+3": 2.3e-09,
+     "verbs_num_pers_dist_Plur+1": 0.39,
+     "verbs_num_pers_dist_Sing+": 0.14,
+     "verbs_num_pers_dist_Sing+3": 8.4e-46,
+     "verbs_num_pers_dist_Plur+2": 0.32,
+     "verbs_num_pers_dist_+": 0.32,
+     "verbs_num_pers_dist_Sing+2": 0.52,
+     "verbs_num_pers_dist_Plur+": 1.0,
+     "aux_mood_dist_Cnd": 0.25,
+     "aux_mood_dist_Ind": 2e-11,
+     "aux_mood_dist_Sub": 4.1e-07,
+     "aux_tense_dist_Past": 2.1e-07,
+     "aux_tense_dist_Pres": 1.2e-27,
+     "aux_tense_dist_Imp": 1.3e-05,
+     "aux_tense_dist_Fut": 0.0057,
+     "aux_form_dist_Part": 1.5e-15,
+     "aux_form_dist_Fin": 6.9e-05,
+     "aux_form_dist_Ger": 0.024,
+     "aux_form_dist_Inf": 0.00013,
+     "aux_num_pers_dist_Sing+2": 0.32,
+     "aux_num_pers_dist_Plur+3": 0.36,
+     "aux_num_pers_dist_Sing+1": 0.083,
+     "aux_num_pers_dist_Plur+1": 0.39,
+     "aux_num_pers_dist_Sing+3": 9.6e-07,
+     "verbal_head_per_sent": 1.1e-125,
+     "verbal_root_perc": 0.13,
+     "avg_token_per_clause": 1.2e-33,
+     "avg_links_len": 5.3e-110,
+     "max_links_len": 2.4e-142,
+     "avg_max_links_len": 2.4e-142,
+     "avg_max_depth": 1.1e-144,
+     "dep_dist_root": 9.1e-236,
+     "dep_dist_flat": 0.72,
+     "dep_dist_det:predet": 0.037,
+     "dep_dist_appos": 9.9e-17,
+     "dep_dist_aux:pass": 1.1e-08,
+     "dep_dist_parataxis:hashtag": 0.32,
+     "dep_dist_acl:relcl": 5e-10,
+     "dep_dist_flat:name": 0.54,
+     "dep_dist_obl:agent": 0.032,
+     "dep_dist_fixed": 0.00079,
+     "dep_dist_case": 3.9e-12,
+     "dep_dist_advmod": 7e-25,
+     "dep_dist_nsubj": 1.2e-21,
+     "dep_dist_nmod": 1.8e-05,
+     "dep_dist_det": 1.7e-06,
+     "dep_dist_compound": 0.018,
+     "dep_dist_vocative": null,
+     "dep_dist_obj": 0.078,
+     "dep_dist_dep": 0.071,
+     "dep_dist_amod": 0.068,
+     "dep_dist_xcomp": 0.27,
+     "dep_dist_obl": 1.1e-06,
+     "dep_dist_aux": 2.4e-62,
+     "dep_dist_discourse": 0.11,
+     "dep_dist_nsubj:pass": 2.4e-08,
+     "dep_dist_ccomp": 3.1e-05,
+     "dep_dist_conj": 0.0003,
+     "dep_dist_list": null,
+     "dep_dist_mark": 0.00079,
+     "dep_dist_expl:pass": 0.29,
+     "dep_dist_cc": 0.0014,
+     "dep_dist_acl": 3.4e-17,
+     "dep_dist_parataxis": 2.6e-05,
+     "dep_dist_det:poss": 0.25,
+     "dep_dist_iobj": 1.4e-06,
+     "dep_dist_csubj": 0.026,
+     "dep_dist_expl:impers": 0.79,
+     "dep_dist_nummod": 0.45,
+     "dep_dist_advcl": 1.8e-08,
+     "dep_dist_flat:foreign": 0.042,
+     "dep_dist_cop": 1.7e-14,
+     "dep_dist_punct": 2.1e-40,
+     "dep_dist_expl": 1.1e-05,
+     "subj_pre": 0.53,
+     "subj_post": 2.2e-12,
+     "obj_pre": 5.7e-08,
+     "obj_post": 2.9e-15,
+     "n_prepositional_chains": 3.5e-96,
+     "avg_prepositional_chain_len": 2.1e-39,
+     "prep_dist_5": 0.75,
+     "prep_dist_3": 0.022,
+     "prep_dist_4": 0.23,
+     "prep_dist_1": 5.6e-13,
+     "prep_dist_2": 1.3e-11,
+     "subordinate_dist_4": 0.094,
+     "subordinate_dist_3": 1.1e-05,
+     "subordinate_dist_5": 0.79,
+     "subordinate_dist_1": 3.5e-51,
+     "subordinate_dist_2": 1.4e-06,
+     "avg_subordinate_chain_len": 6.6e-73,
+     "principal_proposition_dist": 3.9e-63,
+     "subordinate_proposition_dist": 1.3e-93,
+     "subordinate_pre": 1.8e-08,
+     "subordinate_post": 1.8e-58,
+     "verb_edges_dist_3": 0.026,
+     "verb_edges_dist_0": 0.55,
+     "verb_edges_dist_5": 4.1e-12,
+     "verb_edges_dist_1": 1e-11,
+     "verb_edges_dist_2": 0.0046,
+     "verb_edges_dist_6": 1.8e-08,
+     "verb_edges_dist_4": 3.8e-07,
+     "avg_verb_edges": 3.6e-30
+    },
+    "share_changed": {
+     "n_tokens": 0.946,
+     "tokens_per_sent": 0.946,
+     "char_per_tok": 0.968,
+     "in_dict": 0.922,
+     "in_dict_types": 0.904,
+     "in_FO": 0.935,
+     "in_AD": 0.883,
+     "in_AU": 0.857,
+     "in_FO_types": 0.918,
+     "in_AD_types": 0.858,
+     "in_AU_types": 0.837,
+     "upos_dist_CCONJ": 0.575,
+     "upos_dist_X": 0.0445,
+     "upos_dist_SCONJ": 0.2,
+     "upos_dist_DET": 0.936,
+     "upos_dist_NOUN": 0.937,
+     "upos_dist_PROPN": 0.74,
+     "upos_dist_SYM": 0.0145,
+     "upos_dist_ADJ": 0.797,
+     "upos_dist_PUNCT": 0.942,
+     "upos_dist_PART": 0.0015,
+     "upos_dist_VERB": 0.898,
+     "upos_dist_ADV": 0.556,
+     "upos_dist_ADP": 0.938,
+     "upos_dist_INTJ": 0.001,
+     "upos_dist_AUX": 0.758,
+     "upos_dist_NUM": 0.47,
+     "upos_dist_PRON": 0.527,
+     "lexical_density": 0.918,
+     "verbs_mood_dist_Sub": 0.012,
+     "verbs_mood_dist_Ind": 0.326,
+     "verbs_mood_dist_Cnd": 0.0025,
+     "verbs_mood_dist_Imp": 0.0035,
+     "verbs_tense_dist_Fut": 0.012,
+     "verbs_tense_dist_Pres": 0.279,
+     "verbs_tense_dist_Past": 0.341,
+     "verbs_tense_dist_Imp": 0.0755,
+     "verbs_form_dist_Part": 0.455,
+     "verbs_form_dist_Ger": 0.099,
+     "verbs_form_dist_Inf": 0.203,
+     "verbs_form_dist_Fin": 0.479,
+     "verbs_num_pers_dist_Sing+1": 0.0015,
+     "verbs_num_pers_dist_Plur+3": 0.13,
+     "verbs_num_pers_dist_Plur+1": 0.004,
+     "verbs_num_pers_dist_Sing+": 0.0035,
+     "verbs_num_pers_dist_Sing+3": 0.329,
+     "verbs_num_pers_dist_Plur+2": 0.0005,
+     "verbs_num_pers_dist_+": 0.0005,
+     "verbs_num_pers_dist_Sing+2": 0.0045,
+     "verbs_num_pers_dist_Plur+": 0.001,
+     "aux_mood_dist_Cnd": 0.0205,
+     "aux_mood_dist_Ind": 0.281,
+     "aux_mood_dist_Sub": 0.029,
+     "aux_tense_dist_Past": 0.19,
+     "aux_tense_dist_Pres": 0.362,
+     "aux_tense_dist_Imp": 0.104,
+     "aux_tense_dist_Fut": 0.005,
+     "aux_form_dist_Part": 0.135,
+     "aux_form_dist_Fin": 0.375,
+     "aux_form_dist_Ger": 0.003,
+     "aux_form_dist_Inf": 0.0415,
+     "aux_num_pers_dist_Sing+2": 0.0005,
+     "aux_num_pers_dist_Plur+3": 0.14,
+     "aux_num_pers_dist_Sing+1": 0.0015,
+     "aux_num_pers_dist_Plur+1": 0.0035,
+     "aux_num_pers_dist_Sing+3": 0.29,
+     "verbal_head_per_sent": 0.538,
+     "verbal_root_perc": 0.0775,
+     "avg_token_per_clause": 0.929,
+     "avg_links_len": 0.959,
+     "max_links_len": 0.813,
+     "avg_max_links_len": 0.813,
+     "avg_max_depth": 0.657,
+     "dep_dist_root": 0.946,
+     "dep_dist_flat": 0.105,
+     "dep_dist_det:predet": 0.032,
+     "dep_dist_appos": 0.21,
+     "dep_dist_aux:pass": 0.325,
+     "dep_dist_parataxis:hashtag": 0.0005,
+     "dep_dist_acl:relcl": 0.293,
+     "dep_dist_flat:name": 0.429,
+     "dep_dist_obl:agent": 0.178,
+     "dep_dist_fixed": 0.132,
+     "dep_dist_case": 0.935,
+     "dep_dist_advmod": 0.515,
+     "dep_dist_nsubj": 0.768,
+     "dep_dist_nmod": 0.868,
+     "dep_dist_det": 0.936,
+     "dep_dist_compound": 0.085,
+     "dep_dist_vocative": 0.0,
+     "dep_dist_obj": 0.583,
+     "dep_dist_dep": 0.006,
+     "dep_dist_amod": 0.768,
+     "dep_dist_xcomp": 0.208,
+     "dep_dist_obl": 0.864,
+     "dep_dist_aux": 0.455,
+     "dep_dist_discourse": 0.003,
+     "dep_dist_nsubj:pass": 0.267,
+     "dep_dist_ccomp": 0.134,
+     "dep_dist_conj": 0.59,
+     "dep_dist_list": 0.0,
+     "dep_dist_mark": 0.364,
+     "dep_dist_expl:pass": 0.0015,
+     "dep_dist_cc": 0.577,
+     "dep_dist_acl": 0.319,
+     "dep_dist_parataxis": 0.0575,
+     "dep_dist_det:poss": 0.216,
+     "dep_dist_iobj": 0.0355,
+     "dep_dist_csubj": 0.009,
+     "dep_dist_expl:impers": 0.0015,
+     "dep_dist_nummod": 0.282,
+     "dep_dist_advcl": 0.312,
+     "dep_dist_flat:foreign": 0.0395,
+     "dep_dist_cop": 0.325,
+     "dep_dist_punct": 0.942,
+     "dep_dist_expl": 0.242,
+     "subj_pre": 0.265,
+     "subj_post": 0.146,
+     "obj_pre": 0.0385,
+     "obj_post": 0.239,
+     "n_prepositional_chains": 0.548,
+     "avg_prepositional_chain_len": 0.446,
+     "prep_dist_5": 0.003,
+     "prep_dist_3": 0.061,
+     "prep_dist_4": 0.0075,
+     "prep_dist_1": 0.422,
+     "prep_dist_2": 0.265,
+     "subordinate_dist_4": 0.0045,
+     "subordinate_dist_3": 0.027,
+     "subordinate_dist_5": 0.0015,
+     "subordinate_dist_1": 0.368,
+     "subordinate_dist_2": 0.117,
+     "avg_subordinate_chain_len": 0.396,
+     "principal_proposition_dist": 0.5,
+     "subordinate_proposition_dist": 0.484,
+     "subordinate_pre": 0.15,
+     "subordinate_post": 0.351,
+     "verb_edges_dist_3": 0.503,
+     "verb_edges_dist_0": 0.018,
+     "verb_edges_dist_5": 0.203,
+     "verb_edges_dist_1": 0.279,
+     "verb_edges_dist_2": 0.435,
+     "verb_edges_dist_6": 0.0555,
+     "verb_edges_dist_4": 0.403,
+     "avg_verb_edges": 0.702
+    },
+    "rho_global": {
+     "n_tokens": 0.502,
+     "tokens_per_sent": 0.502,
+     "char_per_tok": 0.0222,
+     "in_dict": 0.00938,
+     "in_dict_types": -0.0229,
+     "in_FO": -0.0148,
+     "in_AD": 0.0229,
+     "in_AU": 0.0424,
+     "in_FO_types": 0.00222,
+     "in_AD_types": -0.13,
+     "in_AU_types": 0.0383,
+     "upos_dist_CCONJ": 0.0111,
+     "upos_dist_X": 0.0228,
+     "upos_dist_SCONJ": 0.073,
+     "upos_dist_DET": -0.0935,
+     "upos_dist_NOUN": -0.0408,
+     "upos_dist_PROPN": -0.0547,
+     "upos_dist_SYM": 0.00353,
+     "upos_dist_ADJ": -0.0106,
+     "upos_dist_PUNCT": 0.131,
+     "upos_dist_PART": -0.00831,
+     "upos_dist_VERB": -0.018,
+     "upos_dist_ADV": 0.145,
+     "upos_dist_ADP": 0.0951,
+     "upos_dist_INTJ": 0.006,
+     "upos_dist_AUX": -0.15,
+     "upos_dist_NUM": -0.0391,
+     "upos_dist_PRON": 0.149,
+     "lexical_density": 0.0067,
+     "verbs_mood_dist_Sub": 0.0474,
+     "verbs_mood_dist_Ind": 0.151,
+     "verbs_mood_dist_Cnd": 0.0101,
+     "verbs_mood_dist_Imp": 0.00686,
+     "verbs_tense_dist_Fut": 0.0273,
+     "verbs_tense_dist_Pres": 0.0816,
+     "verbs_tense_dist_Past": 0.0013,
+     "verbs_tense_dist_Imp": 0.031,
+     "verbs_form_dist_Part": -0.0306,
+     "verbs_form_dist_Ger": 0.126,
+     "verbs_form_dist_Inf": 0.0308,
+     "verbs_form_dist_Fin": 0.0788,
+     "verbs_num_pers_dist_Sing+1": 0.0547,
+     "verbs_num_pers_dist_Plur+3": 0.0269,
+     "verbs_num_pers_dist_Plur+1": -0.00413,
+     "verbs_num_pers_dist_Sing+": 0.0745,
+     "verbs_num_pers_dist_Sing+3": 0.155,
+     "verbs_num_pers_dist_Plur+2": 0.025,
+     "verbs_num_pers_dist_+": -0.0262,
+     "verbs_num_pers_dist_Sing+2": 0.0145,
+     "verbs_num_pers_dist_Plur+": 0.0337,
+     "aux_mood_dist_Cnd": 0.0322,
+     "aux_mood_dist_Ind": -0.0571,
+     "aux_mood_dist_Sub": 0.0683,
+     "aux_tense_dist_Past": -0.0121,
+     "aux_tense_dist_Pres": -0.0665,
+     "aux_tense_dist_Imp": 0.0558,
+     "aux_tense_dist_Fut": 0.0324,
+     "aux_form_dist_Part": -0.0434,
+     "aux_form_dist_Fin": -0.0132,
+     "aux_form_dist_Ger": 0.0416,
+     "aux_form_dist_Inf": 0.00914,
+     "aux_num_pers_dist_Sing+2": 0.00622,
+     "aux_num_pers_dist_Plur+3": -0.028,
+     "aux_num_pers_dist_Sing+1": 0.000929,
+     "aux_num_pers_dist_Plur+1": -0.0212,
+     "aux_num_pers_dist_Sing+3": -0.00483,
+     "verbal_head_per_sent": 0.362,
+     "verbal_root_perc": -0.0582,
+     "avg_token_per_clause": 0.0532,
+     "avg_links_len": 0.291,
+     "max_links_len": 0.346,
+     "avg_max_links_len": 0.346,
+     "avg_max_depth": 0.392,
+     "dep_dist_root": -0.373,
+     "dep_dist_flat": -0.00418,
+     "dep_dist_det:predet": -0.0106,
+     "dep_dist_appos": 0.0882,
+     "dep_dist_aux:pass": -0.0389,
+     "dep_dist_parataxis:hashtag": -0.0301,
+     "dep_dist_acl:relcl": 0.157,
+     "dep_dist_flat:name": 0.0018,
+     "dep_dist_obl:agent": 0.0838,
+     "dep_dist_fixed": 0.111,
+     "dep_dist_case": 0.0935,
+     "dep_dist_advmod": 0.128,
+     "dep_dist_nsubj": -0.0871,
+     "dep_dist_nmod": 0.0558,
+     "dep_dist_det": -0.101,
+     "dep_dist_compound": 0.0296,
+     "dep_dist_vocative": null,
+     "dep_dist_obj": -0.00635,
+     "dep_dist_dep": -0.0228,
+     "dep_dist_amod": -0.00177,
+     "dep_dist_xcomp": 0.0409,
+     "dep_dist_obl": 0.05,
+     "dep_dist_aux": -0.0961,
+     "dep_dist_discourse": -0.025,
+     "dep_dist_nsubj:pass": -0.0401,
+     "dep_dist_ccomp": 0.0869,
+     "dep_dist_conj": 0.0212,
+     "dep_dist_list": null,
+     "dep_dist_mark": 0.0656,
+     "dep_dist_expl:pass": 0.0163,
+     "dep_dist_cc": 0.0121,
+     "dep_dist_acl": 0.139,
+     "dep_dist_parataxis": 0.0697,
+     "dep_dist_det:poss": 0.0286,
+     "dep_dist_iobj": 0.086,
+     "dep_dist_csubj": -0.0154,
+     "dep_dist_expl:impers": -0.0029,
+     "dep_dist_nummod": -0.006,
+     "dep_dist_advcl": 0.108,
+     "dep_dist_flat:foreign": 0.0693,
+     "dep_dist_cop": 0.0124,
+     "dep_dist_punct": 0.131,
+     "dep_dist_expl": 0.0472,
+     "subj_pre": -0.046,
+     "subj_post": 0.0779,
+     "obj_pre": 0.0992,
+     "obj_post": 0.0723,
+     "n_prepositional_chains": 0.303,
+     "avg_prepositional_chain_len": 0.139,
+     "prep_dist_5": 0.0485,
+     "prep_dist_3": 0.028,
+     "prep_dist_4": 0.0125,
+     "prep_dist_1": 0.0704,
+     "prep_dist_2": 0.0736,
+     "subordinate_dist_4": 0.0146,
+     "subordinate_dist_3": 0.0987,
+     "subordinate_dist_5": 0.0065,
+     "subordinate_dist_1": 0.14,
+     "subordinate_dist_2": 0.142,
+     "avg_subordinate_chain_len": 0.283,
+     "principal_proposition_dist": -0.332,
+     "subordinate_proposition_dist": 0.356,
+     "subordinate_pre": 0.111,
+     "subordinate_post": 0.185,
+     "verb_edges_dist_3": -0.00569,
+     "verb_edges_dist_0": 0.0306,
+     "verb_edges_dist_5": 0.0452,
+     "verb_edges_dist_1": 0.0987,
+     "verb_edges_dist_2": 0.0448,
+     "verb_edges_dist_6": 0.102,
+     "verb_edges_dist_4": 0.0367,
+     "avg_verb_edges": 0.0304
+    }
+   },
+   "clicit2026_gfff_training": {
+    "pairs": 45209,
+    "originals": 11464,
+    "readit_original_mean": {
+     "all": 78.9,
+     "base": 58.1,
+     "lexical": 37.9,
+     "syntax": 76.6
+    },
+    "readit_drop_mean": {
+     "all": 36.6,
+     "base": 21.1,
+     "lexical": 3.88,
+     "syntax": 34.5
+    },
+    "share_harder_in": {
+     "base": 0.0,
+     "lexical": 0.0,
+     "syntax": 0.0
+    },
+    "original_chars_median": 199,
+    "manova_one_per_original": {
+     "V": 0.404,
+     "F": 110.1,
+     "df1": 140,
+     "df2": 22787,
+     "p": 0.0,
+     "chance": 0.00611
+    },
+    "manova_most_random_least": {
+     "most": {
+      "V": 0.548,
+      "F": 199.1,
+      "df1": 139,
+      "df2": 22788,
+      "p": 0.0,
+      "chance": 0.00606
+     },
+     "random": {
+      "V": 0.419,
+      "F": 117.4,
+      "df1": 140,
+      "df2": 22787,
+      "p": 0.0,
+      "chance": 0.00611
+     },
+     "least": {
+      "V": 0.258,
+      "F": 56.99,
+      "df1": 139,
+      "df2": 22788,
+      "p": 0.0,
+      "chance": 0.00606
+     }
+    },
+    "r": {
+     "n_tokens": 0.972,
+     "tokens_per_sent": 0.972,
+     "char_per_tok": 0.00593,
+     "in_dict": 0.0134,
+     "in_dict_types": -0.155,
+     "in_FO": -0.123,
+     "in_AD": 0.00012,
+     "in_AU": 0.278,
+     "in_FO_types": -0.112,
+     "in_AD_types": -0.372,
+     "in_AU_types": 0.225,
+     "upos_dist_CCONJ": 0.154,
+     "upos_dist_X": 0.312,
+     "upos_dist_SCONJ": -0.0072,
+     "upos_dist_DET": -0.0907,
+     "upos_dist_NOUN": -0.145,
+     "upos_dist_PROPN": -0.376,
+     "upos_dist_SYM": 0.445,
+     "upos_dist_ADJ": -0.0297,
+     "upos_dist_PUNCT": 0.333,
+     "upos_dist_PART": -0.0889,
+     "upos_dist_VERB": -0.0277,
+     "upos_dist_ADV": 0.378,
+     "upos_dist_ADP": 0.336,
+     "upos_dist_INTJ": -0.0323,
+     "upos_dist_AUX": -0.61,
+     "upos_dist_NUM": -0.125,
+     "upos_dist_PRON": 0.435,
+     "lexical_density": -0.142,
+     "verbs_mood_dist_Sub": 0.517,
+     "verbs_mood_dist_Ind": 0.753,
+     "verbs_mood_dist_Cnd": 0.475,
+     "verbs_mood_dist_Imp": -0.477,
+     "verbs_tense_dist_Fut": 0.543,
+     "verbs_tense_dist_Pres": 0.341,
+     "verbs_tense_dist_Past": -0.0195,
+     "verbs_tense_dist_Imp": 0.257,
+     "verbs_form_dist_Part": -0.179,
+     "verbs_form_dist_Ger": 0.541,
+     "verbs_form_dist_Inf": 0.164,
+     "verbs_form_dist_Fin": 0.259,
+     "verbs_num_pers_dist_Sing+1": -0.181,
+     "verbs_num_pers_dist_Plur+3": 0.347,
+     "verbs_num_pers_dist_Plur+1": 0.0543,
+     "verbs_num_pers_dist_Sing+": 0.616,
+     "verbs_num_pers_dist_Sing+3": 0.672,
+     "verbs_num_pers_dist_Plur+2": 0.0,
+     "verbs_num_pers_dist_+": 0.893,
+     "verbs_num_pers_dist_Sing+2": -0.368,
+     "verbs_num_pers_dist_Plur+": 0.308,
+     "aux_mood_dist_Cnd": 0.194,
+     "aux_mood_dist_Ind": -0.239,
+     "aux_mood_dist_Sub": 0.239,
+     "aux_tense_dist_Past": 0.24,
+     "aux_tense_dist_Pres": -0.356,
+     "aux_tense_dist_Imp": 0.0849,
+     "aux_tense_dist_Fut": 0.534,
+     "aux_form_dist_Part": -0.547,
+     "aux_form_dist_Fin": -0.126,
+     "aux_form_dist_Ger": 0.889,
+     "aux_form_dist_Inf": 0.28,
+     "aux_num_pers_dist_Sing+2": -0.692,
+     "aux_num_pers_dist_Plur+3": -0.184,
+     "aux_num_pers_dist_Sing+1": -0.872,
+     "aux_num_pers_dist_Plur+1": -0.478,
+     "aux_num_pers_dist_Sing+3": -0.131,
+     "verbal_head_per_sent": 0.9,
+     "verbal_root_perc": 0.102,
+     "avg_token_per_clause": 0.124,
+     "avg_links_len": 0.701,
+     "max_links_len": 0.81,
+     "avg_max_links_len": 0.81,
+     "avg_max_depth": 0.878,
+     "dep_dist_root": -0.958,
+     "dep_dist_flat": -0.0183,
+     "dep_dist_det:predet": 0.0848,
+     "dep_dist_appos": 0.366,
+     "dep_dist_aux:pass": -0.362,
+     "dep_dist_parataxis:hashtag": -1.0,
+     "dep_dist_acl:relcl": 0.343,
+     "dep_dist_flat:name": -0.247,
+     "dep_dist_obl:agent": 0.164,
+     "dep_dist_fixed": 0.156,
+     "dep_dist_case": 0.328,
+     "dep_dist_advmod": 0.406,
+     "dep_dist_nsubj": -0.318,
+     "dep_dist_nmod": -0.00636,
+     "dep_dist_det": -0.101,
+     "dep_dist_compound": 0.0475,
+     "dep_dist_vocative": -0.905,
+     "dep_dist_obj": -0.157,
+     "dep_dist_dep": 0.476,
+     "dep_dist_amod": -0.00788,
+     "dep_dist_xcomp": -0.0278,
+     "dep_dist_obl": 0.327,
+     "dep_dist_aux": -0.681,
+     "dep_dist_discourse": 0.826,
+     "dep_dist_nsubj:pass": -0.414,
+     "dep_dist_ccomp": 0.194,
+     "dep_dist_conj": 0.152,
+     "dep_dist_list": -1.0,
+     "dep_dist_mark": 0.0415,
+     "dep_dist_expl:pass": 0.0218,
+     "dep_dist_cc": 0.153,
+     "dep_dist_acl": 0.429,
+     "dep_dist_parataxis": 0.683,
+     "dep_dist_det:poss": 0.0434,
+     "dep_dist_iobj": 0.538,
+     "dep_dist_csubj": -0.293,
+     "dep_dist_expl:impers": -0.0857,
+     "dep_dist_nummod": -0.0939,
+     "dep_dist_advcl": 0.23,
+     "dep_dist_flat:foreign": 0.224,
+     "dep_dist_cop": -0.295,
+     "dep_dist_punct": 0.328,
+     "dep_dist_expl": 0.335,
+     "subj_pre": -0.231,
+     "subj_post": 0.51,
+     "obj_pre": 0.597,
+     "obj_post": 0.35,
+     "n_prepositional_chains": 0.769,
+     "avg_prepositional_chain_len": 0.464,
+     "prep_dist_5": 0.537,
+     "prep_dist_3": 0.264,
+     "prep_dist_4": 0.36,
+     "prep_dist_1": 0.291,
+     "prep_dist_2": 0.238,
+     "subordinate_dist_4": 0.556,
+     "subordinate_dist_3": 0.445,
+     "subordinate_dist_5": 0.705,
+     "subordinate_dist_1": 0.559,
+     "subordinate_dist_2": 0.385,
+     "avg_subordinate_chain_len": 0.737,
+     "principal_proposition_dist": -0.755,
+     "subordinate_proposition_dist": 0.817,
+     "subordinate_pre": 0.28,
+     "subordinate_post": 0.688,
+     "verb_edges_dist_3": -0.124,
+     "verb_edges_dist_0": 0.295,
+     "verb_edges_dist_5": 0.439,
+     "verb_edges_dist_1": 0.427,
+     "verb_edges_dist_2": -0.103,
+     "verb_edges_dist_6": 0.583,
+     "verb_edges_dist_4": 0.104,
+     "avg_verb_edges": 0.242
+    },
+    "p": {
+     "n_tokens": 0.0,
+     "tokens_per_sent": 0.0,
+     "char_per_tok": 0.6,
+     "in_dict": 0.24,
+     "in_dict_types": 1.6e-41,
+     "in_FO": 1.1e-27,
+     "in_AD": 0.99,
+     "in_AU": 1.6e-129,
+     "in_FO_types": 7.3e-23,
+     "in_AD_types": 3.7e-224,
+     "in_AU_types": 2.7e-84,
+     "upos_dist_CCONJ": 1.9e-30,
+     "upos_dist_X": 5.9e-05,
+     "upos_dist_SCONJ": 0.72,
+     "upos_dist_DET": 1.5e-15,
+     "upos_dist_NOUN": 2.7e-37,
+     "upos_dist_PROPN": 1.2e-179,
+     "upos_dist_SYM": 2.4e-06,
+     "upos_dist_ADJ": 0.012,
+     "upos_dist_PUNCT": 1.1e-189,
+     "upos_dist_PART": 0.81,
+     "upos_dist_VERB": 0.016,
+     "upos_dist_ADV": 3.2e-192,
+     "upos_dist_ADP": 8.7e-192,
+     "upos_dist_INTJ": 0.88,
+     "upos_dist_AUX": 0.0,
+     "upos_dist_NUM": 2.4e-13,
+     "upos_dist_PRON": 5e-245,
+     "lexical_density": 1.6e-35,
+     "verbs_mood_dist_Sub": 4.4e-15,
+     "verbs_mood_dist_Ind": 0.0,
+     "verbs_mood_dist_Cnd": 0.0012,
+     "verbs_mood_dist_Imp": 0.081,
+     "verbs_tense_dist_Fut": 5.1e-14,
+     "verbs_tense_dist_Pres": 1e-78,
+     "verbs_tense_dist_Past": 0.23,
+     "verbs_tense_dist_Imp": 8e-18,
+     "verbs_form_dist_Part": 9.4e-36,
+     "verbs_form_dist_Ger": 2e-102,
+     "verbs_form_dist_Inf": 6.5e-19,
+     "verbs_form_dist_Fin": 1.4e-78,
+     "verbs_num_pers_dist_Sing+1": 0.28,
+     "verbs_num_pers_dist_Plur+3": 8.6e-49,
+     "verbs_num_pers_dist_Plur+1": 0.7,
+     "verbs_num_pers_dist_Sing+": 0.00015,
+     "verbs_num_pers_dist_Sing+3": 0.0,
+     "verbs_num_pers_dist_Plur+2": 1.0,
+     "verbs_num_pers_dist_+": 0.028,
+     "verbs_num_pers_dist_Sing+2": 0.073,
+     "verbs_num_pers_dist_Plur+": 0.29,
+     "aux_mood_dist_Cnd": 0.0025,
+     "aux_mood_dist_Ind": 1.3e-42,
+     "aux_mood_dist_Sub": 9e-07,
+     "aux_tense_dist_Past": 7.2e-24,
+     "aux_tense_dist_Pres": 4.1e-94,
+     "aux_tense_dist_Imp": 0.0043,
+     "aux_tense_dist_Fut": 1.7e-06,
+     "aux_form_dist_Part": 7.9e-84,
+     "aux_form_dist_Fin": 3.2e-14,
+     "aux_form_dist_Ger": 2e-15,
+     "aux_form_dist_Inf": 6.7e-13,
+     "aux_num_pers_dist_Sing+2": 0.014,
+     "aux_num_pers_dist_Plur+3": 1.1e-12,
+     "aux_num_pers_dist_Sing+1": 8.1e-07,
+     "aux_num_pers_dist_Plur+1": 0.0052,
+     "aux_num_pers_dist_Sing+3": 3.6e-13,
+     "verbal_head_per_sent": 0.0,
+     "verbal_root_perc": 0.0037,
+     "avg_token_per_clause": 1.2e-27,
+     "avg_links_len": 0.0,
+     "max_links_len": 0.0,
+     "avg_max_links_len": 0.0,
+     "avg_max_depth": 0.0,
+     "dep_dist_root": 0.0,
+     "dep_dist_flat": 0.67,
+     "dep_dist_det:predet": 0.11,
+     "dep_dist_appos": 1.2e-37,
+     "dep_dist_aux:pass": 2.4e-83,
+     "dep_dist_parataxis:hashtag": 0.32,
+     "dep_dist_acl:relcl": 5.3e-101,
+     "dep_dist_flat:name": 1.3e-42,
+     "dep_dist_obl:agent": 2.9e-13,
+     "dep_dist_fixed": 9.7e-11,
+     "dep_dist_case": 8.4e-183,
+     "dep_dist_advmod": 1e-206,
+     "dep_dist_nsubj": 4.8e-151,
+     "dep_dist_nmod": 0.59,
+     "dep_dist_det": 1.1e-18,
+     "dep_dist_compound": 0.23,
+     "dep_dist_vocative": 0.046,
+     "dep_dist_obj": 3.3e-33,
+     "dep_dist_dep": 0.12,
+     "dep_dist_amod": 0.51,
+     "dep_dist_xcomp": 0.18,
+     "dep_dist_obl": 2.1e-176,
+     "dep_dist_aux": 0.0,
+     "dep_dist_discourse": 4.7e-06,
+     "dep_dist_nsubj:pass": 1.3e-92,
+     "dep_dist_ccomp": 1.8e-15,
+     "dep_dist_conj": 1.2e-30,
+     "dep_dist_list": 0.32,
+     "dep_dist_mark": 0.0063,
+     "dep_dist_expl:pass": 0.91,
+     "dep_dist_cc": 6.1e-30,
+     "dep_dist_acl": 1.4e-143,
+     "dep_dist_parataxis": 3.7e-73,
+     "dep_dist_det:poss": 0.048,
+     "dep_dist_iobj": 2.8e-35,
+     "dep_dist_csubj": 0.00047,
+     "dep_dist_expl:impers": 0.74,
+     "dep_dist_nummod": 8.5e-06,
+     "dep_dist_advcl": 9.9e-49,
+     "dep_dist_flat:foreign": 0.017,
+     "dep_dist_cop": 3.4e-52,
+     "dep_dist_punct": 1.4e-183,
+     "dep_dist_expl": 2.6e-72,
+     "subj_pre": 1.1e-31,
+     "subj_post": 3e-102,
+     "obj_pre": 2.9e-47,
+     "obj_post": 1.3e-78,
+     "n_prepositional_chains": 0.0,
+     "avg_prepositional_chain_len": 1.1e-196,
+     "prep_dist_5": 0.021,
+     "prep_dist_3": 4.9e-12,
+     "prep_dist_4": 4.1e-05,
+     "prep_dist_1": 1.4e-75,
+     "prep_dist_2": 1.2e-35,
+     "subordinate_dist_4": 8.6e-07,
+     "subordinate_dist_3": 9.6e-20,
+     "subordinate_dist_5": 0.019,
+     "subordinate_dist_1": 3.5e-288,
+     "subordinate_dist_2": 2.4e-66,
+     "avg_subordinate_chain_len": 0.0,
+     "principal_proposition_dist": 0.0,
+     "subordinate_proposition_dist": 0.0,
+     "subordinate_pre": 1.6e-37,
+     "subordinate_post": 0.0,
+     "verb_edges_dist_3": 2.4e-19,
+     "verb_edges_dist_0": 3.7e-06,
+     "verb_edges_dist_5": 1.8e-103,
+     "verb_edges_dist_1": 1.5e-131,
+     "verb_edges_dist_2": 8.1e-13,
+     "verb_edges_dist_6": 7.4e-66,
+     "verb_edges_dist_4": 1e-11,
+     "avg_verb_edges": 2.2e-86
+    },
+    "share_changed": {
+     "n_tokens": 0.904,
+     "tokens_per_sent": 0.904,
+     "char_per_tok": 0.929,
+     "in_dict": 0.89,
+     "in_dict_types": 0.884,
+     "in_FO": 0.908,
+     "in_AD": 0.87,
+     "in_AU": 0.881,
+     "in_FO_types": 0.892,
+     "in_AD_types": 0.856,
+     "in_AU_types": 0.87,
+     "upos_dist_CCONJ": 0.646,
+     "upos_dist_X": 0.0193,
+     "upos_dist_SCONJ": 0.293,
+     "upos_dist_DET": 0.898,
+     "upos_dist_NOUN": 0.903,
+     "upos_dist_PROPN": 0.671,
+     "upos_dist_SYM": 0.013,
+     "upos_dist_ADJ": 0.836,
+     "upos_dist_PUNCT": 0.905,
+     "upos_dist_PART": 0.000785,
+     "upos_dist_VERB": 0.89,
+     "upos_dist_ADV": 0.712,
+     "upos_dist_ADP": 0.901,
+     "upos_dist_INTJ": 0.0027,
+     "upos_dist_AUX": 0.71,
+     "upos_dist_NUM": 0.398,
+     "upos_dist_PRON": 0.686,
+     "lexical_density": 0.89,
+     "verbs_mood_dist_Sub": 0.0263,
+     "verbs_mood_dist_Ind": 0.336,
+     "verbs_mood_dist_Cnd": 0.00523,
+     "verbs_mood_dist_Imp": 0.00148,
+     "verbs_tense_dist_Fut": 0.0222,
+     "verbs_tense_dist_Pres": 0.351,
+     "verbs_tense_dist_Past": 0.441,
+     "verbs_tense_dist_Imp": 0.129,
+     "verbs_form_dist_Part": 0.567,
+     "verbs_form_dist_Ger": 0.183,
+     "verbs_form_dist_Inf": 0.34,
+     "verbs_form_dist_Fin": 0.609,
+     "verbs_num_pers_dist_Sing+1": 0.00393,
+     "verbs_num_pers_dist_Plur+3": 0.201,
+     "verbs_num_pers_dist_Plur+1": 0.00576,
+     "verbs_num_pers_dist_Sing+": 0.00427,
+     "verbs_num_pers_dist_Sing+3": 0.37,
+     "verbs_num_pers_dist_Plur+2": 0.000611,
+     "verbs_num_pers_dist_+": 0.000611,
+     "verbs_num_pers_dist_Sing+2": 0.00262,
+     "verbs_num_pers_dist_Plur+": 0.00131,
+     "aux_mood_dist_Cnd": 0.0275,
+     "aux_mood_dist_Ind": 0.317,
+     "aux_mood_dist_Sub": 0.0476,
+     "aux_tense_dist_Past": 0.201,
+     "aux_tense_dist_Pres": 0.37,
+     "aux_tense_dist_Imp": 0.126,
+     "aux_tense_dist_Fut": 0.00898,
+     "aux_form_dist_Part": 0.14,
+     "aux_form_dist_Fin": 0.406,
+     "aux_form_dist_Ger": 0.00907,
+     "aux_form_dist_Inf": 0.075,
+     "aux_num_pers_dist_Sing+2": 0.00131,
+     "aux_num_pers_dist_Plur+3": 0.164,
+     "aux_num_pers_dist_Sing+1": 0.00349,
+     "aux_num_pers_dist_Plur+1": 0.00375,
+     "aux_num_pers_dist_Sing+3": 0.316,
+     "verbal_head_per_sent": 0.684,
+     "verbal_root_perc": 0.0698,
+     "avg_token_per_clause": 0.897,
+     "avg_links_len": 0.921,
+     "max_links_len": 0.82,
+     "avg_max_links_len": 0.82,
+     "avg_max_depth": 0.725,
+     "dep_dist_root": 0.904,
+     "dep_dist_flat": 0.0624,
+     "dep_dist_det:predet": 0.0421,
+     "dep_dist_appos": 0.142,
+     "dep_dist_aux:pass": 0.333,
+     "dep_dist_parataxis:hashtag": 8.72e-05,
+     "dep_dist_acl:relcl": 0.451,
+     "dep_dist_flat:name": 0.357,
+     "dep_dist_obl:agent": 0.23,
+     "dep_dist_fixed": 0.199,
+     "dep_dist_case": 0.901,
+     "dep_dist_advmod": 0.663,
+     "dep_dist_nsubj": 0.787,
+     "dep_dist_nmod": 0.849,
+     "dep_dist_det": 0.897,
+     "dep_dist_compound": 0.0756,
+     "dep_dist_vocative": 0.000523,
+     "dep_dist_obj": 0.678,
+     "dep_dist_dep": 0.00122,
+     "dep_dist_amod": 0.815,
+     "dep_dist_xcomp": 0.272,
+     "dep_dist_obl": 0.872,
+     "dep_dist_aux": 0.45,
+     "dep_dist_discourse": 0.00349,
+     "dep_dist_nsubj:pass": 0.283,
+     "dep_dist_ccomp": 0.196,
+     "dep_dist_conj": 0.664,
+     "dep_dist_list": 8.72e-05,
+     "dep_dist_mark": 0.503,
+     "dep_dist_expl:pass": 0.00297,
+     "dep_dist_cc": 0.646,
+     "dep_dist_acl": 0.411,
+     "dep_dist_parataxis": 0.0816,
+     "dep_dist_det:poss": 0.243,
+     "dep_dist_iobj": 0.0618,
+     "dep_dist_csubj": 0.0166,
+     "dep_dist_expl:impers": 0.00174,
+     "dep_dist_nummod": 0.262,
+     "dep_dist_advcl": 0.475,
+     "dep_dist_flat:foreign": 0.0132,
+     "dep_dist_cop": 0.31,
+     "dep_dist_punct": 0.904,
+     "dep_dist_expl": 0.335,
+     "subj_pre": 0.287,
+     "subj_post": 0.202,
+     "obj_pre": 0.0671,
+     "obj_post": 0.288,
+     "n_prepositional_chains": 0.6,
+     "avg_prepositional_chain_len": 0.478,
+     "prep_dist_5": 0.00209,
+     "prep_dist_3": 0.0789,
+     "prep_dist_4": 0.015,
+     "prep_dist_1": 0.458,
+     "prep_dist_2": 0.317,
+     "subordinate_dist_4": 0.0089,
+     "subordinate_dist_3": 0.0476,
+     "subordinate_dist_5": 0.00122,
+     "subordinate_dist_1": 0.458,
+     "subordinate_dist_2": 0.228,
+     "avg_subordinate_chain_len": 0.492,
+     "principal_proposition_dist": 0.65,
+     "subordinate_proposition_dist": 0.643,
+     "subordinate_pre": 0.241,
+     "subordinate_post": 0.438,
+     "verb_edges_dist_3": 0.609,
+     "verb_edges_dist_0": 0.0283,
+     "verb_edges_dist_5": 0.28,
+     "verb_edges_dist_1": 0.378,
+     "verb_edges_dist_2": 0.56,
+     "verb_edges_dist_6": 0.0997,
+     "verb_edges_dist_4": 0.499,
+     "avg_verb_edges": 0.769
+    },
+    "rho_global": {
+     "n_tokens": 0.502,
+     "tokens_per_sent": 0.502,
+     "char_per_tok": 0.0734,
+     "in_dict": 0.0785,
+     "in_dict_types": 0.0233,
+     "in_FO": 0.0157,
+     "in_AD": -0.0255,
+     "in_AU": 0.136,
+     "in_FO_types": 0.0293,
+     "in_AD_types": -0.206,
+     "in_AU_types": 0.111,
+     "upos_dist_CCONJ": 0.0755,
+     "upos_dist_X": 0.0345,
+     "upos_dist_SCONJ": 0.11,
+     "upos_dist_DET": -0.112,
+     "upos_dist_NOUN": -0.0613,
+     "upos_dist_PROPN": -0.179,
+     "upos_dist_SYM": 0.0257,
+     "upos_dist_ADJ": 0.0782,
+     "upos_dist_PUNCT": 0.118,
+     "upos_dist_PART": 0.00689,
+     "upos_dist_VERB": 0.0593,
+     "upos_dist_ADV": 0.207,
+     "upos_dist_ADP": 0.15,
+     "upos_dist_INTJ": 0.0128,
+     "upos_dist_AUX": -0.252,
+     "upos_dist_NUM": -0.035,
+     "upos_dist_PRON": 0.232,
+     "lexical_density": 0.00292,
+     "verbs_mood_dist_Sub": 0.0202,
+     "verbs_mood_dist_Ind": 0.25,
+     "verbs_mood_dist_Cnd": 0.0149,
+     "verbs_mood_dist_Imp": 0.0094,
+     "verbs_tense_dist_Fut": 0.022,
+     "verbs_tense_dist_Pres": 0.119,
+     "verbs_tense_dist_Past": -0.0368,
+     "verbs_tense_dist_Imp": 0.0534,
+     "verbs_form_dist_Part": -0.061,
+     "verbs_form_dist_Ger": 0.133,
+     "verbs_form_dist_Inf": 0.0635,
+     "verbs_form_dist_Fin": 0.125,
+     "verbs_num_pers_dist_Sing+1": 0.0187,
+     "verbs_num_pers_dist_Plur+3": 0.0707,
+     "verbs_num_pers_dist_Plur+1": 0.0377,
+     "verbs_num_pers_dist_Sing+": 0.00228,
+     "verbs_num_pers_dist_Sing+3": 0.208,
+     "verbs_num_pers_dist_Plur+2": -0.00346,
+     "verbs_num_pers_dist_+": 0.000245,
+     "verbs_num_pers_dist_Sing+2": 0.0167,
+     "verbs_num_pers_dist_Plur+": 0.000226,
+     "aux_mood_dist_Cnd": 0.0283,
+     "aux_mood_dist_Ind": -0.105,
+     "aux_mood_dist_Sub": 0.0287,
+     "aux_tense_dist_Past": 0.0228,
+     "aux_tense_dist_Pres": -0.133,
+     "aux_tense_dist_Imp": 0.0296,
+     "aux_tense_dist_Fut": 0.035,
+     "aux_form_dist_Part": -0.0438,
+     "aux_form_dist_Fin": -0.0713,
+     "aux_form_dist_Ger": 0.0299,
+     "aux_form_dist_Inf": 0.0178,
+     "aux_num_pers_dist_Sing+2": 0.00625,
+     "aux_num_pers_dist_Plur+3": -0.0254,
+     "aux_num_pers_dist_Sing+1": 0.0306,
+     "aux_num_pers_dist_Plur+1": 0.00736,
+     "aux_num_pers_dist_Sing+3": -0.0694,
+     "verbal_head_per_sent": 0.415,
+     "verbal_root_perc": -0.0632,
+     "avg_token_per_clause": -0.0075,
+     "avg_links_len": 0.318,
+     "max_links_len": 0.328,
+     "avg_max_links_len": 0.328,
+     "avg_max_depth": 0.438,
+     "dep_dist_root": -0.566,
+     "dep_dist_flat": 0.00573,
+     "dep_dist_det:predet": 0.0246,
+     "dep_dist_appos": 0.0951,
+     "dep_dist_aux:pass": -0.0216,
+     "dep_dist_parataxis:hashtag": 0.0102,
+     "dep_dist_acl:relcl": 0.22,
+     "dep_dist_flat:name": -0.0462,
+     "dep_dist_obl:agent": 0.111,
+     "dep_dist_fixed": 0.0738,
+     "dep_dist_case": 0.147,
+     "dep_dist_advmod": 0.224,
+     "dep_dist_nsubj": -0.161,
+     "dep_dist_nmod": -0.0161,
+     "dep_dist_det": -0.123,
+     "dep_dist_compound": 0.0441,
+     "dep_dist_vocative": -0.00977,
+     "dep_dist_obj": -0.0136,
+     "dep_dist_dep": -0.00324,
+     "dep_dist_amod": 0.0778,
+     "dep_dist_xcomp": 0.0713,
+     "dep_dist_obl": 0.142,
+     "dep_dist_aux": -0.151,
+     "dep_dist_discourse": 0.0112,
+     "dep_dist_nsubj:pass": -0.0314,
+     "dep_dist_ccomp": 0.0868,
+     "dep_dist_conj": 0.0791,
+     "dep_dist_list": -0.0135,
+     "dep_dist_mark": 0.0879,
+     "dep_dist_expl:pass": 0.00502,
+     "dep_dist_cc": 0.0754,
+     "dep_dist_acl": 0.212,
+     "dep_dist_parataxis": 0.0934,
+     "dep_dist_det:poss": 0.0688,
+     "dep_dist_iobj": 0.0788,
+     "dep_dist_csubj": 0.0227,
+     "dep_dist_expl:impers": -0.00345,
+     "dep_dist_nummod": 0.0212,
+     "dep_dist_advcl": 0.165,
+     "dep_dist_flat:foreign": 0.0366,
+     "dep_dist_cop": -0.0276,
+     "dep_dist_punct": 0.115,
+     "dep_dist_expl": 0.115,
+     "subj_pre": -0.128,
+     "subj_post": 0.121,
+     "obj_pre": 0.0969,
+     "obj_post": 0.065,
+     "n_prepositional_chains": 0.259,
+     "avg_prepositional_chain_len": 0.16,
+     "prep_dist_5": 0.0137,
+     "prep_dist_3": 0.0674,
+     "prep_dist_4": 0.0097,
+     "prep_dist_1": 0.0266,
+     "prep_dist_2": 0.0945,
+     "subordinate_dist_4": 0.0292,
+     "subordinate_dist_3": 0.0566,
+     "subordinate_dist_5": 0.00222,
+     "subordinate_dist_1": 0.226,
+     "subordinate_dist_2": 0.103,
+     "avg_subordinate_chain_len": 0.325,
+     "principal_proposition_dist": -0.432,
+     "subordinate_proposition_dist": 0.444,
+     "subordinate_pre": 0.146,
+     "subordinate_post": 0.237,
+     "verb_edges_dist_3": -0.0201,
+     "verb_edges_dist_0": 0.0372,
+     "verb_edges_dist_5": 0.116,
+     "verb_edges_dist_1": 0.179,
+     "verb_edges_dist_2": 0.0151,
+     "verb_edges_dist_6": 0.0913,
+     "verb_edges_dist_4": 0.0501,
+     "avg_verb_edges": 0.0601
+    }
+   },
+   "v0_training": {
+    "pairs": 55877,
+    "originals": 11657,
+    "readit_original_mean": {
+     "all": 78.9,
+     "base": 58.4,
+     "lexical": 37.9,
+     "syntax": 76.6
+    },
+    "readit_drop_mean": {
+     "all": 39.0,
+     "base": 21.9,
+     "lexical": 4.08,
+     "syntax": 36.8
+    },
+    "share_harder_in": {
+     "base": 0.0,
+     "lexical": 0.0,
+     "syntax": 0.0
+    },
+    "original_chars_median": 200,
+    "manova_one_per_original": {
+     "V": 0.435,
+     "F": 128.2,
+     "df1": 139,
+     "df2": 23174,
+     "p": 0.0,
+     "chance": 0.00596
+    },
+    "manova_most_random_least": {
+     "most": {
+      "V": 0.583,
+      "F": 235.1,
+      "df1": 138,
+      "df2": 23175,
+      "p": 0.0,
+      "chance": 0.00592
+     },
+     "random": {
+      "V": 0.45,
+      "F": 135.6,
+      "df1": 140,
+      "df2": 23173,
+      "p": 0.0,
+      "chance": 0.00601
+     },
+     "least": {
+      "V": 0.278,
+      "F": 64.35,
+      "df1": 139,
+      "df2": 23174,
+      "p": 0.0,
+      "chance": 0.00596
+     }
+    },
+    "r": {
+     "n_tokens": 0.97,
+     "tokens_per_sent": 0.97,
+     "char_per_tok": 0.0128,
+     "in_dict": 0.00972,
+     "in_dict_types": -0.16,
+     "in_FO": -0.127,
+     "in_AD": -0.00579,
+     "in_AU": 0.28,
+     "in_FO_types": -0.114,
+     "in_AD_types": -0.378,
+     "in_AU_types": 0.233,
+     "upos_dist_CCONJ": 0.154,
+     "upos_dist_X": 0.268,
+     "upos_dist_SCONJ": -0.00114,
+     "upos_dist_DET": -0.0952,
+     "upos_dist_NOUN": -0.156,
+     "upos_dist_PROPN": -0.368,
+     "upos_dist_SYM": 0.337,
+     "upos_dist_ADJ": -0.0257,
+     "upos_dist_PUNCT": 0.329,
+     "upos_dist_PART": -0.0727,
+     "upos_dist_VERB": -0.00686,
+     "upos_dist_ADV": 0.41,
+     "upos_dist_ADP": 0.323,
+     "upos_dist_INTJ": -0.118,
+     "upos_dist_AUX": -0.612,
+     "upos_dist_NUM": -0.125,
+     "upos_dist_PRON": 0.434,
+     "lexical_density": -0.118,
+     "verbs_mood_dist_Sub": 0.468,
+     "verbs_mood_dist_Ind": 0.76,
+     "verbs_mood_dist_Cnd": 0.456,
+     "verbs_mood_dist_Imp": -0.333,
+     "verbs_tense_dist_Fut": 0.596,
+     "verbs_tense_dist_Pres": 0.346,
+     "verbs_tense_dist_Past": -0.01,
+     "verbs_tense_dist_Imp": 0.23,
+     "verbs_form_dist_Part": -0.169,
+     "verbs_form_dist_Ger": 0.549,
+     "verbs_form_dist_Inf": 0.17,
+     "verbs_form_dist_Fin": 0.265,
+     "verbs_num_pers_dist_Sing+1": -0.368,
+     "verbs_num_pers_dist_Plur+3": 0.363,
+     "verbs_num_pers_dist_Plur+1": 0.172,
+     "verbs_num_pers_dist_Sing+": 0.603,
+     "verbs_num_pers_dist_Sing+3": 0.671,
+     "verbs_num_pers_dist_Plur+2": 0.238,
+     "verbs_num_pers_dist_+": 0.5,
+     "verbs_num_pers_dist_Sing+2": -0.351,
+     "verbs_num_pers_dist_Plur+": 0.34,
+     "aux_mood_dist_Cnd": 0.156,
+     "aux_mood_dist_Ind": -0.243,
+     "aux_mood_dist_Sub": 0.219,
+     "aux_tense_dist_Past": 0.223,
+     "aux_tense_dist_Pres": -0.364,
+     "aux_tense_dist_Imp": 0.116,
+     "aux_tense_dist_Fut": 0.589,
+     "aux_form_dist_Part": -0.538,
+     "aux_form_dist_Fin": -0.133,
+     "aux_form_dist_Ger": 0.929,
+     "aux_form_dist_Inf": 0.233,
+     "aux_num_pers_dist_Sing+2": -0.781,
+     "aux_num_pers_dist_Plur+3": -0.187,
+     "aux_num_pers_dist_Sing+1": -0.878,
+     "aux_num_pers_dist_Plur+1": -0.657,
+     "aux_num_pers_dist_Sing+3": -0.135,
+     "verbal_head_per_sent": 0.898,
+     "verbal_root_perc": 0.0693,
+     "avg_token_per_clause": 0.128,
+     "avg_links_len": 0.71,
+     "max_links_len": 0.816,
+     "avg_max_links_len": 0.816,
+     "avg_max_depth": 0.878,
+     "dep_dist_root": -0.958,
+     "dep_dist_flat": -0.0228,
+     "dep_dist_det:predet": 0.108,
+     "dep_dist_appos": 0.394,
+     "dep_dist_aux:pass": -0.364,
+     "dep_dist_parataxis:hashtag": -1.0,
+     "dep_dist_acl:relcl": 0.349,
+     "dep_dist_flat:name": -0.265,
+     "dep_dist_obl:agent": 0.196,
+     "dep_dist_fixed": 0.198,
+     "dep_dist_case": 0.312,
+     "dep_dist_advmod": 0.425,
+     "dep_dist_nsubj": -0.322,
+     "dep_dist_nmod": -0.0178,
+     "dep_dist_det": -0.103,
+     "dep_dist_compound": 0.0466,
+     "dep_dist_vocative": -0.867,
+     "dep_dist_obj": -0.138,
+     "dep_dist_dep": 0.486,
+     "dep_dist_amod": -0.00134,
+     "dep_dist_xcomp": -0.0458,
+     "dep_dist_obl": 0.314,
+     "dep_dist_aux": -0.672,
+     "dep_dist_discourse": 0.842,
+     "dep_dist_nsubj:pass": -0.41,
+     "dep_dist_ccomp": 0.2,
+     "dep_dist_conj": 0.15,
+     "dep_dist_list": -1.0,
+     "dep_dist_mark": 0.0451,
+     "dep_dist_expl:pass": 0.148,
+     "dep_dist_cc": 0.153,
+     "dep_dist_acl": 0.447,
+     "dep_dist_parataxis": 0.735,
+     "dep_dist_det:poss": 0.0482,
+     "dep_dist_iobj": 0.565,
+     "dep_dist_csubj": -0.318,
+     "dep_dist_expl:impers": 0.111,
+     "dep_dist_nummod": -0.0868,
+     "dep_dist_advcl": 0.237,
+     "dep_dist_flat:foreign": 0.134,
+     "dep_dist_cop": -0.313,
+     "dep_dist_punct": 0.326,
+     "dep_dist_expl": 0.345,
+     "subj_pre": -0.25,
+     "subj_post": 0.513,
+     "obj_pre": 0.57,
+     "obj_post": 0.356,
+     "n_prepositional_chains": 0.766,
+     "avg_prepositional_chain_len": 0.435,
+     "prep_dist_5": 0.16,
+     "prep_dist_3": 0.221,
+     "prep_dist_4": 0.402,
+     "prep_dist_1": 0.283,
+     "prep_dist_2": 0.225,
+     "subordinate_dist_4": 0.608,
+     "subordinate_dist_3": 0.446,
+     "subordinate_dist_5": 0.757,
+     "subordinate_dist_1": 0.568,
+     "subordinate_dist_2": 0.378,
+     "avg_subordinate_chain_len": 0.74,
+     "principal_proposition_dist": -0.764,
+     "subordinate_proposition_dist": 0.824,
+     "subordinate_pre": 0.297,
+     "subordinate_post": 0.685,
+     "verb_edges_dist_3": -0.138,
+     "verb_edges_dist_0": 0.256,
+     "verb_edges_dist_5": 0.418,
+     "verb_edges_dist_1": 0.441,
+     "verb_edges_dist_2": -0.0935,
+     "verb_edges_dist_6": 0.634,
+     "verb_edges_dist_4": 0.129,
+     "avg_verb_edges": 0.251
+    },
+    "p": {
+     "n_tokens": 0.0,
+     "tokens_per_sent": 0.0,
+     "char_per_tok": 0.24,
+     "in_dict": 0.38,
+     "in_dict_types": 2.4e-47,
+     "in_FO": 3.5e-31,
+     "in_AD": 0.6,
+     "in_AU": 8.9e-140,
+     "in_FO_types": 3.5e-25,
+     "in_AD_types": 2.7e-246,
+     "in_AU_types": 4.4e-96,
+     "upos_dist_CCONJ": 1.2e-32,
+     "upos_dist_X": 0.00033,
+     "upos_dist_SCONJ": 0.95,
+     "upos_dist_DET": 4.7e-18,
+     "upos_dist_NOUN": 1.5e-45,
+     "upos_dist_PROPN": 2.2e-183,
+     "upos_dist_SYM": 0.00022,
+     "upos_dist_ADJ": 0.024,
+     "upos_dist_PUNCT": 2.6e-197,
+     "upos_dist_PART": 0.84,
+     "upos_dist_VERB": 0.54,
+     "upos_dist_ADV": 3.4e-241,
+     "upos_dist_ADP": 5.2e-189,
+     "upos_dist_INTJ": 0.57,
+     "upos_dist_AUX": 0.0,
+     "upos_dist_NUM": 3e-14,
+     "upos_dist_PRON": 9.3e-261,
+     "lexical_density": 1.1e-26,
+     "verbs_mood_dist_Sub": 1.3e-13,
+     "verbs_mood_dist_Ind": 0.0,
+     "verbs_mood_dist_Cnd": 0.0011,
+     "verbs_mood_dist_Imp": 0.27,
+     "verbs_tense_dist_Fut": 1.5e-16,
+     "verbs_tense_dist_Pres": 7.4e-88,
+     "verbs_tense_dist_Past": 0.52,
+     "verbs_tense_dist_Imp": 3.2e-15,
+     "verbs_form_dist_Part": 1.8e-34,
+     "verbs_form_dist_Ger": 2.9e-112,
+     "verbs_form_dist_Inf": 3.3e-21,
+     "verbs_form_dist_Fin": 1.2e-86,
+     "verbs_num_pers_dist_Sing+1": 0.024,
+     "verbs_num_pers_dist_Plur+3": 9.7e-56,
+     "verbs_num_pers_dist_Plur+1": 0.22,
+     "verbs_num_pers_dist_Sing+": 7.4e-05,
+     "verbs_num_pers_dist_Sing+3": 0.0,
+     "verbs_num_pers_dist_Plur+2": 0.6,
+     "verbs_num_pers_dist_+": 0.23,
+     "verbs_num_pers_dist_Sing+2": 0.15,
+     "verbs_num_pers_dist_Plur+": 0.22,
+     "aux_mood_dist_Cnd": 0.0095,
+     "aux_mood_dist_Ind": 1.7e-47,
+     "aux_mood_dist_Sub": 3.4e-06,
+     "aux_tense_dist_Past": 1.5e-22,
+     "aux_tense_dist_Pres": 3.3e-106,
+     "aux_tense_dist_Imp": 7.1e-05,
+     "aux_tense_dist_Fut": 3.3e-08,
+     "aux_form_dist_Part": 1.9e-87,
+     "aux_form_dist_Fin": 6.7e-17,
+     "aux_form_dist_Ger": 1e-17,
+     "aux_form_dist_Inf": 2.5e-10,
+     "aux_num_pers_dist_Sing+2": 0.0084,
+     "aux_num_pers_dist_Plur+3": 1.3e-13,
+     "aux_num_pers_dist_Sing+1": 7.3e-08,
+     "aux_num_pers_dist_Plur+1": 1.4e-05,
+     "aux_num_pers_dist_Sing+3": 4.2e-15,
+     "verbal_head_per_sent": 0.0,
+     "verbal_root_perc": 0.047,
+     "avg_token_per_clause": 3.2e-31,
+     "avg_links_len": 0.0,
+     "max_links_len": 0.0,
+     "avg_max_links_len": 0.0,
+     "avg_max_depth": 0.0,
+     "dep_dist_root": 0.0,
+     "dep_dist_flat": 0.58,
+     "dep_dist_det:predet": 0.032,
+     "dep_dist_appos": 1.5e-45,
+     "dep_dist_aux:pass": 3.2e-90,
+     "dep_dist_parataxis:hashtag": 0.32,
+     "dep_dist_acl:relcl": 2.2e-111,
+     "dep_dist_flat:name": 1.3e-51,
+     "dep_dist_obl:agent": 5.5e-19,
+     "dep_dist_fixed": 3.6e-17,
+     "dep_dist_case": 2.4e-176,
+     "dep_dist_advmod": 4.1e-241,
+     "dep_dist_nsubj": 5.5e-165,
+     "dep_dist_nmod": 0.12,
+     "dep_dist_det": 7.5e-21,
+     "dep_dist_compound": 0.22,
+     "dep_dist_vocative": 0.08,
+     "dep_dist_obj": 1.8e-27,
+     "dep_dist_dep": 0.11,
+     "dep_dist_amod": 0.91,
+     "dep_dist_xcomp": 0.022,
+     "dep_dist_obl": 8e-174,
+     "dep_dist_aux": 0.0,
+     "dep_dist_discourse": 1.7e-06,
+     "dep_dist_nsubj:pass": 3.2e-97,
+     "dep_dist_ccomp": 1.2e-17,
+     "dep_dist_conj": 7.3e-32,
+     "dep_dist_list": 0.32,
+     "dep_dist_mark": 0.0022,
+     "dep_dist_expl:pass": 0.45,
+     "dep_dist_cc": 5.4e-32,
+     "dep_dist_acl": 3.9e-165,
+     "dep_dist_parataxis": 5.4e-87,
+     "dep_dist_det:poss": 0.023,
+     "dep_dist_iobj": 5.2e-41,
+     "dep_dist_csubj": 8.3e-05,
+     "dep_dist_expl:impers": 0.63,
+     "dep_dist_nummod": 2e-05,
+     "dep_dist_advcl": 2.4e-55,
+     "dep_dist_flat:foreign": 0.13,
+     "dep_dist_cop": 3.4e-63,
+     "dep_dist_punct": 2.9e-193,
+     "dep_dist_expl": 2.7e-81,
+     "subj_pre": 2.3e-38,
+     "subj_post": 3.8e-110,
+     "obj_pre": 4.2e-46,
+     "obj_post": 1.1e-87,
+     "n_prepositional_chains": 0.0,
+     "avg_prepositional_chain_len": 2.2e-187,
+     "prep_dist_5": 0.49,
+     "prep_dist_3": 2.6e-09,
+     "prep_dist_4": 2e-06,
+     "prep_dist_1": 3e-77,
+     "prep_dist_2": 3.4e-34,
+     "subordinate_dist_4": 7.8e-08,
+     "subordinate_dist_3": 6.2e-22,
+     "subordinate_dist_5": 0.0069,
+     "subordinate_dist_1": 0.0,
+     "subordinate_dist_2": 3.5e-68,
+     "avg_subordinate_chain_len": 0.0,
+     "principal_proposition_dist": 0.0,
+     "subordinate_proposition_dist": 0.0,
+     "subordinate_pre": 7.2e-45,
+     "subordinate_post": 0.0,
+     "verb_edges_dist_3": 2e-25,
+     "verb_edges_dist_0": 3.9e-05,
+     "verb_edges_dist_5": 4.4e-100,
+     "verb_edges_dist_1": 3.9e-150,
+     "verb_edges_dist_2": 1.7e-11,
+     "verb_edges_dist_6": 6.5e-80,
+     "verb_edges_dist_4": 3.2e-18,
+     "avg_verb_edges": 6.1e-100
+    },
+    "share_changed": {
+     "n_tokens": 0.95,
+     "tokens_per_sent": 0.95,
+     "char_per_tok": 0.975,
+     "in_dict": 0.936,
+     "in_dict_types": 0.928,
+     "in_FO": 0.952,
+     "in_AD": 0.917,
+     "in_AU": 0.926,
+     "in_FO_types": 0.939,
+     "in_AD_types": 0.899,
+     "in_AU_types": 0.914,
+     "upos_dist_CCONJ": 0.678,
+     "upos_dist_X": 0.0205,
+     "upos_dist_SCONJ": 0.312,
+     "upos_dist_DET": 0.946,
+     "upos_dist_NOUN": 0.945,
+     "upos_dist_PROPN": 0.704,
+     "upos_dist_SYM": 0.0137,
+     "upos_dist_ADJ": 0.88,
+     "upos_dist_PUNCT": 0.948,
+     "upos_dist_PART": 0.000858,
+     "upos_dist_VERB": 0.933,
+     "upos_dist_ADV": 0.748,
+     "upos_dist_ADP": 0.946,
+     "upos_dist_INTJ": 0.00257,
+     "upos_dist_AUX": 0.752,
+     "upos_dist_NUM": 0.421,
+     "upos_dist_PRON": 0.722,
+     "lexical_density": 0.932,
+     "verbs_mood_dist_Sub": 0.028,
+     "verbs_mood_dist_Ind": 0.35,
+     "verbs_mood_dist_Cnd": 0.00566,
+     "verbs_mood_dist_Imp": 0.0012,
+     "verbs_tense_dist_Fut": 0.0217,
+     "verbs_tense_dist_Pres": 0.374,
+     "verbs_tense_dist_Past": 0.47,
+     "verbs_tense_dist_Imp": 0.133,
+     "verbs_form_dist_Part": 0.595,
+     "verbs_form_dist_Ger": 0.191,
+     "verbs_form_dist_Inf": 0.354,
+     "verbs_form_dist_Fin": 0.634,
+     "verbs_num_pers_dist_Sing+1": 0.00412,
+     "verbs_num_pers_dist_Plur+3": 0.208,
+     "verbs_num_pers_dist_Plur+1": 0.00558,
+     "verbs_num_pers_dist_Sing+": 0.0048,
+     "verbs_num_pers_dist_Sing+3": 0.384,
+     "verbs_num_pers_dist_Plur+2": 0.000515,
+     "verbs_num_pers_dist_+": 0.0006,
+     "verbs_num_pers_dist_Sing+2": 0.0018,
+     "verbs_num_pers_dist_Plur+": 0.00146,
+     "aux_mood_dist_Cnd": 0.0306,
+     "aux_mood_dist_Ind": 0.337,
+     "aux_mood_dist_Sub": 0.0501,
+     "aux_tense_dist_Past": 0.214,
+     "aux_tense_dist_Pres": 0.392,
+     "aux_tense_dist_Imp": 0.129,
+     "aux_tense_dist_Fut": 0.00961,
+     "aux_form_dist_Part": 0.149,
+     "aux_form_dist_Fin": 0.432,
+     "aux_form_dist_Ger": 0.00952,
+     "aux_form_dist_Inf": 0.0826,
+     "aux_num_pers_dist_Sing+2": 0.0012,
+     "aux_num_pers_dist_Plur+3": 0.169,
+     "aux_num_pers_dist_Sing+1": 0.00403,
+     "aux_num_pers_dist_Plur+1": 0.00472,
+     "aux_num_pers_dist_Sing+3": 0.337,
+     "verbal_head_per_sent": 0.716,
+     "verbal_root_perc": 0.0706,
+     "avg_token_per_clause": 0.94,
+     "avg_links_len": 0.968,
+     "max_links_len": 0.859,
+     "avg_max_links_len": 0.859,
+     "avg_max_depth": 0.761,
+     "dep_dist_root": 0.95,
+     "dep_dist_flat": 0.066,
+     "dep_dist_det:predet": 0.0449,
+     "dep_dist_appos": 0.148,
+     "dep_dist_aux:pass": 0.35,
+     "dep_dist_parataxis:hashtag": 8.58e-05,
+     "dep_dist_acl:relcl": 0.474,
+     "dep_dist_flat:name": 0.372,
+     "dep_dist_obl:agent": 0.237,
+     "dep_dist_fixed": 0.208,
+     "dep_dist_case": 0.944,
+     "dep_dist_advmod": 0.696,
+     "dep_dist_nsubj": 0.825,
+     "dep_dist_nmod": 0.894,
+     "dep_dist_det": 0.944,
+     "dep_dist_compound": 0.0793,
+     "dep_dist_vocative": 0.000429,
+     "dep_dist_obj": 0.709,
+     "dep_dist_dep": 0.0012,
+     "dep_dist_amod": 0.859,
+     "dep_dist_xcomp": 0.287,
+     "dep_dist_obl": 0.918,
+     "dep_dist_aux": 0.477,
+     "dep_dist_discourse": 0.0036,
+     "dep_dist_nsubj:pass": 0.298,
+     "dep_dist_ccomp": 0.208,
+     "dep_dist_conj": 0.697,
+     "dep_dist_list": 8.58e-05,
+     "dep_dist_mark": 0.527,
+     "dep_dist_expl:pass": 0.00292,
+     "dep_dist_cc": 0.679,
+     "dep_dist_acl": 0.43,
+     "dep_dist_parataxis": 0.0828,
+     "dep_dist_det:poss": 0.253,
+     "dep_dist_iobj": 0.0643,
+     "dep_dist_csubj": 0.0175,
+     "dep_dist_expl:impers": 0.00214,
+     "dep_dist_nummod": 0.277,
+     "dep_dist_advcl": 0.5,
+     "dep_dist_flat:foreign": 0.0148,
+     "dep_dist_cop": 0.329,
+     "dep_dist_punct": 0.947,
+     "dep_dist_expl": 0.351,
+     "subj_pre": 0.295,
+     "subj_post": 0.212,
+     "obj_pre": 0.0705,
+     "obj_post": 0.307,
+     "n_prepositional_chains": 0.631,
+     "avg_prepositional_chain_len": 0.507,
+     "prep_dist_5": 0.00206,
+     "prep_dist_3": 0.0828,
+     "prep_dist_4": 0.0159,
+     "prep_dist_1": 0.486,
+     "prep_dist_2": 0.335,
+     "subordinate_dist_4": 0.00875,
+     "subordinate_dist_3": 0.0523,
+     "subordinate_dist_5": 0.00137,
+     "subordinate_dist_1": 0.478,
+     "subordinate_dist_2": 0.239,
+     "avg_subordinate_chain_len": 0.514,
+     "principal_proposition_dist": 0.683,
+     "subordinate_proposition_dist": 0.676,
+     "subordinate_pre": 0.254,
+     "subordinate_post": 0.462,
+     "verb_edges_dist_3": 0.648,
+     "verb_edges_dist_0": 0.0294,
+     "verb_edges_dist_5": 0.293,
+     "verb_edges_dist_1": 0.399,
+     "verb_edges_dist_2": 0.591,
+     "verb_edges_dist_6": 0.101,
+     "verb_edges_dist_4": 0.521,
+     "avg_verb_edges": 0.815
+    },
+    "rho_global": {
+     "n_tokens": 0.428,
+     "tokens_per_sent": 0.428,
+     "char_per_tok": 0.0813,
+     "in_dict": 0.078,
+     "in_dict_types": 0.0326,
+     "in_FO": 0.0218,
+     "in_AD": -0.0263,
+     "in_AU": 0.128,
+     "in_FO_types": 0.0334,
+     "in_AD_types": -0.183,
+     "in_AU_types": 0.114,
+     "upos_dist_CCONJ": 0.0846,
+     "upos_dist_X": 0.0365,
+     "upos_dist_SCONJ": 0.127,
+     "upos_dist_DET": -0.109,
+     "upos_dist_NOUN": -0.0517,
+     "upos_dist_PROPN": -0.148,
+     "upos_dist_SYM": 0.0214,
+     "upos_dist_ADJ": 0.0852,
+     "upos_dist_PUNCT": 0.0792,
+     "upos_dist_PART": 0.0105,
+     "upos_dist_VERB": 0.0652,
+     "upos_dist_ADV": 0.211,
+     "upos_dist_ADP": 0.125,
+     "upos_dist_INTJ": 0.0139,
+     "upos_dist_AUX": -0.205,
+     "upos_dist_NUM": -0.0157,
+     "upos_dist_PRON": 0.225,
+     "lexical_density": 0.012,
+     "verbs_mood_dist_Sub": 0.0137,
+     "verbs_mood_dist_Ind": 0.203,
+     "verbs_mood_dist_Cnd": 0.024,
+     "verbs_mood_dist_Imp": 0.00485,
+     "verbs_tense_dist_Fut": 0.0286,
+     "verbs_tense_dist_Pres": 0.0859,
+     "verbs_tense_dist_Past": -0.00429,
+     "verbs_tense_dist_Imp": 0.0393,
+     "verbs_form_dist_Part": -0.0342,
+     "verbs_form_dist_Ger": 0.13,
+     "verbs_form_dist_Inf": 0.0516,
+     "verbs_form_dist_Fin": 0.1,
+     "verbs_num_pers_dist_Sing+1": 0.00339,
+     "verbs_num_pers_dist_Plur+3": 0.0668,
+     "verbs_num_pers_dist_Plur+1": 0.0289,
+     "verbs_num_pers_dist_Sing+": 0.000197,
+     "verbs_num_pers_dist_Sing+3": 0.166,
+     "verbs_num_pers_dist_Plur+2": 0.0104,
+     "verbs_num_pers_dist_+": 0.0209,
+     "verbs_num_pers_dist_Sing+2": 0.00785,
+     "verbs_num_pers_dist_Plur+": 0.00929,
+     "aux_mood_dist_Cnd": 0.0221,
+     "aux_mood_dist_Ind": -0.077,
+     "aux_mood_dist_Sub": 0.0199,
+     "aux_tense_dist_Past": 0.00658,
+     "aux_tense_dist_Pres": -0.0924,
+     "aux_tense_dist_Imp": 0.0168,
+     "aux_tense_dist_Fut": 0.0161,
+     "aux_form_dist_Part": -0.0292,
+     "aux_form_dist_Fin": -0.0542,
+     "aux_form_dist_Ger": 0.0154,
+     "aux_form_dist_Inf": 0.00457,
+     "aux_num_pers_dist_Sing+2": 0.00452,
+     "aux_num_pers_dist_Plur+3": -0.014,
+     "aux_num_pers_dist_Sing+1": 0.016,
+     "aux_num_pers_dist_Plur+1": 0.00065,
+     "aux_num_pers_dist_Sing+3": -0.052,
+     "verbal_head_per_sent": 0.354,
+     "verbal_root_perc": -0.054,
+     "avg_token_per_clause": -0.0128,
+     "avg_links_len": 0.276,
+     "max_links_len": 0.274,
+     "avg_max_links_len": 0.274,
+     "avg_max_depth": 0.383,
+     "dep_dist_root": -0.529,
+     "dep_dist_flat": 0.0169,
+     "dep_dist_det:predet": 0.0323,
+     "dep_dist_appos": 0.0952,
+     "dep_dist_aux:pass": 0.00274,
+     "dep_dist_parataxis:hashtag": 0.0118,
+     "dep_dist_acl:relcl": 0.233,
+     "dep_dist_flat:name": -0.0297,
+     "dep_dist_obl:agent": 0.0912,
+     "dep_dist_fixed": 0.0958,
+     "dep_dist_case": 0.12,
+     "dep_dist_advmod": 0.215,
+     "dep_dist_nsubj": -0.132,
+     "dep_dist_nmod": -0.0135,
+     "dep_dist_det": -0.116,
+     "dep_dist_compound": 0.0539,
+     "dep_dist_vocative": -0.00579,
+     "dep_dist_obj": 0.0179,
+     "dep_dist_dep": -0.00266,
+     "dep_dist_amod": 0.0802,
+     "dep_dist_xcomp": 0.089,
+     "dep_dist_obl": 0.127,
+     "dep_dist_aux": -0.103,
+     "dep_dist_discourse": 0.00926,
+     "dep_dist_nsubj:pass": -0.000285,
+     "dep_dist_ccomp": 0.0828,
+     "dep_dist_conj": 0.086,
+     "dep_dist_list": -0.0138,
+     "dep_dist_mark": 0.103,
+     "dep_dist_expl:pass": -0.0011,
+     "dep_dist_cc": 0.0843,
+     "dep_dist_acl": 0.2,
+     "dep_dist_parataxis": 0.0799,
+     "dep_dist_det:poss": 0.075,
+     "dep_dist_iobj": 0.0829,
+     "dep_dist_csubj": 0.0371,
+     "dep_dist_expl:impers": -0.000722,
+     "dep_dist_nummod": 0.0362,
+     "dep_dist_advcl": 0.171,
+     "dep_dist_flat:foreign": 0.0311,
+     "dep_dist_cop": -0.0162,
+     "dep_dist_punct": 0.0775,
+     "dep_dist_expl": 0.12,
+     "subj_pre": -0.0988,
+     "subj_post": 0.1,
+     "obj_pre": 0.0759,
+     "obj_post": 0.0767,
+     "n_prepositional_chains": 0.208,
+     "avg_prepositional_chain_len": 0.145,
+     "prep_dist_5": 0.0182,
+     "prep_dist_3": 0.0629,
+     "prep_dist_4": 0.0108,
+     "prep_dist_1": 0.0167,
+     "prep_dist_2": 0.0854,
+     "subordinate_dist_4": 0.026,
+     "subordinate_dist_3": 0.0523,
+     "subordinate_dist_5": 0.00964,
+     "subordinate_dist_1": 0.215,
+     "subordinate_dist_2": 0.101,
+     "avg_subordinate_chain_len": 0.313,
+     "principal_proposition_dist": -0.391,
+     "subordinate_proposition_dist": 0.406,
+     "subordinate_pre": 0.135,
+     "subordinate_post": 0.224,
+     "verb_edges_dist_3": -0.0227,
+     "verb_edges_dist_0": 0.0501,
+     "verb_edges_dist_5": 0.102,
+     "verb_edges_dist_1": 0.141,
+     "verb_edges_dist_2": 0.0159,
+     "verb_edges_dist_6": 0.0675,
+     "verb_edges_dist_4": 0.0631,
+     "avg_verb_edges": 0.0713
+    }
+   },
+   "v1_training": {
+    "pairs": 78462,
+    "originals": 10800,
+    "readit_original_mean": {
+     "all": 79.8,
+     "base": 57.2,
+     "lexical": 37.4,
+     "syntax": 77.7
+    },
+    "readit_drop_mean": {
+     "all": 40.1,
+     "base": 19.9,
+     "lexical": 1.02,
+     "syntax": 39.2
+    },
+    "share_harder_in": {
+     "base": 0.101,
+     "lexical": 0.413,
+     "syntax": 0.0142
+    },
+    "original_chars_median": 200,
+    "manova_one_per_original": {
+     "V": 0.452,
+     "F": 126.4,
+     "df1": 140,
+     "df2": 21459,
+     "p": 0.0,
+     "chance": 0.00648
+    },
+    "manova_most_random_least": {
+     "most": {
+      "V": 0.618,
+      "F": 249.6,
+      "df1": 139,
+      "df2": 21460,
+      "p": 0.0,
+      "chance": 0.00644
+     },
+     "random": {
+      "V": 0.456,
+      "F": 128.5,
+      "df1": 140,
+      "df2": 21459,
+      "p": 0.0,
+      "chance": 0.00648
+     },
+     "least": {
+      "V": 0.29,
+      "F": 62.61,
+      "df1": 140,
+      "df2": 21459,
+      "p": 0.0,
+      "chance": 0.00648
+     }
+    },
+    "r": {
+     "n_tokens": 0.926,
+     "tokens_per_sent": 0.926,
+     "char_per_tok": 0.149,
+     "in_dict": 0.0868,
+     "in_dict_types": -0.0532,
+     "in_FO": -0.0489,
+     "in_AD": 0.037,
+     "in_AU": 0.228,
+     "in_FO_types": -0.0065,
+     "in_AD_types": -0.335,
+     "in_AU_types": 0.186,
+     "upos_dist_CCONJ": 0.148,
+     "upos_dist_X": -0.179,
+     "upos_dist_SCONJ": 0.13,
+     "upos_dist_DET": -0.156,
+     "upos_dist_NOUN": -0.0889,
+     "upos_dist_PROPN": -0.315,
+     "upos_dist_SYM": 0.352,
+     "upos_dist_ADJ": 0.0644,
+     "upos_dist_PUNCT": 0.132,
+     "upos_dist_PART": 0.164,
+     "upos_dist_VERB": 0.105,
+     "upos_dist_ADV": 0.439,
+     "upos_dist_ADP": 0.319,
+     "upos_dist_INTJ": -0.241,
+     "upos_dist_AUX": -0.64,
+     "upos_dist_NUM": -0.16,
+     "upos_dist_PRON": 0.489,
+     "lexical_density": 0.0361,
+     "verbs_mood_dist_Sub": 0.544,
+     "verbs_mood_dist_Ind": 0.791,
+     "verbs_mood_dist_Cnd": 0.606,
+     "verbs_mood_dist_Imp": -0.4,
+     "verbs_tense_dist_Fut": 0.558,
+     "verbs_tense_dist_Pres": 0.417,
+     "verbs_tense_dist_Past": -0.057,
+     "verbs_tense_dist_Imp": 0.319,
+     "verbs_form_dist_Part": -0.225,
+     "verbs_form_dist_Ger": 0.537,
+     "verbs_form_dist_Inf": 0.195,
+     "verbs_form_dist_Fin": 0.328,
+     "verbs_num_pers_dist_Sing+1": -0.195,
+     "verbs_num_pers_dist_Plur+3": 0.369,
+     "verbs_num_pers_dist_Plur+1": -0.027,
+     "verbs_num_pers_dist_Sing+": 0.791,
+     "verbs_num_pers_dist_Sing+3": 0.719,
+     "verbs_num_pers_dist_Plur+2": -0.2,
+     "verbs_num_pers_dist_+": 0.583,
+     "verbs_num_pers_dist_Sing+2": -0.294,
+     "verbs_num_pers_dist_Plur+": 1.0,
+     "aux_mood_dist_Cnd": 0.409,
+     "aux_mood_dist_Ind": -0.347,
+     "aux_mood_dist_Sub": 0.351,
+     "aux_tense_dist_Past": 0.167,
+     "aux_tense_dist_Pres": -0.461,
+     "aux_tense_dist_Imp": 0.245,
+     "aux_tense_dist_Fut": 0.572,
+     "aux_form_dist_Part": -0.594,
+     "aux_form_dist_Fin": -0.224,
+     "aux_form_dist_Ger": 0.978,
+     "aux_form_dist_Inf": 0.396,
+     "aux_num_pers_dist_Sing+2": -0.345,
+     "aux_num_pers_dist_Plur+3": -0.0466,
+     "aux_num_pers_dist_Sing+1": -0.885,
+     "aux_num_pers_dist_Plur+1": -0.512,
+     "aux_num_pers_dist_Sing+3": -0.295,
+     "verbal_head_per_sent": 0.891,
+     "verbal_root_perc": 0.0194,
+     "avg_token_per_clause": 0.0455,
+     "avg_links_len": 0.642,
+     "max_links_len": 0.761,
+     "avg_max_links_len": 0.761,
+     "avg_max_depth": 0.874,
+     "dep_dist_root": -0.913,
+     "dep_dist_flat": -0.00091,
+     "dep_dist_det:predet": 0.129,
+     "dep_dist_appos": 0.236,
+     "dep_dist_aux:pass": -0.398,
+     "dep_dist_parataxis:hashtag": -0.333,
+     "dep_dist_acl:relcl": 0.423,
+     "dep_dist_flat:name": -0.189,
+     "dep_dist_obl:agent": 0.17,
+     "dep_dist_fixed": 0.15,
+     "dep_dist_case": 0.304,
+     "dep_dist_advmod": 0.463,
+     "dep_dist_nsubj": -0.253,
+     "dep_dist_nmod": 0.0101,
+     "dep_dist_det": -0.167,
+     "dep_dist_compound": 0.147,
+     "dep_dist_vocative": -0.81,
+     "dep_dist_obj": -0.031,
+     "dep_dist_dep": -0.159,
+     "dep_dist_amod": 0.104,
+     "dep_dist_xcomp": 0.0274,
+     "dep_dist_obl": 0.319,
+     "dep_dist_aux": -0.673,
+     "dep_dist_discourse": 0.484,
+     "dep_dist_nsubj:pass": -0.456,
+     "dep_dist_ccomp": 0.291,
+     "dep_dist_conj": 0.123,
+     "dep_dist_list": -1.0,
+     "dep_dist_mark": 0.143,
+     "dep_dist_expl:pass": -0.168,
+     "dep_dist_cc": 0.145,
+     "dep_dist_acl": 0.479,
+     "dep_dist_parataxis": 0.68,
+     "dep_dist_det:poss": 0.0312,
+     "dep_dist_iobj": 0.643,
+     "dep_dist_csubj": -0.256,
+     "dep_dist_expl:impers": 0.471,
+     "dep_dist_nummod": -0.0488,
+     "dep_dist_advcl": 0.294,
+     "dep_dist_flat:foreign": -0.351,
+     "dep_dist_cop": -0.39,
+     "dep_dist_punct": 0.13,
+     "dep_dist_expl": 0.322,
+     "subj_pre": -0.228,
+     "subj_post": 0.533,
+     "obj_pre": 0.62,
+     "obj_post": 0.407,
+     "n_prepositional_chains": 0.73,
+     "avg_prepositional_chain_len": 0.428,
+     "prep_dist_5": 0.612,
+     "prep_dist_3": 0.301,
+     "prep_dist_4": 0.43,
+     "prep_dist_1": 0.297,
+     "prep_dist_2": 0.176,
+     "subordinate_dist_4": 0.63,
+     "subordinate_dist_3": 0.547,
+     "subordinate_dist_5": 0.676,
+     "subordinate_dist_1": 0.567,
+     "subordinate_dist_2": 0.432,
+     "avg_subordinate_chain_len": 0.765,
+     "principal_proposition_dist": -0.771,
+     "subordinate_proposition_dist": 0.835,
+     "subordinate_pre": 0.26,
+     "subordinate_post": 0.708,
+     "verb_edges_dist_3": -0.124,
+     "verb_edges_dist_0": 0.36,
+     "verb_edges_dist_5": 0.362,
+     "verb_edges_dist_1": 0.42,
+     "verb_edges_dist_2": -0.0246,
+     "verb_edges_dist_6": 0.606,
+     "verb_edges_dist_4": 0.0925,
+     "avg_verb_edges": 0.213
+    },
+    "p": {
+     "n_tokens": 0.0,
+     "tokens_per_sent": 0.0,
+     "char_per_tok": 8.3e-41,
+     "in_dict": 1.8e-14,
+     "in_dict_types": 2.8e-06,
+     "in_FO": 1.3e-05,
+     "in_AD": 0.0012,
+     "in_AU": 2.5e-89,
+     "in_FO_types": 0.57,
+     "in_AD_types": 1.7e-187,
+     "in_AU_types": 1.6e-59,
+     "upos_dist_CCONJ": 2.1e-28,
+     "upos_dist_X": 0.0058,
+     "upos_dist_SCONJ": 7.8e-11,
+     "upos_dist_DET": 1.7e-43,
+     "upos_dist_NOUN": 3.2e-15,
+     "upos_dist_PROPN": 9e-129,
+     "upos_dist_SYM": 0.00021,
+     "upos_dist_ADJ": 3.5e-08,
+     "upos_dist_PUNCT": 9.2e-32,
+     "upos_dist_PART": 0.65,
+     "upos_dist_VERB": 1.5e-20,
+     "upos_dist_ADV": 2.8e-263,
+     "upos_dist_ADP": 1.6e-176,
+     "upos_dist_INTJ": 0.19,
+     "upos_dist_AUX": 0.0,
+     "upos_dist_NUM": 3.3e-21,
+     "upos_dist_PRON": 0.0,
+     "lexical_density": 0.0014,
+     "verbs_mood_dist_Sub": 1.4e-15,
+     "verbs_mood_dist_Ind": 0.0,
+     "verbs_mood_dist_Cnd": 5e-05,
+     "verbs_mood_dist_Imp": 0.28,
+     "verbs_tense_dist_Fut": 7.9e-15,
+     "verbs_tense_dist_Pres": 1e-123,
+     "verbs_tense_dist_Past": 0.00029,
+     "verbs_tense_dist_Imp": 1.5e-26,
+     "verbs_form_dist_Part": 1.5e-58,
+     "verbs_form_dist_Ger": 2.6e-106,
+     "verbs_form_dist_Inf": 9.6e-27,
+     "verbs_form_dist_Fin": 7.8e-131,
+     "verbs_num_pers_dist_Sing+1": 0.26,
+     "verbs_num_pers_dist_Plur+3": 1.6e-54,
+     "verbs_num_pers_dist_Plur+1": 0.85,
+     "verbs_num_pers_dist_Sing+": 1.3e-08,
+     "verbs_num_pers_dist_Sing+3": 0.0,
+     "verbs_num_pers_dist_Plur+2": 0.68,
+     "verbs_num_pers_dist_+": 0.14,
+     "verbs_num_pers_dist_Sing+2": 0.23,
+     "verbs_num_pers_dist_Plur+": 0.0019,
+     "aux_mood_dist_Cnd": 2e-10,
+     "aux_mood_dist_Ind": 9.6e-96,
+     "aux_mood_dist_Sub": 1.4e-12,
+     "aux_tense_dist_Past": 3.2e-13,
+     "aux_tense_dist_Pres": 2.9e-170,
+     "aux_tense_dist_Imp": 4.3e-16,
+     "aux_tense_dist_Fut": 4.2e-07,
+     "aux_form_dist_Part": 1.7e-104,
+     "aux_form_dist_Fin": 1.1e-44,
+     "aux_form_dist_Ger": 1.8e-16,
+     "aux_form_dist_Inf": 9.8e-26,
+     "aux_num_pers_dist_Sing+2": 0.33,
+     "aux_num_pers_dist_Plur+3": 0.074,
+     "aux_num_pers_dist_Sing+1": 8e-07,
+     "aux_num_pers_dist_Plur+1": 0.0035,
+     "aux_num_pers_dist_Sing+3": 1.3e-66,
+     "verbal_head_per_sent": 0.0,
+     "verbal_root_perc": 0.57,
+     "avg_token_per_clause": 5.6e-05,
+     "avg_links_len": 0.0,
+     "max_links_len": 0.0,
+     "avg_max_links_len": 0.0,
+     "avg_max_depth": 0.0,
+     "dep_dist_root": 0.0,
+     "dep_dist_flat": 0.98,
+     "dep_dist_det:predet": 0.016,
+     "dep_dist_appos": 6.8e-17,
+     "dep_dist_aux:pass": 1.6e-104,
+     "dep_dist_parataxis:hashtag": 0.65,
+     "dep_dist_acl:relcl": 1.3e-157,
+     "dep_dist_flat:name": 1.2e-25,
+     "dep_dist_obl:agent": 2.9e-14,
+     "dep_dist_fixed": 2.1e-10,
+     "dep_dist_case": 8e-160,
+     "dep_dist_advmod": 7.8e-274,
+     "dep_dist_nsubj": 1.3e-96,
+     "dep_dist_nmod": 0.39,
+     "dep_dist_det": 1.9e-49,
+     "dep_dist_compound": 0.00015,
+     "dep_dist_vocative": 0.075,
+     "dep_dist_obj": 0.018,
+     "dep_dist_dep": 0.5,
+     "dep_dist_amod": 1.8e-18,
+     "dep_dist_xcomp": 0.19,
+     "dep_dist_obl": 3.6e-171,
+     "dep_dist_aux": 0.0,
+     "dep_dist_discourse": 0.0021,
+     "dep_dist_nsubj:pass": 3.4e-116,
+     "dep_dist_ccomp": 2.5e-30,
+     "dep_dist_conj": 8.7e-21,
+     "dep_dist_list": 0.32,
+     "dep_dist_mark": 3.7e-21,
+     "dep_dist_expl:pass": 0.39,
+     "dep_dist_cc": 1.9e-27,
+     "dep_dist_acl": 9.6e-183,
+     "dep_dist_parataxis": 9.9e-59,
+     "dep_dist_det:poss": 0.16,
+     "dep_dist_iobj": 3.6e-50,
+     "dep_dist_csubj": 0.0038,
+     "dep_dist_expl:impers": 0.088,
+     "dep_dist_nummod": 0.02,
+     "dep_dist_advcl": 1.5e-80,
+     "dep_dist_flat:foreign": 3.5e-06,
+     "dep_dist_cop": 2.2e-91,
+     "dep_dist_punct": 1.6e-30,
+     "dep_dist_expl": 7.6e-67,
+     "subj_pre": 1.3e-31,
+     "subj_post": 4.1e-110,
+     "obj_pre": 8.7e-51,
+     "obj_post": 2.7e-116,
+     "n_prepositional_chains": 0.0,
+     "avg_prepositional_chain_len": 3.3e-176,
+     "prep_dist_5": 0.0099,
+     "prep_dist_3": 8.8e-15,
+     "prep_dist_4": 7.7e-07,
+     "prep_dist_1": 2.7e-82,
+     "prep_dist_2": 2.4e-21,
+     "subordinate_dist_4": 3e-08,
+     "subordinate_dist_3": 1.7e-30,
+     "subordinate_dist_5": 0.024,
+     "subordinate_dist_1": 0.0,
+     "subordinate_dist_2": 2.6e-85,
+     "avg_subordinate_chain_len": 0.0,
+     "principal_proposition_dist": 0.0,
+     "subordinate_proposition_dist": 0.0,
+     "subordinate_pre": 1.5e-34,
+     "subordinate_post": 0.0,
+     "verb_edges_dist_3": 5.1e-20,
+     "verb_edges_dist_0": 6.8e-08,
+     "verb_edges_dist_5": 5.1e-73,
+     "verb_edges_dist_1": 2.1e-133,
+     "verb_edges_dist_2": 0.081,
+     "verb_edges_dist_6": 4.6e-71,
+     "verb_edges_dist_4": 8.1e-10,
+     "avg_verb_edges": 1.2e-69
+    },
+    "share_changed": {
+     "n_tokens": 0.975,
+     "tokens_per_sent": 0.975,
+     "char_per_tok": 0.993,
+     "in_dict": 0.962,
+     "in_dict_types": 0.958,
+     "in_FO": 0.978,
+     "in_AD": 0.947,
+     "in_AU": 0.956,
+     "in_FO_types": 0.966,
+     "in_AD_types": 0.937,
+     "in_AU_types": 0.946,
+     "upos_dist_CCONJ": 0.692,
+     "upos_dist_X": 0.0292,
+     "upos_dist_SCONJ": 0.307,
+     "upos_dist_DET": 0.97,
+     "upos_dist_NOUN": 0.97,
+     "upos_dist_PROPN": 0.724,
+     "upos_dist_SYM": 0.0136,
+     "upos_dist_ADJ": 0.905,
+     "upos_dist_PUNCT": 0.971,
+     "upos_dist_PART": 0.000926,
+     "upos_dist_VERB": 0.962,
+     "upos_dist_ADV": 0.769,
+     "upos_dist_ADP": 0.972,
+     "upos_dist_INTJ": 0.00361,
+     "upos_dist_AUX": 0.779,
+     "upos_dist_NUM": 0.429,
+     "upos_dist_PRON": 0.738,
+     "lexical_density": 0.965,
+     "verbs_mood_dist_Sub": 0.026,
+     "verbs_mood_dist_Ind": 0.394,
+     "verbs_mood_dist_Cnd": 0.00537,
+     "verbs_mood_dist_Imp": 0.000833,
+     "verbs_tense_dist_Fut": 0.0236,
+     "verbs_tense_dist_Pres": 0.394,
+     "verbs_tense_dist_Past": 0.494,
+     "verbs_tense_dist_Imp": 0.137,
+     "verbs_form_dist_Part": 0.632,
+     "verbs_form_dist_Ger": 0.204,
+     "verbs_form_dist_Inf": 0.37,
+     "verbs_form_dist_Fin": 0.678,
+     "verbs_num_pers_dist_Sing+1": 0.00398,
+     "verbs_num_pers_dist_Plur+3": 0.212,
+     "verbs_num_pers_dist_Plur+1": 0.00602,
+     "verbs_num_pers_dist_Sing+": 0.0062,
+     "verbs_num_pers_dist_Sing+3": 0.428,
+     "verbs_num_pers_dist_Plur+2": 0.000463,
+     "verbs_num_pers_dist_+": 0.000741,
+     "verbs_num_pers_dist_Sing+2": 0.00194,
+     "verbs_num_pers_dist_Plur+": 0.00111,
+     "aux_mood_dist_Cnd": 0.029,
+     "aux_mood_dist_Ind": 0.363,
+     "aux_mood_dist_Sub": 0.0486,
+     "aux_tense_dist_Past": 0.228,
+     "aux_tense_dist_Pres": 0.426,
+     "aux_tense_dist_Imp": 0.13,
+     "aux_tense_dist_Fut": 0.00917,
+     "aux_form_dist_Part": 0.158,
+     "aux_form_dist_Fin": 0.462,
+     "aux_form_dist_Ger": 0.00852,
+     "aux_form_dist_Inf": 0.0848,
+     "aux_num_pers_dist_Sing+2": 0.000926,
+     "aux_num_pers_dist_Plur+3": 0.171,
+     "aux_num_pers_dist_Sing+1": 0.00352,
+     "aux_num_pers_dist_Plur+1": 0.0038,
+     "aux_num_pers_dist_Sing+3": 0.367,
+     "verbal_head_per_sent": 0.762,
+     "verbal_root_perc": 0.081,
+     "avg_token_per_clause": 0.967,
+     "avg_links_len": 0.993,
+     "max_links_len": 0.898,
+     "avg_max_links_len": 0.898,
+     "avg_max_depth": 0.802,
+     "dep_dist_root": 0.975,
+     "dep_dist_flat": 0.0624,
+     "dep_dist_det:predet": 0.0431,
+     "dep_dist_appos": 0.155,
+     "dep_dist_aux:pass": 0.367,
+     "dep_dist_parataxis:hashtag": 0.000185,
+     "dep_dist_acl:relcl": 0.493,
+     "dep_dist_flat:name": 0.379,
+     "dep_dist_obl:agent": 0.248,
+     "dep_dist_fixed": 0.221,
+     "dep_dist_case": 0.97,
+     "dep_dist_advmod": 0.72,
+     "dep_dist_nsubj": 0.84,
+     "dep_dist_nmod": 0.92,
+     "dep_dist_det": 0.968,
+     "dep_dist_compound": 0.083,
+     "dep_dist_vocative": 0.000556,
+     "dep_dist_obj": 0.72,
+     "dep_dist_dep": 0.00213,
+     "dep_dist_amod": 0.881,
+     "dep_dist_xcomp": 0.289,
+     "dep_dist_obl": 0.943,
+     "dep_dist_aux": 0.493,
+     "dep_dist_discourse": 0.00491,
+     "dep_dist_nsubj:pass": 0.311,
+     "dep_dist_ccomp": 0.191,
+     "dep_dist_conj": 0.713,
+     "dep_dist_list": 9.26e-05,
+     "dep_dist_mark": 0.538,
+     "dep_dist_expl:pass": 0.00315,
+     "dep_dist_cc": 0.692,
+     "dep_dist_acl": 0.448,
+     "dep_dist_parataxis": 0.0697,
+     "dep_dist_det:poss": 0.256,
+     "dep_dist_iobj": 0.0662,
+     "dep_dist_csubj": 0.0158,
+     "dep_dist_expl:impers": 0.00157,
+     "dep_dist_nummod": 0.282,
+     "dep_dist_advcl": 0.515,
+     "dep_dist_flat:foreign": 0.0215,
+     "dep_dist_cop": 0.334,
+     "dep_dist_punct": 0.97,
+     "dep_dist_expl": 0.354,
+     "subj_pre": 0.311,
+     "subj_post": 0.211,
+     "obj_pre": 0.071,
+     "obj_post": 0.335,
+     "n_prepositional_chains": 0.669,
+     "avg_prepositional_chain_len": 0.532,
+     "prep_dist_5": 0.00213,
+     "prep_dist_3": 0.0813,
+     "prep_dist_4": 0.0161,
+     "prep_dist_1": 0.51,
+     "prep_dist_2": 0.356,
+     "subordinate_dist_4": 0.00935,
+     "subordinate_dist_3": 0.0532,
+     "subordinate_dist_5": 0.0013,
+     "subordinate_dist_1": 0.514,
+     "subordinate_dist_2": 0.248,
+     "avg_subordinate_chain_len": 0.553,
+     "principal_proposition_dist": 0.733,
+     "subordinate_proposition_dist": 0.725,
+     "subordinate_pre": 0.271,
+     "subordinate_post": 0.502,
+     "verb_edges_dist_3": 0.668,
+     "verb_edges_dist_0": 0.0275,
+     "verb_edges_dist_5": 0.306,
+     "verb_edges_dist_1": 0.422,
+     "verb_edges_dist_2": 0.616,
+     "verb_edges_dist_6": 0.106,
+     "verb_edges_dist_4": 0.541,
+     "avg_verb_edges": 0.848
+    },
+    "rho_global": {
+     "n_tokens": 0.287,
+     "tokens_per_sent": 0.287,
+     "char_per_tok": 0.0961,
+     "in_dict": 0.0588,
+     "in_dict_types": 0.027,
+     "in_FO": 0.00888,
+     "in_AD": -0.0141,
+     "in_AU": 0.0871,
+     "in_FO_types": 0.0186,
+     "in_AD_types": -0.114,
+     "in_AU_types": 0.0746,
+     "upos_dist_CCONJ": 0.0407,
+     "upos_dist_X": 0.042,
+     "upos_dist_SCONJ": 0.0943,
+     "upos_dist_DET": -0.127,
+     "upos_dist_NOUN": -0.0473,
+     "upos_dist_PROPN": -0.126,
+     "upos_dist_SYM": 0.015,
+     "upos_dist_ADJ": 0.073,
+     "upos_dist_PUNCT": 0.0588,
+     "upos_dist_PART": 0.00406,
+     "upos_dist_VERB": 0.0784,
+     "upos_dist_ADV": 0.146,
+     "upos_dist_ADP": 0.0982,
+     "upos_dist_INTJ": -0.00267,
+     "upos_dist_AUX": -0.192,
+     "upos_dist_NUM": -0.0322,
+     "upos_dist_PRON": 0.191,
+     "lexical_density": 0.0316,
+     "verbs_mood_dist_Sub": 0.0289,
+     "verbs_mood_dist_Ind": 0.161,
+     "verbs_mood_dist_Cnd": 0.0156,
+     "verbs_mood_dist_Imp": 0.00853,
+     "verbs_tense_dist_Fut": 0.0284,
+     "verbs_tense_dist_Pres": 0.0774,
+     "verbs_tense_dist_Past": -0.0226,
+     "verbs_tense_dist_Imp": 0.0476,
+     "verbs_form_dist_Part": -0.0467,
+     "verbs_form_dist_Ger": 0.121,
+     "verbs_form_dist_Inf": 0.0687,
+     "verbs_form_dist_Fin": 0.086,
+     "verbs_num_pers_dist_Sing+1": 0.0127,
+     "verbs_num_pers_dist_Plur+3": 0.0591,
+     "verbs_num_pers_dist_Plur+1": 0.0288,
+     "verbs_num_pers_dist_Sing+": 0.0163,
+     "verbs_num_pers_dist_Sing+3": 0.13,
+     "verbs_num_pers_dist_Plur+2": 0.0217,
+     "verbs_num_pers_dist_+": 0.0185,
+     "verbs_num_pers_dist_Sing+2": 0.00499,
+     "verbs_num_pers_dist_Plur+": 0.00595,
+     "aux_mood_dist_Cnd": 0.0287,
+     "aux_mood_dist_Ind": -0.103,
+     "aux_mood_dist_Sub": 0.0162,
+     "aux_tense_dist_Past": -0.00149,
+     "aux_tense_dist_Pres": -0.109,
+     "aux_tense_dist_Imp": 0.00657,
+     "aux_tense_dist_Fut": 0.0184,
+     "aux_form_dist_Part": -0.0208,
+     "aux_form_dist_Fin": -0.087,
+     "aux_form_dist_Ger": 0.0265,
+     "aux_form_dist_Inf": 0.017,
+     "aux_num_pers_dist_Sing+2": -0.0181,
+     "aux_num_pers_dist_Plur+3": -0.0149,
+     "aux_num_pers_dist_Sing+1": 0.00671,
+     "aux_num_pers_dist_Plur+1": 0.00536,
+     "aux_num_pers_dist_Sing+3": -0.0812,
+     "verbal_head_per_sent": 0.255,
+     "verbal_root_perc": -0.0979,
+     "avg_token_per_clause": -0.0447,
+     "avg_links_len": 0.18,
+     "max_links_len": 0.164,
+     "avg_max_links_len": 0.164,
+     "avg_max_depth": 0.3,
+     "dep_dist_root": -0.378,
+     "dep_dist_flat": -0.00459,
+     "dep_dist_det:predet": 0.0182,
+     "dep_dist_appos": 0.0607,
+     "dep_dist_aux:pass": -0.0259,
+     "dep_dist_parataxis:hashtag": 0.0125,
+     "dep_dist_acl:relcl": 0.185,
+     "dep_dist_flat:name": -0.0225,
+     "dep_dist_obl:agent": 0.0714,
+     "dep_dist_fixed": 0.0623,
+     "dep_dist_case": 0.0875,
+     "dep_dist_advmod": 0.152,
+     "dep_dist_nsubj": -0.106,
+     "dep_dist_nmod": -0.00353,
+     "dep_dist_det": -0.131,
+     "dep_dist_compound": 0.0115,
+     "dep_dist_vocative": -0.00285,
+     "dep_dist_obj": 0.00599,
+     "dep_dist_dep": 0.00421,
+     "dep_dist_amod": 0.0773,
+     "dep_dist_xcomp": 0.067,
+     "dep_dist_obl": 0.0832,
+     "dep_dist_aux": -0.0937,
+     "dep_dist_discourse": 0.00186,
+     "dep_dist_nsubj:pass": -0.034,
+     "dep_dist_ccomp": 0.0768,
+     "dep_dist_conj": 0.0383,
+     "dep_dist_list": -0.0162,
+     "dep_dist_mark": 0.0875,
+     "dep_dist_expl:pass": 0.00677,
+     "dep_dist_cc": 0.0391,
+     "dep_dist_acl": 0.157,
+     "dep_dist_parataxis": 0.0223,
+     "dep_dist_det:poss": 0.0233,
+     "dep_dist_iobj": 0.0463,
+     "dep_dist_csubj": 0.022,
+     "dep_dist_expl:impers": 0.02,
+     "dep_dist_nummod": 0.005,
+     "dep_dist_advcl": 0.135,
+     "dep_dist_flat:foreign": 0.0446,
+     "dep_dist_cop": -0.0323,
+     "dep_dist_punct": 0.0582,
+     "dep_dist_expl": 0.09,
+     "subj_pre": -0.0997,
+     "subj_post": 0.0715,
+     "obj_pre": 0.0616,
+     "obj_post": 0.0398,
+     "n_prepositional_chains": 0.142,
+     "avg_prepositional_chain_len": 0.104,
+     "prep_dist_5": 0.0218,
+     "prep_dist_3": 0.0571,
+     "prep_dist_4": 0.0294,
+     "prep_dist_1": 0.0319,
+     "prep_dist_2": 0.0444,
+     "subordinate_dist_4": 0.0202,
+     "subordinate_dist_3": 0.0446,
+     "subordinate_dist_5": 0.0218,
+     "subordinate_dist_1": 0.182,
+     "subordinate_dist_2": 0.101,
+     "avg_subordinate_chain_len": 0.277,
+     "principal_proposition_dist": -0.351,
+     "subordinate_proposition_dist": 0.342,
+     "subordinate_pre": 0.11,
+     "subordinate_post": 0.202,
+     "verb_edges_dist_3": -0.0223,
+     "verb_edges_dist_0": 0.0324,
+     "verb_edges_dist_5": 0.056,
+     "verb_edges_dist_1": 0.135,
+     "verb_edges_dist_2": 0.0245,
+     "verb_edges_dist_6": 0.0415,
+     "verb_edges_dist_4": 0.0396,
+     "avg_verb_edges": 0.0211
+    }
+   },
+   "v1_training_no_score_higher": {
+    "pairs": 42704,
+    "originals": 9675,
+    "readit_original_mean": {
+     "all": 79.8,
+     "base": 57.6,
+     "lexical": 37.7,
+     "syntax": 77.7
+    },
+    "readit_drop_mean": {
+     "all": 41.7,
+     "base": 22.9,
+     "lexical": 4.09,
+     "syntax": 39.7
+    },
+    "share_harder_in": {
+     "base": 0.0,
+     "lexical": 0.0,
+     "syntax": 0.0
+    },
+    "original_chars_median": 200,
+    "manova_one_per_original": {
+     "V": 0.486,
+     "F": 131.6,
+     "df1": 138,
+     "df2": 19211,
+     "p": 0.0,
+     "chance": 0.00713
+    },
+    "manova_most_random_least": {
+     "most": {
+      "V": 0.595,
+      "F": 205.9,
+      "df1": 137,
+      "df2": 19212,
+      "p": 0.0,
+      "chance": 0.00708
+     },
+     "random": {
+      "V": 0.496,
+      "F": 137.2,
+      "df1": 138,
+      "df2": 19211,
+      "p": 0.0,
+      "chance": 0.00713
+     },
+     "least": {
+      "V": 0.376,
+      "F": 83.77,
+      "df1": 138,
+      "df2": 19211,
+      "p": 0.0,
+      "chance": 0.00713
+     }
+    },
+    "r": {
+     "n_tokens": 0.98,
+     "tokens_per_sent": 0.98,
+     "char_per_tok": 0.00666,
+     "in_dict": 0.0192,
+     "in_dict_types": -0.15,
+     "in_FO": -0.12,
+     "in_AD": -0.00698,
+     "in_AU": 0.291,
+     "in_FO_types": -0.108,
+     "in_AD_types": -0.382,
+     "in_AU_types": 0.24,
+     "upos_dist_CCONJ": 0.156,
+     "upos_dist_X": 0.196,
+     "upos_dist_SCONJ": -0.0172,
+     "upos_dist_DET": -0.0874,
+     "upos_dist_NOUN": -0.154,
+     "upos_dist_PROPN": -0.378,
+     "upos_dist_SYM": 0.374,
+     "upos_dist_ADJ": -0.0272,
+     "upos_dist_PUNCT": 0.313,
+     "upos_dist_PART": -0.0952,
+     "upos_dist_VERB": -0.0038,
+     "upos_dist_ADV": 0.401,
+     "upos_dist_ADP": 0.361,
+     "upos_dist_INTJ": -0.137,
+     "upos_dist_AUX": -0.63,
+     "upos_dist_NUM": -0.14,
+     "upos_dist_PRON": 0.459,
+     "lexical_density": -0.132,
+     "verbs_mood_dist_Sub": 0.446,
+     "verbs_mood_dist_Ind": 0.758,
+     "verbs_mood_dist_Cnd": 0.432,
+     "verbs_mood_dist_Imp": -0.327,
+     "verbs_tense_dist_Fut": 0.701,
+     "verbs_tense_dist_Pres": 0.335,
+     "verbs_tense_dist_Past": -0.00583,
+     "verbs_tense_dist_Imp": 0.227,
+     "verbs_form_dist_Part": -0.166,
+     "verbs_form_dist_Ger": 0.556,
+     "verbs_form_dist_Inf": 0.16,
+     "verbs_form_dist_Fin": 0.246,
+     "verbs_num_pers_dist_Sing+1": -0.263,
+     "verbs_num_pers_dist_Plur+3": 0.363,
+     "verbs_num_pers_dist_Plur+1": -0.082,
+     "verbs_num_pers_dist_Sing+": 0.684,
+     "verbs_num_pers_dist_Sing+3": 0.664,
+     "verbs_num_pers_dist_Plur+2": -0.19,
+     "verbs_num_pers_dist_+": 1.0,
+     "verbs_num_pers_dist_Sing+2": -0.409,
+     "verbs_num_pers_dist_Plur+": 0.333,
+     "aux_mood_dist_Cnd": 0.137,
+     "aux_mood_dist_Ind": -0.259,
+     "aux_mood_dist_Sub": 0.146,
+     "aux_tense_dist_Past": 0.212,
+     "aux_tense_dist_Pres": -0.372,
+     "aux_tense_dist_Imp": 0.106,
+     "aux_tense_dist_Fut": 0.472,
+     "aux_form_dist_Part": -0.563,
+     "aux_form_dist_Fin": -0.151,
+     "aux_form_dist_Ger": 0.921,
+     "aux_form_dist_Inf": 0.263,
+     "aux_num_pers_dist_Sing+2": -0.786,
+     "aux_num_pers_dist_Plur+3": -0.188,
+     "aux_num_pers_dist_Sing+1": -0.899,
+     "aux_num_pers_dist_Plur+1": -0.644,
+     "aux_num_pers_dist_Sing+3": -0.161,
+     "verbal_head_per_sent": 0.91,
+     "verbal_root_perc": 0.0717,
+     "avg_token_per_clause": 0.117,
+     "avg_links_len": 0.717,
+     "max_links_len": 0.813,
+     "avg_max_links_len": 0.813,
+     "avg_max_depth": 0.896,
+     "dep_dist_root": -0.97,
+     "dep_dist_flat": -0.0187,
+     "dep_dist_det:predet": 0.158,
+     "dep_dist_appos": 0.354,
+     "dep_dist_aux:pass": -0.396,
+     "dep_dist_parataxis:hashtag": -1.0,
+     "dep_dist_acl:relcl": 0.378,
+     "dep_dist_flat:name": -0.271,
+     "dep_dist_obl:agent": 0.209,
+     "dep_dist_fixed": 0.149,
+     "dep_dist_case": 0.347,
+     "dep_dist_advmod": 0.43,
+     "dep_dist_nsubj": -0.333,
+     "dep_dist_nmod": -0.0121,
+     "dep_dist_det": -0.102,
+     "dep_dist_compound": 0.0762,
+     "dep_dist_vocative": -0.714,
+     "dep_dist_obj": -0.159,
+     "dep_dist_dep": -0.0909,
+     "dep_dist_amod": 0.00187,
+     "dep_dist_xcomp": -0.0125,
+     "dep_dist_obl": 0.335,
+     "dep_dist_aux": -0.686,
+     "dep_dist_discourse": 0.687,
+     "dep_dist_nsubj:pass": -0.451,
+     "dep_dist_ccomp": 0.182,
+     "dep_dist_conj": 0.147,
+     "dep_dist_list": null,
+     "dep_dist_mark": 0.044,
+     "dep_dist_expl:pass": 0.143,
+     "dep_dist_cc": 0.154,
+     "dep_dist_acl": 0.462,
+     "dep_dist_parataxis": 0.707,
+     "dep_dist_det:poss": 0.0754,
+     "dep_dist_iobj": 0.594,
+     "dep_dist_csubj": -0.28,
+     "dep_dist_expl:impers": 0.123,
+     "dep_dist_nummod": -0.0907,
+     "dep_dist_advcl": 0.254,
+     "dep_dist_flat:foreign": 0.105,
+     "dep_dist_cop": -0.321,
+     "dep_dist_punct": 0.31,
+     "dep_dist_expl": 0.321,
+     "subj_pre": -0.254,
+     "subj_post": 0.517,
+     "obj_pre": 0.563,
+     "obj_post": 0.318,
+     "n_prepositional_chains": 0.774,
+     "avg_prepositional_chain_len": 0.463,
+     "prep_dist_5": 0.303,
+     "prep_dist_3": 0.292,
+     "prep_dist_4": 0.446,
+     "prep_dist_1": 0.284,
+     "prep_dist_2": 0.227,
+     "subordinate_dist_4": 0.643,
+     "subordinate_dist_3": 0.454,
+     "subordinate_dist_5": 0.846,
+     "subordinate_dist_1": 0.558,
+     "subordinate_dist_2": 0.388,
+     "avg_subordinate_chain_len": 0.748,
+     "principal_proposition_dist": -0.774,
+     "subordinate_proposition_dist": 0.832,
+     "subordinate_pre": 0.305,
+     "subordinate_post": 0.681,
+     "verb_edges_dist_3": -0.121,
+     "verb_edges_dist_0": 0.285,
+     "verb_edges_dist_5": 0.353,
+     "verb_edges_dist_1": 0.426,
+     "verb_edges_dist_2": -0.0814,
+     "verb_edges_dist_6": 0.642,
+     "verb_edges_dist_4": 0.106,
+     "avg_verb_edges": 0.222
+    },
+    "p": {
+     "n_tokens": 0.0,
+     "tokens_per_sent": 0.0,
+     "char_per_tok": 0.57,
+     "in_dict": 0.11,
+     "in_dict_types": 1.1e-35,
+     "in_FO": 3.6e-24,
+     "in_AD": 0.56,
+     "in_AU": 2.1e-129,
+     "in_FO_types": 1.8e-19,
+     "in_AD_types": 5.8e-218,
+     "in_AU_types": 1.6e-87,
+     "upos_dist_CCONJ": 2e-28,
+     "upos_dist_X": 0.018,
+     "upos_dist_SCONJ": 0.41,
+     "upos_dist_DET": 2.2e-13,
+     "upos_dist_NOUN": 2.6e-38,
+     "upos_dist_PROPN": 1.5e-163,
+     "upos_dist_SYM": 0.00025,
+     "upos_dist_ADJ": 0.027,
+     "upos_dist_PUNCT": 2e-152,
+     "upos_dist_PART": 0.83,
+     "upos_dist_VERB": 0.75,
+     "upos_dist_ADV": 4.7e-197,
+     "upos_dist_ADP": 5.4e-202,
+     "upos_dist_INTJ": 0.51,
+     "upos_dist_AUX": 0.0,
+     "upos_dist_NUM": 5.8e-15,
+     "upos_dist_PRON": 4.8e-248,
+     "lexical_density": 2e-28,
+     "verbs_mood_dist_Sub": 1.4e-10,
+     "verbs_mood_dist_Ind": 0.0,
+     "verbs_mood_dist_Cnd": 0.0053,
+     "verbs_mood_dist_Imp": 0.35,
+     "verbs_tense_dist_Fut": 8.8e-20,
+     "verbs_tense_dist_Pres": 4.7e-71,
+     "verbs_tense_dist_Past": 0.73,
+     "verbs_tense_dist_Imp": 4.7e-13,
+     "verbs_form_dist_Part": 4.1e-29,
+     "verbs_form_dist_Ger": 3e-103,
+     "verbs_form_dist_Inf": 8.9e-17,
+     "verbs_form_dist_Fin": 2e-66,
+     "verbs_num_pers_dist_Sing+1": 0.14,
+     "verbs_num_pers_dist_Plur+3": 4.6e-48,
+     "verbs_num_pers_dist_Plur+1": 0.57,
+     "verbs_num_pers_dist_Sing+": 5.6e-06,
+     "verbs_num_pers_dist_Sing+3": 2.2e-309,
+     "verbs_num_pers_dist_Plur+2": 0.67,
+     "verbs_num_pers_dist_+": 0.016,
+     "verbs_num_pers_dist_Sing+2": 0.12,
+     "verbs_num_pers_dist_Plur+": 0.27,
+     "aux_mood_dist_Cnd": 0.036,
+     "aux_mood_dist_Ind": 6e-46,
+     "aux_mood_dist_Sub": 0.0042,
+     "aux_tense_dist_Past": 1.3e-17,
+     "aux_tense_dist_Pres": 5.8e-95,
+     "aux_tense_dist_Imp": 0.00081,
+     "aux_tense_dist_Fut": 0.00013,
+     "aux_form_dist_Part": 1.6e-82,
+     "aux_form_dist_Fin": 1.6e-18,
+     "aux_form_dist_Ger": 2.3e-14,
+     "aux_form_dist_Inf": 6e-11,
+     "aux_num_pers_dist_Sing+2": 0.054,
+     "aux_num_pers_dist_Plur+3": 2.2e-12,
+     "aux_num_pers_dist_Sing+1": 2.6e-05,
+     "aux_num_pers_dist_Plur+1": 0.00015,
+     "aux_num_pers_dist_Sing+3": 5.7e-18,
+     "verbal_head_per_sent": 0.0,
+     "verbal_root_perc": 0.056,
+     "avg_token_per_clause": 1.7e-22,
+     "avg_links_len": 0.0,
+     "max_links_len": 0.0,
+     "avg_max_links_len": 0.0,
+     "avg_max_depth": 0.0,
+     "dep_dist_root": 0.0,
+     "dep_dist_flat": 0.69,
+     "dep_dist_det:predet": 0.0047,
+     "dep_dist_appos": 5e-31,
+     "dep_dist_aux:pass": 4.5e-91,
+     "dep_dist_parataxis:hashtag": 0.32,
+     "dep_dist_acl:relcl": 2.2e-114,
+     "dep_dist_flat:name": 8.3e-46,
+     "dep_dist_obl:agent": 1.3e-18,
+     "dep_dist_fixed": 2.3e-09,
+     "dep_dist_case": 9.6e-187,
+     "dep_dist_advmod": 3.6e-211,
+     "dep_dist_nsubj": 3.8e-150,
+     "dep_dist_nmod": 0.32,
+     "dep_dist_det": 1.2e-17,
+     "dep_dist_compound": 0.06,
+     "dep_dist_vocative": 0.09,
+     "dep_dist_obj": 4.4e-31,
+     "dep_dist_dep": 0.79,
+     "dep_dist_amod": 0.88,
+     "dep_dist_xcomp": 0.57,
+     "dep_dist_obl": 6e-169,
+     "dep_dist_aux": 0.0,
+     "dep_dist_discourse": 0.00045,
+     "dep_dist_nsubj:pass": 3.3e-100,
+     "dep_dist_ccomp": 7e-12,
+     "dep_dist_conj": 4.2e-26,
+     "dep_dist_list": null,
+     "dep_dist_mark": 0.0059,
+     "dep_dist_expl:pass": 0.51,
+     "dep_dist_cc": 1.4e-27,
+     "dep_dist_acl": 3.4e-153,
+     "dep_dist_parataxis": 1.7e-56,
+     "dep_dist_det:poss": 0.0013,
+     "dep_dist_iobj": 4.9e-38,
+     "dep_dist_csubj": 0.0015,
+     "dep_dist_expl:impers": 0.65,
+     "dep_dist_nummod": 3.6e-05,
+     "dep_dist_advcl": 1.3e-54,
+     "dep_dist_flat:foreign": 0.3,
+     "dep_dist_cop": 3.6e-55,
+     "dep_dist_punct": 3.1e-149,
+     "dep_dist_expl": 2.5e-60,
+     "subj_pre": 4.1e-35,
+     "subj_post": 2.8e-97,
+     "obj_pre": 3.4e-39,
+     "obj_post": 4.1e-62,
+     "n_prepositional_chains": 0.0,
+     "avg_prepositional_chain_len": 8.1e-185,
+     "prep_dist_5": 0.19,
+     "prep_dist_3": 6.1e-13,
+     "prep_dist_4": 1e-06,
+     "prep_dist_1": 4.1e-68,
+     "prep_dist_2": 1.5e-30,
+     "subordinate_dist_4": 1.3e-07,
+     "subordinate_dist_3": 4.3e-20,
+     "subordinate_dist_5": 0.0089,
+     "subordinate_dist_1": 2.6e-272,
+     "subordinate_dist_2": 4.4e-63,
+     "avg_subordinate_chain_len": 0.0,
+     "principal_proposition_dist": 0.0,
+     "subordinate_proposition_dist": 0.0,
+     "subordinate_pre": 4.5e-43,
+     "subordinate_post": 0.0,
+     "verb_edges_dist_3": 2.8e-17,
+     "verb_edges_dist_0": 2.8e-05,
+     "verb_edges_dist_5": 2.1e-62,
+     "verb_edges_dist_1": 4.1e-123,
+     "verb_edges_dist_2": 3.6e-08,
+     "verb_edges_dist_6": 1.9e-70,
+     "verb_edges_dist_4": 2.7e-11,
+     "avg_verb_edges": 9.9e-68
+    },
+    "share_changed": {
+     "n_tokens": 0.977,
+     "tokens_per_sent": 0.977,
+     "char_per_tok": 0.992,
+     "in_dict": 0.961,
+     "in_dict_types": 0.955,
+     "in_FO": 0.978,
+     "in_AD": 0.945,
+     "in_AU": 0.95,
+     "in_FO_types": 0.968,
+     "in_AD_types": 0.938,
+     "in_AU_types": 0.945,
+     "upos_dist_CCONJ": 0.691,
+     "upos_dist_X": 0.0202,
+     "upos_dist_SCONJ": 0.311,
+     "upos_dist_DET": 0.97,
+     "upos_dist_NOUN": 0.971,
+     "upos_dist_PROPN": 0.717,
+     "upos_dist_SYM": 0.0131,
+     "upos_dist_ADJ": 0.906,
+     "upos_dist_PUNCT": 0.972,
+     "upos_dist_PART": 0.00062,
+     "upos_dist_VERB": 0.961,
+     "upos_dist_ADV": 0.769,
+     "upos_dist_ADP": 0.971,
+     "upos_dist_INTJ": 0.0032,
+     "upos_dist_AUX": 0.758,
+     "upos_dist_NUM": 0.426,
+     "upos_dist_PRON": 0.74,
+     "lexical_density": 0.964,
+     "verbs_mood_dist_Sub": 0.0279,
+     "verbs_mood_dist_Ind": 0.364,
+     "verbs_mood_dist_Cnd": 0.00558,
+     "verbs_mood_dist_Imp": 0.00103,
+     "verbs_tense_dist_Fut": 0.0229,
+     "verbs_tense_dist_Pres": 0.386,
+     "verbs_tense_dist_Past": 0.486,
+     "verbs_tense_dist_Imp": 0.138,
+     "verbs_form_dist_Part": 0.622,
+     "verbs_form_dist_Ger": 0.207,
+     "verbs_form_dist_Inf": 0.372,
+     "verbs_form_dist_Fin": 0.674,
+     "verbs_num_pers_dist_Sing+1": 0.00413,
+     "verbs_num_pers_dist_Plur+3": 0.215,
+     "verbs_num_pers_dist_Plur+1": 0.0062,
+     "verbs_num_pers_dist_Sing+": 0.00589,
+     "verbs_num_pers_dist_Sing+3": 0.404,
+     "verbs_num_pers_dist_Plur+2": 0.00062,
+     "verbs_num_pers_dist_+": 0.000724,
+     "verbs_num_pers_dist_Sing+2": 0.00186,
+     "verbs_num_pers_dist_Plur+": 0.00145,
+     "aux_mood_dist_Cnd": 0.031,
+     "aux_mood_dist_Ind": 0.344,
+     "aux_mood_dist_Sub": 0.051,
+     "aux_tense_dist_Past": 0.219,
+     "aux_tense_dist_Pres": 0.403,
+     "aux_tense_dist_Imp": 0.131,
+     "aux_tense_dist_Fut": 0.00858,
+     "aux_form_dist_Part": 0.154,
+     "aux_form_dist_Fin": 0.443,
+     "aux_form_dist_Ger": 0.0092,
+     "aux_form_dist_Inf": 0.0838,
+     "aux_num_pers_dist_Sing+2": 0.000724,
+     "aux_num_pers_dist_Plur+3": 0.179,
+     "aux_num_pers_dist_Sing+1": 0.00279,
+     "aux_num_pers_dist_Plur+1": 0.00444,
+     "aux_num_pers_dist_Sing+3": 0.345,
+     "verbal_head_per_sent": 0.764,
+     "verbal_root_perc": 0.0735,
+     "avg_token_per_clause": 0.965,
+     "avg_links_len": 0.992,
+     "max_links_len": 0.894,
+     "avg_max_links_len": 0.894,
+     "avg_max_depth": 0.805,
+     "dep_dist_root": 0.977,
+     "dep_dist_flat": 0.0607,
+     "dep_dist_det:predet": 0.0442,
+     "dep_dist_appos": 0.147,
+     "dep_dist_aux:pass": 0.36,
+     "dep_dist_parataxis:hashtag": 0.000103,
+     "dep_dist_acl:relcl": 0.497,
+     "dep_dist_flat:name": 0.379,
+     "dep_dist_obl:agent": 0.244,
+     "dep_dist_fixed": 0.222,
+     "dep_dist_case": 0.971,
+     "dep_dist_advmod": 0.716,
+     "dep_dist_nsubj": 0.845,
+     "dep_dist_nmod": 0.918,
+     "dep_dist_det": 0.969,
+     "dep_dist_compound": 0.0841,
+     "dep_dist_vocative": 0.000724,
+     "dep_dist_obj": 0.73,
+     "dep_dist_dep": 0.00114,
+     "dep_dist_amod": 0.883,
+     "dep_dist_xcomp": 0.292,
+     "dep_dist_obl": 0.942,
+     "dep_dist_aux": 0.484,
+     "dep_dist_discourse": 0.00351,
+     "dep_dist_nsubj:pass": 0.306,
+     "dep_dist_ccomp": 0.196,
+     "dep_dist_conj": 0.709,
+     "dep_dist_list": 0.0,
+     "dep_dist_mark": 0.54,
+     "dep_dist_expl:pass": 0.00289,
+     "dep_dist_cc": 0.69,
+     "dep_dist_acl": 0.449,
+     "dep_dist_parataxis": 0.0691,
+     "dep_dist_det:poss": 0.251,
+     "dep_dist_iobj": 0.0648,
+     "dep_dist_csubj": 0.0177,
+     "dep_dist_expl:impers": 0.00186,
+     "dep_dist_nummod": 0.286,
+     "dep_dist_advcl": 0.517,
+     "dep_dist_flat:foreign": 0.0133,
+     "dep_dist_cop": 0.327,
+     "dep_dist_punct": 0.971,
+     "dep_dist_expl": 0.36,
+     "subj_pre": 0.313,
+     "subj_post": 0.221,
+     "obj_pre": 0.0734,
+     "obj_post": 0.325,
+     "n_prepositional_chains": 0.667,
+     "avg_prepositional_chain_len": 0.534,
+     "prep_dist_5": 0.00248,
+     "prep_dist_3": 0.083,
+     "prep_dist_4": 0.0163,
+     "prep_dist_1": 0.512,
+     "prep_dist_2": 0.351,
+     "subordinate_dist_4": 0.0091,
+     "subordinate_dist_3": 0.0551,
+     "subordinate_dist_5": 0.00124,
+     "subordinate_dist_1": 0.514,
+     "subordinate_dist_2": 0.253,
+     "avg_subordinate_chain_len": 0.551,
+     "principal_proposition_dist": 0.727,
+     "subordinate_proposition_dist": 0.721,
+     "subordinate_pre": 0.277,
+     "subordinate_post": 0.495,
+     "verb_edges_dist_3": 0.672,
+     "verb_edges_dist_0": 0.0296,
+     "verb_edges_dist_5": 0.305,
+     "verb_edges_dist_1": 0.421,
+     "verb_edges_dist_2": 0.628,
+     "verb_edges_dist_6": 0.105,
+     "verb_edges_dist_4": 0.541,
+     "avg_verb_edges": 0.847
+    },
+    "rho_global": {
+     "n_tokens": 0.291,
+     "tokens_per_sent": 0.291,
+     "char_per_tok": 0.0918,
+     "in_dict": 0.0653,
+     "in_dict_types": 0.0313,
+     "in_FO": 0.00331,
+     "in_AD": -0.0169,
+     "in_AU": 0.118,
+     "in_FO_types": 0.00813,
+     "in_AD_types": -0.13,
+     "in_AU_types": 0.111,
+     "upos_dist_CCONJ": 0.0684,
+     "upos_dist_X": 0.0215,
+     "upos_dist_SCONJ": 0.103,
+     "upos_dist_DET": -0.111,
+     "upos_dist_NOUN": -0.0427,
+     "upos_dist_PROPN": -0.136,
+     "upos_dist_SYM": 0.0148,
+     "upos_dist_ADJ": 0.0776,
+     "upos_dist_PUNCT": 0.0578,
+     "upos_dist_PART": 0.0126,
+     "upos_dist_VERB": 0.0842,
+     "upos_dist_ADV": 0.165,
+     "upos_dist_ADP": 0.1,
+     "upos_dist_INTJ": 0.0154,
+     "upos_dist_AUX": -0.176,
+     "upos_dist_NUM": -0.0193,
+     "upos_dist_PRON": 0.184,
+     "lexical_density": 0.034,
+     "verbs_mood_dist_Sub": 0.0063,
+     "verbs_mood_dist_Ind": 0.174,
+     "verbs_mood_dist_Cnd": 0.0228,
+     "verbs_mood_dist_Imp": 0.00868,
+     "verbs_tense_dist_Fut": 0.0348,
+     "verbs_tense_dist_Pres": 0.0717,
+     "verbs_tense_dist_Past": -0.0155,
+     "verbs_tense_dist_Imp": 0.0489,
+     "verbs_form_dist_Part": -0.0386,
+     "verbs_form_dist_Ger": 0.114,
+     "verbs_form_dist_Inf": 0.0497,
+     "verbs_form_dist_Fin": 0.0861,
+     "verbs_num_pers_dist_Sing+1": 0.0222,
+     "verbs_num_pers_dist_Plur+3": 0.059,
+     "verbs_num_pers_dist_Plur+1": 0.0411,
+     "verbs_num_pers_dist_Sing+": 0.00801,
+     "verbs_num_pers_dist_Sing+3": 0.132,
+     "verbs_num_pers_dist_Plur+2": -0.000586,
+     "verbs_num_pers_dist_+": 0.0085,
+     "verbs_num_pers_dist_Sing+2": 0.0156,
+     "verbs_num_pers_dist_Plur+": 0.021,
+     "aux_mood_dist_Cnd": 0.0353,
+     "aux_mood_dist_Ind": -0.0979,
+     "aux_mood_dist_Sub": 0.0147,
+     "aux_tense_dist_Past": 0.0043,
+     "aux_tense_dist_Pres": -0.102,
+     "aux_tense_dist_Imp": -0.00393,
+     "aux_tense_dist_Fut": 0.0265,
+     "aux_form_dist_Part": -0.0216,
+     "aux_form_dist_Fin": -0.0807,
+     "aux_form_dist_Ger": 0.0372,
+     "aux_form_dist_Inf": 0.0167,
+     "aux_num_pers_dist_Sing+2": -0.011,
+     "aux_num_pers_dist_Plur+3": -0.0137,
+     "aux_num_pers_dist_Sing+1": 0.00747,
+     "aux_num_pers_dist_Plur+1": -0.00493,
+     "aux_num_pers_dist_Sing+3": -0.0739,
+     "verbal_head_per_sent": 0.265,
+     "verbal_root_perc": -0.0764,
+     "avg_token_per_clause": -0.0542,
+     "avg_links_len": 0.182,
+     "max_links_len": 0.156,
+     "avg_max_links_len": 0.156,
+     "avg_max_depth": 0.297,
+     "dep_dist_root": -0.406,
+     "dep_dist_flat": 0.00656,
+     "dep_dist_det:predet": 0.0259,
+     "dep_dist_appos": 0.0574,
+     "dep_dist_aux:pass": -0.0181,
+     "dep_dist_parataxis:hashtag": 0.0153,
+     "dep_dist_acl:relcl": 0.201,
+     "dep_dist_flat:name": -0.0292,
+     "dep_dist_obl:agent": 0.0756,
+     "dep_dist_fixed": 0.0602,
+     "dep_dist_case": 0.0951,
+     "dep_dist_advmod": 0.177,
+     "dep_dist_nsubj": -0.0966,
+     "dep_dist_nmod": -0.0263,
+     "dep_dist_det": -0.116,
+     "dep_dist_compound": 0.0355,
+     "dep_dist_vocative": -0.00311,
+     "dep_dist_obj": 0.0105,
+     "dep_dist_dep": -0.0104,
+     "dep_dist_amod": 0.071,
+     "dep_dist_xcomp": 0.0738,
+     "dep_dist_obl": 0.113,
+     "dep_dist_aux": -0.0889,
+     "dep_dist_discourse": 0.00907,
+     "dep_dist_nsubj:pass": -0.0271,
+     "dep_dist_ccomp": 0.0615,
+     "dep_dist_conj": 0.0587,
+     "dep_dist_list": null,
+     "dep_dist_mark": 0.0925,
+     "dep_dist_expl:pass": -0.013,
+     "dep_dist_cc": 0.0667,
+     "dep_dist_acl": 0.18,
+     "dep_dist_parataxis": 0.0257,
+     "dep_dist_det:poss": 0.0393,
+     "dep_dist_iobj": 0.0618,
+     "dep_dist_csubj": 0.0337,
+     "dep_dist_expl:impers": 0.00222,
+     "dep_dist_nummod": 0.0144,
+     "dep_dist_advcl": 0.155,
+     "dep_dist_flat:foreign": 0.0224,
+     "dep_dist_cop": -0.0102,
+     "dep_dist_punct": 0.0556,
+     "dep_dist_expl": 0.0748,
+     "subj_pre": -0.11,
+     "subj_post": 0.0872,
+     "obj_pre": 0.0612,
+     "obj_post": 0.0453,
+     "n_prepositional_chains": 0.12,
+     "avg_prepositional_chain_len": 0.111,
+     "prep_dist_5": 0.00518,
+     "prep_dist_3": 0.0474,
+     "prep_dist_4": 0.0127,
+     "prep_dist_1": 0.0201,
+     "prep_dist_2": 0.0629,
+     "subordinate_dist_4": 0.0104,
+     "subordinate_dist_3": 0.0417,
+     "subordinate_dist_5": 0.0147,
+     "subordinate_dist_1": 0.208,
+     "subordinate_dist_2": 0.0723,
+     "avg_subordinate_chain_len": 0.273,
+     "principal_proposition_dist": -0.342,
+     "subordinate_proposition_dist": 0.352,
+     "subordinate_pre": 0.122,
+     "subordinate_post": 0.204,
+     "verb_edges_dist_3": -0.0263,
+     "verb_edges_dist_0": 0.0344,
+     "verb_edges_dist_5": 0.0698,
+     "verb_edges_dist_1": 0.143,
+     "verb_edges_dist_2": 0.0309,
+     "verb_edges_dist_6": 0.0318,
+     "verb_edges_dist_4": 0.0393,
+     "avg_verb_edges": 0.0193
+    }
+   }
+  },
+  "r_changes": {
+   "clicit2025_sample -> clicit2026_gfff_training": [
+    {
+     "feature": "upos_dist_SCONJ",
+     "category": "Morphosyntactic information",
+     "r_from": 0.292,
+     "r_to": -0.0072
+    },
+    {
+     "feature": "aux_tense_dist_Imp",
+     "category": "Inflectional morphology",
+     "r_from": 0.339,
+     "r_to": 0.0849
+    },
+    {
+     "feature": "upos_dist_PROPN",
+     "category": "Morphosyntactic information",
+     "r_from": -0.15,
+     "r_to": -0.376
+    },
+    {
+     "feature": "dep_dist_flat:name",
+     "category": "Dependency relations",
+     "r_from": -0.0242,
+     "r_to": -0.247
+    },
+    {
+     "feature": "lexical_density",
+     "category": "Morphosyntactic information",
+     "r_from": 0.0731,
+     "r_to": -0.142
+    },
+    {
+     "feature": "subj_pre",
+     "category": "Order of elements",
+     "r_from": -0.0302,
+     "r_to": -0.231
+    },
+    {
+     "feature": "avg_token_per_clause",
+     "category": "Global and local parse-tree structures",
+     "r_from": 0.324,
+     "r_to": 0.124
+    },
+    {
+     "feature": "dep_dist_obl",
+     "category": "Dependency relations",
+     "r_from": 0.136,
+     "r_to": 0.327
+    },
+    {
+     "feature": "in_AU",
+     "category": "Lexical variety",
+     "r_from": 0.1,
+     "r_to": 0.278
+    },
+    {
+     "feature": "upos_dist_ADP",
+     "category": "Morphosyntactic information",
+     "r_from": 0.174,
+     "r_to": 0.336
+    },
+    {
+     "feature": "verbs_form_dist_Fin",
+     "category": "Inflectional morphology",
+     "r_from": 0.416,
+     "r_to": 0.259
+    }
+   ],
+   "clicit2025_sample -> v1_training": [
+    {
+     "feature": "avg_token_per_clause",
+     "category": "Global and local parse-tree structures",
+     "r_from": 0.324,
+     "r_to": 0.0455
+    },
+    {
+     "feature": "dep_dist_appos",
+     "category": "Dependency relations",
+     "r_from": 0.467,
+     "r_to": 0.236
+    },
+    {
+     "feature": "dep_dist_punct",
+     "category": "Dependency relations",
+     "r_from": 0.354,
+     "r_to": 0.13
+    },
+    {
+     "feature": "upos_dist_PUNCT",
+     "category": "Morphosyntactic information",
+     "r_from": 0.346,
+     "r_to": 0.132
+    },
+    {
+     "feature": "subj_pre",
+     "category": "Order of elements",
+     "r_from": -0.0302,
+     "r_to": -0.228
+    },
+    {
+     "feature": "upos_dist_VERB",
+     "category": "Morphosyntactic information",
+     "r_from": -0.0865,
+     "r_to": 0.105
+    },
+    {
+     "feature": "dep_dist_obl",
+     "category": "Dependency relations",
+     "r_from": 0.136,
+     "r_to": 0.319
+    },
+    {
+     "feature": "upos_dist_PRON",
+     "category": "Morphosyntactic information",
+     "r_from": 0.312,
+     "r_to": 0.489
+    },
+    {
+     "feature": "dep_dist_nsubj:pass",
+     "category": "Dependency relations",
+     "r_from": -0.279,
+     "r_to": -0.456
+    },
+    {
+     "feature": "upos_dist_PROPN",
+     "category": "Morphosyntactic information",
+     "r_from": -0.15,
+     "r_to": -0.315
+    },
+    {
+     "feature": "dep_dist_flat:name",
+     "category": "Dependency relations",
+     "r_from": -0.0242,
+     "r_to": -0.189
+    },
+    {
+     "feature": "principal_proposition_dist",
+     "category": "Use of subordination",
+     "r_from": -0.607,
+     "r_to": -0.771
+    },
+    {
+     "feature": "prep_dist_2",
+     "category": "Global and local parse-tree structures",
+     "r_from": 0.338,
+     "r_to": 0.176
+    },
+    {
+     "feature": "upos_dist_SCONJ",
+     "category": "Morphosyntactic information",
+     "r_from": 0.292,
+     "r_to": 0.13
+    }
+   ],
+   "clicit2026_gfff_training -> v1_training": [
+    {
+     "feature": "upos_dist_PUNCT",
+     "category": "Morphosyntactic information",
+     "r_from": 0.333,
+     "r_to": 0.132
+    },
+    {
+     "feature": "dep_dist_punct",
+     "category": "Dependency relations",
+     "r_from": 0.328,
+     "r_to": 0.13
+    },
+    {
+     "feature": "lexical_density",
+     "category": "Morphosyntactic information",
+     "r_from": -0.142,
+     "r_to": 0.0361
+    },
+    {
+     "feature": "aux_num_pers_dist_Sing+3",
+     "category": "Inflectional morphology",
+     "r_from": -0.131,
+     "r_to": -0.295
+    },
+    {
+     "feature": "aux_tense_dist_Imp",
+     "category": "Inflectional morphology",
+     "r_from": 0.0849,
+     "r_to": 0.245
+    }
+   ],
+   "v1_training_no_score_higher -> v1_training": [
+    {
+     "feature": "upos_dist_PUNCT",
+     "category": "Morphosyntactic information",
+     "r_from": 0.313,
+     "r_to": 0.132
+    },
+    {
+     "feature": "dep_dist_punct",
+     "category": "Dependency relations",
+     "r_from": 0.31,
+     "r_to": 0.13
+    },
+    {
+     "feature": "lexical_density",
+     "category": "Morphosyntactic information",
+     "r_from": -0.132,
+     "r_to": 0.0361
+    }
+   ]
+  }
+ },
+ "small_edits": {
+  "character_similarity_quartiles": [
+   0.475,
+   0.638,
+   0.776
+  ],
+  "near_copies": {
+   ">=0.9": 0.056,
+   ">=0.95": 0.016,
+   ">=0.98": 0.003
+  },
+  "target_score_drop": {
+   "base": {
+    "quartiles": [
+     14.7,
+     24.4,
+     35.6
+    ],
+    "below_2_points": 0.0,
+    "below_5_points": 0.0
+   },
+   "lexical": {
+    "quartiles": [
+     5.6,
+     7.4,
+     9.9
+    ],
+    "below_2_points": 0.0,
+    "below_5_points": 0.169
+   },
+   "syntax": {
+    "quartiles": [
+     31.2,
+     43.8,
+     56.8
+    ],
+    "below_2_points": 0.0,
+    "below_5_points": 0.0
+   }
+  },
+  "rows_whose_largest_target_drop_is_below": {
+   "2_points": 0.0,
+   "5_points": 0.003
+  },
+  "near_copies_by_pattern": {
+   "B": 0.022,
+   "L": 0.043,
+   "S": 0.042,
+   "B+S": 0.009,
+   "B+L+S": 0.002
+  }
+ },
+ "profiling": {
+  "all": {
+   "n_pairs": 10800,
+   "readit_change_mean": {
+    "all": 40.1,
+    "base": 19.9,
+    "lexical": 1.02,
+    "syntax": 39.2
+   },
+   "manova": {
+    "V": 0.452,
+    "F": 126.4,
+    "df1": 140,
+    "df2": 21459,
+    "p": 0.0,
+    "chance": 0.00648
+   },
+   "top_features": [
+    {
+     "feature": "n_tokens",
+     "category": "Raw text properties",
+     "r": 0.926,
+     "mean_o": 38.8,
+     "mean_s": 23.33
+    },
+    {
+     "feature": "tokens_per_sent",
+     "category": "Raw text properties",
+     "r": 0.926,
+     "mean_o": 38.8,
+     "mean_s": 23.33
+    },
+    {
+     "feature": "dep_dist_root",
+     "category": "Dependency relations",
+     "r": -0.913,
+     "mean_o": 3.097,
+     "mean_s": 5.501
+    },
+    {
+     "feature": "verbal_head_per_sent",
+     "category": "Verbal predicate structure",
+     "r": 0.891,
+     "mean_o": 3.62,
+     "mean_s": 2.153
+    },
+    {
+     "feature": "avg_max_depth",
+     "category": "Global and local parse-tree structures",
+     "r": 0.874,
+     "mean_o": 6.574,
+     "mean_s": 4.632
+    },
+    {
+     "feature": "subordinate_proposition_dist",
+     "category": "Use of subordination",
+     "r": 0.835,
+     "mean_o": 60.73,
+     "mean_s": 35.67
+    },
+    {
+     "feature": "verbs_mood_dist_Ind",
+     "category": "Inflectional morphology",
+     "r": 0.791,
+     "mean_o": 76.35,
+     "mean_s": 46.81
+    },
+    {
+     "feature": "principal_proposition_dist",
+     "category": "Use of subordination",
+     "r": -0.771,
+     "mean_o": 37.69,
+     "mean_s": 60.97
+    },
+    {
+     "feature": "avg_subordinate_chain_len",
+     "category": "Use of subordination",
+     "r": 0.765,
+     "mean_o": 1.113,
+     "mean_s": 0.6987
+    },
+    {
+     "feature": "max_links_len",
+     "category": "Global and local parse-tree structures",
+     "r": 0.761,
+     "mean_o": 15.79,
+     "mean_s": 9.752
+    }
+   ],
+   "key_features": {
+    "n_tokens": {
+     "r": 0.926,
+     "mean_o": 38.8,
+     "mean_s": 23.33,
+     "share_changed": 0.975
+    },
+    "char_per_tok": {
+     "r": 0.149,
+     "mean_o": 4.814,
+     "mean_s": 4.758,
+     "share_changed": 0.993
+    },
+    "in_dict": {
+     "r": 0.0868,
+     "mean_o": 0.821,
+     "mean_s": 0.8111,
+     "share_changed": 0.962
+    },
+    "in_FO": {
+     "r": -0.0489,
+     "mean_o": 0.6032,
+     "mean_s": 0.6072,
+     "share_changed": 0.978
+    },
+    "lexical_density": {
+     "r": 0.0361,
+     "mean_o": 0.4998,
+     "mean_s": 0.4992,
+     "share_changed": 0.965
+    },
+    "avg_max_depth": {
+     "r": 0.874,
+     "mean_o": 6.574,
+     "mean_s": 4.632,
+     "share_changed": 0.802
+    },
+    "avg_links_len": {
+     "r": 0.642,
+     "mean_o": 2.705,
+     "mean_s": 2.367,
+     "share_changed": 0.993
+    },
+    "max_links_len": {
+     "r": 0.761,
+     "mean_o": 15.79,
+     "mean_s": 9.752,
+     "share_changed": 0.898
+    },
+    "avg_token_per_clause": {
+     "r": 0.0455,
+     "mean_o": 12.51,
+     "mean_s": 12.09,
+     "share_changed": 0.967
+    },
+    "verbal_head_per_sent": {
+     "r": 0.891,
+     "mean_o": 3.62,
+     "mean_s": 2.153,
+     "share_changed": 0.762
+    },
+    "subordinate_proposition_dist": {
+     "r": 0.835,
+     "mean_o": 60.73,
+     "mean_s": 35.67,
+     "share_changed": 0.725
+    },
+    "n_prepositional_chains": {
+     "r": 0.73,
+     "mean_o": 2.321,
+     "mean_s": 1.454,
+     "share_changed": 0.669
+    },
+    "avg_prepositional_chain_len": {
+     "r": 0.428,
+     "mean_o": 1.125,
+     "mean_s": 0.9432,
+     "share_changed": 0.532
+    }
+   },
+   "category_mean_abs_r": {
+    "Raw text properties": 0.667,
+    "Lexical variety": 0.123,
+    "Morphosyntactic information": 0.231,
+    "Inflectional morphology": 0.447,
+    "Verbal predicate structure": 0.311,
+    "Global and local parse-tree structures": 0.505,
+    "Dependency relations": 0.325,
+    "Order of elements": 0.447,
+    "Use of subordination": 0.619
+   },
+   "top_spearman_with_readit_change": {
+    "all": [
+     [
+      "dep_dist_root",
+      -0.378
+     ],
+     [
+      "principal_proposition_dist",
+      -0.351
+     ],
+     [
+      "subordinate_proposition_dist",
+      0.342
+     ],
+     [
+      "avg_max_depth",
+      0.3
+     ],
+     [
+      "n_tokens",
+      0.287
+     ]
+    ],
+    "base": [
+     [
+      "n_tokens",
+      0.907
+     ],
+     [
+      "tokens_per_sent",
+      0.907
+     ],
+     [
+      "dep_dist_root",
+      -0.678
+     ],
+     [
+      "verbal_head_per_sent",
+      0.6
+     ],
+     [
+      "avg_max_links_len",
+      0.58
+     ]
+    ],
+    "lexical": [
+     [
+      "upos_dist_PUNCT",
+      0.302
+     ],
+     [
+      "dep_dist_punct",
+      0.302
+     ],
+     [
+      "lexical_density",
+      -0.166
+     ],
+     [
+      "in_FO_types",
+      -0.153
+     ],
+     [
+      "in_dict_types",
+      -0.15
+     ]
+    ],
+    "syntax": [
+     [
+      "dep_dist_root",
+      -0.383
+     ],
+     [
+      "principal_proposition_dist",
+      -0.351
+     ],
+     [
+      "subordinate_proposition_dist",
+      0.345
+     ],
+     [
+      "avg_max_depth",
+      0.312
+     ],
+     [
+      "avg_subordinate_chain_len",
+      0.279
+     ]
+    ]
+   }
+  },
+  "base targeted": {
+   "n_pairs": 10266,
+   "readit_change_mean": {
+    "all": 41.9,
+    "base": 24.0,
+    "lexical": 1.49,
+    "syntax": 40.8
+   },
+   "manova": {
+    "V": 0.521,
+    "F": 158.4,
+    "df1": 140,
+    "df2": 20391,
+    "p": 0.0,
+    "chance": 0.00682
+   },
+   "top_features": [
+    {
+     "feature": "n_tokens",
+     "category": "Raw text properties",
+     "r": 0.987,
+     "mean_o": 39.66,
+     "mean_s": 21.32
+    },
+    {
+     "feature": "tokens_per_sent",
+     "category": "Raw text properties",
+     "r": 0.987,
+     "mean_o": 39.66,
+     "mean_s": 21.32
+    },
+    {
+     "feature": "dep_dist_root",
+     "category": "Dependency relations",
+     "r": -0.98,
+     "mean_o": 2.964,
+     "mean_s": 5.967
+    },
+    {
+     "feature": "verbal_head_per_sent",
+     "category": "Verbal predicate structure",
+     "r": 0.94,
+     "mean_o": 3.697,
+     "mean_s": 1.997
+    },
+    {
+     "feature": "avg_max_depth",
+     "category": "Global and local parse-tree structures",
+     "r": 0.933,
+     "mean_o": 6.669,
+     "mean_s": 4.399
+    },
+    {
+     "feature": "subordinate_proposition_dist",
+     "category": "Use of subordination",
+     "r": 0.877,
+     "mean_o": 61.63,
+     "mean_s": 32.81
+    },
+    {
+     "feature": "avg_max_links_len",
+     "category": "Global and local parse-tree structures",
+     "r": 0.855,
+     "mean_o": 16.1,
+     "mean_s": 8.915
+    },
+    {
+     "feature": "max_links_len",
+     "category": "Global and local parse-tree structures",
+     "r": 0.855,
+     "mean_o": 16.1,
+     "mean_s": 8.915
+    },
+    {
+     "feature": "n_prepositional_chains",
+     "category": "Global and local parse-tree structures",
+     "r": 0.843,
+     "mean_o": 2.382,
+     "mean_s": 1.318
+    },
+    {
+     "feature": "avg_subordinate_chain_len",
+     "category": "Use of subordination",
+     "r": 0.817,
+     "mean_o": 1.128,
+     "mean_s": 0.6419
+    }
+   ],
+   "key_features": {
+    "n_tokens": {
+     "r": 0.987,
+     "mean_o": 39.66,
+     "mean_s": 21.32,
+     "share_changed": 0.997
+    },
+    "char_per_tok": {
+     "r": 0.0584,
+     "mean_o": 4.807,
+     "mean_s": 4.788,
+     "share_changed": 0.996
+    },
+    "in_dict": {
+     "r": 0.13,
+     "mean_o": 0.8236,
+     "mean_s": 0.8099,
+     "share_changed": 0.973
+    },
+    "in_FO": {
+     "r": -0.0392,
+     "mean_o": 0.6047,
+     "mean_s": 0.6083,
+     "share_changed": 0.986
+    },
+    "lexical_density": {
+     "r": -0.0743,
+     "mean_o": 0.4987,
+     "mean_s": 0.5057,
+     "share_changed": 0.972
+    },
+    "avg_max_depth": {
+     "r": 0.933,
+     "mean_o": 6.669,
+     "mean_s": 4.399,
+     "share_changed": 0.846
+    },
+    "avg_links_len": {
+     "r": 0.732,
+     "mean_o": 2.72,
+     "mean_s": 2.308,
+     "share_changed": 0.995
+    },
+    "max_links_len": {
+     "r": 0.855,
+     "mean_o": 16.1,
+     "mean_s": 8.915,
+     "share_changed": 0.921
+    },
+    "avg_token_per_clause": {
+     "r": 0.107,
+     "mean_o": 12.59,
+     "mean_s": 11.69,
+     "share_changed": 0.977
+    },
+    "verbal_head_per_sent": {
+     "r": 0.94,
+     "mean_o": 3.697,
+     "mean_s": 1.997,
+     "share_changed": 0.822
+    },
+    "subordinate_proposition_dist": {
+     "r": 0.877,
+     "mean_o": 61.63,
+     "mean_s": 32.81,
+     "share_changed": 0.771
+    },
+    "n_prepositional_chains": {
+     "r": 0.843,
+     "mean_o": 2.382,
+     "mean_s": 1.318,
+     "share_changed": 0.704
+    },
+    "avg_prepositional_chain_len": {
+     "r": 0.536,
+     "mean_o": 1.141,
+     "mean_s": 0.9009,
+     "share_changed": 0.557
+    }
+   },
+   "category_mean_abs_r": {
+    "Raw text properties": 0.677,
+    "Lexical variety": 0.131,
+    "Morphosyntactic information": 0.264,
+    "Inflectional morphology": 0.449,
+    "Verbal predicate structure": 0.355,
+    "Global and local parse-tree structures": 0.545,
+    "Dependency relations": 0.342,
+    "Order of elements": 0.435,
+    "Use of subordination": 0.677
+   },
+   "top_spearman_with_readit_change": {
+    "all": [
+     [
+      "dep_dist_root",
+      -0.382
+     ],
+     [
+      "principal_proposition_dist",
+      -0.325
+     ],
+     [
+      "subordinate_proposition_dist",
+      0.318
+     ],
+     [
+      "avg_max_depth",
+      0.267
+     ],
+     [
+      "n_tokens",
+      0.255
+     ]
+    ],
+    "base": [
+     [
+      "n_tokens",
+      0.869
+     ],
+     [
+      "tokens_per_sent",
+      0.869
+     ],
+     [
+      "verbal_head_per_sent",
+      0.505
+     ],
+     [
+      "max_links_len",
+      0.486
+     ],
+     [
+      "avg_max_links_len",
+      0.486
+     ]
+    ],
+    "lexical": [
+     [
+      "upos_dist_PUNCT",
+      0.298
+     ],
+     [
+      "dep_dist_punct",
+      0.298
+     ],
+     [
+      "verbal_head_per_sent",
+      -0.189
+     ],
+     [
+      "n_tokens",
+      -0.173
+     ],
+     [
+      "tokens_per_sent",
+      -0.173
+     ]
+    ],
+    "syntax": [
+     [
+      "dep_dist_root",
+      -0.393
+     ],
+     [
+      "principal_proposition_dist",
+      -0.326
+     ],
+     [
+      "subordinate_proposition_dist",
+      0.325
+     ],
+     [
+      "avg_max_depth",
+      0.282
+     ],
+     [
+      "avg_subordinate_chain_len",
+      0.261
+     ]
+    ]
+   }
+  },
+  "lexical targeted": {
+   "n_pairs": 5366,
+   "readit_change_mean": {
+    "all": 45.1,
+    "base": 24.8,
+    "lexical": 7.92,
+    "syntax": 41.7
+   },
+   "manova": {
+    "V": 0.535,
+    "F": 87.07,
+    "df1": 140,
+    "df2": 10591,
+    "p": 0.0,
+    "chance": 0.013
+   },
+   "top_features": [
+    {
+     "feature": "n_tokens",
+     "category": "Raw text properties",
+     "r": 0.923,
+     "mean_o": 36.99,
+     "mean_s": 21.18
+    },
+    {
+     "feature": "tokens_per_sent",
+     "category": "Raw text properties",
+     "r": 0.923,
+     "mean_o": 36.99,
+     "mean_s": 21.18
+    },
+    {
+     "feature": "dep_dist_root",
+     "category": "Dependency relations",
+     "r": -0.921,
+     "mean_o": 3.244,
+     "mean_s": 6.023
+    },
+    {
+     "feature": "avg_max_depth",
+     "category": "Global and local parse-tree structures",
+     "r": 0.862,
+     "mean_o": 6.385,
+     "mean_s": 4.466
+    },
+    {
+     "feature": "verbal_head_per_sent",
+     "category": "Verbal predicate structure",
+     "r": 0.85,
+     "mean_o": 3.448,
+     "mean_s": 2.063
+    },
+    {
+     "feature": "max_links_len",
+     "category": "Global and local parse-tree structures",
+     "r": 0.78,
+     "mean_o": 15.14,
+     "mean_s": 8.849
+    },
+    {
+     "feature": "avg_max_links_len",
+     "category": "Global and local parse-tree structures",
+     "r": 0.78,
+     "mean_o": 15.14,
+     "mean_s": 8.849
+    },
+    {
+     "feature": "subordinate_proposition_dist",
+     "category": "Use of subordination",
+     "r": 0.773,
+     "mean_o": 59.13,
+     "mean_s": 35.71
+    },
+    {
+     "feature": "dep_dist_aux",
+     "category": "Dependency relations",
+     "r": -0.732,
+     "mean_o": 0.9409,
+     "mean_s": 2.547
+    },
+    {
+     "feature": "verbs_mood_dist_Ind",
+     "category": "Inflectional morphology",
+     "r": 0.724,
+     "mean_o": 75.94,
+     "mean_s": 50.56
+    }
+   ],
+   "key_features": {
+    "n_tokens": {
+     "r": 0.923,
+     "mean_o": 36.99,
+     "mean_s": 21.18,
+     "share_changed": 0.983
+    },
+    "char_per_tok": {
+     "r": -0.1,
+     "mean_o": 4.83,
+     "mean_s": 4.893,
+     "share_changed": 0.994
+    },
+    "in_dict": {
+     "r": -0.0395,
+     "mean_o": 0.8165,
+     "mean_s": 0.8147,
+     "share_changed": 0.967
+    },
+    "in_FO": {
+     "r": -0.176,
+     "mean_o": 0.5994,
+     "mean_s": 0.6159,
+     "share_changed": 0.979
+    },
+    "lexical_density": {
+     "r": -0.297,
+     "mean_o": 0.4982,
+     "mean_s": 0.5217,
+     "share_changed": 0.966
+    },
+    "avg_max_depth": {
+     "r": 0.862,
+     "mean_o": 6.385,
+     "mean_s": 4.466,
+     "share_changed": 0.82
+    },
+    "avg_links_len": {
+     "r": 0.708,
+     "mean_o": 2.695,
+     "mean_s": 2.297,
+     "share_changed": 0.993
+    },
+    "max_links_len": {
+     "r": 0.78,
+     "mean_o": 15.14,
+     "mean_s": 8.849,
+     "share_changed": 0.922
+    },
+    "avg_token_per_clause": {
+     "r": 0.205,
+     "mean_o": 12.46,
+     "mean_s": 11.2,
+     "share_changed": 0.971
+    },
+    "verbal_head_per_sent": {
+     "r": 0.85,
+     "mean_o": 3.448,
+     "mean_s": 2.063,
+     "share_changed": 0.779
+    },
+    "subordinate_proposition_dist": {
+     "r": 0.773,
+     "mean_o": 59.13,
+     "mean_s": 35.71,
+     "share_changed": 0.729
+    },
+    "n_prepositional_chains": {
+     "r": 0.715,
+     "mean_o": 2.158,
+     "mean_s": 1.308,
+     "share_changed": 0.679
+    },
+    "avg_prepositional_chain_len": {
+     "r": 0.475,
+     "mean_o": 1.105,
+     "mean_s": 0.8859,
+     "share_changed": 0.548
+    }
+   },
+   "category_mean_abs_r": {
+    "Raw text properties": 0.649,
+    "Lexical variety": 0.201,
+    "Morphosyntactic information": 0.342,
+    "Inflectional morphology": 0.411,
+    "Verbal predicate structure": 0.344,
+    "Global and local parse-tree structures": 0.548,
+    "Dependency relations": 0.312,
+    "Order of elements": 0.409,
+    "Use of subordination": 0.548
+   },
+   "top_spearman_with_readit_change": {
+    "all": [
+     [
+      "dep_dist_root",
+      -0.406
+     ],
+     [
+      "subordinate_proposition_dist",
+      0.349
+     ],
+     [
+      "tokens_per_sent",
+      0.339
+     ],
+     [
+      "n_tokens",
+      0.339
+     ],
+     [
+      "principal_proposition_dist",
+      -0.339
+     ]
+    ],
+    "base": [
+     [
+      "n_tokens",
+      0.925
+     ],
+     [
+      "tokens_per_sent",
+      0.925
+     ],
+     [
+      "dep_dist_root",
+      -0.623
+     ],
+     [
+      "verbal_head_per_sent",
+      0.596
+     ],
+     [
+      "avg_max_links_len",
+      0.568
+     ]
+    ],
+    "lexical": [
+     [
+      "dep_dist_root",
+      -0.183
+     ],
+     [
+      "upos_dist_PUNCT",
+      0.123
+     ],
+     [
+      "dep_dist_punct",
+      0.12
+     ],
+     [
+      "lexical_density",
+      -0.12
+     ],
+     [
+      "avg_token_per_clause",
+      0.0851
+     ]
+    ],
+    "syntax": [
+     [
+      "dep_dist_root",
+      -0.41
+     ],
+     [
+      "subordinate_proposition_dist",
+      0.343
+     ],
+     [
+      "avg_max_depth",
+      0.337
+     ],
+     [
+      "principal_proposition_dist",
+      -0.336
+     ],
+     [
+      "n_tokens",
+      0.329
+     ]
+    ]
+   }
+  },
+  "syntax targeted": {
+   "n_pairs": 10673,
+   "readit_change_mean": {
+    "all": 44.2,
+    "base": 20.9,
+    "lexical": 0.942,
+    "syntax": 43.4
+   },
+   "manova": {
+    "V": 0.493,
+    "F": 147.2,
+    "df1": 140,
+    "df2": 21205,
+    "p": 0.0,
+    "chance": 0.00656
+   },
+   "top_features": [
+    {
+     "feature": "n_tokens",
+     "category": "Raw text properties",
+     "r": 0.925,
+     "mean_o": 38.72,
+     "mean_s": 22.47
+    },
+    {
+     "feature": "tokens_per_sent",
+     "category": "Raw text properties",
+     "r": 0.925,
+     "mean_o": 38.72,
+     "mean_s": 22.47
+    },
+    {
+     "feature": "dep_dist_root",
+     "category": "Dependency relations",
+     "r": -0.913,
+     "mean_o": 3.104,
+     "mean_s": 5.623
+    },
+    {
+     "feature": "verbal_head_per_sent",
+     "category": "Verbal predicate structure",
+     "r": 0.902,
+     "mean_o": 3.619,
+     "mean_s": 2.075
+    },
+    {
+     "feature": "avg_max_depth",
+     "category": "Global and local parse-tree structures",
+     "r": 0.893,
+     "mean_o": 6.562,
+     "mean_s": 4.493
+    },
+    {
+     "feature": "subordinate_proposition_dist",
+     "category": "Use of subordination",
+     "r": 0.866,
+     "mean_o": 60.74,
+     "mean_s": 33.67
+    },
+    {
+     "feature": "principal_proposition_dist",
+     "category": "Use of subordination",
+     "r": -0.81,
+     "mean_o": 37.67,
+     "mean_s": 63.24
+    },
+    {
+     "feature": "verbs_mood_dist_Ind",
+     "category": "Inflectional morphology",
+     "r": 0.797,
+     "mean_o": 76.32,
+     "mean_s": 45.31
+    },
+    {
+     "feature": "avg_subordinate_chain_len",
+     "category": "Use of subordination",
+     "r": 0.78,
+     "mean_o": 1.113,
+     "mean_s": 0.6698
+    },
+    {
+     "feature": "max_links_len",
+     "category": "Global and local parse-tree structures",
+     "r": 0.778,
+     "mean_o": 15.78,
+     "mean_s": 9.358
+    }
+   ],
+   "key_features": {
+    "n_tokens": {
+     "r": 0.925,
+     "mean_o": 38.72,
+     "mean_s": 22.47,
+     "share_changed": 0.978
+    },
+    "char_per_tok": {
+     "r": 0.154,
+     "mean_o": 4.814,
+     "mean_s": 4.757,
+     "share_changed": 0.993
+    },
+    "in_dict": {
+     "r": 0.0785,
+     "mean_o": 0.821,
+     "mean_s": 0.812,
+     "share_changed": 0.963
+    },
+    "in_FO": {
+     "r": -0.0723,
+     "mean_o": 0.6036,
+     "mean_s": 0.6102,
+     "share_changed": 0.981
+    },
+    "lexical_density": {
+     "r": 0.0515,
+     "mean_o": 0.4999,
+     "mean_s": 0.4991,
+     "share_changed": 0.968
+    },
+    "avg_max_depth": {
+     "r": 0.893,
+     "mean_o": 6.562,
+     "mean_s": 4.493,
+     "share_changed": 0.818
+    },
+    "avg_links_len": {
+     "r": 0.664,
+     "mean_o": 2.705,
+     "mean_s": 2.338,
+     "share_changed": 0.991
+    },
+    "max_links_len": {
+     "r": 0.778,
+     "mean_o": 15.78,
+     "mean_s": 9.358,
+     "share_changed": 0.903
+    },
+    "avg_token_per_clause": {
+     "r": 0.0337,
+     "mean_o": 12.47,
+     "mean_s": 12.15,
+     "share_changed": 0.969
+    },
+    "verbal_head_per_sent": {
+     "r": 0.902,
+     "mean_o": 3.619,
+     "mean_s": 2.075,
+     "share_changed": 0.776
+    },
+    "subordinate_proposition_dist": {
+     "r": 0.866,
+     "mean_o": 60.74,
+     "mean_s": 33.67,
+     "share_changed": 0.739
+    },
+    "n_prepositional_chains": {
+     "r": 0.738,
+     "mean_o": 2.314,
+     "mean_s": 1.407,
+     "share_changed": 0.68
+    },
+    "avg_prepositional_chain_len": {
+     "r": 0.474,
+     "mean_o": 1.124,
+     "mean_s": 0.9175,
+     "share_changed": 0.54
+    }
+   },
+   "category_mean_abs_r": {
+    "Raw text properties": 0.668,
+    "Lexical variety": 0.133,
+    "Morphosyntactic information": 0.229,
+    "Inflectional morphology": 0.484,
+    "Verbal predicate structure": 0.319,
+    "Global and local parse-tree structures": 0.512,
+    "Dependency relations": 0.329,
+    "Order of elements": 0.462,
+    "Use of subordination": 0.665
+   },
+   "top_spearman_with_readit_change": {
+    "all": [
+     [
+      "dep_dist_root",
+      -0.381
+     ],
+     [
+      "principal_proposition_dist",
+      -0.311
+     ],
+     [
+      "tokens_per_sent",
+      0.306
+     ],
+     [
+      "n_tokens",
+      0.306
+     ],
+     [
+      "subordinate_proposition_dist",
+      0.303
+     ]
+    ],
+    "base": [
+     [
+      "n_tokens",
+      0.91
+     ],
+     [
+      "tokens_per_sent",
+      0.91
+     ],
+     [
+      "dep_dist_root",
+      -0.67
+     ],
+     [
+      "verbal_head_per_sent",
+      0.603
+     ],
+     [
+      "avg_max_links_len",
+      0.596
+     ]
+    ],
+    "lexical": [
+     [
+      "dep_dist_punct",
+      0.289
+     ],
+     [
+      "upos_dist_PUNCT",
+      0.287
+     ],
+     [
+      "lexical_density",
+      -0.188
+     ],
+     [
+      "in_FO_types",
+      -0.159
+     ],
+     [
+      "in_dict_types",
+      -0.134
+     ]
+    ],
+    "syntax": [
+     [
+      "dep_dist_root",
+      -0.38
+     ],
+     [
+      "principal_proposition_dist",
+      -0.306
+     ],
+     [
+      "subordinate_proposition_dist",
+      0.304
+     ],
+     [
+      "avg_max_depth",
+      0.291
+     ],
+     [
+      "n_tokens",
+      0.281
+     ]
+    ]
+   }
+  },
+  "only base": {
+   "n_pairs": 3916,
+   "readit_change_mean": {
+    "all": 11.0,
+    "base": 17.1,
+    "lexical": 0.301,
+    "syntax": 9.46
+   },
+   "manova": {
+    "V": 0.324,
+    "F": 26.57,
+    "df1": 139,
+    "df2": 7692,
+    "p": 0.0,
+    "chance": 0.0177
+   },
+   "top_features": [
+    {
+     "feature": "n_tokens",
+     "category": "Raw text properties",
+     "r": 0.98,
+     "mean_o": 42.63,
+     "mean_s": 29.36
+    },
+    {
+     "feature": "tokens_per_sent",
+     "category": "Raw text properties",
+     "r": 0.98,
+     "mean_o": 42.63,
+     "mean_s": 29.36
+    },
+    {
+     "feature": "dep_dist_root",
+     "category": "Dependency relations",
+     "r": -0.978,
+     "mean_o": 2.652,
+     "mean_s": 4.356
+    },
+    {
+     "feature": "verbal_head_per_sent",
+     "category": "Verbal predicate structure",
+     "r": 0.9,
+     "mean_o": 3.921,
+     "mean_s": 2.75
+    },
+    {
+     "feature": "n_prepositional_chains",
+     "category": "Global and local parse-tree structures",
+     "r": 0.822,
+     "mean_o": 2.6,
+     "mean_s": 1.792
+    },
+    {
+     "feature": "avg_max_depth",
+     "category": "Global and local parse-tree structures",
+     "r": 0.792,
+     "mean_o": 6.915,
+     "mean_s": 5.625
+    },
+    {
+     "feature": "max_links_len",
+     "category": "Global and local parse-tree structures",
+     "r": 0.749,
+     "mean_o": 17.23,
+     "mean_s": 12.27
+    },
+    {
+     "feature": "avg_max_links_len",
+     "category": "Global and local parse-tree structures",
+     "r": 0.749,
+     "mean_o": 17.23,
+     "mean_s": 12.27
+    },
+    {
+     "feature": "verbs_mood_dist_Ind",
+     "category": "Inflectional morphology",
+     "r": 0.706,
+     "mean_o": 76.72,
+     "mean_s": 60.62
+    },
+    {
+     "feature": "verbal_root_perc",
+     "category": "Verbal predicate structure",
+     "r": 0.669,
+     "mean_o": 95.81,
+     "mean_s": 88.99
+    }
+   ],
+   "key_features": {
+    "n_tokens": {
+     "r": 0.98,
+     "mean_o": 42.63,
+     "mean_s": 29.36,
+     "share_changed": 0.998
+    },
+    "char_per_tok": {
+     "r": -0.00858,
+     "mean_o": 4.789,
+     "mean_s": 4.788,
+     "share_changed": 0.996
+    },
+    "in_dict": {
+     "r": 0.0562,
+     "mean_o": 0.8349,
+     "mean_s": 0.826,
+     "share_changed": 0.976
+    },
+    "in_FO": {
+     "r": -0.0543,
+     "mean_o": 0.6118,
+     "mean_s": 0.612,
+     "share_changed": 0.988
+    },
+    "lexical_density": {
+     "r": -0.131,
+     "mean_o": 0.4973,
+     "mean_s": 0.5028,
+     "share_changed": 0.974
+    },
+    "avg_max_depth": {
+     "r": 0.792,
+     "mean_o": 6.915,
+     "mean_s": 5.625,
+     "share_changed": 0.724
+    },
+    "avg_links_len": {
+     "r": 0.574,
+     "mean_o": 2.774,
+     "mean_s": 2.54,
+     "share_changed": 0.995
+    },
+    "max_links_len": {
+     "r": 0.749,
+     "mean_o": 17.23,
+     "mean_s": 12.27,
+     "share_changed": 0.831
+    },
+    "avg_token_per_clause": {
+     "r": 0.227,
+     "mean_o": 13.01,
+     "mean_s": 11.83,
+     "share_changed": 0.98
+    },
+    "verbal_head_per_sent": {
+     "r": 0.9,
+     "mean_o": 3.921,
+     "mean_s": 2.75,
+     "share_changed": 0.709
+    },
+    "subordinate_proposition_dist": {
+     "r": 0.64,
+     "mean_o": 63.27,
+     "mean_s": 50.91,
+     "share_changed": 0.648
+    },
+    "n_prepositional_chains": {
+     "r": 0.822,
+     "mean_o": 2.6,
+     "mean_s": 1.792,
+     "share_changed": 0.632
+    },
+    "avg_prepositional_chain_len": {
+     "r": 0.412,
+     "mean_o": 1.18,
+     "mean_s": 1.041,
+     "share_changed": 0.495
+    }
+   },
+   "category_mean_abs_r": {
+    "Raw text properties": 0.656,
+    "Lexical variety": 0.108,
+    "Morphosyntactic information": 0.243,
+    "Inflectional morphology": 0.454,
+    "Verbal predicate structure": 0.344,
+    "Global and local parse-tree structures": 0.436,
+    "Dependency relations": 0.262,
+    "Order of elements": 0.386,
+    "Use of subordination": 0.422
+   },
+   "top_spearman_with_readit_change": {
+    "all": [
+     [
+      "n_tokens",
+      0.165
+     ],
+     [
+      "tokens_per_sent",
+      0.165
+     ],
+     [
+      "char_per_tok",
+      0.13
+     ],
+     [
+      "principal_proposition_dist",
+      -0.118
+     ],
+     [
+      "dep_dist_root",
+      -0.112
+     ]
+    ],
+    "base": [
+     [
+      "n_tokens",
+      0.86
+     ],
+     [
+      "tokens_per_sent",
+      0.86
+     ],
+     [
+      "dep_dist_root",
+      -0.626
+     ],
+     [
+      "verbal_head_per_sent",
+      0.48
+     ],
+     [
+      "n_prepositional_chains",
+      0.388
+     ]
+    ],
+    "lexical": [
+     [
+      "upos_dist_PUNCT",
+      0.267
+     ],
+     [
+      "dep_dist_punct",
+      0.267
+     ],
+     [
+      "tokens_per_sent",
+      -0.241
+     ],
+     [
+      "n_tokens",
+      -0.241
+     ],
+     [
+      "verbal_head_per_sent",
+      -0.214
+     ]
+    ],
+    "syntax": [
+     [
+      "dep_dist_root",
+      -0.131
+     ],
+     [
+      "n_tokens",
+      0.111
+     ],
+     [
+      "tokens_per_sent",
+      0.111
+     ],
+     [
+      "principal_proposition_dist",
+      -0.107
+     ],
+     [
+      "avg_max_depth",
+      0.104
+     ]
+    ]
+   }
+  },
+  "only lexical": {
+   "n_pairs": 548,
+   "readit_change_mean": {
+    "all": 11.2,
+    "base": -0.74,
+    "lexical": 6.94,
+    "syntax": 6.54
+   },
+   "manova": {
+    "V": 0.295,
+    "F": 3.077,
+    "df1": 131,
+    "df2": 964,
+    "p": 5e-23,
+    "chance": 0.12
+   },
+   "top_features": [
+    {
+     "feature": "aux_form_dist_Part",
+     "category": "Inflectional morphology",
+     "r": -0.746,
+     "mean_o": 2.464,
+     "mean_s": 6.134
+    },
+    {
+     "feature": "dep_dist_aux",
+     "category": "Dependency relations",
+     "r": -0.737,
+     "mean_o": 0.7757,
+     "mean_s": 1.773
+    },
+    {
+     "feature": "aux_tense_dist_Pres",
+     "category": "Inflectional morphology",
+     "r": -0.707,
+     "mean_o": 30.38,
+     "mean_s": 46.19
+    },
+    {
+     "feature": "upos_dist_AUX",
+     "category": "Morphosyntactic information",
+     "r": -0.577,
+     "mean_o": 2.331,
+     "mean_s": 3.757
+    },
+    {
+     "feature": "aux_mood_dist_Ind",
+     "category": "Inflectional morphology",
+     "r": -0.562,
+     "mean_o": 44.13,
+     "mean_s": 57.42
+    },
+    {
+     "feature": "dep_dist_punct",
+     "category": "Dependency relations",
+     "r": 0.522,
+     "mean_o": 10.66,
+     "mean_s": 9.252
+    },
+    {
+     "feature": "upos_dist_PUNCT",
+     "category": "Morphosyntactic information",
+     "r": 0.521,
+     "mean_o": 10.65,
+     "mean_s": 9.244
+    },
+    {
+     "feature": "subj_pre",
+     "category": "Order of elements",
+     "r": -0.516,
+     "mean_o": 61.69,
+     "mean_s": 71.29
+    },
+    {
+     "feature": "upos_dist_SCONJ",
+     "category": "Morphosyntactic information",
+     "r": -0.505,
+     "mean_o": 0.6609,
+     "mean_s": 1.021
+    },
+    {
+     "feature": "verbs_mood_dist_Ind",
+     "category": "Inflectional morphology",
+     "r": 0.504,
+     "mean_o": 70.57,
+     "mean_s": 57.6
+    }
+   ],
+   "key_features": {
+    "n_tokens": {
+     "r": -0.37,
+     "mean_o": 31.72,
+     "mean_s": 34.75,
+     "share_changed": 0.861
+    },
+    "char_per_tok": {
+     "r": 0.208,
+     "mean_o": 4.807,
+     "mean_s": 4.73,
+     "share_changed": 0.973
+    },
+    "in_dict": {
+     "r": -0.496,
+     "mean_o": 0.7971,
+     "mean_s": 0.8191,
+     "share_changed": 0.909
+    },
+    "in_FO": {
+     "r": -0.383,
+     "mean_o": 0.5847,
+     "mean_s": 0.6093,
+     "share_changed": 0.945
+    },
+    "lexical_density": {
+     "r": -0.00077,
+     "mean_o": 0.494,
+     "mean_s": 0.4965,
+     "share_changed": 0.911
+    },
+    "avg_max_depth": {
+     "r": -0.136,
+     "mean_o": 5.673,
+     "mean_s": 6.055,
+     "share_changed": 0.513
+    },
+    "avg_links_len": {
+     "r": 0.0484,
+     "mean_o": 2.673,
+     "mean_s": 3.013,
+     "share_changed": 0.958
+    },
+    "max_links_len": {
+     "r": -0.0875,
+     "mean_o": 13.23,
+     "mean_s": 14.53,
+     "share_changed": 0.734
+    },
+    "avg_token_per_clause": {
+     "r": -0.00597,
+     "mean_o": 13.29,
+     "mean_s": 13.61,
+     "share_changed": 0.887
+    },
+    "verbal_head_per_sent": {
+     "r": -0.208,
+     "mean_o": 2.714,
+     "mean_s": 2.967,
+     "share_changed": 0.467
+    },
+    "subordinate_proposition_dist": {
+     "r": -0.13,
+     "mean_o": 50.47,
+     "mean_s": 52.11,
+     "share_changed": 0.456
+    },
+    "n_prepositional_chains": {
+     "r": -0.452,
+     "mean_o": 1.905,
+     "mean_s": 2.237,
+     "share_changed": 0.465
+    },
+    "avg_prepositional_chain_len": {
+     "r": -0.253,
+     "mean_o": 1.048,
+     "mean_s": 1.135,
+     "share_changed": 0.434
+    }
+   },
+   "category_mean_abs_r": {
+    "Raw text properties": 0.316,
+    "Lexical variety": 0.39,
+    "Morphosyntactic information": 0.261,
+    "Inflectional morphology": 0.544,
+    "Verbal predicate structure": 0.159,
+    "Global and local parse-tree structures": 0.159,
+    "Dependency relations": 0.248,
+    "Order of elements": 0.344,
+    "Use of subordination": 0.115
+   },
+   "top_spearman_with_readit_change": {
+    "all": [
+     [
+      "in_FO",
+      -0.143
+     ],
+     [
+      "in_dict",
+      -0.14
+     ],
+     [
+      "in_AU",
+      0.137
+     ],
+     [
+      "in_FO_types",
+      -0.134
+     ],
+     [
+      "dep_dist_flat:foreign",
+      0.118
+     ]
+    ],
+    "base": [
+     [
+      "n_tokens",
+      0.764
+     ],
+     [
+      "tokens_per_sent",
+      0.764
+     ],
+     [
+      "dep_dist_root",
+      -0.72
+     ],
+     [
+      "max_links_len",
+      0.355
+     ],
+     [
+      "avg_max_links_len",
+      0.355
+     ]
+    ],
+    "lexical": [
+     [
+      "dep_dist_root",
+      0.277
+     ],
+     [
+      "n_tokens",
+      -0.256
+     ],
+     [
+      "tokens_per_sent",
+      -0.256
+     ],
+     [
+      "in_dict",
+      -0.188
+     ],
+     [
+      "in_dict_types",
+      -0.145
+     ]
+    ],
+    "syntax": [
+     [
+      "verbal_root_perc",
+      -0.155
+     ],
+     [
+      "dep_dist_advcl",
+      -0.125
+     ],
+     [
+      "principal_proposition_dist",
+      -0.116
+     ],
+     [
+      "dep_dist_nsubj:pass",
+      -0.111
+     ],
+     [
+      "dep_dist_aux",
+      -0.109
+     ]
+    ]
+   }
+  },
+  "only syntax": {
+   "n_pairs": 4869,
+   "readit_change_mean": {
+    "all": 34.2,
+    "base": -0.128,
+    "lexical": -1.31,
+    "syntax": 34.8
+   },
+   "manova": {
+    "V": 0.283,
+    "F": 28.24,
+    "df1": 134,
+    "df2": 9603,
+    "p": 0.0,
+    "chance": 0.0138
+   },
+   "top_features": [
+    {
+     "feature": "aux_tense_dist_Pres",
+     "category": "Inflectional morphology",
+     "r": -0.771,
+     "mean_o": 27.04,
+     "mean_s": 53.51
+    },
+    {
+     "feature": "verbs_mood_dist_Ind",
+     "category": "Inflectional morphology",
+     "r": 0.767,
+     "mean_o": 74.61,
+     "mean_s": 49.46
+    },
+    {
+     "feature": "aux_mood_dist_Ind",
+     "category": "Inflectional morphology",
+     "r": -0.756,
+     "mean_o": 42.93,
+     "mean_s": 68.54
+    },
+    {
+     "feature": "aux_form_dist_Part",
+     "category": "Inflectional morphology",
+     "r": -0.74,
+     "mean_o": 2.135,
+     "mean_s": 6.136
+    },
+    {
+     "feature": "dep_dist_aux",
+     "category": "Dependency relations",
+     "r": -0.738,
+     "mean_o": 0.9372,
+     "mean_s": 2.348
+    },
+    {
+     "feature": "aux_num_pers_dist_Sing+3",
+     "category": "Inflectional morphology",
+     "r": -0.722,
+     "mean_o": 35.85,
+     "mean_s": 58.45
+    },
+    {
+     "feature": "verbs_num_pers_dist_Sing+3",
+     "category": "Inflectional morphology",
+     "r": 0.721,
+     "mean_o": 59.03,
+     "mean_s": 36.67
+    },
+    {
+     "feature": "upos_dist_AUX",
+     "category": "Morphosyntactic information",
+     "r": -0.718,
+     "mean_o": 2.411,
+     "mean_s": 4.687
+    },
+    {
+     "feature": "aux_form_dist_Fin",
+     "category": "Inflectional morphology",
+     "r": -0.64,
+     "mean_o": 42.95,
+     "mean_s": 63.37
+    },
+    {
+     "feature": "subordinate_proposition_dist",
+     "category": "Use of subordination",
+     "r": 0.63,
+     "mean_o": 56.03,
+     "mean_s": 44.51
+    }
+   ],
+   "key_features": {
+    "n_tokens": {
+     "r": 0.306,
+     "mean_o": 31.49,
+     "mean_s": 30.41,
+     "share_changed": 0.907
+    },
+    "char_per_tok": {
+     "r": 0.45,
+     "mean_o": 4.869,
+     "mean_s": 4.714,
+     "share_changed": 0.986
+    },
+    "in_dict": {
+     "r": -0.0692,
+     "mean_o": 0.8118,
+     "mean_s": 0.8098,
+     "share_changed": 0.928
+    },
+    "in_FO": {
+     "r": -0.0832,
+     "mean_o": 0.5988,
+     "mean_s": 0.6015,
+     "share_changed": 0.954
+    },
+    "lexical_density": {
+     "r": 0.464,
+     "mean_o": 0.5065,
+     "mean_s": 0.4833,
+     "share_changed": 0.946
+    },
+    "avg_max_depth": {
+     "r": 0.53,
+     "mean_o": 5.95,
+     "mean_s": 5.365,
+     "share_changed": 0.616
+    },
+    "avg_links_len": {
+     "r": 0.0595,
+     "mean_o": 2.569,
+     "mean_s": 2.559,
+     "share_changed": 0.98
+    },
+    "max_links_len": {
+     "r": 0.0722,
+     "mean_o": 12.76,
+     "mean_s": 12.62,
+     "share_changed": 0.787
+    },
+    "avg_token_per_clause": {
+     "r": -0.225,
+     "mean_o": 11.94,
+     "mean_s": 13.1,
+     "share_changed": 0.932
+    },
+    "verbal_head_per_sent": {
+     "r": 0.514,
+     "mean_o": 3.038,
+     "mean_s": 2.679,
+     "share_changed": 0.51
+    },
+    "subordinate_proposition_dist": {
+     "r": 0.63,
+     "mean_o": 56.03,
+     "mean_s": 44.51,
+     "share_changed": 0.524
+    },
+    "n_prepositional_chains": {
+     "r": -0.112,
+     "mean_o": 1.844,
+     "mean_s": 1.923,
+     "share_changed": 0.479
+    },
+    "avg_prepositional_chain_len": {
+     "r": 0.0204,
+     "mean_o": 1.047,
+     "mean_s": 1.036,
+     "share_changed": 0.395
+    }
+   },
+   "category_mean_abs_r": {
+    "Raw text properties": 0.354,
+    "Lexical variety": 0.125,
+    "Morphosyntactic information": 0.284,
+    "Inflectional morphology": 0.521,
+    "Verbal predicate structure": 0.184,
+    "Global and local parse-tree structures": 0.15,
+    "Dependency relations": 0.289,
+    "Order of elements": 0.411,
+    "Use of subordination": 0.374
+   },
+   "top_spearman_with_readit_change": {
+    "all": [
+     [
+      "principal_proposition_dist",
+      -0.208
+     ],
+     [
+      "subordinate_proposition_dist",
+      0.187
+     ],
+     [
+      "dep_dist_root",
+      -0.183
+     ],
+     [
+      "char_per_tok",
+      0.171
+     ],
+     [
+      "dep_dist_det",
+      -0.157
+     ]
+    ],
+    "base": [
+     [
+      "n_tokens",
+      0.715
+     ],
+     [
+      "tokens_per_sent",
+      0.715
+     ],
+     [
+      "dep_dist_root",
+      -0.658
+     ],
+     [
+      "upos_dist_CCONJ",
+      -0.265
+     ],
+     [
+      "dep_dist_cc",
+      -0.265
+     ]
+    ],
+    "lexical": [
+     [
+      "dep_dist_punct",
+      0.274
+     ],
+     [
+      "upos_dist_PUNCT",
+      0.272
+     ],
+     [
+      "tokens_per_sent",
+      -0.234
+     ],
+     [
+      "n_tokens",
+      -0.234
+     ],
+     [
+      "dep_dist_root",
+      0.224
+     ]
+    ],
+    "syntax": [
+     [
+      "principal_proposition_dist",
+      -0.213
+     ],
+     [
+      "subordinate_proposition_dist",
+      0.205
+     ],
+     [
+      "dep_dist_root",
+      -0.203
+     ],
+     [
+      "avg_max_depth",
+      0.176
+     ],
+     [
+      "avg_subordinate_chain_len",
+      0.169
+     ]
+    ]
+   }
+  },
+  "all three": {
+   "n_pairs": 4627,
+   "readit_change_mean": {
+    "all": 51.6,
+    "base": 29.0,
+    "lexical": 8.08,
+    "syntax": 48.4
+   },
+   "manova": {
+    "V": 0.636,
+    "F": 116.3,
+    "df1": 137,
+    "df2": 9116,
+    "p": 0.0,
+    "chance": 0.0148
+   },
+   "top_features": [
+    {
+     "feature": "n_tokens",
+     "category": "Raw text properties",
+     "r": 0.988,
+     "mean_o": 37.85,
+     "mean_s": 18.97
+    },
+    {
+     "feature": "tokens_per_sent",
+     "category": "Raw text properties",
+     "r": 0.988,
+     "mean_o": 37.85,
+     "mean_s": 18.97
+    },
+    {
+     "feature": "dep_dist_root",
+     "category": "Dependency relations",
+     "r": -0.979,
+     "mean_o": 3.135,
+     "mean_s": 6.447
+    },
+    {
+     "feature": "avg_max_depth",
+     "category": "Global and local parse-tree structures",
+     "r": 0.932,
+     "mean_o": 6.463,
+     "mean_s": 4.149
+    },
+    {
+     "feature": "verbal_head_per_sent",
+     "category": "Verbal predicate structure",
+     "r": 0.916,
+     "mean_o": 3.531,
+     "mean_s": 1.912
+    },
+    {
+     "feature": "max_links_len",
+     "category": "Global and local parse-tree structures",
+     "r": 0.888,
+     "mean_o": 15.48,
+     "mean_s": 7.828
+    },
+    {
+     "feature": "avg_max_links_len",
+     "category": "Global and local parse-tree structures",
+     "r": 0.888,
+     "mean_o": 15.48,
+     "mean_s": 7.828
+    },
+    {
+     "feature": "subordinate_proposition_dist",
+     "category": "Use of subordination",
+     "r": 0.848,
+     "mean_o": 60.12,
+     "mean_s": 31.79
+    },
+    {
+     "feature": "n_prepositional_chains",
+     "category": "Global and local parse-tree structures",
+     "r": 0.825,
+     "mean_o": 2.209,
+     "mean_s": 1.161
+    },
+    {
+     "feature": "avg_links_len",
+     "category": "Global and local parse-tree structures",
+     "r": 0.813,
+     "mean_o": 2.707,
+     "mean_s": 2.21
+    }
+   ],
+   "key_features": {
+    "n_tokens": {
+     "r": 0.988,
+     "mean_o": 37.85,
+     "mean_s": 18.97,
+     "share_changed": 0.994
+    },
+    "char_per_tok": {
+     "r": -0.121,
+     "mean_o": 4.823,
+     "mean_s": 4.901,
+     "share_changed": 0.996
+    },
+    "in_dict": {
+     "r": 0.00721,
+     "mean_o": 0.8197,
+     "mean_s": 0.8164,
+     "share_changed": 0.973
+    },
+    "in_FO": {
+     "r": -0.164,
+     "mean_o": 0.6013,
+     "mean_s": 0.6187,
+     "share_changed": 0.985
+    },
+    "lexical_density": {
+     "r": -0.336,
+     "mean_o": 0.4965,
+     "mean_s": 0.5245,
+     "share_changed": 0.97
+    },
+    "avg_max_depth": {
+     "r": 0.932,
+     "mean_o": 6.463,
+     "mean_s": 4.149,
+     "share_changed": 0.866
+    },
+    "avg_links_len": {
+     "r": 0.813,
+     "mean_o": 2.707,
+     "mean_s": 2.21,
+     "share_changed": 0.997
+    },
+    "max_links_len": {
+     "r": 0.888,
+     "mean_o": 15.48,
+     "mean_s": 7.828,
+     "share_changed": 0.94
+    },
+    "avg_token_per_clause": {
+     "r": 0.229,
+     "mean_o": 12.55,
+     "mean_s": 10.99,
+     "share_changed": 0.975
+    },
+    "verbal_head_per_sent": {
+     "r": 0.916,
+     "mean_o": 3.531,
+     "mean_s": 1.912,
+     "share_changed": 0.82
+    },
+    "subordinate_proposition_dist": {
+     "r": 0.848,
+     "mean_o": 60.12,
+     "mean_s": 31.79,
+     "share_changed": 0.77
+    },
+    "n_prepositional_chains": {
+     "r": 0.825,
+     "mean_o": 2.209,
+     "mean_s": 1.161,
+     "share_changed": 0.71
+    },
+    "avg_prepositional_chain_len": {
+     "r": 0.538,
+     "mean_o": 1.122,
+     "mean_s": 0.8571,
+     "share_changed": 0.573
+    }
+   },
+   "category_mean_abs_r": {
+    "Raw text properties": 0.699,
+    "Lexical variety": 0.194,
+    "Morphosyntactic information": 0.361,
+    "Inflectional morphology": 0.378,
+    "Verbal predicate structure": 0.365,
+    "Global and local parse-tree structures": 0.626,
+    "Dependency relations": 0.361,
+    "Order of elements": 0.44,
+    "Use of subordination": 0.624
+   },
+   "top_spearman_with_readit_change": {
+    "all": [
+     [
+      "dep_dist_root",
+      -0.306
+     ],
+     [
+      "subordinate_proposition_dist",
+      0.262
+     ],
+     [
+      "principal_proposition_dist",
+      -0.243
+     ],
+     [
+      "avg_max_depth",
+      0.232
+     ],
+     [
+      "avg_subordinate_chain_len",
+      0.212
+     ]
+    ],
+    "base": [
+     [
+      "n_tokens",
+      0.904
+     ],
+     [
+      "tokens_per_sent",
+      0.904
+     ],
+     [
+      "verbal_head_per_sent",
+      0.524
+     ],
+     [
+      "max_links_len",
+      0.509
+     ],
+     [
+      "avg_max_links_len",
+      0.509
+     ]
+    ],
+    "lexical": [
+     [
+      "upos_dist_PUNCT",
+      0.132
+     ],
+     [
+      "dep_dist_punct",
+      0.128
+     ],
+     [
+      "dep_dist_root",
+      -0.121
+     ],
+     [
+      "avg_token_per_clause",
+      0.0902
+     ],
+     [
+      "lexical_density",
+      -0.0893
+     ]
+    ],
+    "syntax": [
+     [
+      "dep_dist_root",
+      -0.306
+     ],
+     [
+      "subordinate_proposition_dist",
+      0.249
+     ],
+     [
+      "avg_max_depth",
+      0.239
+     ],
+     [
+      "principal_proposition_dist",
+      -0.234
+     ],
+     [
+      "avg_subordinate_chain_len",
+      0.198
+     ]
+    ]
+   }
+  }
+ },
+ "examples": {
+  "only base": [
+   {
+    "original": "È una delle prime case inglesi dove fu costruita la grande sala su un asse passante per il centro della casa e non ad angolo retto all'ingresso.",
+    "simplification": "È una delle prime case inglesi con una grande sala in asse con il centro della casa piuttosto che ad angolo retto all'ingresso.",
+    "ctrl_tokens": "<|readability_base_30|><|readability_lexical_any|><|readability_syntax_any|>",
+    "readit_o": {
+     "base": 46.9,
+     "lexical": 34.0,
+     "syntax": 78.8
+    },
+    "readit_s": {
+     "base": 39.1,
+     "lexical": 31.3,
+     "syntax": 65.9
+    }
+   },
+   {
+    "original": "Tim, non voleva che abortisse, per cui le fu molto vicino, persino accompagnandola ad un corso pre-parto col nome fittizio di Alvin Draper.",
+    "simplification": "Tim non voleva che abortisse, per cui le fu molto vicino, persino accompagnandola ad un corso pre-parto.",
+    "ctrl_tokens": "<|readability_base_30|><|readability_lexical_any|><|readability_syntax_any|>",
+    "readit_o": {
+     "base": 45.0,
+     "lexical": 38.4,
+     "syntax": 93.9
+    },
+    "readit_s": {
+     "base": 35.8,
+     "lexical": 41.2,
+     "syntax": 92.6
+    }
+   }
+  ],
+  "only lexical": [
+   {
+    "original": "L'istituto non va confuso, come a volte succede, con la preesistente imposta patrimoniale del catasto, introdotta qualche anno prima:",
+    "simplification": "Istituto di imposta patrimoniale del 1909 non va confuso con la preesistente imposta patrimoniale del catasto introdotta qualche anno prima.",
+    "ctrl_tokens": "<|readability_base_any|><|readability_lexical_30|><|readability_syntax_any|>",
+    "readit_o": {
+     "base": 39.2,
+     "lexical": 42.3,
+     "syntax": 75.6
+    },
+    "readit_s": {
+     "base": 30.4,
+     "lexical": 33.2,
+     "syntax": 65.7
+    }
+   },
+   {
+    "original": "E lì dà vita ad una divisione chiamata specializzata nella consulenza gestionale.",
+    "simplification": "E lì inizia una divisione chiamata specializzata nella consulenza gestionale.",
+    "ctrl_tokens": "<|readability_base_any|><|readability_lexical_30|><|readability_syntax_any|>",
+    "readit_o": {
+     "base": 29.1,
+     "lexical": 47.6,
+     "syntax": 63.4
+    },
+    "readit_s": {
+     "base": 21.6,
+     "lexical": 37.7,
+     "syntax": 60.3
+    }
+   }
+  ],
+  "only syntax": [
+   {
+    "original": "Gran cacciatore di pernici, trascinò nei suoi vagabondaggi l'amico Onorato Carlandi.",
+    "simplification": "Onorato Carlandi fu trascinato nei suoi vagabondaggi da un grande cacciatore di pernici.",
+    "ctrl_tokens": "<|readability_base_any|><|readability_lexical_any|><|readability_syntax_0|>",
+    "readit_o": {
+     "base": 24.4,
+     "lexical": 38.4,
+     "syntax": 71.6
+    },
+    "readit_s": {
+     "base": 24.9,
+     "lexical": 38.8,
+     "syntax": 3.2
+    }
+   },
+   {
+    "original": "Questo pose lo Xinjiang sotto il pieno controllo politico ed economico dei sovietici, rendendolo parte della Cina solo nominalmente.",
+    "simplification": "Ciò ha posto lo Xinjiang sotto il pieno controllo politico ed economico dei sovietici rendendolo parte della Cina solo nominalmente",
+    "ctrl_tokens": "<|readability_base_any|><|readability_lexical_any|><|readability_syntax_50|>",
+    "readit_o": {
+     "base": 34.2,
+     "lexical": 30.6,
+     "syntax": 77.6
+    },
+    "readit_s": {
+     "base": 30.8,
+     "lexical": 28.0,
+     "syntax": 52.3
+    }
+   }
+  ]
+ },
+ "n_features": 150,
+ "manova_excluded": [
+  "tokens_per_sent",
+  "avg_max_links_len"
+ ],
+ "seed": 42
+}

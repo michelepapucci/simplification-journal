@@ -1,0 +1,26 @@
+/home/mpapucci/text-simplification-experiments/LREC/evaluation/.venv_t2k/lib/python3.10/site-packages/torch/cuda/__init__.py:628: UserWarning: Can't initialize NVML
+  warnings.warn("Can't initialize NVML")
+[ Second_Order_Features ] Unknown parameter... Skip!
+[ Second_Order_Features ] Unknown parameter... Skip!
+[ Second_Order_Features ] Unknown parameter... Skip!
+[ Second_Order_Features ] Unknown parameter... Skip!
+[ Second_Order_Features ] Unknown parameter... Skip!
+[ Second_Order_Features ] Unknown parameter... Skip!
+[ Second_Order_Features ] Unknown parameter... Skip!
+[ Second_Order_Features ] Unknown parameter... Skip!
+o has no FEATS, setting to _
+love has no FEATS, setting to _
+( has no FEATS, setting to _
+in has no FEATS, setting to _
+Italian has no FEATS, setting to _
+) has no FEATS, setting to _
+documents base
+documents lexic
+documents syntax
+documents all
+sentences base
+sentences lexic
+sentences syntax
+sentences all
+{'documents': {'base': [('0', 1, [0.2182849671238387, 0.7817150328761613]), ('1', 0, [0.8669836971399273, 0.13301630286007274])], 'lexic': [('0', 1, [1.3176524538138779e-08, 0.9999999868234755]), ('1', 1, [0.0019180601140613707, 0.9980819398859386])], 'syntax': [('0', 0, [0.9800112461808047, 0.01998875381919529]), ('1', 0, [0.8722144186222074, 0.12778558137779256])], 'all': [('0', 1, [0.018164964238543524, 0.9818350357614565]), ('1', 1, [0.029697303839273048, 0.970302696160727])]}, 'sentences': {'base': [('0_0', 1, [0.38033897604380373, 0.6196610239561963]), ('1_0', 0, [0.7948765169411144, 0.20512348305888564])], 'lexic': [('0_0', 1, [0.08358437384761175, 0.9164156261523883]), ('1_0', 1, [0.43648260922188786, 0.5635173907781121])], 'syntax': [('0_0', 0, [0.8627355741810764, 0.13726442581892362]), ('1_0', 0, [0.9667010562284952, 0.03329894377150482])], 'all': [('0_0', 1, [0.29069401235831926, 0.7093059876416807]), ('1_0', 0, [0.893099083757415, 0.10690091624258499])]}}
+2 texts: analysis 1s, readability 0s; 0 failed; 0 unscored; wrote /home/mpapucci/text-simplification-experiments/simplification-journal/data/v1/experiments/outputs/source_targets/repairs/readit-lexical.csv

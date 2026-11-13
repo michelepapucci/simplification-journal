@@ -1,0 +1,155 @@
+/home/mpapucci/text-simplification-experiments/LREC/evaluation/.venv_t2k/lib/python3.10/site-packages/torch/cuda/__init__.py:628: UserWarning: Can't initialize NVML
+  warnings.warn("Can't initialize NVML")
+[ Second_Order_Features ] Unknown parameter... Skip!
+[ Second_Order_Features ] Unknown parameter... Skip!
+[ Second_Order_Features ] Unknown parameter... Skip!
+[ Second_Order_Features ] Unknown parameter... Skip!
+[ Second_Order_Features ] Unknown parameter... Skip!
+[ Second_Order_Features ] Unknown parameter... Skip!
+[ Second_Order_Features ] Unknown parameter... Skip!
+[ Second_Order_Features ] Unknown parameter... Skip!
+Dal has no FEATS, setting to _
+di has no FEATS, setting to _
+Ranieri has no FEATS, setting to _
+con has no FEATS, setting to _
+Willa has no FEATS, setting to _
+Ranieri has no FEATS, setting to _
+, has no FEATS, setting to _
+o has no FEATS, setting to _
+Ranieri has no FEATS, setting to _
+, has no FEATS, setting to _
+con has no FEATS, setting to _
+, has no FEATS, setting to _
+Caterina has no FEATS, setting to _
+Trotta has no FEATS, setting to _
+, has no FEATS, setting to _
+da has no FEATS, setting to _
+di has no FEATS, setting to _
+di has no FEATS, setting to _
+a has no FEATS, setting to _
+da has no FEATS, setting to _
+Caterina has no FEATS, setting to _
+, has no FEATS, setting to _
+di has no FEATS, setting to _
+Ranieri has no FEATS, setting to _
+, has no FEATS, setting to _
+di has no FEATS, setting to _
+, has no FEATS, setting to _
+a has no FEATS, setting to _
+forse has no FEATS, setting to _
+di has no FEATS, setting to _
+, has no FEATS, setting to _
+di has no FEATS, setting to _
+in has no FEATS, setting to _
+di has no FEATS, setting to _
+Arezzo has no FEATS, setting to _
+per has no FEATS, setting to _
+di has no FEATS, setting to _
+in has no FEATS, setting to _
+di has no FEATS, setting to _
+Bergamo-Villa has no FEATS, setting to _
+d' has no FEATS, setting to _
+Almè has no FEATS, setting to _
+in has no FEATS, setting to _
+per has no FEATS, setting to _
+Bergamo-Villa has no FEATS, setting to _
+d' has no FEATS, setting to _
+Almè has no FEATS, setting to _
+, has no FEATS, setting to _
+dove has no FEATS, setting to _
+in has no FEATS, setting to _
+come has no FEATS, setting to _
+T2 has no FEATS, setting to _
+, has no FEATS, setting to _
+analogamente has no FEATS, setting to _
+a has no FEATS, setting to _
+per has no FEATS, setting to _
+Bergamo-Albino has no FEATS, setting to _
+; has no FEATS, setting to _
+per has no FEATS, setting to _
+da has no FEATS, setting to _
+in has no FEATS, setting to _
+e has no FEATS, setting to _
+di has no FEATS, setting to _
+km has no FEATS, setting to _
+con has no FEATS, setting to _
+, has no FEATS, setting to _
+per has no FEATS, setting to _
+di has no FEATS, setting to _
+di has no FEATS, setting to _
+In has no FEATS, setting to _
+, has no FEATS, setting to _
+come has no FEATS, setting to _
+Regno has no FEATS, setting to _
+Unito has no FEATS, setting to _
+e has no FEATS, setting to _
+Malta has no FEATS, setting to _
+, has no FEATS, setting to _
+, has no FEATS, setting to _
+per has no FEATS, setting to _
+non has no FEATS, setting to _
+o has no FEATS, setting to _
+per has no FEATS, setting to _
+a has no FEATS, setting to _
+. has no FEATS, setting to _
+di has no FEATS, setting to _
+, has no FEATS, setting to _
+se has no FEATS, setting to _
+ampiamente has no FEATS, setting to _
+a has no FEATS, setting to _
+di has no FEATS, setting to _
+. has no FEATS, setting to _
+Ayla has no FEATS, setting to _
+in has no FEATS, setting to _
+con has no FEATS, setting to _
+, has no FEATS, setting to _
+anche has no FEATS, setting to _
+con has no FEATS, setting to _
+di has no FEATS, setting to _
+Clan has no FEATS, setting to _
+, has no FEATS, setting to _
+e has no FEATS, setting to _
+Hinni has no FEATS, setting to _
+, has no FEATS, setting to _
+... has no FEATS, setting to _
+per has no FEATS, setting to _
+, has no FEATS, setting to _
+di has no FEATS, setting to _
+in has no FEATS, setting to _
+. has no FEATS, setting to _
+Orabi has no FEATS, setting to _
+. has no FEATS, setting to _
+Kaiowa has no FEATS, setting to _
+e has no FEATS, setting to _
+Ñandeva has no FEATS, setting to _
+in has no FEATS, setting to _
+di has no FEATS, setting to _
+di has no FEATS, setting to _
+. has no FEATS, setting to _
+Matte has no FEATS, setting to _
+Laranjeira has no FEATS, setting to _
+a has no FEATS, setting to _
+, has no FEATS, setting to _
+ma has no FEATS, setting to _
+non has no FEATS, setting to _
+. has no FEATS, setting to _
+Matte has no FEATS, setting to _
+Laranjeira has no FEATS, setting to _
+a has no FEATS, setting to _
+per has no FEATS, setting to _
+matava has no FEATS, setting to _
+, has no FEATS, setting to _
+e has no FEATS, setting to _
+lontano has no FEATS, setting to _
+di has no FEATS, setting to _
+. has no FEATS, setting to _
+documents base
+documents lexic
+documents syntax
+documents all
+sentences base
+sentences lexic
+sentences syntax
+sentences all
+{'documents': {'base': [('0', 1, [0.0016862636321427482, 0.9983137363678573]), ('1', 1, [0.00544996592427216, 0.9945500340757278]), ('2', 1, [0.32451040652144325, 0.6754895934785567]), ('3', 0, [0.5691377532973956, 0.4308622467026045]), ('4', 1, [0.13924013650541067, 0.8607598634945893]), ('5', 0, [0.9543744395119359, 0.0456255604880641]), ('6', 0, [0.8028813773211871, 0.1971186226788129])], 'lexic': [('0', 0, [0.6586964057512772, 0.3413035942487228]), ('1', 1, [0.33811866440978544, 0.6618813355902146]), ('2', 0, [0.7159907022964782, 0.2840092977035218]), ('3', 1, [0.29688364451072535, 0.7031163554892746]), ('4', 0, [0.8847753591157951, 0.11522464088420492]), ('5', 0, [0.9101334878030898, 0.08986651219691018]), ('6', 0, [0.7410844585403642, 0.25891554145963586])], 'syntax': [('0', 1, [0.001507037755267282, 0.9984929622447327]), ('1', 1, [0.0029677482924340692, 0.9970322517075659]), ('2', 1, [0.09363301823467152, 0.9063669817653285]), ('3', 1, [0.024086789894784744, 0.9759132101052153]), ('4', 1, [0.0012088889823499427, 0.9987911110176501]), ('5', 0, [0.9980545677567665, 0.0019454322432334908]), ('6', 0, [0.9904698037270311, 0.009530196272968918])], 'all': [('0', 1, [0.0016972261369008201, 0.9983027738630992]), ('1', 1, [0.00235936140107762, 0.9976406385989224]), ('2', 1, [0.07070847029921878, 0.9292915297007812]), ('3', 1, [0.029703891346090416, 0.9702961086539096]), ('4', 1, [0.014977885392090773, 0.9850221146079092]), ('5', 0, [0.9901378147813834, 0.00986218521861656]), ('6', 0, [0.9557622427613607, 0.04423775723863937])]}, 'sentences': {'base': [('0_0', 1, [0.04241440877716962, 0.9575855912228304]), ('1_0', 1, [0.07708195996165046, 0.9229180400383495]), ('2_0', 1, [0.44634129310790915, 0.5536587068920908]), ('3_0', 0, [0.5927829029053308, 0.40721709709466924]), ('4_0', 1, [0.3354168999362447, 0.6645831000637553]), ('5_0', 0, [0.8494196034798444, 0.15058039652015562]), ('6_0', 0, [0.7700653512840889, 0.22993464871591107]), ('6_1', 0, [0.7317814089530006, 0.26821859104699947]), ('6_2', 0, [0.6738606497812969, 0.3261393502187031])], 'lexic': [('0_0', 0, [0.6648074184322859, 0.3351925815677142]), ('1_0', 0, [0.5987237265711873, 0.4012762734288126]), ('2_0', 0, [0.6734873571921358, 0.32651264280786413]), ('3_0', 0, [0.6044482656942503, 0.3955517343057498]), ('4_0', 0, [0.6904907643746926, 0.3095092356253074]), ('5_0', 0, [0.7129796159477091, 0.2870203840522909]), ('6_0', 0, [0.7337422556657587, 0.26625774433424126]), ('6_1', 0, [0.6460944732580443, 0.35390552674195574]), ('6_2', 0, [0.6983087000879107, 0.3016912999120894])], 'syntax': [('0_0', 1, [0.14347223035095025, 0.8565277696490498]), ('1_0', 1, [0.30363211208083773, 0.6963678879191623]), ('2_0', 1, [0.3609039255725286, 0.6390960744274714]), ('3_0', 0, [0.7494565001651334, 0.2505434998348666]), ('4_0', 1, [0.21335324526128951, 0.7866467547387105]), ('5_0', 0, [0.9947652033395882, 0.005234796660411814]), ('6_0', 0, [0.6715459417042968, 0.32845405829570323]), ('6_1', 0, [0.9080941466351148, 0.09190585336488519]), ('6_2', 0, [0.8441965052455518, 0.1558034947544482])], 'all': [('0_0', 1, [0.12504827071789026, 0.8749517292821097]), ('1_0', 1, [0.2702125242236809, 0.7297874757763191]), ('2_0', 1, [0.32404538767871394, 0.6759546123212861]), ('3_0', 0, [0.7051632779109631, 0.2948367220890369]), ('4_0', 1, [0.2743741548622587, 0.7256258451377413]), ('5_0', 0, [0.9949889530038485, 0.005011046996151568]), ('6_0', 0, [0.7231548971618222, 0.27684510283817776]), ('6_1', 0, [0.9095596673231877, 0.09044033267681231]), ('6_2', 0, [0.8330154097252354, 0.16698459027476462])]}}
+7 texts: analysis 2s, readability 0s; 0 failed; 0 unscored; wrote /home/mpapucci/text-simplification-experiments/simplification-journal/data/v1/experiments/outputs/targets/repairs/readit-base.csv

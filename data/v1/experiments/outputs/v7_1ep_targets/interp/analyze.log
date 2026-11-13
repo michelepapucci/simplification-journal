@@ -1,0 +1,118 @@
+free: done
+keep: done
+# Interpretability, v7_1ep_targets: 1000 originals, 34702 greedy requests, 5795 distinct outputs, 56 unscored
+
+## Q2: specificity matrix (achieved points per requested point, within original)
+
+| Mode | Moved token | base | lexical | syntax | global |
+|---|---|---|---|---|---|
+| free | base | 0.692 [0.666, 0.717] | 0.0418 [0.0331, 0.0509] | 0.763 [0.731, 0.793] | 0.797 [0.766, 0.828] |
+| free | lexical | 0.118 [0.097, 0.142] | 0.0378 [0.024, 0.0536] | 0.171 [0.138, 0.206] | 0.189 [0.152, 0.229] |
+| free | syntax | 0.408 [0.389, 0.428] | 0.0449 [0.0383, 0.0518] | 0.601 [0.574, 0.628] | 0.615 [0.588, 0.642] |
+| keep | base | 0.451 [0.423, 0.477] | 0.0173 [0.012, 0.0228] | 0.463 [0.435, 0.492] | 0.492 [0.462, 0.522] |
+| keep | lexical | -0.00356 [-0.0146, 0.00608] | 0.00342 [0.000274, 0.00681] | 0.0168 [1.85e-05, 0.0348] | 0.0152 [-0.00266, 0.0335] |
+| keep | syntax | 0.309 [0.291, 0.327] | 0.0261 [0.0212, 0.0312] | 0.447 [0.423, 0.471] | 0.458 [0.434, 0.483] |
+| training data | base | 1.0 | 0.052 | 0.338 | 0.375 |
+| training data | lexical | 0.473 | 1.0 | -0.12 | 0.259 |
+| training data | syntax | 0.253 | -0.00984 | 1.0 | 0.967 |
+
+Embedding level directions, cosine: {'base-lexical': 0.313, 'base-syntax': 0.139, 'lexical-syntax': 0.218} (95% permutation null |cos| 0.273); PC1: {'base': {'rho': 0.891, 'share': 0.711}, 'lexical': {'rho': 0.438, 'share': 0.53}, 'syntax': {'rho': 1.0, 'share': 0.677}}
+
+### Activations, free: layer, cos(b-l, b-s, l-s), reliability(b, l, s), readout diag / base>syntax, syntax>base
+- L0: cos [None, None, None], rel [None, None, None], diag [None, None, None], b>s None, s>b None, b>l None, l>b None
+- L4: cos [0.391, 0.917, 0.507], rel [1.0, 0.998, 1.0], diag [0.923, 0.768, 0.984], b>s 0.987, s>b 0.922, b>l 0.231, l>b 0.966
+- L8: cos [0.908, 0.975, 0.954], rel [1.0, 0.999, 1.0], diag [0.954, 0.526, 0.992], b>s 0.993, s>b 0.952, b>l 0.476, l>b 0.95
+- L12: cos [0.959, 0.991, 0.968], rel [1.0, 0.999, 1.0], diag [0.953, 0.469, 0.989], b>s 0.988, s>b 0.953, b>l 0.469, l>b 0.946
+- L16: cos [0.956, 0.991, 0.968], rel [1.0, 0.999, 1.0], diag [0.951, 0.462, 0.986], b>s 0.985, s>b 0.95, b>l 0.46, l>b 0.943
+- L20: cos [0.937, 0.991, 0.946], rel [0.999, 0.998, 0.999], diag [0.956, 0.459, 0.991], b>s 0.99, s>b 0.955, b>l 0.455, l>b 0.946
+- L24: cos [0.918, 0.989, 0.923], rel [0.997, 0.994, 0.998], diag [0.947, 0.447, 0.982], b>s 0.98, s>b 0.947, b>l 0.448, l>b 0.921
+- L28: cos [0.907, 0.989, 0.914], rel [0.996, 0.991, 0.997], diag [0.948, 0.439, 0.974], b>s 0.972, s>b 0.947, b>l 0.442, l>b 0.92
+
+### Activations, keep: layer, cos(b-l, b-s, l-s), reliability(b, l, s), readout diag / base>syntax, syntax>base
+- L0: cos [None, None, None], rel [None, None, None], diag [None, None, None], b>s None, s>b None, b>l None, l>b None
+- L4: cos [0.0477, 0.894, 0.24], rel [0.999, 0.997, 1.0], diag [0.907, 0.816, 0.977], b>s 0.982, s>b 0.902, b>l 0.025, l>b 0.227
+- L8: cos [0.391, 0.945, 0.478], rel [1.0, 0.994, 1.0], diag [0.894, 0.477, 0.97], b>s 0.974, s>b 0.882, b>l 0.11, l>b 0.877
+- L12: cos [0.653, 0.981, 0.678], rel [1.0, 0.993, 1.0], diag [0.887, 0.3, 0.967], b>s 0.97, s>b 0.88, b>l 0.147, l>b 0.886
+- L16: cos [0.603, 0.973, 0.649], rel [0.999, 0.989, 1.0], diag [0.896, 0.294, 0.972], b>s 0.977, s>b 0.883, b>l 0.125, l>b 0.875
+- L20: cos [0.554, 0.981, 0.584], rel [0.999, 0.982, 0.999], diag [0.908, 0.31, 0.981], b>s 0.98, s>b 0.9, b>l 0.12, l>b 0.901
+- L24: cos [0.434, 0.965, 0.477], rel [0.996, 0.967, 0.997], diag [0.906, 0.328, 0.972], b>s 0.971, s>b 0.892, b>l 0.126, l>b 0.866
+- L28: cos [0.592, 0.97, 0.587], rel [0.996, 0.965, 0.997], diag [0.908, 0.357, 0.962], b>s 0.958, s>b 0.899, b>l 0.182, l>b 0.894
+
+## Q1: what is edited
+
+### free
+- identical outputs: {'adjacent': {'base': 0.471, 'lexical': 0.48, 'syntax': 0.579}, 'across': {'base-lexical': {1: 0.284, 2: 0.273, 3: 0.343}, 'base-syntax': {1: 0.476, 2: 0.372, 3: 0.349}, 'lexical-syntax': {1: 0.225, 2: 0.2, 3: 0.246}}, 'copies': {'base': {'all': 0.101, 'drop1': 0.28}, 'lexical': {'all': 0.0398, 'drop1': 0.058}, 'syntax': {'all': 0.118, 'drop1': 0.34}}}
+- profile rho between tokens: {'base-lexical': 0.877, 'base-syntax': 0.93, 'lexical-syntax': 0.857}
+- classifier: {'n': 8975, 'chance': 0.334, 'accuracy': {'overall READ-IT change': 0.456, 'three READ-IT changes': 0.456, 'profile change + edits': 0.471, 'all of the above': 0.473}, 'confusion': {'base': {'base': 710, 'lexical': 771, 'syntax': 1505}, 'lexical': {'base': 595, 'lexical': 1764, 'syntax': 632}, 'syntax': {'base': 582, 'lexical': 646, 'syntax': 1770}}}
+- classifier, non-copies: {'overall READ-IT change': 0.446, 'three READ-IT changes': 0.448, 'profile change + edits': 0.461, 'all of the above': 0.468}
+
+| Feature | base | lexical | syntax |
+|---|---|---|---|
+| readit_base | -0.897 (-11.3) | -0.71 (-3.87) | -0.878 (-8.8) |
+| readit_lexical | -0.386 (-1.46) | -0.335 (-0.943) | -0.334 (-0.87) |
+| readit_syntax | -0.845 (-15.1) | -0.545 (-5.55) | -0.876 (-12.6) |
+| readit_all | -0.844 (-15.8) | -0.561 (-6.0) | -0.877 (-13.1) |
+| n_sentences | 0.466 (0.085) | 0.24 (0.086) | 0.781 (0.118) |
+| n_tokens | -0.895 (-8.55) | -0.709 (-2.63) | -0.871 (-6.57) |
+| tokens_per_sent | -0.895 (-8.55) | -0.709 (-2.63) | -0.871 (-6.57) |
+| char_per_tok | -0.0133 (0.00333) | 0.00913 (0.00367) | -0.098 (-0.02) |
+| in_dict | -0.12 (-0.00673) | -0.147 (-0.00539) | 0.028 (0.000167) |
+| upos_dist_PUNCT | -0.0881 (-0.304) | -0.115 (-0.234) | -0.139 (-0.285) |
+| lexical_density | 0.0836 (0.00425) | 0.145 (0.00417) | 0.0649 (0.00215) |
+| verbal_head_per_sent | -0.887 (-0.796) | -0.67 (-0.219) | -0.84 (-0.567) |
+| avg_links_len | -0.703 (-0.199) | -0.513 (-0.102) | -0.63 (-0.148) |
+| avg_max_depth | -0.858 (-0.897) | -0.672 (-0.302) | -0.81 (-0.705) |
+| subordinate_proposition_dist | -0.828 (-11.8) | -0.653 (-5.47) | -0.765 (-8.0) |
+| len_ratio | -0.843 (-0.16) | -0.566 (-0.0524) | -0.656 (-0.0823) |
+| kept | -0.926 (-0.185) | -0.718 (-0.0799) | -0.899 (-0.135) |
+| deleted | 0.811 (0.132) | 0.526 (0.0524) | 0.723 (0.0806) |
+| replaced | 0.543 (0.0537) | 0.315 (0.0275) | 0.787 (0.054) |
+| inserted | 0.196 (0.00631) | 0.051 (0.00452) | 0.588 (0.0143) |
+| copy | -1.0 (-0.183) | -0.897 (-0.035) | -1.0 (-0.203) |
+
+- matched base-lexical: n 319, mean gap 0.0189; top: 
+- matched base-syntax: n 417, mean gap 0.00634; top: len_ratio -0.346 (-0.0441); kept -0.306 (-0.0346); max_links_len -0.263 (-0.425); avg_max_links_len -0.263 (-0.425); tokens_per_sent -0.248 (-0.927); n_tokens -0.248 (-0.927); dep_dist_nsubj 0.239 (0.309); dep_dist_root 0.235 (0.536); readit_base -0.23 (-1.01)
+- matched lexical-syntax: n 301, mean gap 0.00817; top: 
+- same distance base-lexical: n 1000, same text 0.3; top: subordinate_dist_4 0.894 (0.419); copy 0.885 (0.147); aux_mood_dist_Cnd 0.876 (1.17); n_prepositional_chains 0.866 (0.843); verbal_head_per_sent 0.832 (1.13); tokens_per_sent 0.819 (13.3); n_tokens 0.819 (13.3); readit_base 0.814 (16.7); avg_max_depth 0.812 (1.35); prep_dist_4 0.808 (0.219)
+- same distance base-syntax: n 1000, same text 0.399; top: aux_tense_dist_Imp 0.49 (1.57); n_sentences -0.378 (-0.0357); dep_dist_parataxis 0.369 (0.0279); subordinate_pre -0.313 (-1.86); subordinate_dist_1 -0.293 (-5.63); dep_dist_root 0.271 (0.592); avg_subordinate_chain_len -0.264 (-0.0693); aux_mood_dist_Ind 0.261 (3.06); aux_form_dist_Fin 0.26 (3.33); kept -0.256 (-0.0496)
+- same distance lexical-syntax: n 1000, same text 0.224; top: subordinate_dist_4 -1.0 (-0.449); copy -1.0 (-0.189); readit_base -0.958 (-14.9); tokens_per_sent -0.957 (-11.2); n_tokens -0.957 (-11.2); dep_dist_root 0.946 (2.03); readit_syntax -0.945 (-21.9); kept -0.944 (-0.239); readit_all -0.943 (-22.3); verbal_head_per_sent -0.921 (-0.999)
+
+### keep
+- identical outputs: {'adjacent': {'base': 0.592, 'lexical': 0.826, 'syntax': 0.714}, 'across': {'base-lexical': {1: 0.837, 2: 0.759, 3: 0.611}, 'base-syntax': {1: 0.863, 2: 0.779, 3: 0.692}, 'lexical-syntax': {1: 0.871, 2: 0.793, 3: 0.654}}, 'copies': {'base': {'all': 0.32, 'drop1': 0.529}, 'lexical': {'all': 0.553, 'drop1': 0.577}, 'syntax': {'all': 0.312, 'drop1': 0.532}}}
+- profile rho between tokens: {'base-lexical': 0.3, 'base-syntax': 0.94, 'lexical-syntax': 0.305}
+- classifier: {'n': 8993, 'chance': 0.333, 'accuracy': {'overall READ-IT change': 0.372, 'three READ-IT changes': 0.374, 'profile change + edits': 0.372, 'all of the above': 0.372}, 'confusion': {'base': {'base': 673, 'lexical': 1901, 'syntax': 423}, 'lexical': {'base': 451, 'lexical': 2220, 'syntax': 327}, 'syntax': {'base': 600, 'lexical': 1948, 'syntax': 450}}}
+- classifier, non-copies: {'overall READ-IT change': 0.364, 'three READ-IT changes': 0.368, 'profile change + edits': 0.361, 'all of the above': 0.363}
+
+| Feature | base | lexical | syntax |
+|---|---|---|---|
+| readit_base | -0.813 (-3.8) | -0.0887 (0.0399) | -0.778 (-3.16) |
+| readit_lexical | -0.314 (-0.567) | -0.192 (-0.147) | -0.31 (-0.393) |
+| readit_syntax | -0.806 (-6.89) | -0.0994 (-0.441) | -0.767 (-5.44) |
+| readit_all | -0.812 (-7.25) | -0.103 (-0.433) | -0.758 (-5.6) |
+| n_sentences | 0.528 (0.026) | -0.373 (-0.009) | 0.486 (0.019) |
+| n_tokens | -0.789 (-2.73) | -0.0122 (0.221) | -0.803 (-2.53) |
+| tokens_per_sent | -0.789 (-2.73) | -0.0122 (0.221) | -0.803 (-2.53) |
+| char_per_tok | -0.121 (-0.0122) | 0.138 (0.0076) | -0.0643 (-0.00391) |
+| in_dict | 0.0153 (0.000258) | 0.233 (0.00168) | 0.0542 (0.000948) |
+| upos_dist_PUNCT | -0.222 (-0.251) | -0.0534 (-0.0404) | -0.121 (-0.123) |
+| lexical_density | 0.00162 (-0.000169) | 0.044 (0.000356) | -0.0578 (-0.000175) |
+| verbal_head_per_sent | -0.747 (-0.246) | 0.236 (0.0338) | -0.771 (-0.231) |
+| avg_links_len | -0.533 (-0.0737) | -0.0865 (-0.00462) | -0.453 (-0.0566) |
+| avg_max_depth | -0.663 (-0.272) | 0.0278 (0.0117) | -0.702 (-0.241) |
+| subordinate_proposition_dist | -0.715 (-3.84) | -0.118 (-0.33) | -0.668 (-3.01) |
+| len_ratio | -0.709 (-0.0525) | -0.121 (-0.00375) | -0.778 (-0.0443) |
+| kept | -0.882 (-0.0798) | -0.183 (-0.00795) | -0.936 (-0.0629) |
+| deleted | 0.881 (0.0544) | 0.178 (0.00571) | 0.9 (0.0432) |
+| replaced | 0.669 (0.0253) | 0.178 (0.00224) | 0.69 (0.0197) |
+| inserted | 0.57 (0.00728) | 0.215 (0.00133) | 0.604 (0.00547) |
+| copy | -0.927 (-0.153) | -0.179 (-0.014) | -0.971 (-0.133) |
+
+- matched base-lexical: n 103, mean gap -0.051; top: kept -0.691 (-0.0433)
+- matched base-syntax: n 245, mean gap -0.0146; top: 
+- matched lexical-syntax: n 110, mean gap 0.0641; top: kept 0.758 (0.059)
+- same distance base-lexical: n 1000, same text 0.736; top: copy -0.965 (-0.107); kept -0.935 (-0.0528); deleted 0.911 (0.034); dep_dist_root 0.848 (0.276); readit_base -0.837 (-2.21); readit_syntax -0.833 (-4.44); readit_all -0.833 (-4.6); tokens_per_sent -0.818 (-1.53); n_tokens -0.818 (-1.53); replaced 0.788 (0.0188)
+- same distance base-syntax: n 1000, same text 0.778; top: deleted 0.357 (0.00989); kept -0.34 (-0.0135); dep_dist_root 0.334 (0.139); len_ratio -0.299 (-0.00927); readit_base -0.283 (-0.207); readit_all -0.251 (-1.02); readit_syntax -0.246 (-0.979); readit_lexical -0.222 (-0.202); avg_links_len -0.217 (-0.00971); tokens_per_sent -0.211 (0.142)
+- same distance lexical-syntax: n 1000, same text 0.773; top: copy 0.979 (0.097); kept 0.928 (0.0392); deleted -0.885 (-0.0241); readit_syntax 0.825 (3.46); readit_all 0.817 (3.57); dep_dist_parataxis 0.797 (0.0357); tokens_per_sent 0.785 (1.67); n_tokens 0.785 (1.67); verbs_mood_dist_Ind 0.784 (2.71); verbal_head_per_sent 0.784 (0.15)
+
+Anchor (every dimension at the original's level): {'copies': 0.602, 'scores': {'readit_base': -2.57, 'readit_lexical': -0.374, 'readit_syntax': -4.8, 'readit_all': -5.06}}
+

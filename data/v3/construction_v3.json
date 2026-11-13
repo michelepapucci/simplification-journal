@@ -1,0 +1,111 @@
+{
+ "based_on": "data/v2/training_set_v2.zip (same pairs, splits and columns)",
+ "rules": {
+  "same_level_targets": [
+   "base",
+   "syntax"
+  ],
+  "same_level": "target = the original's level when the simplification stays in it and the score did not rise by the margin or more",
+  "otherwise": "as v2 (dataset v1 rule)",
+  "margins": {
+   "base": 5.7,
+   "lexical": 3.8,
+   "syntax": 17.6
+  }
+ },
+ "pairs": 89460,
+ "train": 88599,
+ "validation": 861,
+ "changed": {
+  "base": {
+   "same_level_targets": 10767,
+   "same_level_train": 10622,
+   "kept_any_rise_within_level": 351,
+   "median_change_same_level": -1.39,
+   "train_targets_by_level": {
+    "v2": {
+     "0": 343,
+     "10": 8023,
+     "20": 23536,
+     "30": 20819,
+     "40": 10913,
+     "50": 4889,
+     "60": 2163,
+     "70": 717,
+     "80": 90
+    },
+    "v3": {
+     "0": 343,
+     "10": 8169,
+     "20": 25834,
+     "30": 23836,
+     "40": 13090,
+     "50": 6378,
+     "60": 2990,
+     "70": 1177,
+     "80": 272,
+     "90": 26
+    }
+   }
+  },
+  "syntax": {
+   "same_level_targets": 4302,
+   "same_level_train": 4263,
+   "kept_any_rise_within_level": 0,
+   "median_change_same_level": -1.94,
+   "train_targets_by_level": {
+    "v2": {
+     "0": 7299,
+     "10": 13014,
+     "20": 14159,
+     "30": 14208,
+     "40": 13030,
+     "50": 8534,
+     "60": 3130,
+     "70": 511
+    },
+    "v3": {
+     "0": 7776,
+     "10": 13465,
+     "20": 14460,
+     "30": 14448,
+     "40": 13188,
+     "50": 8697,
+     "60": 3771,
+     "70": 1605,
+     "80": 629,
+     "90": 109
+    }
+   }
+  }
+ },
+ "pairs_with_all_three_targets": {
+  "v2": 17296,
+  "v3": 20850
+ },
+ "epoch_composition_with_dropout": {
+  "v2": {
+   "syntax": 0.2932,
+   "base+syntax": 0.2553,
+   "base": 0.2294,
+   "base+lexical+syntax": 0.067,
+   "base+lexical": 0.0628,
+   "lexical": 0.0538,
+   "lexical+syntax": 0.0385
+  },
+  "v3": {
+   "base+syntax": 0.3175,
+   "base": 0.2385,
+   "syntax": 0.2267,
+   "base+lexical+syntax": 0.0807,
+   "base+lexical": 0.0608,
+   "lexical+syntax": 0.0391,
+   "lexical": 0.0367
+  }
+ },
+ "test_sets": {
+  "base": "identical to data/v2/base_test_set_v2.csv",
+  "lexical": "identical to data/v2/lexical_test_set_v2.csv",
+  "syntax": "identical to data/v2/syntax_test_set_v2.csv"
+ }
+}

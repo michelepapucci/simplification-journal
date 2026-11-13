@@ -1,0 +1,58 @@
+{
+ "base": {
+  "generations": 8054,
+  "bleu": 33.817824558074086,
+  "rouge1": 0.5866134899729486,
+  "rouge2": 0.47794537159751094,
+  "rougeL": 0.5455155042888811,
+  "rougeLsum": 0.5457426217866075,
+  "bertscore_precision": 0.8853837847709656,
+  "bertscore_recall": 0.7969613075256348,
+  "bertscore_f1": 0.8370896577835083,
+  "sbert_cosine": 0.750543475151062,
+  "copy_rate": 0.008443009684628756,
+  "empty_rate": 0.0
+ },
+ "lexical": {
+  "generations": 3862,
+  "bleu": 34.805117834160974,
+  "rouge1": 0.5967940221157919,
+  "rouge2": 0.4606369393968024,
+  "rougeL": 0.5532281191412969,
+  "rougeLsum": 0.5530729662841928,
+  "bertscore_precision": 0.8704304695129395,
+  "bertscore_recall": 0.8140734434127808,
+  "bertscore_f1": 0.8398226499557495,
+  "sbert_cosine": 0.752629280090332,
+  "copy_rate": 0.010357327809425169,
+  "empty_rate": 0.0
+ },
+ "syntax": {
+  "generations": 7905,
+  "bleu": 39.88229033997343,
+  "rouge1": 0.6276284769037243,
+  "rouge2": 0.5006871052018103,
+  "rougeL": 0.5821205989864235,
+  "rougeLsum": 0.5821255696472349,
+  "bertscore_precision": 0.8822274208068848,
+  "bertscore_recall": 0.8247279524803162,
+  "bertscore_f1": 0.8510791063308716,
+  "sbert_cosine": 0.7799280285835266,
+  "copy_rate": 0.015306767868437697,
+  "empty_rate": 0.0
+ },
+ "joint": {
+  "generations": 4553,
+  "bleu": 25.329480455742644,
+  "rouge1": 0.5246144496298109,
+  "rouge2": 0.387551924770952,
+  "rougeL": 0.4770073491884512,
+  "rougeLsum": 0.47711689615600783,
+  "bertscore_precision": 0.8625253438949585,
+  "bertscore_recall": 0.7748945355415344,
+  "bertscore_f1": 0.8147944211959839,
+  "sbert_cosine": 0.7037184834480286,
+  "copy_rate": 0.003074895673182517,
+  "empty_rate": 0.0
+ }
+}

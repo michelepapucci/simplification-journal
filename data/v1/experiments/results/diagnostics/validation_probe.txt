@@ -1,0 +1,6 @@
+610 texts: analysis 56s, readability 3s; 0 failed; 1 unscored; wrote /home/mpapucci/text-simplification-experiments/simplification-journal/data/v1/experiments/outputs/diagnostics/readit-targets.csv
+targets     lexical_supplement originals  63 scored 260/260 | original lexical 41.3 | achieved at 0: 38.8 10: 40.4 20: 39.1 30: 40.6 | Δ lexical -2.1 Δ base -5.8 | inside 14.6% | ρ within: lexical +0.10 base +0.25
+targets     v1                 originals 107 scored 349/350 | original lexical 32.7 | achieved at 0: 36.6 10: 37.3 20: 36.7 30: 41.8 | Δ lexical +3.5 Δ base -13.2 | inside 6.0% | ρ within: lexical +0.02 base +0.23
+610 texts: analysis 52s, readability 3s; 0 failed; 2 unscored; wrote /home/mpapucci/text-simplification-experiments/simplification-journal/data/v1/experiments/outputs/diagnostics/readit-v2_targets.csv
+v2_targets  lexical_supplement originals  63 scored 258/260 | original lexical 41.3 | achieved at 0: 37.1 10: 36.8 20: 38.3 30: 38.6 | Δ lexical -4.1 Δ base -8.6 | inside 15.9% | ρ within: lexical +0.12 base +0.23
+v2_targets  v1                 originals 107 scored 350/350 | original lexical 32.7 | achieved at 0: 35.1 10: 35.7 20: 37.1 30: 40.0 | Δ lexical +2.5 Δ base -16.1 | inside 9.1% | ρ within: lexical +0.09 base +0.09

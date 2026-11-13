@@ -1,0 +1,34 @@
+/home/mpapucci/text-simplification-experiments/.venv/lib/python3.10/site-packages/torch/cuda/__init__.py:829: UserWarning: Can't initialize NVML
+  warnings.warn("Can't initialize NVML")
+`torch_dtype` is deprecated! Use `dtype` instead!
+/home/mpapucci/text-simplification-experiments/.venv/lib/python3.10/site-packages/peft/tuners/tuners_utils.py:1222: UserWarning: Model has `tie_word_embeddings=True` and a tied layer is part of the adapter, but `ensure_weight_tying` is not set to True. This can lead to complications, for example when merging the adapter or converting your model to formats other than safetensors. Check the discussion here: https://github.com/huggingface/peft/issues/2777
+  warnings.warn(msg)
+64/34702 in 1s
+1344/34702 in 23s
+2624/34702 in 46s
+3904/34702 in 66s
+5184/34702 in 99s
+6464/34702 in 130s
+7744/34702 in 159s
+9024/34702 in 190s
+10304/34702 in 215s
+11584/34702 in 249s
+12864/34702 in 282s
+14144/34702 in 316s
+15424/34702 in 354s
+16704/34702 in 395s
+17984/34702 in 445s
+19264/34702 in 493s
+20544/34702 in 552s
+21824/34702 in 606s
+23104/34702 in 666s
+24384/34702 in 727s
+25664/34702 in 790s
+26944/34702 in 851s
+28224/34702 in 915s
+29504/34702 in 986s
+30784/34702 in 1058s
+32064/34702 in 1135s
+33344/34702 in 1211s
+34624/34702 in 1295s
+34702 generations in 1302s, 0 empty

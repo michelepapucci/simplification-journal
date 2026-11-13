@@ -1,0 +1,4 @@
+readit-base.csv: every parse matches its text
+readit-lexical.csv: every parse matches its text
+readit-syntax.csv: every parse matches its text
+readit-joint.csv: every parse matches its text

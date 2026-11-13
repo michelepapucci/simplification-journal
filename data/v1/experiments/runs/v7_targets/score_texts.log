@@ -1,0 +1,16 @@
+8054 texts: analysis 1251s, readability 57s; 0 failed; 10 unscored; wrote /home/mpapucci/text-simplification-experiments/simplification-journal/data/v1/experiments/outputs/v7_targets/readit-base.csv
+/home/mpapucci/text-simplification-experiments/.venv/lib/python3.10/site-packages/torch/cuda/__init__.py:829: UserWarning: Can't initialize NVML
+  warnings.warn("Can't initialize NVML")
+8054 texts: parse 114s, profiling 5s; 0 empty; wrote /home/mpapucci/text-simplification-experiments/simplification-journal/data/v1/experiments/outputs/v7_targets/profiling-base.csv
+3862 texts: analysis 460s, readability 18s; 0 failed; 51 unscored; wrote /home/mpapucci/text-simplification-experiments/simplification-journal/data/v1/experiments/outputs/v7_targets/readit-lexical.csv
+/home/mpapucci/text-simplification-experiments/.venv/lib/python3.10/site-packages/torch/cuda/__init__.py:829: UserWarning: Can't initialize NVML
+  warnings.warn("Can't initialize NVML")
+3862 texts: parse 20s, profiling 2s; 0 empty; wrote /home/mpapucci/text-simplification-experiments/simplification-journal/data/v1/experiments/outputs/v7_targets/profiling-lexical.csv
+7905 texts: analysis 1140s, readability 38s; 0 failed; 27 unscored; wrote /home/mpapucci/text-simplification-experiments/simplification-journal/data/v1/experiments/outputs/v7_targets/readit-syntax.csv
+/home/mpapucci/text-simplification-experiments/.venv/lib/python3.10/site-packages/torch/cuda/__init__.py:829: UserWarning: Can't initialize NVML
+  warnings.warn("Can't initialize NVML")
+7905 texts: parse 162s, profiling 3s; 0 empty; wrote /home/mpapucci/text-simplification-experiments/simplification-journal/data/v1/experiments/outputs/v7_targets/profiling-syntax.csv
+4553 texts: analysis 692s, readability 25s; 0 failed; 20 unscored; wrote /home/mpapucci/text-simplification-experiments/simplification-journal/data/v1/experiments/outputs/v7_targets/readit-joint.csv
+/home/mpapucci/text-simplification-experiments/.venv/lib/python3.10/site-packages/torch/cuda/__init__.py:829: UserWarning: Can't initialize NVML
+  warnings.warn("Can't initialize NVML")
+4553 texts: parse 68s, profiling 2s; 0 empty; wrote /home/mpapucci/text-simplification-experiments/simplification-journal/data/v1/experiments/outputs/v7_targets/profiling-joint.csv

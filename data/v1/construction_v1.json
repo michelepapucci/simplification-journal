@@ -1,0 +1,107 @@
+{
+ "source": {
+  "repo": "mpapucci/impacts",
+  "revision": "489c78edec079421b2c0d777cd3393ad04c96f2c",
+  "config": "wikipedia_profiling"
+ },
+ "rules": {
+  "min_original_global": 0.7,
+  "level": "10 * min(floor(10 * score), 9)",
+  "target": "level of the simplification if below the original's and the score dropped by >= margin, else any",
+  "margins": {
+   "base": 5.7,
+   "lexical": 3.8,
+   "syntax": 17.6
+  },
+  "margin_rule": "p90 of |READ-IT difference| between near-identical (similarity >= 0.9) simplifications of the same original",
+  "readit_noise": {
+   "near_duplicate_pairs": 45445,
+   "base": {
+    "p50": 1.6,
+    "p75": 3.3,
+    "p90": 5.7,
+    "p95": 8.1
+   },
+   "lexical": {
+    "p50": 1.1,
+    "p75": 2.2,
+    "p90": 3.8,
+    "p95": 5.1
+   },
+   "syntax": {
+    "p50": 3.5,
+    "p75": 9.0,
+    "p90": 17.6,
+    "p95": 24.5
+   }
+  },
+  "double_filter_proxy": {
+   "original_matches": "[\"«»“”(]",
+   "or_longer_than_chars": 400
+  },
+  "validation_share_of_originals": 0.01,
+  "seed": 42
+ },
+ "steps": [
+  {
+   "step": "release, Wikipedia",
+   "pairs": 764061,
+   "originals": 106680
+  },
+  {
+   "step": "1. test originals held out",
+   "pairs": 740563,
+   "originals": 104105
+  },
+  {
+   "step": "2. original READ-IT global > 70",
+   "pairs": 213703,
+   "originals": 24355
+  },
+  {
+   "step": "3. langdetect list removed",
+   "pairs": 210720,
+   "originals": 24313
+  },
+  {
+   "step": "4. double-filter proxy on the original",
+   "pairs": 94560,
+   "originals": 10866
+  },
+  {
+   "step": "5. exact duplicates removed",
+   "pairs": 94505,
+   "originals": 10866
+  },
+  {
+   "step": "7. at least one target (one bin lower and drop >= margin)",
+   "pairs": 78462,
+   "originals": 10800
+  },
+  {
+   "step": "8. split: train",
+   "pairs": 77696,
+   "originals": 10692
+  },
+  {
+   "step": "8. split: validation",
+   "pairs": 766,
+   "originals": 108
+  }
+ ],
+ "held_out_test_originals": 2575,
+ "test_sets": {
+  "base": {
+   "pairs": 1000,
+   "reference_with_no_target": 0
+  },
+  "lexical": {
+   "pairs": 1000,
+   "reference_with_no_target": 0
+  },
+  "syntax": {
+   "pairs": 1000,
+   "reference_with_no_target": 0
+  }
+ }
+}

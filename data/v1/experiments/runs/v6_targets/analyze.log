@@ -1,0 +1,69 @@
+CLiC-it 2026 0.6B            base     n= 8054 RMSE 20.38 in-level 0.202 bias 10.4 rho 0.724 within 0.756 moved -40.0 free {'lexical': -2.3, 'syntax': -38.09} | BERTScore 0.8396 SBERT 0.7571 copy 0.0392
+CLiC-it 2026 0.6B            lexical  n= 3862 RMSE 26.1 in-level 0.144 bias 22.34 rho 0.254 within 0.129 moved -7.48 free {'base': -23.66, 'syntax': -42.76} | BERTScore 0.8214 SBERT 0.7104 copy 0.0212
+CLiC-it 2026 0.6B            syntax   n= 7905 RMSE 26.87 in-level 0.155 bias 8.29 rho 0.471 within 0.503 moved -41.41 free {'base': -22.58, 'lexical': -2.74} | BERTScore 0.8529 SBERT 0.7811 copy 0.0568
+v1, target tokens            base     n= 8054 RMSE 21.03 in-level 0.195 bias 8.85 rho 0.677 within 0.702 moved -41.54 free {'lexical': -1.08, 'syntax': -39.26} | BERTScore 0.8355 SBERT 0.7433 copy 0.0079
+v1, target tokens            lexical  n= 3862 RMSE 28.97 in-level 0.105 bias 25.4 rho 0.18 within 0.05 moved -4.49 free {'base': -16.35, 'syntax': -34.38} | BERTScore 0.8526 SBERT 0.7751 copy 0.0158
+v1, target tokens            syntax   n= 7905 RMSE 26.52 in-level 0.177 bias 8.65 rho 0.472 within 0.509 moved -41.05 free {'base': -20.13, 'lexical': -1.34} | BERTScore 0.8514 SBERT 0.7776 copy 0.0142
+v1, target tokens            joint    n=4553 all three in level 0.034 within one level 0.394 | base in-level 0.372, lexical in-level 0.276, syntax in-level 0.21
+v1, source + target tokens   base     n= 8054 RMSE 21.05 in-level 0.211 bias 8.23 rho 0.661 within 0.697 moved -42.15 free {'lexical': -1.1, 'syntax': -40.19} | BERTScore 0.8323 SBERT 0.7379 copy 0.0058
+v1, source + target tokens   lexical  n= 3862 RMSE 29.0 in-level 0.1 bias 25.56 rho 0.166 within 0.016 moved -4.32 free {'base': -14.59, 'syntax': -31.95} | BERTScore 0.8605 SBERT 0.7925 copy 0.0192
+v1, source + target tokens   syntax   n= 7905 RMSE 26.01 in-level 0.179 bias 7.07 rho 0.464 within 0.499 moved -42.61 free {'base': -20.81, 'lexical': -1.38} | BERTScore 0.8473 SBERT 0.7705 copy 0.0156
+v1, source + target tokens   joint    n=4553 all three in level 0.035 within one level 0.389 | base in-level 0.363, lexical in-level 0.268, syntax in-level 0.213
+v2, target tokens            base     n= 8054 RMSE 21.6 in-level 0.203 bias 9.42 rho 0.652 within 0.683 moved -40.99 free {'lexical': -1.17, 'syntax': -38.98} | BERTScore 0.8371 SBERT 0.7505 copy 0.0084
+v2, target tokens            lexical  n= 3862 RMSE 28.02 in-level 0.116 bias 24.22 rho 0.183 within 0.057 moved -5.7 free {'base': -18.1, 'syntax': -37.21} | BERTScore 0.8398 SBERT 0.7526 copy 0.0104
+v2, target tokens            syntax   n= 7905 RMSE 26.56 in-level 0.178 bias 8.32 rho 0.459 within 0.484 moved -41.39 free {'base': -19.88, 'lexical': -1.63} | BERTScore 0.8511 SBERT 0.7799 copy 0.0153
+v2, target tokens            joint    n=4553 all three in level 0.033 within one level 0.392 | base in-level 0.36, lexical in-level 0.284, syntax in-level 0.212
+v3, target tokens            base     n= 8054 RMSE 20.81 in-level 0.206 bias 9.71 rho 0.701 within 0.728 moved -40.69 free {'lexical': -1.24, 'syntax': -38.87} | BERTScore 0.8351 SBERT 0.7451 copy 0.0096
+v3, target tokens            lexical  n= 3862 RMSE 28.01 in-level 0.128 bias 24.2 rho 0.174 within 0.052 moved -5.72 free {'base': -18.89, 'syntax': -37.77} | BERTScore 0.8371 SBERT 0.746 copy 0.0078
+v3, target tokens            syntax   n= 7905 RMSE 26.62 in-level 0.177 bias 7.82 rho 0.448 within 0.483 moved -41.88 free {'base': -20.51, 'lexical': -1.76} | BERTScore 0.8491 SBERT 0.7759 copy 0.0134
+v3, target tokens            joint    n=4553 all three in level 0.036 within one level 0.409 | base in-level 0.374, lexical in-level 0.288, syntax in-level 0.217
+v4, target tokens            base     n= 8054 RMSE 20.79 in-level 0.206 bias 8.31 rho 0.682 within 0.716 moved -42.07 free {'lexical': -1.29, 'syntax': -40.38} | BERTScore 0.8292 SBERT 0.7341 copy 0.0036
+v4, target tokens            lexical  n= 3862 RMSE 28.01 in-level 0.135 bias 24.12 rho 0.15 within 0.007 moved -5.79 free {'base': -19.14, 'syntax': -39.09} | BERTScore 0.8334 SBERT 0.7361 copy 0.007
+v4, target tokens            syntax   n= 7905 RMSE 25.96 in-level 0.179 bias 6.88 rho 0.465 within 0.504 moved -42.82 free {'base': -21.3, 'lexical': -1.71} | BERTScore 0.8476 SBERT 0.7725 copy 0.0156
+v4, target tokens            joint    n=4553 all three in level 0.039 within one level 0.394 | base in-level 0.363, lexical in-level 0.298, syntax in-level 0.217
+v5, target tokens            base     n= 8054 RMSE 20.92 in-level 0.203 bias 9.16 rho 0.693 within 0.726 moved -41.23 free {'lexical': -1.31, 'syntax': -39.05} | BERTScore 0.8344 SBERT 0.742 copy 0.0125
+v5, target tokens            lexical  n= 3862 RMSE 27.7 in-level 0.125 bias 23.92 rho 0.191 within 0.077 moved -5.94 free {'base': -20.66, 'syntax': -40.14} | BERTScore 0.8279 SBERT 0.7228 copy 0.0117
+v5, target tokens            syntax   n= 7905 RMSE 25.8 in-level 0.166 bias 10.42 rho 0.555 within 0.587 moved -39.27 free {'base': -19.8, 'lexical': -1.59} | BERTScore 0.8582 SBERT 0.7855 copy 0.0869
+v5, target tokens            joint    n=4553 all three in level 0.035 within one level 0.407 | base in-level 0.368, lexical in-level 0.293, syntax in-level 0.23
+v6, target tokens            base     n= 8054 RMSE 24.3 in-level 0.201 bias 11.19 rho 0.567 within 0.592 moved -39.2 free {'lexical': -1.18, 'syntax': -37.2} | BERTScore 0.8409 SBERT 0.7531 copy 0.0151
+v6, target tokens            lexical  n= 3862 RMSE 27.79 in-level 0.123 bias 23.96 rho 0.165 within 0.039 moved -5.94 free {'base': -19.69, 'syntax': -39.95} | BERTScore 0.83 SBERT 0.7333 copy 0.0101
+v6, target tokens            syntax   n= 7905 RMSE 26.48 in-level 0.17 bias 6.63 rho 0.442 within 0.471 moved -43.08 free {'base': -21.64, 'lexical': -1.76} | BERTScore 0.8445 SBERT 0.7659 copy 0.0219
+v6, target tokens            joint    n=4553 all three in level 0.038 within one level 0.409 | base in-level 0.379, lexical in-level 0.299, syntax in-level 0.206
+{
+ "originals-base": {
+  "base": 1.0,
+  "lexical": 1.0,
+  "syntax": 1.0,
+  "all": 1.0
+ },
+ "references-base": {
+  "base": 1.0,
+  "lexical": 1.0,
+  "syntax": 1.0,
+  "all": 1.0
+ },
+ "originals-lexical": {
+  "base": 1.0,
+  "lexical": 1.0,
+  "syntax": 1.0,
+  "all": 1.0
+ },
+ "references-lexical": {
+  "base": 1.0,
+  "lexical": 1.0,
+  "syntax": 1.0,
+  "all": 1.0
+ },
+ "originals-syntax": {
+  "base": 1.0,
+  "lexical": 1.0,
+  "syntax": 1.0,
+  "all": 1.0
+ },
+ "references-syntax": {
+  "base": 1.0,
+  "lexical": 1.0,
+  "syntax": 1.0,
+  "all": 1.0
+ }
+}

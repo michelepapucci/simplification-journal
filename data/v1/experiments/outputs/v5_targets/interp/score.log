@@ -1,0 +1,8 @@
+34702 generations, 8137 distinct texts (997 originals)
+reusing 7462 scored texts from outputs/v5_targets/interp_lexical_any; scoring 675
+675 texts: analysis 90s, readability 4s; 0 failed; 0 unscored; wrote /home/mpapucci/text-simplification-experiments/simplification-journal/data/v1/experiments/outputs/v5_targets/interp/new/readit-texts.csv
+readit-texts.csv: every parse matches its text
+/home/mpapucci/text-simplification-experiments/.venv/lib/python3.10/site-packages/torch/cuda/__init__.py:829: UserWarning: Can't initialize NVML
+  warnings.warn("Can't initialize NVML")
+675 texts: parse 14s, profiling 0s; 0 empty; wrote outputs/v5_targets/interp/new/profiling-texts.csv
+wrote readit-texts.csv and profiling-texts.csv for 8137 texts; 18 unscored

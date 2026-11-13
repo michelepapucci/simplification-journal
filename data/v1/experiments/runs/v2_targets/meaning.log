@@ -1,0 +1,6 @@
+/home/mpapucci/text-simplification-experiments/.venv/lib/python3.10/site-packages/torch/cuda/__init__.py:829: UserWarning: Can't initialize NVML
+  warnings.warn("Can't initialize NVML")
+base {'generations': 8054, 'bleu': 33.8178, 'rouge1': 0.5866, 'rouge2': 0.4779, 'rougeL': 0.5455, 'rougeLsum': 0.5457, 'bertscore_precision': 0.8854, 'bertscore_recall': 0.797, 'bertscore_f1': 0.8371, 'sbert_cosine': 0.7505, 'copy_rate': 0.0084, 'empty_rate': 0.0}
+lexical {'generations': 3862, 'bleu': 34.8051, 'rouge1': 0.5968, 'rouge2': 0.4606, 'rougeL': 0.5532, 'rougeLsum': 0.5531, 'bertscore_precision': 0.8704, 'bertscore_recall': 0.8141, 'bertscore_f1': 0.8398, 'sbert_cosine': 0.7526, 'copy_rate': 0.0104, 'empty_rate': 0.0}
+syntax {'generations': 7905, 'bleu': 39.8823, 'rouge1': 0.6276, 'rouge2': 0.5007, 'rougeL': 0.5821, 'rougeLsum': 0.5821, 'bertscore_precision': 0.8822, 'bertscore_recall': 0.8247, 'bertscore_f1': 0.8511, 'sbert_cosine': 0.7799, 'copy_rate': 0.0153, 'empty_rate': 0.0}
+joint {'generations': 4553, 'bleu': 25.3295, 'rouge1': 0.5246, 'rouge2': 0.3876, 'rougeL': 0.477, 'rougeLsum': 0.4771, 'bertscore_precision': 0.8625, 'bertscore_recall': 0.7749, 'bertscore_f1': 0.8148, 'sbert_cosine': 0.7037, 'copy_rate': 0.0031, 'empty_rate': 0.0}

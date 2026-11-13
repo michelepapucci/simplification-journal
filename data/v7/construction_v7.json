@@ -1,0 +1,158 @@
+{
+ "based_on": "data/v3/training_set_v3.zip (same pairs, splits and labels), in the CLiC-it format plus a combined example",
+ "rules": {
+  "examples": "per training pair, one example per set target with that token alone, plus one combined example with all targets if two or three are set; validation pairs unchanged (one example each)",
+  "target_dropout": 0.0,
+  "identity_pairs": "original -> original from distinct training originals at syntax 60-90; syntax and base targets at the original's levels, lexical any; as many as give the CLiC-it share of identical pairs among training examples showing syntax token L; base target kept on at most as many as give the CLiC-it share among examples showing base token B, the others syntax only",
+  "seed": 0,
+  "levels": [
+   60,
+   70,
+   80,
+   90
+  ]
+ },
+ "rows": 268251,
+ "training_examples": 267390,
+ "training_pairs": 89630,
+ "validation_pairs": 861,
+ "identity_pairs": 1031,
+ "identity_pairs_with_base_target": 908,
+ "identity_idx_from": 1071354,
+ "examples_by_kind": {
+  "base": 83023,
+  "syntax": 79179,
+  "combined": 78455,
+  "lexical": 26733
+ },
+ "steps_for_3_epochs_at_batch_64": 12534,
+ "by_syntax_level": {
+  "60": {
+   "clicit_share": 0.0496,
+   "v3_examples_showing_token": 7126,
+   "identity_pairs": 192,
+   "of_which_with_base_target": 180,
+   "candidate_originals": 2251,
+   "examples_showing_token": 7498,
+   "identity_share": 0.0496
+  },
+  "70": {
+   "clicit_share": 0.186,
+   "v3_examples_showing_token": 3137,
+   "identity_pairs": 370,
+   "of_which_with_base_target": 347,
+   "candidate_originals": 5319,
+   "examples_showing_token": 3854,
+   "identity_share": 0.186
+  },
+  "80": {
+   "clicit_share": 0.3345,
+   "v3_examples_showing_token": 1258,
+   "identity_pairs": 336,
+   "of_which_with_base_target": 296,
+   "candidate_originals": 3431,
+   "examples_showing_token": 1890,
+   "identity_share": 0.3344
+  },
+  "90": {
+   "clicit_share": 0.5,
+   "v3_examples_showing_token": 218,
+   "identity_pairs": 133,
+   "of_which_with_base_target": 85,
+   "candidate_originals": 953,
+   "examples_showing_token": 436,
+   "identity_share": 0.5
+  }
+ },
+ "by_base_level": {
+  "0": {
+   "clicit_share": 0.0,
+   "examples_showing_token": 686,
+   "identity_share": 0.0
+  },
+  "10": {
+   "clicit_share": 0.0018,
+   "examples_showing_token": 16210,
+   "identity_share": 0.0006
+  },
+  "20": {
+   "clicit_share": 0.0109,
+   "examples_showing_token": 51089,
+   "identity_share": 0.0022
+  },
+  "30": {
+   "clicit_share": 0.0211,
+   "examples_showing_token": 46664,
+   "identity_share": 0.0049
+  },
+  "40": {
+   "clicit_share": 0.0428,
+   "examples_showing_token": 25222,
+   "identity_share": 0.0122
+  },
+  "50": {
+   "clicit_share": 0.0763,
+   "examples_showing_token": 12072,
+   "identity_share": 0.032
+  },
+  "60": {
+   "clicit_share": 0.123,
+   "examples_showing_token": 5703,
+   "identity_share": 0.0677
+  },
+  "70": {
+   "clicit_share": 0.1436,
+   "examples_showing_token": 2342,
+   "identity_share": 0.1153
+  },
+  "80": {
+   "clicit_share": 0.1639,
+   "examples_showing_token": 611,
+   "identity_share": 0.1637
+  },
+  "90": {
+   "clicit_share": 0.2389,
+   "examples_showing_token": 68,
+   "identity_share": 0.2353
+  }
+ },
+ "by_lexical_level": {
+  "0": {
+   "examples_showing_token": 201,
+   "identity_share": 0.0
+  },
+  "10": {
+   "examples_showing_token": 2820,
+   "identity_share": 0.0
+  },
+  "20": {
+   "examples_showing_token": 26152,
+   "identity_share": 0.0
+  },
+  "30": {
+   "examples_showing_token": 21974,
+   "identity_share": 0.0
+  },
+  "40": {
+   "examples_showing_token": 1865,
+   "identity_share": 0.0
+  },
+  "50": {
+   "examples_showing_token": 105,
+   "identity_share": 0.0
+  },
+  "60": {
+   "examples_showing_token": 6,
+   "identity_share": 0.0
+  },
+  "70": {
+   "examples_showing_token": 2,
+   "identity_share": 0.0
+  }
+ },
+ "test_sets": {
+  "base": "identical to data/v3/base_test_set_v3.csv",
+  "lexical": "identical to data/v3/lexical_test_set_v3.csv",
+  "syntax": "identical to data/v3/syntax_test_set_v3.csv"
+ }
+}
