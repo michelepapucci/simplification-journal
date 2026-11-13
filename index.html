@@ -108,7 +108,7 @@
             <td data-label="What it contains">v3’s pairs plus 1,031 identity pairs with syntax and base targets: 267,390 training examples. The identity pairs give the CLiC-it data’s share among all examples that show each syntax token.</td>
             <td data-label="Control tokens">One token per example, as in the CLiC-it data, plus one combined example per pair with all its targets, so the model still takes all three at once. No target dropout.</td>
             <td data-label="Why we built it">Our format shows each pair once with all its tokens; the CLiC-it data shows it once per token. Our models saw the high syntax tokens 2.4 times less often than the CLiC-it model.</td>
-            <td data-label="Did it work?"><span class="verdict">Mostly.</span> The model copies at the CLiC-it model’s rate (21.0% at the highest syntax request, against 22.1%). Syntax at 70–80 rose to 65.7 (CLiC-it: 68.1) and base to 68.3. Three of the four syntax goals are met, and the base goal too. RMSE at 60–80 is still 24.4 against 23.2: the outputs that are not copies are slightly heavier edits. The model overfits: validation loss rose after step 2,500 of 12,534.</td>
+            <td data-label="Did it work?"><span class="verdict">Mostly.</span> The model copies at the CLiC-it model’s rate (21.0% at the highest syntax request, against 22.1%). Syntax at 70–80 rose to 65.7 (CLiC-it: 68.1) and base to 68.3. Three of the four syntax goals are met, and the base goal too. RMSE at 60–80 is still 24.4 against 23.2: the outputs that are not copies are slightly heavier edits. Trained for one epoch instead, it does worse: its edits are no lighter, and it copies at mild requests too, so the heavy edits come from the format, not overfitting.</td>
           </tr>
         </tbody>
       </table>
@@ -253,7 +253,7 @@
       <p class="eyebrow">Part 2</p>
       <h2 class="part-title" id="generation-title">Model generation analysis</h2>
       <p class="lede" id="gen-lede"></p>
-      <p class="lede">How the v5 model uses each of its three tokens, with the same sentences under every request: <a href="interp.html">control token interpretability</a>.</p>
+      <p class="lede">How the v5 and v7 models use each of their three tokens, with the same sentences under every request: <a href="interp.html">control token interpretability</a>.</p>
       <ul class="findings" id="gen-findings">
         <li>No model of ours controls READ-IT better than the CLiC-it 2026 0.6B overall. The v7 model comes closest: about level on base and lexical, ahead on syntax over all requests (RMSE 25.8 against 26.9), and 1.2 points of RMSE behind it at syntax 60–80. v5 is ahead on syntax at the top of the scale, but copies more.</li>
         <li>Giving the model the original’s own levels (source tokens) changes nothing measurable.</li>
@@ -270,7 +270,8 @@
             <li><strong>Syntax at the top:</strong> requests at 70–80 land at 65.7 (v3: 56.6; CLiC-it: 68.1).</li>
             <li><strong>Goals:</strong> three of the four syntax goal conditions are met, and base at 70–80 lands at 68.3. RMSE at 60–80 is still 24.4 against 23.2, because the outputs that are not copies are slightly heavier edits.</li>
             <li><strong>Lexical:</strong> its share inside rose to 14.9% (CLiC-it: 14.4%) with the same labels.</li>
-            <li><strong>Overfitting:</strong> validation loss rose from step 2,500 to the end of the 12,534 steps.</li>
+            <li><strong>Overfitting?</strong> Validation loss rose from step 2,500 to the end of the 12,534 steps. Trained for one epoch (lowest validation loss 0.705), the model does worse: at syntax request 70 its outputs that are not copies land at 58.9 (three epochs: 59.8), and it copies at mild requests too (base copies 4.6% against 1.5%; base RMSE 23.1). The heavy edits come from the format, and the extra epochs teach the model when to copy.</li>
+            <li><strong>How the tokens are used</strong> (<a href="interp.html">interpretability</a>): held requests now work for base, unlike in v5, but the three tokens are still one “simplify” dial, more so than v5’s.</li>
           </ul>
         </li>
         <li>With all three dimensions requested, 3–5% of outputs land inside all three levels.</li>

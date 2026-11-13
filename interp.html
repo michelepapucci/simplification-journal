@@ -11,7 +11,7 @@
 <body>
   <header class="page-header wrap">
     <div class="header-row">
-      <h1>How the model uses its control tokens</h1>
+      <h1>How the models use their control tokens</h1>
       <button type="button" class="theme-toggle" id="theme-toggle" aria-label="Colour theme">Theme: auto</button>
     </div>
     <p class="lede">
@@ -39,9 +39,20 @@
       <h2 id="setup-title">Experimental setup</h2>
 
       <div class="card">
-        <h3>The model</h3>
-        <p><strong>v5 · targets</strong>: Qwen3-0.6B-Base fine-tuned with LoRA on dataset v5, the best model so far on syntax. Its prompt is three
-          target tokens, one per READ-IT dimension, followed by the sentence to simplify. Each token is a level from 0 to 90 or <code>any</code> (no request on that dimension):</p>
+        <h3>The models</h3>
+        <p>Three Qwen3-0.6B-Base models fine-tuned with LoRA; the <strong>Model</strong> switch above the results picks one. All take the same prompt
+          and get exactly the same requests.</p>
+        <ul>
+          <li><strong>v5 · targets</strong>, trained on dataset v5: each training pair is one example with all its target tokens, each target dropped to
+            <code>any</code> with probability 0.3. Its identity pairs (an original given as its own simplification) have a syntax target only.</li>
+          <li><strong>v7 · 3 epochs</strong>, trained on dataset v7, the CLiC-it data’s format: one example per target with that token alone
+            (the others <code>any</code>), plus one combined example per pair with all its targets. Its identity pairs have syntax and base targets.
+            The v7 model of the main evaluation.</li>
+          <li><strong>v7 · 1 epoch</strong>: the same data trained for one epoch, with the adapter at the lowest validation loss. It does worse on the
+            main evaluation (it copies at mild requests too) and is shown for comparison.</li>
+        </ul>
+        <p>The prompt is three target tokens, one per READ-IT dimension, followed by the sentence to simplify. Each token is a level from 0 to 90 or
+          <code>any</code> (no request on that dimension):</p>
         <pre>&lt;|readability_base_B|&gt;&lt;|readability_lexical_L|&gt;&lt;|readability_syntax_S|&gt;
 original sentence
 </pre>
@@ -68,10 +79,10 @@ original sentence
           <li><strong>Others any</strong> is how the main evaluation uses the model: only one dimension is requested, and the other two are left free to move however the model usually moves them.</li>
           <li><strong>Others held</strong> asks the other dimensions to stay at the sentence’s own level, to isolate the lowered token’s own effect.
             <ul>
-              <li>The design is symmetric: whichever token is lowered, the other two are held. Holding lexical is outside v5’s training data, though:
-                no training pair has a lexical target at the original’s own level, while base and syntax have (11.9% and 5.9% of pairs).
+              <li>The design is symmetric: whichever token is lowered, the other two are held. Holding lexical is outside every model’s training data, though:
+                no training pair has a lexical target at the original’s own level, while base and syntax have (in v5, 11.9% and 5.9% of pairs).
                 A first version of the run left lexical <code>any</code> when base or syntax was lowered; its results are in <code>data/v1/experiments/interp/README.md</code>.</li>
-              <li>Holding syntax at the original’s level is also what v5’s identity pairs look like (an original given as its own simplification), so held requests can make the model copy. Copy rates are reported with every held result.</li>
+              <li>Holding syntax at the original’s level is also what the identity pairs look like (in v7, holding base too), so held requests can make the model copy. Copy rates are reported with every held result.</li>
             </ul>
           </li>
         </ul>
@@ -145,7 +156,7 @@ original sentence
               <li><em>Unit:</em> achieved points per requested point.</li>
               <li><em>Separate control</em> is 1 on the diagonal (the requested dimension follows the request) and 0 off it (the other dimensions do not move).</li>
               <li><em>Uncertainty:</em> 95% bootstrap interval over sentences (2,000 resamples).</li>
-              <li><em>Reference:</em> the same slopes on v5’s natural training pairs, i.e. how much the other scores move, per point of the moved dimension, in the data the model learned from.
+              <li><em>Reference:</em> the same slopes on the natural training pairs (the same pairs in v5 and v7), i.e. how much the other scores move, per point of the moved dimension, in the data the model learned from.
                 A model whose off-diagonal matches the data’s reproduces the data’s co-movement rather than controlling each dimension.</li>
               <li>The <em>dose-response</em> panels show the same thing as curves: each achieved score’s within-sentence change against k, next to the requested change (−10 points per level).</li>
             </ul>
@@ -184,6 +195,10 @@ original sentence
 
     <div class="filters">
       <div class="wrap filters-row">
+        <div class="filter" id="model-filter">
+          <span class="filter-label" id="model-label">Model</span>
+          <div class="segmented" role="radiogroup" aria-labelledby="model-label" id="model"></div>
+        </div>
         <div class="filter">
           <span class="filter-label" id="mode-label">One token is lowered; the other two are</span>
           <div class="segmented" role="radiogroup" aria-labelledby="mode-label" id="mode"></div>

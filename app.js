@@ -125,8 +125,8 @@
     tip.style.top = `${Math.max(8, top)}px`;
   }
   const hideTip = () => { tip.hidden = true; };
-  const tipRow = (color, value, name) => h("div", { class: "tt-row" },
-    color ? h("span", { class: "key-line", style: `border-color:${color}` }) : null,
+  const tipRow = (color, value, name, dash) => h("div", { class: "tt-row" },
+    color ? h("span", { class: "key-line", style: `border-color:${color}${dash ? ";border-top-style:dashed;border-radius:0" : ""}` }) : null,
     h("strong", { text: value }), h("span", { class: "name", text: name }));
 
   // ---------- charts ----------
@@ -660,19 +660,23 @@
 
   // ---------- part 2: model generation analysis ----------
   const G = window.GENERATION_DATA;
-  // One colour per model, fixed, so toggling a line in the legend never repaints the others. Nine lines cannot all be
-  // told apart, so the curve starts with the CLiC-it model and our two latest models (blue, green and aqua stay apart
-  // pairwise in both themes); the legend shows the others. v1 · source + targets, which changed nothing measurable,
-  // is drawn in muted grey: eight hues for nine models. The tables always list every model.
+  // One colour per model, fixed, so toggling a line in the legend never repaints the others. Ten lines cannot all be
+  // told apart, so the curve starts with the CLiC-it model and our two latest models; the legend shows the others.
+  // v1 · source + targets, which changed nothing measurable, is drawn in muted grey. The two v7 runs share aqua (same
+  // data, different training length): the one-epoch run is solid, the three-epoch run dashed, in the curve and in every
+  // key. Eight hues and a grey for ten models. The tables always list every model.
   const GEN_COLORS = { "clicit2026_0.6B": "series-1", targets: "series-2", source_targets: "text-muted", v2_targets: "series-4",
-                       v3_targets: "series-5", v4_targets: "series-8", v5_targets: "series-7", v6_targets: "series-6", v7_targets: "series-3" };
+                       v3_targets: "series-5", v4_targets: "series-8", v5_targets: "series-7", v6_targets: "series-6", v7_targets: "series-3",
+                       v7_1ep_targets: "series-3" };
+  const GEN_DASH = { v7_targets: true };
+  const keyStyle = (m) => `border-color:${m.color}${m.dash ? ";border-top-style:dashed;border-radius:0" : ""}`;  // a rounded key draws a dashed border solid
   const GEN_SPARE = ["series-1", "series-2", "series-3", "series-4", "series-5", "series-6", "series-7", "series-8"];
   const GEN_DEFAULT_SHOWN = 2;
   const GEN_DIMS = { base: "Base", lexical: "Lexical", syntax: "Syntax" };
   const gen = { dim: "lexical", shown: null };
   const pctOf = (x) => (x == null ? "–" : `${Math.round(x * 100)}%`);
   const genColor = (id, i) => palette[GEN_COLORS[id] || GEN_SPARE[i % GEN_SPARE.length]];
-  const genModels = () => G.meta.models.map((m, i) => ({ ...m, color: genColor(m.id, i) })).filter((m) => G.main[gen.dim] && G.main[gen.dim][m.id]);
+  const genModels = () => G.meta.models.map((m, i) => ({ ...m, color: genColor(m.id, i), dash: !!GEN_DASH[m.id] })).filter((m) => G.main[gen.dim] && G.main[gen.dim][m.id]);
 
   function genShown() {
     if (!gen.shown) {
@@ -691,7 +695,7 @@
       container.append(h("button", { type: "button", class: "legend-item legend-toggle", "aria-pressed": String(on),
         title: on ? "Hide this model’s line" : "Show this model’s line",
         onclick: () => { on ? shown.delete(mod.id) : shown.add(mod.id); genLegend(container); genCurve($("gen-curve-chart")); } },
-        h("span", { class: "key-line", style: `border-color:${mod.color}` }), mod.label));
+        h("span", { class: "key-line", style: keyStyle(mod) }), mod.label));
     }
   }
 
@@ -729,7 +733,7 @@
         svg.append(s("line", { x1: p.cx, x2: p.cx, y1: y(q1), y2: y(q3), stroke: mod.color, "stroke-width": 2, "stroke-linecap": "round", opacity: 0.55 }));
       }
       svg.append(s("path", { d: `M${pts.map((p) => `${p.cx.toFixed(1)},${y(p.achieved_mean).toFixed(1)}`).join("L")}`, fill: "none",
-        stroke: mod.color, "stroke-width": 2, "stroke-linejoin": "round", "stroke-linecap": "round" }));
+        stroke: mod.color, "stroke-width": 2, "stroke-linejoin": "round", "stroke-linecap": "round", "stroke-dasharray": mod.dash ? "6 4" : null }));
       for (const p of pts) {
         const few = (p.scored || 0) < 30;
         svg.append(s("circle", { cx: p.cx, cy: y(p.achieved_mean), r: few ? 3.5 : 4, fill: few ? palette.surface : mod.color,
@@ -743,7 +747,7 @@
         for (const mod of models) {
           const v = G.main[gen.dim][mod.id].levels[L];
           if (!v) continue;
-          t.append(tipRow(mod.color, fmtNum(v.achieved_mean, 1), `${mod.label} · mean`),
+          t.append(tipRow(mod.color, fmtNum(v.achieved_mean, 1), `${mod.label} · mean`, mod.dash),
             h("div", { class: "tt-note", text: `median ${fmtNum(v.achieved_quartiles[1], 1)}, middle half ${fmtNum(v.achieved_quartiles[0], 1)}–${fmtNum(v.achieved_quartiles[2], 1)}; inside ${pctOf(v.in_level)}, RMSE ${fmtNum(v.rmse, 1)}, copies of the original ${pctOf(v.copy)}, n ${fmtInt(v.scored)}` }));
         }
       }));
@@ -765,7 +769,7 @@
     const body = h("tbody");
     for (const mod of models) {
       const r = G.main[gen.dim][mod.id], o = r.overall;
-      body.append(h("tr", {}, h("td", {}, h("span", { class: "key", style: `border-color:${mod.color}` }), mod.label),
+      body.append(h("tr", {}, h("td", {}, h("span", { class: "key", style: keyStyle(mod) }), mod.label),
         h("td", { class: "num", text: fmtInt(r.requests) }), h("td", { class: "num", text: fmtNum(o.rmse, 1) }),
         h("td", { class: "num", text: pctOf(o.in_level) }), h("td", { class: "num", text: signed(o.bias, 1) }),
         h("td", { class: "num", text: fmtNum(o.spearman) }), h("td", { class: "num", text: fmtNum(o.within_original_spearman) }),
@@ -783,7 +787,7 @@
     const t = clear($("gen-levels"));
     t.append(h("thead", {},
       h("tr", {}, h("th", { rowspan: 2, text: "Requested" }), h("th", { rowspan: 2, class: "num", text: "Requests" }),
-        models.map((m) => h("th", { colspan: 3, class: "group" }, h("span", { class: "key", style: `border-color:${m.color}` }), m.label))),
+        models.map((m) => h("th", { colspan: 3, class: "group" }, h("span", { class: "key", style: keyStyle(m) }), m.label))),
       h("tr", {}, models.flatMap(() => ["Mean", "RMSE", "Inside"].map((c) => h("th", { class: "num", text: c }))))));
     const body = h("tbody");
     for (const L of levels) {
@@ -814,7 +818,7 @@
       for (const type of ["all", "achievable", "typical"]) {
         const r = G.joint[mod.id][type];
         if (!r) continue;
-        body.append(h("tr", {}, h("td", {}, type === "all" ? [h("span", { class: "key", style: `border-color:${mod.color}` }), mod.label] : ""),
+        body.append(h("tr", {}, h("td", {}, type === "all" ? [h("span", { class: "key", style: keyStyle(mod) }), mod.label] : ""),
           h("td", { text: type }), h("td", { class: "num", text: fmtInt(r.requests) }),
           h("td", { class: "num" }, h("span", { class: "in", text: `${(100 * r.all_three_in_level).toFixed(1)}%` })), h("td", { class: "num", text: pctOf(r.all_three_within_one_level) }),
           ...["base", "lexical", "syntax"].map((d) => h("td", { class: "num", text: pctOf(r.per_dimension[d].in_level) })),
@@ -829,7 +833,7 @@
     if (!ex) { $("gen-example-sub").textContent = ""; return; }
     $("gen-example-sub").textContent = `A ${gen.dim} test original (READ-IT ${gen.dim} ${fmtNum(ex.original_score, 1)}) and what each model wrote at every requested level. ` +
       `Under each output: its achieved READ-IT ${gen.dim}. Sampling at temperature 0.7, so another run would differ.`;
-    t.append(h("thead", {}, h("tr", {}, h("th", { text: "Level" }), models.map((m) => h("th", {}, h("span", { class: "key", style: `border-color:${m.color}` }), m.label)))));
+    t.append(h("thead", {}, h("tr", {}, h("th", { text: "Level" }), models.map((m) => h("th", {}, h("span", { class: "key", style: keyStyle(m) }), m.label)))));
     const body = h("tbody");
     body.append(h("tr", {}, h("td", { class: "level", text: "Original" }), h("td", { colspan: models.length, text: ex.original })));
     for (const row of ex.rows) {
@@ -846,7 +850,7 @@
   function genMethods() {
     const box = clear($("gen-methods")), code = (x) => h("code", { text: x });
     box.append(h("ul", {},
-      h("li", {}, "Models: Qwen3-0.6B-Base fine-tuned with LoRA on dataset v1 (", code("data/v1/"), " on master), one with three target tokens per request and one also given the original’s three READ-IT levels; the target-token model trained the same way on dataset v2 (", code("data/v2/"), ": v1 plus 11,752 pairs with larger lexical drops), on dataset v3 (", code("data/v3/"), ": v2 with same-level base and syntax targets) and on dataset v4 (", code("data/v4/"), ": v3 with a syntax target on every pair whose syntax did not rise) and on dataset v5 (", code("data/v5/"), ": v3 plus 989 identity pairs at the top of the syntax scale, at the CLiC-it 2026 data’s share) and on dataset v6 (", code("data/v6/"), ": the same with 240 identity pairs, the CLiC-it share among examples that give the syntax token alone) and on dataset v7 (", code("data/v7/"), ": v3 in the CLiC-it format, one example per token plus a combined one, with 1,031 identity pairs at the CLiC-it share among examples that show each syntax token, no target dropout); and the CLiC-it 2026 Qwen3-0.6B, whose existing outputs are re-scored."),
+      h("li", {}, "Models: Qwen3-0.6B-Base fine-tuned with LoRA on dataset v1 (", code("data/v1/"), " on master), one with three target tokens per request and one also given the original’s three READ-IT levels; the target-token model trained the same way on dataset v2 (", code("data/v2/"), ": v1 plus 11,752 pairs with larger lexical drops), on dataset v3 (", code("data/v3/"), ": v2 with same-level base and syntax targets) and on dataset v4 (", code("data/v4/"), ": v3 with a syntax target on every pair whose syntax did not rise) and on dataset v5 (", code("data/v5/"), ": v3 plus 989 identity pairs at the top of the syntax scale, at the CLiC-it 2026 data’s share) and on dataset v6 (", code("data/v6/"), ": the same with 240 identity pairs, the CLiC-it share among examples that give the syntax token alone) and on dataset v7 (", code("data/v7/"), ": v3 in the CLiC-it format, one example per token plus a combined one, with 1,031 identity pairs at the CLiC-it share among examples that show each syntax token, no target dropout), once for three epochs and once for one (the adapter at the lowest validation loss); and the CLiC-it 2026 Qwen3-0.6B, whose existing outputs are re-scored."),
       h("li", {}, "Requests: each test original at every level below its own level in the test set’s dimension, the other two dimensions left free; sampling at temperature 0.7, top-p 1.0, up to 128 new tokens."),
       h("li", {}, "READ-IT is computed exactly as the IMPaCTS labels (t2k with its default configuration, one text at a time, the custom parser under stanza 1.10, mean over sentences): re-scoring the 3,000 test originals and 3,000 references reproduces every label. Outputs, originals and requested levels share one scale."),
       h("li", {}, "RMSE is measured against the bottom of the requested level, as in CLiC-it 2026, so an output inside the level still scores about 5; the share inside the level is the stricter, clearer measure."),

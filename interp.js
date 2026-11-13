@@ -1,7 +1,10 @@
 (() => {
   "use strict";
 
-  const D = window.INTERP_DATA;
+  // data_interp.js: window.INTERP_MODELS = {order, default, models: {<model>: payload}} (one payload per model; the page switches
+  // between them). An older single-model file (window.INTERP_DATA) still loads.
+  const ALL = window.INTERP_MODELS || (window.INTERP_DATA ? { order: ["model"], default: "model", models: { model: window.INTERP_DATA } } : null);
+  let D = null;
   const SVG_NS = "http://www.w3.org/2000/svg";
   const NF = new Intl.NumberFormat("en-US");
   const DIMS = ["base", "lexical", "syntax"];
@@ -21,7 +24,7 @@
     copy: "Copies of the original",
   };
   const label = (f) => LABEL[f] || f;
-  const state = { mode: "free", example: 0, pair: "base-syntax", cmp: "matched", category: "", search: "", sigOnly: true, allRows: false, sort: { key: "max", dir: "desc" } };
+  const state = { model: "", mode: "free", example: 0, pair: "base-syntax", cmp: "matched", category: "", search: "", sigOnly: true, allRows: false, sort: { key: "max", dir: "desc" } };
 
   // ---------- DOM helpers (all text goes through textContent) ----------
   function setAttrs(node, attrs) {
@@ -192,7 +195,7 @@
     for (const f of D.findings || []) ul.append(h("li", { text: f }));
     $("mode-summary").textContent = state.mode === "free"
       ? "Others any: only the lowered token is set, as in the main evaluation. Every result below is shown separately for base, lexical and syntax lowered."
-      : "Others held: the two other tokens stay at the original’s own levels (a held lexical token is outside v5’s training data). Results are per lowered token.";
+      : "Others held: the two other tokens stay at the original’s own levels (a held lexical token is outside every model’s training data). Results are per lowered token.";
   }
 
   // ---------- Q1: example ----------
@@ -449,8 +452,33 @@
     if (theme === "auto") delete document.documentElement.dataset.theme; else document.documentElement.dataset.theme = theme;
     $("theme-toggle").textContent = `Theme: ${theme}`;
   }
+  function fillPickers() {
+    const pick = clear($("example-pick"));
+    D.examples.forEach((ex, i) => pick.append(h("option", { value: i, text: `${i + 1}. ${ex.original.slice(0, 60)}…` })));
+    state.example = Math.min(state.example, D.examples.length - 1);
+    pick.value = String(state.example);
+    const cats = [...new Set(D.categories)];
+    if (!cats.includes(state.category)) state.category = "";
+    const cat = clear($("category"));
+    cat.append(h("option", { value: "", text: "all" }), ...cats.map((c) => h("option", { value: c, text: c })));
+    cat.value = state.category;
+  }
+  function setModel(m) {
+    state.model = ALL.models[m] ? m : ALL.default;
+    D = ALL.models[state.model];
+    if (ALL.order.length > 1) {
+      try { history.replaceState(null, "", `#model=${state.model}`); } catch (e) { /* not allowed in this context */ }
+    }
+    fillPickers();
+  }
   function init() {
-    if (!D) { document.querySelector("main").textContent = "No data loaded."; return; }
+    if (!ALL) { document.querySelector("main").textContent = "No data loaded."; return; }
+    setModel(new URLSearchParams(location.hash.slice(1)).get("model") || ALL.default);
+    if (ALL.order.length > 1) {
+      segmented("model", Object.fromEntries(ALL.order.map((m) => [m, ALL.models[m].short || m])), "model", () => { setModel(state.model); renderAll(); });
+    } else {
+      $("model-filter").hidden = true;
+    }
     let saved = "auto";
     try { saved = localStorage.getItem("webview-theme") || "auto"; } catch (e) { /* storage unavailable */ }
     applyTheme(saved);
@@ -463,12 +491,8 @@
     segmented("mode", MODES, "mode", renderAll);
     segmented("pair", Object.fromEntries(PAIRS.map((p) => [p, p.replace("-", " vs ")])), "pair", renderMatched);
     segmented("cmp", { matched: "same overall READ-IT", same_distance: "same distance" }, "cmp", renderMatched);
-    const pick = $("example-pick");
-    D.examples.forEach((ex, i) => pick.append(h("option", { value: i, text: `${i + 1}. ${ex.original.slice(0, 60)}…` })));
-    pick.addEventListener("change", (e) => { state.example = Number(e.target.value); renderExample(); });
-    const cat = $("category");
-    cat.append(h("option", { value: "", text: "all" }), ...[...new Set(D.categories)].map((c) => h("option", { value: c, text: c })));
-    cat.addEventListener("change", (e) => { state.category = e.target.value; renderFeatures(); });
+    $("example-pick").addEventListener("change", (e) => { state.example = Number(e.target.value); renderExample(); });
+    $("category").addEventListener("change", (e) => { state.category = e.target.value; renderFeatures(); });
     $("search").addEventListener("input", (e) => { state.search = e.target.value; renderFeatures(); });
     $("sig-only").addEventListener("change", (e) => { state.sigOnly = e.target.checked; renderFeatures(); });
     $("all-rows").addEventListener("change", (e) => { state.allRows = e.target.checked; renderFeatures(); });
