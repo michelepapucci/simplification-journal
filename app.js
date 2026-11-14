@@ -934,7 +934,8 @@
   function methodsCard() {
     const code = (x) => h("code", { text: x });
     const tr = R.meta.training || {};
-    const steps = Object.entries(tr).map(([k, v]) => `${k}: ${fmtInt(v.steps)} steps, ${v.hours} h, final validation loss ${v.final_eval_loss}`).join("; ");
+    const NAMES = { g1: "g1", g1_balanced: "g1 · balanced", g1_guided: "g1 · guided" };
+    const steps = Object.entries(tr).map(([k, v]) => `${NAMES[k] || k}: ${fmtInt(v.steps)} steps, ${v.hours} h, final validation loss ${v.final_eval_loss.toFixed(3)}`).join("; ");
     return card(null, null, h("ul", {},
       h("li", {}, "Models: Qwen3-0.6B-Base, LoRA r 32 on every projection with the embeddings and output layer trained in full, learning rate 2.5e-5, batch 64, 3 epochs; the final adapter. Prompt ",
         code("<|readability_L|>\\n{original}\\n"), ". g1 · balanced shows every level 0–70 as often as the most frequent one (extra copies redrawn every epoch); g1 · guided gets ",

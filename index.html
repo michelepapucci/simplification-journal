@@ -182,22 +182,44 @@
     <header class="wrap part-head">
       <p class="eyebrow">Part 2</p>
       <h2 class="part-title" id="generation-title">The models</h2>
-      <p class="lede" id="gen-lede">Three Qwen3-0.6B models trained on g1, asked to simplify the 1,000 test originals to every READ-IT global
-        level below their own (7,582 requests): g1 (plain); g1 · balanced (levels 0–70 shown equally often); g1 · guided (a “no level” token
-        on 10% of its examples, so that classifier-free guidance can strengthen the token at generation time). g1 is also scored with
-        best-of-n selection: the closest to the request of up to four samples.</p>
-      <ul class="findings">
-        <li><strong>One sample hides most of the control.</strong> g1’s outputs follow the request, but compressed (0.585 points per requested point:
-          request 0 lands at 22.8, request 70 at 65.6), and each output is very variable: four samples of the same request differ by a median
-          SD of 15.4 READ-IT points, more than a level. RMSE 24.1, 19% inside the level, ρ within original 0.55. Keeping the closest of four
-          samples: RMSE 11.3, 52% inside, ρ 0.93, with unchanged meaning.</li>
-        <li><strong>Balancing the levels does nothing</strong> (RMSE +0.28, interval includes 0): showing levels 0 and 70 twice as often moved neither end.</li>
-        <li><strong>Guidance stretches the curve, at w = 3 too far.</strong> The weight chosen on the dev set (the largest tried) gives RMSE 20.1 (−4.0)
-          and ρ within 0.80, as good as best of 2. Strong requests are now reached (request 0: 10.4, 67% inside), but mild ones are under-done:
-          at requests 60–70, 57–67% of outputs stay at or above the original’s level, and 14% of request-70 outputs are copies. BERTScore −0.005.</li>
-        <li>Meaning is preserved (BERTScore with the original 0.85; SARI 43 against the references), and under 1% of outputs are degenerate.</li>
-      </ul>
+      <p class="lede" id="gen-lede">Three Qwen3-0.6B models trained on g1, plus one decoding experiment. Each is asked to simplify the 1,000 test
+        originals to every READ-IT global level below their own (7,582 requests), sampling at temperature 0.7.</p>
     </header>
+    <section class="wrap" aria-labelledby="runs-title">
+      <div class="card">
+        <h3 id="runs-title">The runs</h3>
+        <table class="datasets">
+          <thead><tr><th scope="col">Run</th><th scope="col">What changes</th><th scope="col">Why we tried it</th><th scope="col">Did it work?</th></tr></thead>
+          <tbody>
+            <tr>
+              <th scope="row">g1<span class="ds-sub">plain</span></th>
+              <td data-label="What changes">Nothing: every g1 pair once, with its simplification’s level as the token. 3 epochs, the final adapter.</td>
+              <td data-label="Why we tried it">The reference for every other run.</td>
+              <td data-label="Did it work?"><span class="verdict">Partly.</span> Outputs follow the request, but compressed: request 0 lands at 22.8 and request 70 at 65.6. Single outputs also vary a lot: four samples of the same request have a median standard deviation of 15 READ-IT points, more than a level. RMSE 24.1, 19% inside the level.</td>
+            </tr>
+            <tr>
+              <th scope="row">g1 · balanced</th>
+              <td data-label="What changes">Levels 0–70 are each shown as often as the most frequent one (12,039 times per epoch). The extra copies are redrawn every epoch.</td>
+              <td data-label="Why we tried it">Levels 0 and 70 had about half as many pairs as the others, and the ends of the scale are where g1 falls short.</td>
+              <td data-label="Did it work?"><span class="verdict">No.</span> Neither end moved (request 0: 22.0; request 70: 65.5). RMSE 24.4, not different from g1.</td>
+            </tr>
+            <tr>
+              <th scope="row">g1 · guided<span class="ds-sub">classifier-free guidance</span></th>
+              <td data-label="What changes">10% of the training examples get a “no level” token. At generation time, the difference between the requested level and “no level” is multiplied by a weight w. w was chosen on 300 dev originals, before the test run, among 1, 1.5, 2 and 3.</td>
+              <td data-label="Why we tried it">To strengthen the token without retraining: g1 moves only 0.6 points per requested point.</td>
+              <td data-label="Did it work?"><span class="verdict">Partly.</span> At w = 1 it equals g1, so the extra token costs nothing. The chosen w = 3 overshoots: RMSE 20.1, and request 0 lands at 10.4 (67% inside), but at requests 60–70 most outputs stay at or above the original’s level.</td>
+            </tr>
+            <tr>
+              <th scope="row">g1, best of n<span class="ds-sub">decoding only</span></th>
+              <td data-label="What changes">No new model: for each request, g1’s output plus up to 3 more samples. The one whose READ-IT global is closest to the middle of the requested level is kept.</td>
+              <td data-label="Why we tried it">To measure how much control g1 has but loses by sampling once.</td>
+              <td data-label="Did it work?"><span class="verdict">Yes, as a measurement.</span> Best of 4: RMSE 11.3, 52% inside, ρ within original 0.93, meaning unchanged. Most of g1’s error is the spread between samples. It needs READ-IT on every sample.</td>
+            </tr>
+          </tbody>
+        </table>
+        <p class="sub">All runs preserve meaning (BERTScore with the original 0.85; SARI 42–43 against the references), and about 1% of outputs or fewer are degenerate. The numbers behind every verdict are below.</p>
+      </div>
+    </section>
     <div id="results"></div>
    </div>
   </main>
