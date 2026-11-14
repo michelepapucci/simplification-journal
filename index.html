@@ -182,9 +182,21 @@
     <header class="wrap part-head">
       <p class="eyebrow">Part 2</p>
       <h2 class="part-title" id="generation-title">The models</h2>
-      <p class="lede" id="gen-lede">Three Qwen3-0.6B models trained on g1 are being trained and evaluated: g1 (plain), g1 · balanced
-        (levels 0–70 shown equally often) and g1 · guided (with a “no level” token, for classifier-free guidance at generation time).
-        Their results will appear here.</p>
+      <p class="lede" id="gen-lede">Three Qwen3-0.6B models trained on g1, asked to simplify the 1,000 test originals to every READ-IT global
+        level below their own (7,582 requests): g1 (plain); g1 · balanced (levels 0–70 shown equally often); g1 · guided (a “no level” token
+        on 10% of its examples, so that classifier-free guidance can strengthen the token at generation time). g1 is also scored with
+        best-of-n selection: the closest to the request of up to four samples.</p>
+      <ul class="findings">
+        <li><strong>One sample hides most of the control.</strong> g1’s outputs follow the request, but compressed (0.585 points per requested point:
+          request 0 lands at 22.8, request 70 at 65.6), and each output is very variable: four samples of the same request differ by a median
+          SD of 15.4 READ-IT points, more than a level. RMSE 24.1, 19% inside the level, ρ within original 0.55. Keeping the closest of four
+          samples: RMSE 11.3, 52% inside, ρ 0.93, with unchanged meaning.</li>
+        <li><strong>Balancing the levels does nothing</strong> (RMSE +0.28, interval includes 0): showing levels 0 and 70 twice as often moved neither end.</li>
+        <li><strong>Guidance stretches the curve, at w = 3 too far.</strong> The weight chosen on the dev set (the largest tried) gives RMSE 20.1 (−4.0)
+          and ρ within 0.80, as good as best of 2. Strong requests are now reached (request 0: 10.4, 67% inside), but mild ones are under-done:
+          at requests 60–70, 57–67% of outputs stay at or above the original’s level, and 14% of request-70 outputs are copies. BERTScore −0.005.</li>
+        <li>Meaning is preserved (BERTScore with the original 0.85; SARI 43 against the references), and under 1% of outputs are degenerate.</li>
+      </ul>
     </header>
     <div id="results"></div>
    </div>
@@ -193,7 +205,6 @@
   <div class="tooltip" id="tooltip" role="tooltip" hidden></div>
   <script src="data_g1.js"></script>
   <script src="data_results.js" onerror="void 0"></script>
-  <script src="results.js" onerror="void 0"></script>
   <script src="app.js"></script>
 </body>
 </html>

@@ -312,3 +312,8 @@ table.datasets { font-size: 13.5px; table-layout: fixed; }
 }
 
 .dataset-row[hidden] { display: none; }
+
+/* part 2: where the outputs land */
+table.data.landing td.num { min-width: 34px; text-align: center; }
+table.data.landing td.target { outline: 2px solid var(--text-primary); outline-offset: -2px; }
+table.data tr.selected td { font-weight: 600; }

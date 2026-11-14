@@ -659,8 +659,309 @@
     }
   }
 
-  // ---------- part 2: the g1 models (results.js) ----------
-  const renderGeneration = () => { if (window.renderResults) window.renderResults(); };
+  // ---------- part 2: the g1 models ----------
+  const R = window.RESULTS_DATA;
+  // One colour per model, fixed: g1 blue, balanced orange, guided green. A dashed line is the same model with a different
+  // decoding (best-of-n for g1, guidance w > 1 for the guided model). Best of 2 and 3 appear in the tables only.
+  const RES_STYLE = { g1: ["series-1", false], g1_balanced: ["series-2", false], g1_guided: ["series-3", false] };
+  const resStyle = (id) => RES_STYLE[id] || (id.startsWith("g1_best_of_") ? ["series-1", true] : id.startsWith("g1_guided_w") ? ["series-3", true] : ["text-muted", false]);
+  const keyStyle = (m) => `border-color:${m.color}${m.dash ? ";border-top-style:dashed;border-radius:0" : ""}`;
+  const res = { origin: "all", shown: null, cond: "g1", example: 0 };
+  const share = (x, d = 0) => (x == null ? "–" : `${(100 * x).toFixed(d)}%`);
+  const ORIGINS = [["all", "All originals"], ["70", "Originals at 70"], ["80", "Originals at 80"]];  // an array keeps the order (numeric object keys come first)
+  const originName = (o) => ORIGINS.find(([k]) => k === String(o))[1];
+  const resModels = () => R.meta.conditions.map((c) => { const [col, dash] = resStyle(c.id); return { ...c, color: palette[col], dash }; });
+  const best = () => R.meta.conditions.map((c) => c.id).filter((id) => id.startsWith("g1_best_of_")).pop();
+  const curveDefault = (id) => !id.startsWith("g1_best_of_") || id === best();
+  function levelStats(id, origin = res.origin) {
+    const c = R.conditions[id];
+    if (origin === "all") return Object.fromEntries(Object.entries(c.by_level).map(([L, v]) => [L, v.control]));
+    return (c.by_original_and_level || {})[origin] || {};
+  }
+  function card(title, sub, ...children) {
+    return h("div", { class: "card" }, title ? h("h3", { text: title }) : null, sub ? h("p", { class: "sub", text: sub }) : null, ...children);
+  }
+  function segmented(options, value, onPick, label) {
+    return h("div", { class: "segmented", role: "radiogroup", "aria-label": label },
+      (Array.isArray(options) ? options : Object.entries(options)).map(([v, l]) => h("button", { type: "button", role: "radio", "aria-checked": String(String(v) === String(value)), onclick: () => onPick(v) }, l)));
+  }
+  function condSelect(value, onPick, ids) {
+    const sel = h("select", { "aria-label": "Model" }, ids.map((id) => h("option", { value: id, text: R.conditions[id].label, selected: id === value ? "" : null })));
+    sel.addEventListener("change", (e) => onPick(e.target.value));
+    return sel;
+  }
+
+  function resCurve(container) {
+    clear(container);
+    const models = resModels().filter((m) => res.shown.has(m.id));
+    const levels = [...new Set(models.flatMap((m) => Object.keys(levelStats(m.id)).map(Number)))].sort((a, b) => a - b);
+    if (!levels.length) return;
+    const width = Math.max(280, Math.floor(container.clientWidth || 720)), height = 360;
+    const m = { top: 12, right: 16, bottom: 46, left: 52 };
+    const xMax = levels[levels.length - 1] + 10;
+    const x = (v) => m.left + (v / xMax) * (width - m.left - m.right);
+    const y = (v) => height - m.bottom - (Math.max(0, Math.min(100, v)) / 100) * (height - m.top - m.bottom);
+    const svg = s("svg", { width, height, viewBox: `0 0 ${width} ${height}`, style: "max-width:100%;height:auto", role: "img", tabindex: 0,
+      "aria-label": "Achieved READ-IT global against the requested level, one line per model. The tables below list the same values." });
+    for (let v = 20; v <= 100; v += 20) {
+      svg.append(s("line", { class: "gridline", x1: m.left, x2: width - m.right, y1: y(v), y2: y(v) }));
+      svg.append(s("text", { class: "axis-text", x: m.left - 8, y: y(v) + 4, "text-anchor": "end", text: v }));
+    }
+    svg.append(s("line", { class: "baseline", x1: m.left, x2: width - m.right, y1: y(0), y2: y(0) }));
+    for (const L of levels) {
+      svg.append(s("rect", { class: "band", x: x(L) + 1, width: x(L + 10) - x(L) - 2, y: y(L + 10), height: y(L) - y(L + 10), rx: 2 }));
+      svg.append(s("text", { class: "axis-text", x: x(L + 5), y: height - m.bottom + 15, "text-anchor": "middle", text: L }));
+    }
+    svg.append(s("text", { class: "axis-title", x: m.left + (width - m.left - m.right) / 2, y: height - 8, "text-anchor": "middle", text: "Requested READ-IT global level" }));
+    svg.append(s("text", { class: "axis-title", x: 12, y: m.top + (height - m.top - m.bottom) / 2, "text-anchor": "middle",
+      transform: `rotate(-90 12 ${m.top + (height - m.top - m.bottom) / 2})`, text: "Achieved READ-IT global" }));
+    const step = Math.min(2.4, 6 / Math.max(1, models.length));
+    models.forEach((mod, i) => {
+      const lv = levelStats(mod.id), off = (i - (models.length - 1) / 2) * step;
+      const pts = levels.filter((L) => lv[L] && lv[L].achieved_mean != null).map((L) => ({ L, cx: x(L + 5 + off), ...lv[L] }));
+      for (const p of pts) {
+        const [q1, , q3] = p.achieved_quartiles;
+        svg.append(s("line", { x1: p.cx, x2: p.cx, y1: y(q1), y2: y(q3), stroke: mod.color, "stroke-width": 2, "stroke-linecap": "round", opacity: 0.55 }));
+      }
+      svg.append(s("path", { d: `M${pts.map((p) => `${p.cx.toFixed(1)},${y(p.achieved_mean).toFixed(1)}`).join("L")}`, fill: "none",
+        stroke: mod.color, "stroke-width": 2, "stroke-linejoin": "round", "stroke-linecap": "round", "stroke-dasharray": mod.dash ? "6 4" : null }));
+      for (const p of pts) svg.append(s("circle", { cx: p.cx, cy: y(p.achieved_mean), r: 4, fill: mod.color, stroke: palette.surface, "stroke-width": 2 }));
+    });
+    for (const L of levels) {
+      const hit = s("rect", { x: x(L), y: m.top, width: x(L + 10) - x(L), height: height - m.top - m.bottom, fill: "transparent" });
+      hit.addEventListener("pointermove", (e) => showTip(e.clientX, e.clientY, (t) => {
+        t.append(h("div", { class: "tt-title", text: `Requested ${L} (target ${L}–${L + 10}) · ${originName(res.origin).toLowerCase()}` }));
+        for (const mod of models) {
+          const v = levelStats(mod.id)[L];
+          if (!v) continue;
+          t.append(tipRow(mod.color, fmtNum(v.achieved_mean, 1), `${mod.label} · mean`, mod.dash),
+            h("div", { class: "tt-note", text: `middle half ${fmtNum(v.achieved_quartiles[0], 1)}–${fmtNum(v.achieved_quartiles[2], 1)}; inside ${share(v.in_level)}, within one level ${share(v.within_one_level)}, RMSE ${fmtNum(v.rmse, 1)}, n ${fmtInt(v.scored)}` }));
+        }
+      }));
+      hit.addEventListener("pointerleave", hideTip);
+      svg.append(hit);
+    }
+    container.append(svg);
+  }
+
+  function resLegend(container, chart) {
+    clear(container);
+    for (const mod of resModels().filter((m) => curveDefault(m.id))) {
+      const on = res.shown.has(mod.id);
+      container.append(h("button", { type: "button", class: "legend-item legend-toggle", "aria-pressed": String(on),
+        title: on ? "Hide this line" : "Show this line",
+        onclick: () => { on ? res.shown.delete(mod.id) : res.shown.add(mod.id); resLegend(container, chart); resCurve(chart); } },
+        h("span", { class: "key-line", style: keyStyle(mod) }), mod.label));
+    }
+  }
+
+  function ci(d, digits, scale = 1) {
+    if (!d) return "–";
+    const f = (v) => signed(v * scale, digits);
+    const sig = d.ci95[0] > 0 || d.ci95[1] < 0;
+    return h("span", { class: sig ? "in" : null, text: `${f(d.diff)} [${f(d.ci95[0])}, ${f(d.ci95[1])}]` });
+  }
+
+  function summaryCard() {
+    const models = resModels();
+    const t = h("table", { class: "data" });
+    t.append(h("thead", {}, h("tr", {}, ["Model", "RMSE", "Inside", "Within one level", "Bias", "ρ", "ρ within", "Slope within", "BERTScore", "SBERT", "Copies", "Degenerate", "Echo"]
+      .map((c, i) => h("th", { class: i ? "num" : null, text: c })))));
+    const body = h("tbody");
+    for (const mod of models) {
+      const c = R.conditions[mod.id], a = c.all.control, me = c.all.meaning, w = c.within_original;
+      body.append(h("tr", {}, h("td", {}, h("span", { class: "key", style: keyStyle(mod) }), mod.label),
+        h("td", { class: "num", text: fmtNum(a.rmse, 1) }), h("td", { class: "num", text: share(a.in_level, 1) }), h("td", { class: "num", text: share(a.within_one_level, 1) }),
+        h("td", { class: "num", text: signed(a.bias, 1) }), h("td", { class: "num", text: fmtNum(a.spearman_pooled, 3) }), h("td", { class: "num", text: fmtNum(w.rho_within, 3) }),
+        h("td", { class: "num", text: fmtNum(w.slope_within, 3) }), h("td", { class: "num", text: fmtNum(me.bertscore_f1, 3) }), h("td", { class: "num", text: fmtNum(me.sbert_cosine, 3) }),
+        h("td", { class: "num", text: share(me.copy, 1) }), h("td", { class: "num", text: share(me.degenerate, 1) }), h("td", { class: "num", text: share(me.echo, 1) })));
+    }
+    t.append(body);
+    const d = h("table", { class: "data" });
+    d.append(h("thead", {}, h("tr", {}, ["Model", "RMSE", "Inside (points)", "ρ within", "Slope within", "BERTScore"].map((c, i) => h("th", { class: i ? "num" : null, text: c })))));
+    const db = h("tbody");
+    for (const mod of models.filter((m) => R.conditions[m.id].vs_g1)) {
+      const v = R.conditions[mod.id].vs_g1;
+      db.append(h("tr", {}, h("td", {}, h("span", { class: "key", style: keyStyle(mod) }), mod.label),
+        h("td", { class: "num" }, ci(v.rmse, 2)), h("td", { class: "num" }, ci(v.in_level, 1, 100)), h("td", { class: "num" }, ci(v.rho_within, 3)),
+        h("td", { class: "num" }, ci(v.slope_within, 3)), h("td", { class: "num" }, ci(v.bertscore_f1, 4))));
+    }
+    d.append(db);
+    return card("Every request · overall",
+      `All ${fmtInt(R.meta.test_requests)} requests: each of the ${fmtInt(R.meta.test_originals)} test originals at every level below its own. ` +
+      "RMSE is measured against the bottom of the requested level (the CLiC-it convention), so an output in the middle of its level scores 5. Inside: in the requested level; within one level: in it or in a neighbouring one. " +
+      "Bias: achieved minus requested, mean. ρ: Spearman between requested and achieved; within: computed for each original over its requests, then averaged. Slope within: achieved points per requested point within an original (1 = perfect). " +
+      "Meaning against the original; copies are outputs identical to it; degenerate and echo are outputs that would break the training data’s cleaning rules.",
+      h("div", { class: "scroll-x" }, t),
+      h("h4", { text: "Difference from g1, with 95% paired bootstrap intervals over test originals" }),
+      h("p", { class: "sub", text: "Bold: the interval excludes 0. For RMSE lower is better; for the others higher is better." }),
+      h("div", { class: "scroll-x" }, d));
+  }
+
+  function levelsCard() {
+    const models = resModels().filter((m) => curveDefault(m.id));
+    const levels = [...new Set(models.flatMap((m) => Object.keys(levelStats(m.id)).map(Number)))].sort((a, b) => a - b);
+    const t = h("table", { class: "data" });
+    t.append(h("thead", {},
+      h("tr", {}, h("th", { rowspan: 2, text: "Requested" }), h("th", { rowspan: 2, class: "num", text: "Requests" }),
+        models.map((m) => h("th", { colspan: 3, class: "group" }, h("span", { class: "key", style: keyStyle(m) }), m.short))),
+      h("tr", {}, models.flatMap(() => ["Mean", "RMSE", "Inside"].map((c) => h("th", { class: "num", text: c }))))));
+    const body = h("tbody");
+    for (const L of levels) {
+      const n = Math.max(...models.map((m) => (levelStats(m.id)[L] || {}).requests || 0));
+      body.append(h("tr", {}, h("td", { text: `${L}–${L + 10}` }), h("td", { class: "num", text: fmtInt(n) }),
+        models.flatMap((m) => {
+          const v = levelStats(m.id)[L];
+          return v ? [h("td", { class: "num", text: fmtNum(v.achieved_mean, 1) }), h("td", { class: "num", text: fmtNum(v.rmse, 1) }),
+            h("td", { class: "num" }, h("span", { class: "in", text: share(v.in_level) }))] : [0, 1, 2].map(() => h("td", { class: "num", text: "–" }));
+        })));
+    }
+    t.append(body);
+    return card(`By requested level · ${originName(res.origin).toLowerCase()}`, "Mean achieved READ-IT global, RMSE against the bottom of the level, and share inside the level.", h("div", { class: "scroll-x" }, t));
+  }
+
+  function landingCard() {
+    const c = R.conditions[res.cond], land = c.landing;
+    const levels = Object.keys(land).map(Number).sort((a, b) => a - b), cols = [0, 10, 20, 30, 40, 50, 60, 70, 80, 90];
+    const t = h("table", { class: "data landing" });
+    t.append(h("thead", {}, h("tr", {}, h("th", { text: "Requested ↓ · achieved →" }), cols.map((a) => h("th", { class: "num", text: a })))));
+    const body = h("tbody");
+    for (const L of levels) {
+      body.append(h("tr", {}, h("td", { text: `${L}` }), cols.map((a) => {
+        const v = land[L][a] || 0;
+        const bg = v ? mix(palette.surface, palette["series-1"], Math.min(1, v / 0.5)) : null;
+        return h("td", { class: `num${a === L ? " target" : ""}`, style: bg ? `background:${bg};color:${v > 0.3 ? palette.surface : palette["text-primary"]}` : null,
+          title: `requested ${L}, achieved ${a}–${a + 10}: ${share(v, 1)}`, text: v >= 0.005 ? share(v) : "" });
+      })));
+    }
+    t.append(body);
+    const mv = h("table", { class: "data" });
+    mv.append(h("thead", {}, h("tr", {}, ["Requested", "Δ global", "Δ base", "Δ lexical", "Δ syntax", "BERTScore", "Copies", "Degenerate"].map((x, i) => h("th", { class: i ? "num" : null, text: x })))));
+    const mb = h("tbody");
+    for (const L of levels) {
+      const b = c.by_level[L];
+      mb.append(h("tr", {}, h("td", { text: `${L}–${L + 10}` }), ["all", "base", "lexical", "syntax"].map((d) => h("td", { class: "num", text: signed(b.readit_change[d], 1) })),
+        h("td", { class: "num", text: fmtNum(b.meaning.bertscore_f1, 3) }), h("td", { class: "num", text: share(b.meaning.copy, 1) }), h("td", { class: "num", text: share(b.meaning.degenerate, 1) })));
+    }
+    mv.append(mb);
+    const picker = condSelect(res.cond, (v) => { res.cond = v; renderResults(); }, Object.keys(R.conditions));
+    return card(null, null, h("div", { class: "card-head" }, h("h3", { text: "Where the outputs land, and what moves" }), h("label", { class: "inline-control" }, "Model ", picker)),
+      h("p", { class: "sub", text: "Each row: the outputs at one requested level, spread over the READ-IT global level they reach (share of the row; the outlined cell is the requested level). All originals." }),
+      h("div", { class: "scroll-x" }, t),
+      h("h4", { text: "READ-IT change from the original, and meaning, by requested level" }),
+      h("p", { class: "sub", text: "Δ: output minus original, points (negative = simpler). Global is the controlled score; base, lexical and syntax are what comes with it." }),
+      h("div", { class: "scroll-x" }, mv));
+  }
+
+  function decodingCard() {
+    const rows = [];
+    const ids = ["g1", ...R.meta.conditions.map((c) => c.id).filter((id) => id.startsWith("g1_best_of_"))];
+    const t = h("table", { class: "data" });
+    t.append(h("thead", {}, h("tr", {}, ["Outputs to choose from", "RMSE", "Inside", "Within one level", "ρ within", "Slope within", "BERTScore", "Copies"].map((x, i) => h("th", { class: i ? "num" : null, text: x })))));
+    const tb = h("tbody");
+    for (const id of ids) {
+      const c = R.conditions[id];
+      if (!c) continue;
+      tb.append(h("tr", {}, h("td", { text: id === "g1" ? "1 (g1, plain)" : id.replace("g1_best_of_", "") }), h("td", { class: "num", text: fmtNum(c.all.control.rmse, 1) }),
+        h("td", { class: "num", text: share(c.all.control.in_level, 1) }), h("td", { class: "num", text: share(c.all.control.within_one_level, 1) }),
+        h("td", { class: "num", text: fmtNum(c.within_original.rho_within) }), h("td", { class: "num", text: fmtNum(c.within_original.slope_within) }),
+        h("td", { class: "num", text: fmtNum(c.all.meaning.bertscore_f1, 3) }), h("td", { class: "num", text: share(c.all.meaning.copy, 1) })));
+    }
+    t.append(tb);
+    rows.push(h("h4", { text: "Best of n (g1)" }),
+      h("p", { class: "sub", text: "For every request, the plain output and up to three more samples; the one whose READ-IT global is closest to the middle of the requested level is kept. No training involved: it shows how much control the model has but loses when sampling once." }),
+      h("div", { class: "scroll-x" }, t));
+    const g = R.meta.guidance;
+    if (g && g.candidates) {
+      const gt = h("table", { class: "data" });
+      gt.append(h("thead", {}, h("tr", {}, ["w", "RMSE", "Inside", "Bias", "BERTScore", "Degenerate or echo", "Copies", ""].map((x, i) => h("th", { class: i ? "num" : null, text: x })))));
+      const gb = h("tbody");
+      for (const [w, r] of Object.entries(g.candidates).sort((a, b) => Number(a[0]) - Number(b[0]))) {
+        const chosen = Number(w) === Number(g.chosen), allowed = g.allowed.includes(w);
+        gb.append(h("tr", { class: chosen ? "selected" : null }, h("td", { text: w }), h("td", { class: "num", text: fmtNum(r.rmse, 1) }), h("td", { class: "num", text: share(r.in_level, 1) }),
+          h("td", { class: "num", text: signed(r.bias, 1) }), h("td", { class: "num", text: fmtNum(r.bertscore_f1, 3) }), h("td", { class: "num", text: share(r.bad, 1) }),
+          h("td", { class: "num", text: share(r.copy, 1) }), h("td", { text: chosen ? "chosen" : allowed ? "" : "outside the meaning limits" })));
+      }
+      gt.append(gb);
+      rows.push(h("h4", { text: "Guidance weight, chosen on the dev requests (g1 · guided)" }),
+        h("p", { class: "sub", text: "Classifier-free guidance: the next token is sampled from log p(·|no level) + w · (log p(·|level) − log p(·|no level)). The rule, fixed before the run: the lowest dev RMSE among the weights whose BERTScore is at most 0.01 below w = 1’s and whose share of degenerate or echoing outputs is at most 1 point above it. 300 dev originals, 2,275 requests." }),
+        h("div", { class: "scroll-x" }, gt));
+    }
+    return card("Decoding: best of n, and guidance", null, ...rows);
+  }
+
+  function referenceCard() {
+    const models = resModels().filter((m) => R.conditions[m.id].reference_metrics);
+    if (!models.length) return null;
+    const t = h("table", { class: "data" });
+    t.append(h("thead", {}, h("tr", {}, ["Model", "Requests with references", "SARI", "BLEU", "BERTScore (references)"].map((x, i) => h("th", { class: i ? "num" : null, text: x })))));
+    const b = h("tbody");
+    for (const mod of models) {
+      const r = R.conditions[mod.id].reference_metrics;
+      b.append(h("tr", {}, h("td", {}, h("span", { class: "key", style: keyStyle(mod) }), mod.label), h("td", { class: "num", text: fmtInt(r.requests_with_references) }),
+        h("td", { class: "num", text: fmtNum(r.all.sari, 1) }), h("td", { class: "num", text: fmtNum(r.all.bleu, 1) }), h("td", { class: "num", text: fmtNum(r.all.bertscore_f1, 3) })));
+    }
+    t.append(b);
+    return card("Against the references (the LREC 2026 metrics)",
+      "For the requests whose original has IMPaCTS simplifications at the requested level (cleaned like the training data), SARI, sacreBLEU and BERTScore F1 of the output against all of them.",
+      h("div", { class: "scroll-x" }, t));
+  }
+
+  function exampleCard() {
+    const exs = R.examples || [];
+    if (!exs.length) return null;
+    const ex = exs[res.example];
+    const models = resModels().filter((m) => ex.rows.some((r) => r[m.id]));
+    const t = h("table", { class: "data gen-example" });
+    t.append(h("thead", {}, h("tr", {}, h("th", { text: "Level" }), models.map((m) => h("th", {}, h("span", { class: "key", style: keyStyle(m) }), m.short)))));
+    const body = h("tbody");
+    body.append(h("tr", {}, h("td", { class: "level", text: "Original" }), h("td", { colspan: models.length, text: `${ex.original} (READ-IT global ${fmtNum(ex.original_score, 1)})` })));
+    for (const row of ex.rows) {
+      body.append(h("tr", {}, h("td", { class: "level", text: `${row.level}–${row.level + 10}` }), models.map((m) => {
+        const o = row[m.id];
+        if (!o) return h("td", { text: "–" });
+        const inside = o.score != null && o.score >= row.level && o.score < row.level + 10;
+        return h("td", {}, o.text, h("span", { class: "score", text: `global ${o.score == null ? "–" : fmtNum(o.score, 1)}${inside ? " · inside" : ""}` }));
+      })));
+    }
+    t.append(body);
+    const pick = segmented(Object.fromEntries(exs.map((e, i) => [i, `${i + 1} · level ${e.src_level}`])), res.example, (v) => { res.example = Number(v); renderResults(); }, "Example");
+    return card(null, null, h("div", { class: "card-head" }, h("h3", { text: "One original, every requested level" }), pick),
+      h("p", { class: "sub", text: "A test original and what each model wrote at every level below its own; under each output its READ-IT global. Sampling at temperature 0.7, so another run would differ." }),
+      h("div", { class: "scroll-x" }, t));
+  }
+
+  function methodsCard() {
+    const code = (x) => h("code", { text: x });
+    const tr = R.meta.training || {};
+    const steps = Object.entries(tr).map(([k, v]) => `${k}: ${fmtInt(v.steps)} steps, ${v.hours} h, final validation loss ${v.final_eval_loss}`).join("; ");
+    return card(null, null, h("ul", {},
+      h("li", {}, "Models: Qwen3-0.6B-Base, LoRA r 32 on every projection with the embeddings and output layer trained in full, learning rate 2.5e-5, batch 64, 3 epochs; the final adapter. Prompt ",
+        code("<|readability_L|>\\n{original}\\n"), ". g1 · balanced shows every level 0–70 as often as the most frequent one (extra copies redrawn every epoch); g1 · guided gets ",
+        code("<|readability_any|>"), " (“no level”) on 10% of its examples. ", steps ? `Training: ${steps}.` : ""),
+      h("li", {}, "Requests: 1,000 held-out test originals (418 at level 70, 582 at 80) at every level below their own; sampling at temperature 0.7, top-p 1.0, up to 128 new tokens."),
+      h("li", {}, "READ-IT is computed exactly as the IMPaCTS labels: re-scoring the test originals reproduces every label. t2k scores only sentences of more than 5 tokens, so a few outputs have no score and are left out of the control measures."),
+      h("li", {}, "Meaning: BERTScore F1 (bert-base-multilingual-cased, layer 9) and SBERT cosine (distiluse-base-multilingual-cased-v1) against the original."),
+      h("li", {}, "Code: ", code("experiments/"), " on master (", code("analyze.py"), " for every number); this part by ", code("scripts/build_results_webview.py"), `. Generated ${R.meta.generated}.`)));
+  }
+
+  function renderResults() {
+    if (!R) return;
+    const box = clear($("results"));
+    if (!res.shown) res.shown = new Set(R.meta.conditions.map((c) => c.id).filter(curveDefault));
+    if (!R.conditions[res.cond]) res.cond = Object.keys(R.conditions)[0];
+    const chart = h("div", { class: "chart" }), leg = h("div", { class: "legend" });
+    const origin = segmented(ORIGINS, res.origin, (v) => { res.origin = v; renderResults(); }, "Originals");
+    box.append(h("section", { class: "wrap" },
+      card(null, null, h("div", { class: "card-head" }, h("h3", { text: "Achieved READ-IT global against the requested level" }), origin),
+        h("p", { class: "sub", text: "Each point is the mean achieved READ-IT global of the outputs at that requested level; the vertical line spans their middle half. The shaded staircase is where an output should land. Dashed: the same model with a different decoding (best of n; guidance). Click a model in the legend to show or hide it; hover a level for the numbers." }),
+        leg, chart),
+      summaryCard(), levelsCard(), landingCard(), decodingCard(), referenceCard(), exampleCard(),
+      h("h2", { text: "How the models are evaluated" }), methodsCard()));
+    resLegend(leg, chart);
+    resCurve(chart);
+  }
+  const renderGeneration = () => renderResults();
 
   // ---------- state, URL, wiring ----------
   function normalise() {
