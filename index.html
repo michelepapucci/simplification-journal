@@ -16,8 +16,8 @@
     <p class="lede">
       A Qwen3-0.6B model asked to rewrite an Italian sentence at a requested READ-IT global level, with one control
       token, as in the LREC 2026 setup. The training pairs come from the Wikipedia part of
-      <a href="https://huggingface.co/datasets/mpapucci/impacts">IMPaCTS</a>. Part 1 analyses the data, and Part 2
-      the models.
+      <a href="https://huggingface.co/datasets/mpapucci/impacts">IMPaCTS</a>. Part 1 analyses the data, Part 2 the models,
+      and the <a href="interp.html">interpretability page</a> how they use the token.
     </p>
     <div class="dataset-row">
       <span class="filter-label" id="dataset-label">Dataset</span>
@@ -184,8 +184,7 @@
       <h2 class="part-title" id="generation-title">The models</h2>
       <p class="lede" id="gen-lede">Three Qwen3-0.6B models trained on g1, plus one decoding experiment. Each is asked to simplify the 1,000 test
         originals to every READ-IT global level below their own (7,582 requests), sampling at temperature 0.7.</p>
-      <p class="lede">How the models represent the level token, layer by layer, and what it changes in their next-token probabilities
-        (including De Mauro’s basic vocabulary): <a href="interp.html">control token interpretability</a>.</p>
+      <p class="lede">How the models use the token: see the <a href="interp.html">control token interpretability</a> page, and its main findings at the end of the runs table below.</p>
     </header>
     <section class="wrap" aria-labelledby="runs-title">
       <div class="card">
@@ -209,7 +208,7 @@
               <th scope="row">g1 · guided<span class="ds-sub">classifier-free guidance</span></th>
               <td data-label="What changes">10% of the training examples get a “no level” token. At generation time, the difference between the requested level and “no level” is multiplied by a weight w. w was chosen on 300 dev originals, before the test run, among 1, 1.5, 2 and 3.</td>
               <td data-label="Why we tried it">To strengthen the token without retraining: g1 moves only 0.6 points per requested point.</td>
-              <td data-label="Did it work?"><span class="verdict">Partly.</span> At w = 1 it equals g1, so the extra token costs nothing. The chosen w = 3 overshoots: RMSE 20.1, and request 0 lands at 10.4 (67% inside), but at requests 60–70 most outputs stay at or above the original’s level.</td>
+              <td data-label="Did it work?"><span class="verdict">Partly.</span> At w = 1 it equals g1, so the extra token costs nothing. The chosen w = 3 overshoots: RMSE 20.1, and request 0 lands at 10.4 (67% inside), but at requests 60–70 most outputs stay at or above the original’s level. The reason: “no level” behaves as level 40, so guidance pushes every request away from 40, and mild requests back toward the original.</td>
             </tr>
             <tr>
               <th scope="row">g1, best of n<span class="ds-sub">decoding only</span></th>
@@ -220,6 +219,21 @@
           </tbody>
         </table>
         <p class="sub">All runs preserve meaning (BERTScore with the original 0.85; SARI 42–43 against the references), and about 1% of outputs or fewer are degenerate. The numbers behind every verdict are below.</p>
+        <h3>How the models use the token</h3>
+        <p class="sub">From the <a href="interp.html">interpretability page</a>, on g1 · guided and g1, which agree throughout.</p>
+        <ul class="findings">
+          <li><strong>The request is represented cleanly.</strong> From layer 3 to the last, the levels lie on one ordered scale, and the requested
+            level can be read back almost perfectly (R² ≥ 0.99 in layers 7–17); in layers 10–16 it is the main thing the state encodes. The weak
+            control is not a weak representation: the shortfall at the low end and the spread between samples arise while writing.</li>
+          <li><strong>“No level” is level 40,</strong> by its state and by where its outputs land, which explains why guidance stretches the curve
+            both ways.</li>
+          <li><strong>The token shortens and splits.</strong> Read under level 0 instead of 40, the same text’s commas become half as probable,
+            subordinating conjunctions and adverbs ×0.74, pronouns ×0.82, verbs ×0.87; ending the text becomes 3.2 times more probable and full
+            stops 1.4 times, while nouns and names stay put. The outputs’ parts of speech shift like the real simplifications’ (auxiliaries
+            4.0% → 7.4% from request 70 to 0; references 3.5% → 7.6%).</li>
+          <li><strong>It leaves vocabulary alone.</strong> The share of De Mauro’s basic vocabulary stays at 91–92% at every level, in the texts
+            and in the next-token probabilities. The training data itself varies it by only 2 points (92.5% at level 0, 90.3% at 70).</li>
+        </ul>
       </div>
     </section>
     <div id="results"></div>
