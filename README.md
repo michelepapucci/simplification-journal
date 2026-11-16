@@ -10,9 +10,14 @@ single control token on READ-IT global (the LREC setup), on `master`.
 - [`reports/improving_controllability.md`](reports/improving_controllability.md): the controllability report.
 - The data explorer of this period is archived at https://michelepapucci.github.io/simplification-journal/archive/multidim/.
 
-Not in git (each file is over GitHub's 100 MB limit): the LoRA adapters (`data/v1/experiments/runs/*/adapter*/`) and
-the residual-stream states of the interpretability runs (`outputs/*/interp*/states.npy`). They are kept on the
-original machine.
+Not in git, because each file is over GitHub's 100 MB limit: the LoRA adapters (`data/v1/experiments/runs/*/adapter*/`)
+and the residual-stream states of the interpretability runs (`outputs/*/interp*/states.npy`).
+- Only three adapters are kept, on the original machine: v5 (`v5_targets/adapter`), v7 (`v7_targets/adapter`) and the
+  evaluated v7 one-epoch model (`v7_1ep_targets/adapter_best`).
+- The other adapters (v1, v1 with source tokens, v2, v3, v4, v6, and the never-evaluated last step of the one-epoch v7
+  run) were deleted on 2026-11-16.
+- So were the interpretability states, which `interp/generate.py` can rebuild from a kept adapter.
+- All outputs, scores and results of every run remain in this branch.
 
 The scripts expect this repository next to the old `text-simplification-experiments` checkout (its `.venv` and
 `LREC/evaluation/.venv_t2k`), as when they were written.
