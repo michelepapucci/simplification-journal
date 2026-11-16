@@ -50,3 +50,15 @@ table.data.bars td.barcell { width: 60%; }
 table.data.bars .bar { display: inline-block; height: 10px; border-radius: 2px; }
 table.data.pushed td code { font-family: var(--mono); font-size: 12.5px; }
 table.data.pushed .cls { display: block; font-size: 11px; color: var(--text-muted); }
+
+.example-words { line-height: 2; max-width: 110ch; }
+.example-words .tag { display: block; font-size: 12px; color: var(--text-muted); line-height: 1.4; }
+.example-words .w { border-radius: 3px; padding: 1px 2px; }
+table.data.eratio td.ratio { position: relative; min-width: 120px; }
+table.data.eratio th.strong, table.data.eratio td.strong .rval { font-weight: 700; color: var(--text-primary); }
+table.data.eratio .rbar-wrap { position: absolute; left: 8px; right: 60px; top: 50%; height: 8px; transform: translateY(-50%); }
+table.data.eratio .rbar-wrap::before { content: ""; position: absolute; left: 50%; top: -3px; bottom: -3px; border-left: 1px solid var(--grid); }
+table.data.eratio .rbar { position: absolute; top: 0; height: 8px; border-radius: 2px; }
+table.data.eratio .rval { position: relative; font-variant-numeric: tabular-nums; }
+
+.segmented[hidden] { display: none; }

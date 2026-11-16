@@ -15,9 +15,9 @@
       <button type="button" class="theme-toggle" id="theme-toggle" aria-label="Colour theme">Theme: auto</button>
     </div>
     <p class="lede">
-      Four questions on g1 · guided, with g1 as a check: how the control token is represented, layer by layer;
-      whether the representation predicts what the output reaches; what “no level” stands for; and whether lower
-      levels make De Mauro’s basic vocabulary more probable. Back to the <a href="index.html">explorer</a>.
+      How g1 · guided (with g1 as a check) represents its control token layer by layer, whether that predicts what the
+      output reaches, what “no level” stands for, whether lower levels make De Mauro’s basic vocabulary more probable,
+      and which kinds of words and punctuation the token makes more or less probable. Back to the <a href="index.html">explorer</a>.
     </p>
     <p class="meta" id="meta"></p>
     <nav class="toc" aria-label="On this page">
@@ -26,6 +26,7 @@
       <a href="#b-title">B. Readout</a>
       <a href="#c-title">C. “No level”</a>
       <a href="#d-title">D. Basic vocabulary</a>
+      <a href="#e-title">E. Word classes</a>
     </nav>
   </header>
 
@@ -35,22 +36,26 @@
       <ul class="findings" id="findings">
         <li><strong>The levels form one graded scale, in every layer.</strong> From layer 3 on, levels 0–80 lie in order along the main
           direction (ρ = 1), every level sits between its neighbours, clustering always merges adjacent levels first, and distance grows with
-          the gap between levels (ρ 0.93–0.99). The requested level can be read back from the state with R² ≥ 0.99 in layers 7–17. The token
-          alone, and its input embedding, are ordered too. It is a single scale, not separate groups.</li>
-        <li><strong>The scale is widest at the bottom, but the outputs don’t follow.</strong> The step from level 0 to 10 is about
-          1.9 times the average step in the model, yet in the outputs it is an ordinary step (0.7–1.0 times the average), and request 0
-          still lands at 21–23, two levels too high. The model tells the strongest requests apart; the shortfall happens while writing.</li>
-        <li><strong>The state predicts the outcome no better than the request</strong> (R² 0.24–0.27 against 0.26–0.28): beyond the
-          request, where an output lands is sampling noise.</li>
-        <li><strong>“No level” means level 40.</strong> Its state sits where level 40 would be, like the never-trained level 90, and its
-          outputs land at 42.6 on average, the same as request 40. Guidance pushes away from this middle point, which is why it stretches
-          the curve in both directions.</li>
-        <li><strong>Lower levels do not make basic vocabulary more probable.</strong> 88.5–89% of the probability on whole words goes to
-          De Mauro’s basic vocabulary at every requested level, the token alone moves it by less than 0.2 points, and guidance lowers it
-          slightly. The outputs’ words are 91–92% basic at every level, while the real simplifications go from 91% (level 70) to 94% (level 0).</li>
-        <li><strong>The token changes structure instead.</strong> Against “no level”, level 0 makes ending the text 3.1 times more probable,
-          a full stop 1.4 times, and sentences opening with an article (Il, La, Le) 1.3–1.5 times; it makes semicolons (×0.28) and openings with
-          a preposition or adverb (Per, Durante, Con, In: ×0.3–0.6) less probable. Level 70 does the reverse.</li>
+          the gap between levels (ρ 0.93–0.99). The requested level can be read back from the state with R² ≥ 0.99 in layers 7–17. It is a
+          single scale, not separate groups.</li>
+        <li><strong>In the middle layers the level is what the state mostly encodes.</strong> In UMAP and t-SNE maps of single originals, in
+          layers 10–16, 73–88% of a point’s neighbours share its level (±10), and only 10–19% its original. Before layer 8 and after layer 18 the sentence’s content dominates
+          (about 80% of neighbours are the same original, the level is at chance). With each original’s own mean removed, the levels order
+          cleanly at every layer.</li>
+        <li><strong>The scale is widest at the bottom, but the outputs don’t follow.</strong> The step from level 0 to 10 is about 1.9 times
+          the average step in the model, yet an ordinary step in the outputs, and request 0 still lands at 21–23. The state also predicts the
+          outcome no better than the request (R² 0.24–0.27 against 0.26–0.28): the shortfall and the spread happen while writing.</li>
+        <li><strong>“No level” behaves as level 40.</strong> Its state is nearest to level 40’s at every layer, and its outputs’ READ-IT
+          matches request 40’s best (mean 42.6 against 41.9). Textually its output is no closer to the level-40 output than to the others:
+          two samples differ more than two neighbouring levels do.</li>
+        <li><strong>Basic vocabulary barely varies in the data, and not at all in the model.</strong> In the g1 training simplifications, the
+          share of De Mauro basic words goes only from 90.3% (level 70) to 92.5% (level 0). The models’ texts are 91–92% basic at every level
+          (originals 90%), and their next-token probability on basic words stays at 88.5–89%: they keep the average rise, not the gradient.</li>
+        <li><strong>The token changes structure, steadily from 40 to 20 to 0.</strong> Read under level 0 instead of 40, the same text’s commas
+          become half as probable (×0.49), subordinating conjunctions and adverbs ×0.74, pronouns ×0.82, verbs ×0.87 and adpositions ×0.89, while
+          nouns, proper nouns, numerals, determiners and auxiliaries stay put; ending the text becomes 3.2 times more probable at every step,
+          and full stops 1.4 times. The outputs show the same shifts as the real simplifications: from request 70 to 0, auxiliaries
+          4.0% → 7.4% (references 3.5% → 7.6%), pronouns 3.8% → 1.8% (4.2% → 1.5%), adverbs 3.8% → 2.1% (4.0% → 2.0%).</li>
       </ul>
     </section>
 
@@ -58,16 +63,22 @@
       <h2 id="a-title">A. The levels, layer by layer</h2>
       <div class="card">
         <div class="card-head">
-          <h3>The 11 tokens in the model’s space</h3>
+          <h3>Levels 0–80 in the model’s space</h3>
           <div class="controls-row">
             <div class="segmented" role="radiogroup" aria-label="Model" id="a-model"></div>
             <div class="segmented" role="radiogroup" aria-label="View" id="a-view"></div>
           </div>
         </div>
-        <p class="sub">Levels 0–80 (blue, darker = higher), the never-trained level 90 (hollow) and “no level” (diamond), projected on the
-          two main directions of the trained levels. <strong>In context</strong>: the state where generation starts (the newline after the
-          original), averaged over the 1,000 test originals; faint dots are 40 single originals. <strong>Alone</strong>: the token as the only
-          input, before it sees any text. Move the slider through the layers.</p>
+        <p class="sub">The nine trained levels (darker = higher). <strong>In context</strong>: the state where generation starts (the newline after
+          the original), for the 1,000 test originals. <strong>Alone</strong>: the token as the only input, before it sees any text.
+          <strong>PCA</strong> and <strong>MDS</strong> place the level means (PCA on the two main directions, MDS by their actual distances);
+          <strong>t-SNE</strong> and <strong>UMAP</strong> place 300 single originals × 9 levels, keeping neighbours rather than distances,
+          either as is or within original (each original’s own mean removed, which leaves what the level changes). Level 90, never a training
+          target, and “no level” (part C) are left out.</p>
+        <div class="controls-row">
+          <div class="segmented" role="radiogroup" aria-label="Projection" id="a-proj"></div>
+          <div class="segmented" role="radiogroup" aria-label="Points" id="a-variant"></div>
+        </div>
         <div class="layer-row">
           <label for="layer" id="layer-label">Layer</label>
           <input type="range" id="layer" min="0" max="28" step="1" value="12">
@@ -75,7 +86,7 @@
         <p class="sub" id="a-stats" aria-live="polite"></p>
         <div class="multiples two">
           <div class="multiple"><h4>Map</h4><div class="chart" id="a-map"></div></div>
-          <div class="multiple"><h4>Similarity between tokens (cosine, centred)</h4><p class="note">Blue: pointing the same way; red: opposite. An ordered scale shows as a blue band along the diagonal.</p><div class="scroll-x" id="a-cosine"></div></div>
+          <div class="multiple"><h4>Similarity between levels (cosine, centred)</h4><p class="note">Blue: pointing the same way; red: opposite. An ordered scale shows as a blue band along the diagonal.</p><div class="scroll-x" id="a-cosine"></div></div>
         </div>
         <div class="multiples two">
           <div class="multiple"><h4>Ordering and hierarchy at every layer</h4><p class="note">1 = perfectly ordered. The dashed line marks the layer shown above.</p>
@@ -101,11 +112,16 @@
     <section class="wrap" aria-labelledby="c-title">
       <h2 id="c-title">C. What “no level” stands for</h2>
       <div class="card">
-        <p class="sub" id="c-sub">g1 · guided with <code>&lt;|readability_any|&gt;</code> on the 1,000 test originals (sampling at temperature 0.7), and where the
-          “no level” state sits on the model’s level direction (the level whose position on the main direction it matches).</p>
+        <p class="sub">g1 · guided with <code>&lt;|readability_any|&gt;</code> on the 1,000 test originals (sampling at temperature 0.7), compared with
+          the requested levels on the same originals: where its outputs land, how similar its output is to each level’s output, and where its
+          state sits among the levels’ states.</p>
         <div class="multiples two">
-          <div class="multiple"><h4>Where its outputs land</h4><div id="c-bars"></div></div>
-          <div class="multiple"><h4>Its position on the level direction, by layer</h4><div class="legend" id="c-legend"></div><div class="chart" id="c-chart"></div></div>
+          <div class="multiple"><h4>Where the outputs land</h4><div class="legend" id="c-out-legend"></div><div class="chart" id="c-out"></div><p class="note" id="c-out-note"></p></div>
+          <div class="multiple"><h4>Which level’s output it resembles</h4><div class="legend" id="c-chrf-legend"></div><div class="chart" id="c-chrf"></div><p class="note" id="c-chrf-note"></p></div>
+        </div>
+        <div class="multiples two">
+          <div class="multiple"><h4>Its state read as a level, by layer</h4><div class="legend" id="c-state-legend"></div><div class="chart" id="c-state"></div><p class="note" id="c-state-note"></p></div>
+          <div class="multiple"><h4>Its distance to each level’s state</h4><div class="legend" id="c-dist-legend"></div><div class="chart" id="c-dist"></div></div>
         </div>
       </div>
     </section>
@@ -114,21 +130,45 @@
       <h2 id="d-title">D. Does a lower level make basic vocabulary more probable?</h2>
       <div class="card">
         <p class="sub">De Mauro’s <em>Nuovo vocabolario di base</em> (2016): fondamentale, alto uso, alta disponibilità. At every decoding step,
-          of the probability the model gives to whole words it can classify, the share on basic-vocabulary words. Each output is read back
-          through the model that wrote it, which gives the distribution it was drawn from. The three charts’ axes run from 85% to 95%.</p>
+          of the probability the model gives to whole words it can classify, the share on basic-vocabulary words; and the share of basic words in
+          the texts themselves, against the IMPaCTS references and the g1 training simplifications at the same level. Each output is read back
+          through the model that wrote it, which gives the distribution it was drawn from. The axes run from 85% to 95%.</p>
         <div class="multiples two">
           <div class="multiple"><h4>In the model’s next-token distribution</h4><div class="legend" id="d-dist-legend"></div><div class="chart" id="d-dist"></div></div>
-          <div class="multiple"><h4>In the words the outputs contain</h4><div class="legend" id="d-text-legend"></div><div class="chart" id="d-text"></div></div>
+          <div class="multiple"><h4>In the words of the texts</h4><div class="legend" id="d-text-legend"></div><div class="chart" id="d-text"></div></div>
         </div>
         <div class="multiples two">
-          <div class="multiple"><h4>The token alone: one fixed text read under each token</h4><p class="note">Each original’s own output at request 40, read under every token: only the token changes.</p>
+          <div class="multiple"><h4>The token alone: one fixed text read under each level</h4><p class="note">Each original’s own output at request 40, read under every level: only the token changes.</p>
             <div class="legend" id="d-fixed-legend"></div><div class="chart" id="d-fixed"></div></div>
-          <div class="multiple"><h4>What the token pushes up and down</h4>
-            <div class="segmented" role="radiogroup" aria-label="Model" id="d-model"></div>
-            <p class="note">Same fixed texts: how many times more (or less) probable each item is, on average over the steps, than under the reference. Items with at least 1 in 10,000 probability. Items without a leading space open the text or are the first piece of a word split in two (Dur·ante, G·li, Qu·esto).</p>
-          </div>
         </div>
-        <div class="multiples two" id="d-pushed"></div>
+      </div>
+    </section>
+
+    <section class="wrap" aria-labelledby="e-title">
+      <h2 id="e-title">E. What kinds of words the token makes more or less probable</h2>
+      <div class="card">
+        <div class="card-head">
+          <h3>One fixed text per original, read under levels 40, 30, 20, 10 and 0</h3>
+          <div class="segmented" role="radiogroup" aria-label="Model" id="e-model"></div>
+        </div>
+        <p class="sub">Each test original’s level-40 output is read again under lower levels; only the token changes. The text is tagged with
+          stanza (the profiler’s pipeline), and every word gets its probability in context, whatever the number of vocabulary pieces it takes.
+          The table gives, for each part of speech, how many times more or less probable the text’s words of that class are than at level 40
+          (geometric mean over words; hover for the 95% interval over originals). Blue: more probable; red: less.</p>
+        <div class="scroll-x" id="e-words"></div>
+        <div class="multiples two">
+          <div class="multiple"><h4>Ending the text and punctuating, at every step</h4><p class="note">Probability at every step relative to level 40.</p>
+            <div class="legend" id="e-steps-legend"></div><div class="chart" id="e-steps"></div><p class="note" id="e-steps-note"></p></div>
+          <div class="multiple"><h4>Single items that change most steadily</h4><p class="note" id="e-tokens-note"></p><div class="multiples two" id="e-tokens"></div></div>
+        </div>
+        <h3>The same classes in the texts the model writes</h3>
+        <p class="sub">Share of words of each part of speech (Profiling-UD) in the outputs at each requested level, against the IMPaCTS
+          references at that level and the test originals.</p>
+        <div class="legend" id="e-texts-legend"></div>
+        <div class="multiples" id="e-texts"></div>
+        <h3>One original, step by step</h3>
+        <label class="inline-control">Original <select id="e-pick"></select></label>
+        <div id="e-example"></div>
       </div>
     </section>
 
@@ -137,9 +177,10 @@
       <div class="card"><ul>
         <li>Models: g1 · guided and g1 (Part 2 of the <a href="index.html">explorer</a>). Hidden states: the residual stream after the embeddings and after each of the 28 blocks, in float16.</li>
         <li>Ordering: Spearman ρ between level and the first principal component of the 9 trained level means (0–80). In-between: share of triples a &lt; b &lt; c with a and c further apart than either is from b. Neighbour merges: share of the merges of average-linkage clustering that join adjacent levels.</li>
-        <li>Readout: ridge regression with 5-fold cross-validation, folds by original. Level 90 is never a training target and g1 never sees “no level”: their rows keep their initial value and are shown as references.</li>
+        <li>Readout: ridge regression with 5-fold cross-validation, folds by original. Projections: MDS (scikit-learn, metric), t-SNE (perplexity 30, after PCA to 50 dimensions) and UMAP (15 neighbours), every second layer.</li>
+        <li>Word classes (E): the fixed texts tagged with stanza 1.11.0 (tokenize, mwt, pos); each word’s probability is the product of its vocabulary pieces’ probabilities, the pieces assigned to words by character offsets; a contraction takes its first part’s tag. End of text, full stop, comma, semicolon and colon are single vocabulary items, so their probabilities at every step are exact.</li>
         <li>Vocabulary: word forms lemmatised with stanza 1.11.0 (the profiler’s pipeline) on the g1 texts and the test outputs; a form is basic if its lemma or the form is in NVdB 2016, as in READ-IT; proper nouns, numbers and foreign words are left out. A vocabulary item counts as a word when it is a space followed by letters; words split into pieces and apostrophe forms are not counted.</li>
-        <li>Code: <code>experiments/interp/</code> on master (<code>states.py</code>, <code>lexicon.py</code>, <code>logits.py</code>, <code>analyze.py</code>); this page by <code>scripts/build_interp_webview.py</code>.</li>
+        <li>Code: <code>experiments/interp/</code> on master (<code>states.py</code>, <code>lexicon.py</code>, <code>logits.py</code>, <code>classes.py</code>, <code>projections.py</code>, <code>analyze.py</code>); this page by <code>scripts/build_interp_webview.py</code>.</li>
       </ul></div>
     </section>
   </main>
