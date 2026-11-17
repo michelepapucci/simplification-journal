@@ -554,11 +554,106 @@
     }
   }
 
+  // ---------- G: value zeroing and patching ----------
+  const COND_LABEL = { base40: "Level 40, no patch", base0: "Level 0, no patch", "A_0-9": "A: request from level 40, layers 0–9",
+    "A_10-18": "A: … in layers 10–18", "A_19-27": "A: … in layers 19–27", A_all: "A: … in every layer (check)",
+    B_syntax: "B: the 108 syntax heads from level 40", B_random: "B: 108 random heads from level 40" };
+  function renderG() {
+    const Z = D.vz;
+    if (!Z) return;
+    const L = Array.from({ length: 28 }, (_, i) => i);
+    $("g1-note").textContent = `With nothing zeroed, the recomputed layer outputs match the model’s own at every layer (lowest mean cosine ${fmt(Math.min(...Z.exactness_min_by_layer), 5)}).`;
+    const c40 = Z.control_token["originals@40"];
+    const sA = [
+      { name: "Attention it receives", color: palette["text-secondary"], values: c40.att_text, dashed: true },
+      { name: "Value zeroing: what it actually contributes", color: palette["series-1"], values: c40.vz_text },
+      { name: "Norm of its weighted value", color: palette["series-3"], values: c40.norm_text },
+    ];
+    lineChart($("g2-text"), { xs: L, series: sA, height: 210, xTitle: "Layer", yFormat: (v) => pct(v), yLo: 0, yHi: 1, label: "Control token's share at the original's words, by layer" });
+    legend($("g2-text-legend"), sA);
+    const sB = [
+      { name: "Attention it receives", color: palette["text-secondary"], values: c40.att_gen, dashed: true },
+      { name: "Value zeroing", color: palette["series-1"], values: c40.vz_gen },
+      { name: "Norm", color: palette["series-3"], values: c40.norm_gen },
+    ];
+    lineChart($("g2-gen"), { xs: L, series: sB, height: 210, xTitle: "Layer", yFormat: (v) => pct(v), yLo: 0, yHi: 1, label: "Control token's share at the generation point, by layer" });
+    legend($("g2-gen-legend"), sB);
+    const R = Z.level0_over_level40;
+    const sC = [
+      { name: "Reading the original: at its words", color: palette["series-1"], values: R.originals.vz_text },
+      { name: "Reading the original: at the generation point", color: palette["series-2"], values: R.originals.vz_gen },
+      { name: "Reading the fixed level-40 text: at its words", color: palette["series-4"], values: R.fixed.vz_text, dashed: true },
+    ];
+    lineChart($("g2-ratio"), { xs: L.slice(1), series: sC.map((x) => ({ ...x, values: x.values.slice(1) })), height: 210, xTitle: "Layer", yFormat: (v) => `×${fmt(v, 2)}`,
+      zero: false, ref: { name: "same", values: L.slice(1).map(() => 1) }, label: "Control token's value-zeroing share at level 0 relative to level 40" });
+    legend($("g2-ratio-legend"), sC);
+    const S = Z.syntax.vz;
+    $("g3-note").textContent = `${S.confirmed_pairs} layer–relation pairs beat the relation’s best fixed offset by at least 10 points on held-out texts (${S.candidates} selected on the other half), in layers ${S.layers.join(", ")}. ` +
+      (S.found ? "The gate is passed." : "The gate is not passed: 2.1 and 2.2 were not run.");
+    const t = h("table", { class: "data" });
+    t.append(h("thead", {}, h("tr", {}, ["Relation (the word draws most on its head)", "Best layer", "Held-out accuracy", "Best fixed offset", "Arcs"].map((x, i) => h("th", { class: i > 1 ? "num" : null, text: x })))));
+    const b = h("tbody");
+    Object.entries(S.best_per_relation).sort((x, y) => (y[1].acc_heldout - y[1].baseline_heldout) - (x[1].acc_heldout - x[1].baseline_heldout)).forEach(([rel, v]) =>
+      b.append(h("tr", {}, h("td", { text: `${REL[rel] || rel} (${rel})` }), h("td", { text: `layer ${v.layer}` }), h("td", { class: "num" }, h("span", { class: "in", text: pct(v.acc_heldout) })),
+        h("td", { class: "num", text: pct(v.baseline_heldout) }), h("td", { class: "num", text: NF.format(v.arcs_heldout) }))));
+    t.append(b);
+    clear($("g3-table")).append(t);
+    const show = ["obj", "nsubj", "conj", "advcl", "acl", "obl"].filter((x) => S.heldout_accuracy_by_layer[x]);
+    const sD = show.map((rel, k) => ({ name: `${REL[rel] || rel} (offset ${pct(S.heldout_accuracy_by_layer[rel].baseline)})`, color: palette[`series-${k + 1}`], values: S.heldout_accuracy_by_layer[rel].acc }));
+    lineChart($("g3-layers"), { xs: L, series: sD, height: 230, xTitle: "Layer", yFormat: (v) => pct(v), yLo: 0, yHi: 1, label: "Held-out accuracy of value-zeroing mixing per relation, by layer" });
+    legend($("g3-layers-legend"), sD);
+    if (Z.validation) {
+      const targets = { readit_syntax: "READ-IT syntax", readit_global: "READ-IT global", parse_mean_dep_len: "Dependency length", parse_mean_max_depth: "Tree depth", subordinate_proposition_dist: "Subordination" };
+      const lab = { vz_ent: "Value zeroing: entropy", vz_dist: "Value zeroing: distance", vz_long: "Value zeroing: long-range share", norm_ent: "Norm: entropy", norm_dist: "Norm: distance", norm_long: "Norm: long-range share" };
+      const vt = h("table", { class: "data" });
+      vt.append(h("thead", {}, h("tr", {}, h("th", { text: "Index" }), Object.values(targets).map((x) => h("th", { class: "num", text: x })), h("th", { class: "num", text: "Length" }))));
+      const vb = h("tbody");
+      for (const [c, v] of Object.entries(Z.validation)) {
+        vb.append(h("tr", { class: c === "norm_ent" ? "selected" : null }, h("td", { text: lab[c] || c }),
+          Object.keys(targets).map((k) => h("td", { class: "num" }, `${fmt(v[k].rho, 2)} `, h("span", { class: "muted", text: `(${fmt(v[k].partial_length, 2)})` }))),
+          h("td", { class: "num", text: fmt(v.length.rho, 2) })));
+      }
+      vt.append(vb);
+      clear($("g3-valid")).append(vt);
+      const S1 = Z.step_2_1, lv8 = [0, 10, 20, 30, 40, 50, 60, 70];
+      const N1 = Z.step_2_1_norm;
+      const sE = [{ name: "Norm-based entropy (exploratory)", color: palette["series-3"], values: lv8.map((l) => N1.by_level[l].ent) },
+        { name: "Value-zeroing entropy", color: palette["series-1"], values: lv8.map((l) => S1.by_level[l].ent), dashed: true }];
+      lineChart($("g21"), { xs: lv8, series: sE, height: 190, xTitle: "Requested level", yFormat: (v) => fmt(v, 2), zero: false, label: "Entropy of the mixing by requested level" });
+      legend($("g21-legend"), sE);
+      $("g21-note").textContent = `Norm-based entropy: ρ ${fmt(N1.ent.rho_achieved_global, 2)} with the READ-IT global reached (${fmt(N1.ent.partial_length, 2)} controlling for length). ` +
+        `Value-zeroing entropy: ρ ${fmt(S1.ent.rho_achieved_global, 2)} (${fmt(S1.ent.partial_length, 2)}); value-zeroing distance: ρ ${fmt(S1.dist.rho_achieved_global, 2)} (${fmt(S1.dist.partial_length, 2)}), only length.`;
+      const Q = Z.step_2_2;
+      const sF = ["originals", "fixed"].flatMap((kind, k) => ["ent", "dist"].map((c, j) => ({ name: `${kind === "originals" ? "Reading the original" : "Reading the fixed text"}: ${c === "ent" ? "entropy" : "distance"}`,
+        color: palette[k ? "series-4" : "series-1"], dashed: j === 1, values: [0, 20, 40].map((l) => Q[kind][l][c].relative_to_40) })));
+      lineChart($("g22"), { xs: [0, 20, 40], series: sF, height: 190, xTitle: "Level the text is read under", yFormat: (v) => `${(100 * v).toFixed(1)}%`, zero: false, yLo: -0.05, yHi: 0.05,
+        ref: { name: "level 40", values: [0, 0, 0] }, label: "Change of the value-zeroing indices relative to level 40" });
+      legend($("g22-legend"), sF);
+    }
+    const Pt = Z.patching;
+    if (Pt) {
+      const pt = h("table", { class: "data" });
+      const ms = ["all", "syntax", "n_tokens", "subordinate_proposition_dist"].filter((m) => m in Pt.means.base0);
+      const mlab = { all: "READ-IT global", syntax: "READ-IT syntax", base: "READ-IT base", n_tokens: "Words", avg_links_len: "Dependency length", subordinate_proposition_dist: "Subordination (%)" };
+      pt.append(h("thead", {}, h("tr", {}, h("th", { text: "Condition (level-0 run unless stated)" }), ms.map((m) => h("th", { class: "num", text: mlab[m] || m })),
+        h("th", { class: "num", text: "Gap recovered" }), h("th", { class: "num", text: "Same as level 40" }))));
+      const pb = h("tbody");
+      for (const c of Object.keys(Pt.means)) {
+        const rec = Pt.recovered[c].all;
+        pb.append(h("tr", {}, h("td", { text: COND_LABEL[c] || c }), ms.map((m) => h("td", { class: "num", text: fmt(Pt.means[c][m], m === "subordinate_proposition_dist" ? 1 : m === "avg_links_len" ? 2 : 1) })),
+          h("td", { class: "num", title: `95% interval ${pct(rec.ci95[0])} to ${pct(rec.ci95[1])}` }, h("span", { class: "in", text: pct(rec.share) })), h("td", { class: "num", text: pct(Pt.identical_to_base40[c]) })));
+      }
+      pt.append(pb);
+      clear($("g23-table")).append(pt);
+      $("g23-note").textContent = `${Pt.n} test originals, greedy decoding. Gap recovered: how far each patch moves the level-0 outputs’ mean toward the level-40 outputs’ (0% = level 0, 100% = level 40); hover for the 95% interval over originals.`;
+    }
+  }
+
   // ---------- wiring ----------
   function renderAll() {
     readPalette();
     $("meta").textContent = `Built ${D.meta.generated}.`;
-    renderA(); renderB(); renderC(); renderD(); renderE(); renderF();
+    renderA(); renderB(); renderC(); renderD(); renderE(); renderF(); renderG();
   }
   const THEMES = ["auto", "light", "dark"];
   let theme = "auto";

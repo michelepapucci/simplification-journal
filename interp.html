@@ -28,6 +28,7 @@
       <a href="#d-title">D. Basic vocabulary</a>
       <a href="#e-title">E. Word classes</a>
       <a href="#f-title">F. Attention and syntax</a>
+      <a href="#g-title">G. Value zeroing and patching</a>
     </nav>
   </header>
 
@@ -63,6 +64,12 @@
           In the model’s own outputs the entropy falls steadily with the request (0.689 at 70, 0.664 at 0). Reading the same text under a
           lower request changes neither the syntax heads’ attention nor a structural probe’s tree (within 0.3%): the request changes what
           the model writes, not how it parses.</li>
+              <li><strong>The request is read in layers 0–9, then lives in the text’s own states (part G).</strong> Patching the control token’s
+          keys and values from a level-40 run into a level-0 run in layers 0–9 alone gives back 98% of the level-40 outputs’ READ-IT (84% identical
+          outputs); the same patch in layers 10–18 or 19–27 changes nothing. Value zeroing shows the token, though on the attention sink, still
+          contributes 11–51% of what is mixed into the words, about the same at every level. Counting values gives the best complexity index found,
+          the entropy of the norm-based mixing (ρ 0.47 with READ-IT syntax controlling for length), and confirms that the same text read under
+          another request is mixed the same way. The syntax heads are not the request’s route: 108 random heads carry more of it.</li>
       </ul>
     </section>
 
@@ -215,6 +222,42 @@
       </div>
     </section>
 
+    <section class="wrap" aria-labelledby="g-title">
+      <h2 id="g-title">G. Value zeroing, and patching</h2>
+      <div class="card">
+        <h3>Why: the request sits on the attention sink</h3>
+        <p class="sub">The control token is at position 0, which receives most of the attention from layer 3 on while passing on small values: attention
+          weights cannot tell how much of the request is actually read. Value zeroing (Mohebbi et al. 2023) zeroes one position’s value vector in a
+          layer, recomputes the rest of the layer, and measures how much every other position’s output changes; the norm-based score (Kobayashi et al.
+          2020) is the size of each position’s weighted value. Both are normalised over positions. g1 · guided throughout.</p>
+        <p class="sub" id="g1-note"></p>
+        <h3>Where the request enters</h3>
+        <div class="multiples two">
+          <div class="multiple"><h4>The control token’s share at the original’s words (level 40)</h4><div class="legend" id="g2-text-legend"></div><div class="chart" id="g2-text"></div></div>
+          <div class="multiple"><h4>… at the generation point (the prompt’s last newline)</h4><div class="legend" id="g2-gen-legend"></div><div class="chart" id="g2-gen"></div></div>
+        </div>
+        <div class="multiples two">
+          <div class="multiple"><h4>How much more it contributes at level 0 than at level 40</h4><div class="legend" id="g2-ratio-legend"></div><div class="chart" id="g2-ratio"></div></div>
+        </div>
+        <h3>Syntax by value zeroing (part F, redone)</h3>
+        <p class="sub" id="g3-note"></p>
+        <div class="scroll-x" id="g3-table"></div>
+        <div class="legend" id="g3-layers-legend"></div><div class="chart" id="g3-layers"></div>
+        <h4>Validation: Spearman ρ with each measure of complexity (in brackets, controlling for length)</h4>
+        <div class="scroll-x" id="g3-valid"></div>
+        <div class="multiples two">
+          <div class="multiple"><h4>2.1: the outputs at each requested level</h4><div class="legend" id="g21-legend"></div><div class="chart" id="g21"></div><p class="note" id="g21-note"></p></div>
+          <div class="multiple"><h4>2.2: the same text under a different request</h4><div class="legend" id="g22-legend"></div><div class="chart" id="g22"></div></div>
+        </div>
+        <h3>2.3: patching, from a level-40 run into a level-0 run</h3>
+        <p class="sub"><strong>A</strong>: the control token’s keys and values are taken from the level-40 run in one window of layers; every other position reads the
+          request only through them, so taking them from every layer gives exactly the level-40 output. <strong>B</strong>: the outputs of part F’s syntax heads
+          (or of as many random heads) over the prompt are taken from the level-40 run; writing then goes on unpatched.</p>
+        <div class="scroll-x" id="g23-table"></div>
+        <p class="sub" id="g23-note"></p>
+      </div>
+    </section>
+
     <section class="wrap methods" aria-labelledby="methods-title">
       <h2 id="methods-title">How it is computed</h2>
       <div class="card"><ul>
@@ -224,7 +267,7 @@
         <li>Word classes (E): the fixed texts tagged with stanza 1.11.0 (tokenize, mwt, pos); each word’s probability is the product of its vocabulary pieces’ probabilities, the pieces assigned to words by character offsets; a contraction takes its first part’s tag. End of text, full stop, comma, semicolon and colon are single vocabulary items, so their probabilities at every step are exact.</li>
         <li>Vocabulary: word forms lemmatised with stanza 1.11.0 (the profiler’s pipeline) on the g1 texts and the test outputs; a form is basic if its lemma or the form is in NVdB 2016, as in READ-IT; proper nouns, numbers and foreign words are left out. A vocabulary item counts as a word when it is a space followed by letters; words split into pieces and apostrophe forms are not counted.</li>
         <li>Attention and syntax (F): attention weights from the eager implementation; a word’s attention to an earlier word is the mean over its pieces of the summed attention to that word’s pieces, renormalised over the earlier words of the same text, so the prompt and the first-token sink are left out. Parses: stanza 1.11.0 with dependencies. Structural probe: rank 64, trained on 2,000 g1 training simplifications (L1 loss on tree distances), evaluated by the minimum spanning tree of its distances.</li>
-        <li>Code: <code>experiments/interp/</code> on master (<code>states.py</code>, <code>lexicon.py</code>, <code>logits.py</code>, <code>classes.py</code>, <code>projections.py</code>, <code>parse.py</code>, <code>attention.py</code>, <code>probe.py</code>, <code>analyze.py</code>, <code>analyze_attention.py</code>); this page by <code>scripts/build_interp_webview.py</code>.</li>
+        <li>Code: <code>experiments/interp/</code> on master (<code>states.py</code>, <code>lexicon.py</code>, <code>logits.py</code>, <code>classes.py</code>, <code>projections.py</code>, <code>parse.py</code>, <code>attention.py</code>, <code>probe.py</code>, <code>analyze.py</code>, <code>analyze_attention.py</code>, <code>vz.py</code>, <code>patching.py</code>, <code>analyze_vz.py</code>); this page by <code>scripts/build_interp_webview.py</code>.</li>
       </ul></div>
     </section>
   </main>

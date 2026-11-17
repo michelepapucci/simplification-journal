@@ -235,6 +235,9 @@
             position (objects 96%, conjuncts 61%); the entropy of their attention tracks READ-IT syntax beyond length (ρ 0.41) and falls in the
             outputs as the request goes down. Yet the same text read under a lower request gets the same syntactic attention and the same probed
             tree (within 0.3%).</li>
+          <li><strong>The request is read early.</strong> Giving a level-0 run the level-40 token only in layers 0–9 reproduces 98% of the
+            level-40 outputs’ READ-IT; in layers 10–27 it changes nothing. Counting what is actually mixed (value zeroing, norm-based mixing)
+            gives the best complexity index found, and confirms that the request changes what is written, not how the text is read.</li>
           <li><strong>It leaves vocabulary alone.</strong> The share of De Mauro’s basic vocabulary stays at 91–92% at every level, in the texts
             and in the next-token probabilities. The training data itself varies it by only 2 points (92.5% at level 0, 90.3% at 70).</li>
         </ul>
