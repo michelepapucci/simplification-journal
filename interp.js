@@ -486,11 +486,79 @@
     legend(legendBox, mkS("end of text"));
   }
 
+  // ---------- F: attention and syntax ----------
+  const REL = { obj: "object", nsubj: "subject", conj: "conjunct", acl: "clause modifying a noun", advcl: "adverbial clause", ccomp: "clausal complement",
+    xcomp: "open complement", obl: "oblique", nmod: "noun modifier", amod: "adjective", appos: "apposition", parataxis: "parataxis", nummod: "numeral",
+    compound: "compound", flat: "flat name", fixed: "fixed expression", advmod: "adverb" };
+  const IDX = { ent: "Entropy of the syntax heads’ attention", dist: "Expected attention distance (units)", long: "Share of attention more than 5 units back" };
+  function renderF() {
+    const A = D.attention;
+    if (!A) return;
+    const m = A.models.g1_guided, sh = m.syntax_heads;
+    $("f-heads-note").textContent = `${sh.n_heads} syntax heads in g1 · guided (${A.models.g1.syntax_heads.n_heads} in g1, ${A.head_overlap.both} shared): ` +
+      `${sh.confirmed_pairs} head–relation pairs beat the relation’s best fixed offset by at least 10 points on the held-out texts, out of ${sh.candidates} selected on the other half.`;
+    const t = h("table", { class: "data" });
+    t.append(h("thead", {}, h("tr", {}, ["Relation (the word attends to its head)", "Best head", "Held-out accuracy", "Best fixed offset", "Arcs"].map((x, i) => h("th", { class: i > 1 ? "num" : null, text: x })))));
+    const b = h("tbody");
+    Object.entries(sh.best_per_relation).sort((x, y) => (y[1].acc_heldout - y[1].baseline_heldout) - (x[1].acc_heldout - x[1].baseline_heldout)).forEach(([rel, v]) => {
+      b.append(h("tr", {}, h("td", { text: `${REL[rel] || rel} (${rel})` }), h("td", { text: `layer ${v.layer}, head ${v.index}` }),
+        h("td", { class: "num" }, h("span", { class: "in", text: pct(v.acc_heldout) })), h("td", { class: "num", text: pct(v.baseline_heldout) }), h("td", { class: "num", text: NF.format(v.arcs_heldout) })));
+    });
+    t.append(b);
+    clear($("f-heads")).append(t);
+    const layers = Array.from({ length: 28 }, (_, i) => i);
+    const s1 = [{ name: "Syntax heads in the layer (of 16)", color: palette["series-1"], values: layers.map((l) => sh.heads_per_layer[l] || 0) }];
+    lineChart($("f-layers"), { xs: layers, series: s1, height: 170, xTitle: "Layer", yFormat: (v) => fmt(v, 0), yLo: 0, label: "Number of syntax heads per layer" });
+    legend($("f-layers-legend"), s1);
+    const V = A.validation, targets = { readit_syntax: "READ-IT syntax", readit_global: "READ-IT global", parse_mean_dep_len: "Dependency length",
+      parse_mean_max_depth: "Tree depth", subordinate_proposition_dist: "Subordination" };
+    const cols = Object.keys(V);
+    const vt = h("table", { class: "data" });
+    vt.append(h("thead", {}, h("tr", {}, h("th", { text: "Index" }), Object.values(targets).map((x) => h("th", { class: "num", text: x })), h("th", { class: "num", text: "Length" }))));
+    const vb = h("tbody");
+    for (const c of cols) {
+      const label = c.startsWith("probe_len") ? `Probe: dependency length (layer ${c.split("_L")[1]})` : { ent: "Entropy", dist: "Attention distance", long: "Long-range share" }[c];
+      vb.append(h("tr", { class: c === "ent" ? "selected" : null }, h("td", { text: label }),
+        Object.keys(targets).map((k) => h("td", { class: "num" }, `${fmt(V[c][k].rho, 2)} `, h("span", { class: "muted", text: `(${fmt(V[c][k].partial_length, 2)})` }))),
+        h("td", { class: "num", text: fmt(V[c].length.rho, 2) })));
+    }
+    vt.append(vb);
+    clear($("f-valid")).append(vt);
+    const P = A.probe;
+    if (P) {
+      const ls = Object.keys(P.dev_uuas_best_epoch).map(Number);
+      const s2 = [{ name: "Probe: undirected attachment score on the dev sentences", color: palette["series-3"], values: ls.map((l) => P.dev_uuas_best_epoch[l]) }];
+      lineChart($("f-probe"), { xs: ls, series: s2, height: 170, xTitle: "Layer", yFormat: (v) => fmt(v, 2), yLo: 0, yHi: 1, label: "Structural probe accuracy by layer" });
+      legend($("f-probe-legend"), s2);
+      $("f-probe-note").textContent = P.test_uuas ? `Best layer ${P.best_layer}; on the held-out test texts UUAS ${fmt(P.test_uuas.original, 2)} (originals) and ${fmt(P.test_uuas.reference, 2)} (references). ` +
+        `Its predicted dependency length against the syntax heads’ entropy: ρ ${fmt(P.attention_vs_probe.ent, 2)}.` : "";
+    }
+    const S = A.step_2_1, lv8 = [0, 10, 20, 30, 40, 50, 60, 70];
+    const c1 = [{ name: IDX.ent, color: palette["series-1"], values: lv8.map((l) => S.by_level[l].ent) }];
+    lineChart($("f-21-ent"), { xs: lv8, series: c1, height: 190, xTitle: "Requested level", yFormat: (v) => fmt(v, 3), zero: false, label: "Entropy of the syntax heads by requested level" });
+    legend($("f-21-ent-legend"), c1);
+    const c2 = [{ name: IDX.dist, color: palette["series-2"], values: lv8.map((l) => S.by_level[l].dist) }];
+    if (S.by_level[0].probe_len != null) c2.push({ name: "Probe: predicted dependency length", color: palette["series-3"], values: lv8.map((l) => S.by_level[l].probe_len), dashed: true });
+    lineChart($("f-21-dist"), { xs: lv8, series: c2, height: 190, xTitle: "Requested level", yFormat: (v) => fmt(v, 1), yLo: 0, label: "Attention distance and probe dependency length by requested level" });
+    legend($("f-21-dist-legend"), c2);
+    const row = (c) => `${IDX[c] || "Probe dependency length"}: ρ ${fmt(S[c].rho_achieved_global, 2)} with the READ-IT global reached (${fmt(S[c].partial_length, 2)} controlling for length), ${fmt(S[c].within_original_vs_achieved, 2)} within original`;
+    $("f-21-note").textContent = ["ent", "dist", ...(S.probe_len ? ["probe_len"] : [])].map(row).join("; ") + ".";
+    const Q = A.step_2_2, lv5 = [0, 10, 20, 30, 40];
+    for (const kind of ["originals", "fixed"]) {
+      const ser = ["ent", "dist", "long"].map((c, k) => ({ name: IDX[c], color: palette[["series-1", "series-2", "series-4"][k]], values: lv5.map((l) => Q[kind][l][c].relative_to_40) }));
+      lineChart($(`f-22-${kind}`), { xs: lv5, series: ser, height: 190, xTitle: "Level the text is read under", yFormat: (v) => `${(100 * v).toFixed(1)}%`,
+        zero: false, yLo: -0.05, yHi: 0.05, ref: { name: "level 40", values: lv5.map(() => 0) }, label: `Change of the syntax-head indices relative to level 40, ${kind}` });
+      legend($(`f-22-${kind}-legend`), ser);
+      const pu = lv5.map((l) => Q[kind][l].probe_uuas);
+      $(`f-22-${kind}-note`).textContent = pu[0] != null ? `Probe UUAS at levels 0–40: ${pu.map((x) => fmt(x, 3)).join(", ")}.` : "";
+    }
+  }
+
   // ---------- wiring ----------
   function renderAll() {
     readPalette();
     $("meta").textContent = `Built ${D.meta.generated}.`;
-    renderA(); renderB(); renderC(); renderD(); renderE();
+    renderA(); renderB(); renderC(); renderD(); renderE(); renderF();
   }
   const THEMES = ["auto", "light", "dark"];
   let theme = "auto";

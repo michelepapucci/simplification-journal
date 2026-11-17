@@ -27,6 +27,7 @@
       <a href="#c-title">C. “No level”</a>
       <a href="#d-title">D. Basic vocabulary</a>
       <a href="#e-title">E. Word classes</a>
+      <a href="#f-title">F. Attention and syntax</a>
     </nav>
   </header>
 
@@ -56,6 +57,12 @@
           nouns, proper nouns, numerals, determiners and auxiliaries stay put; ending the text becomes 3.2 times more probable at every step,
           and full stops 1.4 times. The outputs show the same shifts as the real simplifications: from request 70 to 0, auxiliaries
           4.0% → 7.4% (references 3.5% → 7.6%), pronouns 3.8% → 1.8% (4.2% → 1.5%), adverbs 3.8% → 2.1% (4.0% → 2.0%).</li>
+              <li><strong>Attention gives a usable index of syntactic complexity: the entropy of the syntax heads.</strong> 108 heads track
+          specific dependencies far above position (objects 96% against 56%, conjuncts 61% against 25%, adverbial clauses 49% against 18%). How spread
+          their attention is tracks READ-IT syntax at ρ 0.50, 0.41 once length is controlled for; how far it reaches mostly counts words.
+          In the model’s own outputs the entropy falls steadily with the request (0.689 at 70, 0.664 at 0). Reading the same text under a
+          lower request changes neither the syntax heads’ attention nor a structural probe’s tree (within 0.3%): the request changes what
+          the model writes, not how it parses.</li>
       </ul>
     </section>
 
@@ -172,6 +179,42 @@
       </div>
     </section>
 
+    <section class="wrap" aria-labelledby="f-title">
+      <h2 id="f-title">F. Attention and syntax</h2>
+      <div class="card">
+        <h3>Step 1: which heads track syntax, and which index measures complexity</h3>
+        <p class="sub">The texts are parsed with the profiler’s stanza pipeline. For each dependency relation, a head counts as syntactic if
+          the word attends most to its syntactic head more often than the best fixed offset (one, two or three words back) does, by at least
+          10 points, on held-out texts (relations with 100+ arcs; heads selected on the texts of 500 test originals, confirmed on the other 500).
+          From those heads, three indices per text: entropy of their attention, expected attention distance, and the share of attention more
+          than 5 words back. They are validated on held-out originals and references, which the model did not write. A structural probe
+          (Hewitt &amp; Manning) trained on the hidden states is the cross-check.</p>
+        <p class="sub" id="f-heads-note"></p>
+        <h4>The best head for each relation (g1 · guided)</h4>
+        <div class="scroll-x" id="f-heads"></div>
+        <div class="multiples two">
+          <div class="multiple"><h4>Where the syntax heads are</h4><div class="legend" id="f-layers-legend"></div><div class="chart" id="f-layers"></div></div>
+          <div class="multiple"><h4>The structural probe</h4><div class="legend" id="f-probe-legend"></div><div class="chart" id="f-probe"></div><p class="note" id="f-probe-note"></p></div>
+        </div>
+        <h4>Validation: Spearman ρ with each measure of complexity (in brackets, controlling for length)</h4>
+        <p class="sub">Held-out test originals and references. The distance indices mostly measure length; the entropy keeps most of its correlation once length is controlled for.</p>
+        <div class="scroll-x" id="f-valid"></div>
+        <h3>Step 2.1: the outputs at each requested level</h3>
+        <p class="sub">The same indices on g1 · guided’s 7,582 test outputs, read back through the model.</p>
+        <div class="multiples two">
+          <div class="multiple"><h4>Entropy</h4><div class="legend" id="f-21-ent-legend"></div><div class="chart" id="f-21-ent"></div></div>
+          <div class="multiple"><h4>Distance</h4><div class="legend" id="f-21-dist-legend"></div><div class="chart" id="f-21-dist"></div></div>
+        </div>
+        <p class="sub" id="f-21-note"></p>
+        <h3>Step 2.2: the same text under a different request</h3>
+        <p class="sub">Only the token changes. Change of each index relative to level 40, averaged over the 1,000 texts (the axis runs from −5% to +5%).</p>
+        <div class="multiples two">
+          <div class="multiple"><h4>Reading the original (in the prompt)</h4><div class="legend" id="f-22-originals-legend"></div><div class="chart" id="f-22-originals"></div><p class="note" id="f-22-originals-note"></p></div>
+          <div class="multiple"><h4>Reading the fixed level-40 output</h4><div class="legend" id="f-22-fixed-legend"></div><div class="chart" id="f-22-fixed"></div><p class="note" id="f-22-fixed-note"></p></div>
+        </div>
+      </div>
+    </section>
+
     <section class="wrap methods" aria-labelledby="methods-title">
       <h2 id="methods-title">How it is computed</h2>
       <div class="card"><ul>
@@ -180,7 +223,8 @@
         <li>Readout: ridge regression with 5-fold cross-validation, folds by original. Projections: MDS (scikit-learn, metric), t-SNE (perplexity 30, after PCA to 50 dimensions) and UMAP (15 neighbours), every second layer.</li>
         <li>Word classes (E): the fixed texts tagged with stanza 1.11.0 (tokenize, mwt, pos); each word’s probability is the product of its vocabulary pieces’ probabilities, the pieces assigned to words by character offsets; a contraction takes its first part’s tag. End of text, full stop, comma, semicolon and colon are single vocabulary items, so their probabilities at every step are exact.</li>
         <li>Vocabulary: word forms lemmatised with stanza 1.11.0 (the profiler’s pipeline) on the g1 texts and the test outputs; a form is basic if its lemma or the form is in NVdB 2016, as in READ-IT; proper nouns, numbers and foreign words are left out. A vocabulary item counts as a word when it is a space followed by letters; words split into pieces and apostrophe forms are not counted.</li>
-        <li>Code: <code>experiments/interp/</code> on master (<code>states.py</code>, <code>lexicon.py</code>, <code>logits.py</code>, <code>classes.py</code>, <code>projections.py</code>, <code>analyze.py</code>); this page by <code>scripts/build_interp_webview.py</code>.</li>
+        <li>Attention and syntax (F): attention weights from the eager implementation; a word’s attention to an earlier word is the mean over its pieces of the summed attention to that word’s pieces, renormalised over the earlier words of the same text, so the prompt and the first-token sink are left out. Parses: stanza 1.11.0 with dependencies. Structural probe: rank 64, trained on 2,000 g1 training simplifications (L1 loss on tree distances), evaluated by the minimum spanning tree of its distances.</li>
+        <li>Code: <code>experiments/interp/</code> on master (<code>states.py</code>, <code>lexicon.py</code>, <code>logits.py</code>, <code>classes.py</code>, <code>projections.py</code>, <code>parse.py</code>, <code>attention.py</code>, <code>probe.py</code>, <code>analyze.py</code>, <code>analyze_attention.py</code>); this page by <code>scripts/build_interp_webview.py</code>.</li>
       </ul></div>
     </section>
   </main>
