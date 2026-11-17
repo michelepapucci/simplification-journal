@@ -61,6 +61,14 @@
       <p class="eyebrow">Part 1</p>
       <h2 class="part-title">The training and test pairs</h2>
       <p class="sub">READ-IT distributions and linguistic profiles of the originals and their simplifications, by split, original level and control token.</p>
+      <div class="findings-box">
+        <strong>Findings</strong>
+        <ul>
+          <li>The simplifications lower READ-IT global from 79.8 to 42.7 on average, almost all through syntax (77.7 → 41.6) and base (57.3 → 39.2); lexical barely moves (37.4 → 36.5).</li>
+          <li>They are shorter (rank-biserial r 0.91), shallower (tree depth 0.86), with fewer verbs per sentence (0.89) and fewer subordinate clauses (0.83); vocabulary features barely change (basic-vocabulary share 0.04).</li>
+          <li>Levels 10–60 are evenly covered and levels 0 and 70 have about half as many pairs; a one-level drop is as common as a five-level one.</li>
+        </ul>
+      </div>
     </header>
     <section class="wrap" aria-labelledby="overview-title">
       <h2 id="overview-title">The data at a glance</h2>
@@ -185,6 +193,14 @@
       <p class="lede" id="gen-lede">Three Qwen3-0.6B models trained on g1, plus one decoding experiment. Each is asked to simplify the 1,000 test
         originals to every READ-IT global level below their own (7,582 requests), sampling at temperature 0.7.</p>
       <p class="lede">How the models use the token: see the <a href="interp.html">control token interpretability</a> page, and its main findings at the end of the runs table below.</p>
+      <div class="findings-box">
+        <strong>Findings</strong>
+        <ul>
+          <li>g1 follows the request, but compressed (request 0 lands at 22.8, request 70 at 65.6), and single outputs vary by about 15 READ-IT points: RMSE 24.1, 19% inside the level.</li>
+          <li>Keeping the best of 4 samples puts 52% inside and halves RMSE (11.3): most of the error is spread between samples, not missing control.</li>
+          <li>Balancing the levels changes nothing; guidance at w = 3 reaches the strong requests but under-simplifies the mild ones. Meaning is preserved throughout (BERTScore 0.85, SARI 42–43).</li>
+        </ul>
+      </div>
     </header>
     <section class="wrap" aria-labelledby="runs-title">
       <div class="card">

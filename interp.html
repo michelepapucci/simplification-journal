@@ -75,6 +75,14 @@
 
     <section class="wrap" aria-labelledby="a-title">
       <h2 id="a-title">A. The levels, layer by layer</h2>
+      <div class="findings-box">
+        <strong>Findings</strong>
+        <ul>
+          <li>From layer 3 to the last, levels 0–80 lie on one ordered scale: every level sits between its neighbours and clustering merges adjacent levels first. The requested level can be read back from the state with R² ≥ 0.99 in layers 7–17.</li>
+          <li>In layers 10–16 the level is the main thing the state encodes: in t-SNE and UMAP maps of single originals, neighbours share the level, not the sentence. Before and after, the sentence’s content dominates.</li>
+          <li>The scale is widest between levels 0 and 10, but the outputs don’t follow: the shortfall at the low end happens while writing, not in the representation.</li>
+        </ul>
+      </div>
       <div class="card">
         <div class="card-head">
           <h3>Levels 0–80 in the model’s space</h3>
@@ -114,6 +122,12 @@
 
     <section class="wrap" aria-labelledby="b-title">
       <h2 id="b-title">B. Does the state predict where the output lands?</h2>
+      <div class="findings-box">
+        <strong>Findings</strong>
+        <ul>
+          <li>The state where generation starts predicts the READ-IT the output reaches no better than the request itself (R² 0.24–0.27 against 0.26–0.28). Beyond the request, where an output lands is sampling noise.</li>
+        </ul>
+      </div>
       <div class="card">
         <p class="sub">On the 7,582 test requests: cross-validated R² (folds by original) of a ridge regression predicting the READ-IT global
           the output reaches, from the hidden state where generation starts, against the request alone and the request plus the original’s
@@ -125,6 +139,13 @@
 
     <section class="wrap" aria-labelledby="c-title">
       <h2 id="c-title">C. What “no level” stands for</h2>
+      <div class="findings-box">
+        <strong>Findings</strong>
+        <ul>
+          <li>“No level” behaves as level 40: its state is nearest to level 40’s at every layer, and its outputs’ READ-IT matches request 40’s (mean 42.6 against 41.9).</li>
+          <li>Comparing the texts can’t confirm it: two samples of one request differ more than two neighbouring levels do.</li>
+        </ul>
+      </div>
       <div class="card">
         <p class="sub">g1 · guided with <code>&lt;|readability_any|&gt;</code> on the 1,000 test originals (sampling at temperature 0.7), compared with
           the requested levels on the same originals: where its outputs land, how similar its output is to each level’s output, and where its
@@ -142,6 +163,13 @@
 
     <section class="wrap" aria-labelledby="d-title">
       <h2 id="d-title">D. Does a lower level make basic vocabulary more probable?</h2>
+      <div class="findings-box">
+        <strong>Findings</strong>
+        <ul>
+          <li>Lower levels do not make De Mauro’s basic vocabulary more probable: about 89% of the next-token probability on classified words goes to it at every level, and the token alone moves it by less than 0.2 points.</li>
+          <li>The training data barely varies it either (92.5% basic at level 0, 90.3% at 70). The model keeps the average rise over the originals, not that small gradient.</li>
+        </ul>
+      </div>
       <div class="card">
         <p class="sub">De Mauro’s <em>Nuovo vocabolario di base</em> (2016): fondamentale, alto uso, alta disponibilità. At every decoding step,
           of the probability the model gives to whole words it can classify, the share on basic-vocabulary words; and the share of basic words in
@@ -160,6 +188,13 @@
 
     <section class="wrap" aria-labelledby="e-title">
       <h2 id="e-title">E. What kinds of words the token makes more or less probable</h2>
+      <div class="findings-box">
+        <strong>Findings</strong>
+        <ul>
+          <li>From level 40 down to 0, the token steadily makes ending the text (×3.2 at every step) and full stops more probable, and commas (×0.49), subordinating conjunctions and adverbs (×0.74), pronouns (×0.82), verbs (×0.87) and adpositions (×0.89) less probable. Nouns, names, numbers and determiners stay put.</li>
+          <li>The texts the model writes shift their parts of speech like the real simplifications at the same levels, by similar amounts.</li>
+        </ul>
+      </div>
       <div class="card">
         <div class="card-head">
           <h3>One fixed text per original, read under levels 40, 30, 20, 10 and 0</h3>
@@ -188,6 +223,14 @@
 
     <section class="wrap" aria-labelledby="f-title">
       <h2 id="f-title">F. Attention and syntax</h2>
+      <div class="findings-box">
+        <strong>Findings</strong>
+        <ul>
+          <li>108 attention heads track specific dependencies far above position: objects 96% against 56% for the best fixed offset, conjuncts 61% against 25%, adverbial clauses 49% against 18%.</li>
+          <li>The entropy of their attention is a valid index of syntactic complexity (ρ 0.50 with READ-IT syntax, 0.41 controlling for length); how far attention reaches mostly counts words. A structural probe agrees with the parser’s dependency lengths (ρ 0.62).</li>
+          <li>In the outputs, the index falls as the request goes down. But the same text read under another request gets the same attention and the same probed tree (within 0.3%): the request changes what is written, not how the text is parsed.</li>
+        </ul>
+      </div>
       <div class="card">
         <h3>Step 1: which heads track syntax, and which index measures complexity</h3>
         <p class="sub">The texts are parsed with the profiler’s stanza pipeline. For each dependency relation, a head counts as syntactic if
@@ -224,6 +267,14 @@
 
     <section class="wrap" aria-labelledby="g-title">
       <h2 id="g-title">G. Value zeroing, and patching</h2>
+      <div class="findings-box">
+        <strong>Findings</strong>
+        <ul>
+          <li>The control token sits on the attention sink, yet it contributes 11–51% of what is mixed into each word from layer 3 on, about the same at every level.</li>
+          <li>The request is read in layers 0–9: giving a level-0 run the level-40 token’s keys and values in those layers alone recovers 98% of the READ-IT gap; doing it in layers 10–27 recovers nothing. Afterwards the request lives in the text’s own states.</li>
+          <li>Counting what is actually mixed gives the best complexity index found (norm-based entropy, ρ 0.47 with READ-IT syntax controlling for length) and confirms part F. The syntax heads are not the request’s route: 108 random heads carry more of it (66% against 37%).</li>
+        </ul>
+      </div>
       <div class="card">
         <h3>Why: the request sits on the attention sink</h3>
         <p class="sub">The control token is at position 0, which receives most of the attention from layer 3 on while passing on small values: attention
