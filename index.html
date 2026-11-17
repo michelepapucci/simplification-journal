@@ -231,6 +231,10 @@
             subordinating conjunctions and adverbs ×0.74, pronouns ×0.82, verbs ×0.87; ending the text becomes 3.2 times more probable and full
             stops 1.4 times, while nouns and names stay put. The outputs’ parts of speech shift like the real simplifications’ (auxiliaries
             4.0% → 7.4% from request 70 to 0; references 3.5% → 7.6%).</li>
+          <li><strong>It changes what the model writes, not how it parses.</strong> 108 attention heads track specific dependencies far above
+            position (objects 96%, conjuncts 61%); the entropy of their attention tracks READ-IT syntax beyond length (ρ 0.41) and falls in the
+            outputs as the request goes down. Yet the same text read under a lower request gets the same syntactic attention and the same probed
+            tree (within 0.3%).</li>
           <li><strong>It leaves vocabulary alone.</strong> The share of De Mauro’s basic vocabulary stays at 91–92% at every level, in the texts
             and in the next-token probabilities. The training data itself varies it by only 2 points (92.5% at level 0, 90.3% at 70).</li>
         </ul>
