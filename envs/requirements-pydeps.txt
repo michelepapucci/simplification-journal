@@ -1,0 +1,8 @@
+# Packages installed with `pip install --target envs/pydeps --no-deps` on top of the old repository's .venv
+# (numpy 2.2.6, scipy 1.15.3, scikit-learn 1.7.1); scripts add envs/pydeps to PYTHONPATH.
+langdetect==1.0.9
+sentence-transformers==5.1.1
+umap-learn==0.5.7
+pynndescent==0.5.13
+numba==0.61.2
+llvmlite==0.44.0

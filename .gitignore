@@ -1,0 +1,23 @@
+# the multi-dimensional work (branch multidim-archive), checked out with its large files; see archive/multidim/README.md
+archive/
+
+# local Python packages installed outside the old repo's virtualenvs (envs/requirements-*.txt list them)
+envs/pydeps/
+envs/pydeps-t2k/
+
+# t2k resources are a symlink to the old repository (read only); t2k writes temp files next to its code
+tools/readit/t2k_v3/t2k/resources
+tools/readit/t2k_v3/t2k/*.tmp
+tools/readit/t2k_v3/t2k/analized.*
+tools/readit/**/itwac-tokenized
+__pycache__/
+
+# experiments: adapters (~2 GB each), checkpoints, parser/scorer working folders
+experiments/runs/*/adapter*/
+experiments/runs/*/checkpoint-*/
+experiments/outputs/**/*.work/
+
+# interpretability intermediates that are too large for git or quick to regenerate (see experiments/interp/README.md)
+experiments/outputs/interp/*/states.npy
+experiments/outputs/interp/*/attention-*.npz
+experiments/outputs/interp/*/*_prob.npz
