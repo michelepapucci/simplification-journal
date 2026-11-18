@@ -21,3 +21,6 @@ experiments/outputs/**/*.work/
 experiments/outputs/interp/*/states.npy
 experiments/outputs/interp/*/attention-*.npz
 experiments/outputs/interp/*/*_prob.npz
+
+# lock file of the background scoring queue (run_g1.sh)
+experiments/runs/*.lock
