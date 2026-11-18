@@ -1,0 +1,48 @@
+{
+ "rule": "Choose the guidance weight w of the guided model on the dev requests, by a rule fixed before any result:\nthe w with the lowest RMSE between requested level and achieved READ-IT global, among the candidates whose mean\nBERTScore F1 against the original is at most 0.01 below w = 1's and whose share of degenerate or echoing outputs is\nat most 1 point above w = 1's. RMSE is the CLiC-it one: achieved minus the requested level's lower bound (x100).",
+ "candidates": {
+  "1": {
+   "rmse": 24.57,
+   "bias": 6.91,
+   "in_level": 0.179,
+   "bertscore_f1": 0.8514,
+   "bad": 0.007,
+   "copy": 0.0123,
+   "scored": 2268
+  },
+  "1.5": {
+   "rmse": 22.29,
+   "bias": 7.26,
+   "in_level": 0.212,
+   "bertscore_f1": 0.851,
+   "bad": 0.0114,
+   "copy": 0.0237,
+   "scored": 2259
+  },
+  "2": {
+   "rmse": 20.93,
+   "bias": 6.53,
+   "in_level": 0.216,
+   "bertscore_f1": 0.8471,
+   "bad": 0.0105,
+   "copy": 0.0268,
+   "scored": 2250
+  },
+  "3": {
+   "rmse": 20.38,
+   "bias": 7.56,
+   "in_level": 0.236,
+   "bertscore_f1": 0.8477,
+   "bad": 0.0057,
+   "copy": 0.0338,
+   "scored": 2246
+  }
+ },
+ "allowed": [
+  "1",
+  "1.5",
+  "2",
+  "3"
+ ],
+ "chosen": 3.0
+}

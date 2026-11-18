@@ -1,0 +1,7 @@
+/home/mpapucci/text-simplification-experiments/.venv/lib/python3.10/site-packages/torch/cuda/__init__.py:829: UserWarning: Can't initialize NVML
+  warnings.warn("Can't initialize NVML")
+test {'generations': 7582, 'bertscore_precision': 0.89, 'bertscore_recall': 0.8179, 'bertscore_f1': 0.8509, 'sbert_cosine': 0.7718, 'copy': 0.0153, 'empty': 0.0, 'degenerate': 0.0091, 'echo': 0.0011, 'too_long': 0.0051}
+test references: {'n': 4216, 'sari': 43.05, 'bleu': 33.45, 'bertscore_f1': 0.8223}
+/home/mpapucci/text-simplification-experiments/.venv/lib/python3.10/site-packages/torch/cuda/__init__.py:829: UserWarning: Can't initialize NVML
+  warnings.warn("Can't initialize NVML")
+samples-test {'generations': 22746, 'bertscore_precision': 0.8913, 'bertscore_recall': 0.8203, 'bertscore_f1': 0.8528, 'sbert_cosine': 0.7747, 'copy': 0.0177, 'empty': 0.0, 'degenerate': 0.0083, 'echo': 0.0004, 'too_long': 0.004}

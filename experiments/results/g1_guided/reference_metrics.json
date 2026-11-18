@@ -1,0 +1,122 @@
+{
+ "test": {
+  "requests_with_references": 4216,
+  "references_per_request_mean": 1.89,
+  "all": {
+   "n": 4216,
+   "sari": 42.9,
+   "bleu": 33.6,
+   "bertscore_f1": 0.8219
+  },
+  "by_level": {
+   "0": {
+    "n": 630,
+    "sari": 45.85,
+    "bleu": 20.78,
+    "bertscore_f1": 0.8047
+   },
+   "10": {
+    "n": 665,
+    "sari": 43.28,
+    "bleu": 20.34,
+    "bertscore_f1": 0.7958
+   },
+   "20": {
+    "n": 624,
+    "sari": 43.3,
+    "bleu": 27.2,
+    "bertscore_f1": 0.8088
+   },
+   "30": {
+    "n": 608,
+    "sari": 42.12,
+    "bleu": 29.55,
+    "bertscore_f1": 0.8144
+   },
+   "40": {
+    "n": 532,
+    "sari": 40.98,
+    "bleu": 34.72,
+    "bertscore_f1": 0.8258
+   },
+   "50": {
+    "n": 473,
+    "sari": 41.87,
+    "bleu": 40.3,
+    "bertscore_f1": 0.844
+   },
+   "60": {
+    "n": 438,
+    "sari": 41.52,
+    "bleu": 45.4,
+    "bertscore_f1": 0.8563
+   },
+   "70": {
+    "n": 246,
+    "sari": 43.78,
+    "bleu": 52.36,
+    "bertscore_f1": 0.8753
+   }
+  }
+ },
+ "test-w3": {
+  "requests_with_references": 4216,
+  "references_per_request_mean": 1.89,
+  "all": {
+   "n": 4216,
+   "sari": 42.32,
+   "bleu": 35.16,
+   "bertscore_f1": 0.8187
+  },
+  "by_level": {
+   "0": {
+    "n": 630,
+    "sari": 42.32,
+    "bleu": 12.72,
+    "bertscore_f1": 0.7777
+   },
+   "10": {
+    "n": 665,
+    "sari": 41.01,
+    "bleu": 14.89,
+    "bertscore_f1": 0.7849
+   },
+   "20": {
+    "n": 624,
+    "sari": 40.91,
+    "bleu": 20.21,
+    "bertscore_f1": 0.7961
+   },
+   "30": {
+    "n": 608,
+    "sari": 40.86,
+    "bleu": 26.15,
+    "bertscore_f1": 0.8064
+   },
+   "40": {
+    "n": 532,
+    "sari": 42.07,
+    "bleu": 35.33,
+    "bertscore_f1": 0.8307
+   },
+   "50": {
+    "n": 473,
+    "sari": 43.27,
+    "bleu": 41.18,
+    "bertscore_f1": 0.8523
+   },
+   "60": {
+    "n": 438,
+    "sari": 45.39,
+    "bleu": 49.26,
+    "bertscore_f1": 0.8802
+   },
+   "70": {
+    "n": 246,
+    "sari": 46.22,
+    "bleu": 56.71,
+    "bertscore_f1": 0.9016
+   }
+  }
+ }
+}

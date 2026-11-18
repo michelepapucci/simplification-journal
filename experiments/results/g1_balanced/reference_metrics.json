@@ -1,0 +1,62 @@
+{
+ "test": {
+  "requests_with_references": 4216,
+  "references_per_request_mean": 1.89,
+  "all": {
+   "n": 4216,
+   "sari": 42.88,
+   "bleu": 33.4,
+   "bertscore_f1": 0.8225
+  },
+  "by_level": {
+   "0": {
+    "n": 630,
+    "sari": 45.26,
+    "bleu": 20.18,
+    "bertscore_f1": 0.8033
+   },
+   "10": {
+    "n": 665,
+    "sari": 43.01,
+    "bleu": 20.98,
+    "bertscore_f1": 0.7993
+   },
+   "20": {
+    "n": 624,
+    "sari": 43.08,
+    "bleu": 26.96,
+    "bertscore_f1": 0.8058
+   },
+   "30": {
+    "n": 608,
+    "sari": 42.81,
+    "bleu": 30.86,
+    "bertscore_f1": 0.8186
+   },
+   "40": {
+    "n": 532,
+    "sari": 41.6,
+    "bleu": 34.8,
+    "bertscore_f1": 0.8272
+   },
+   "50": {
+    "n": 473,
+    "sari": 41.91,
+    "bleu": 39.73,
+    "bertscore_f1": 0.8432
+   },
+   "60": {
+    "n": 438,
+    "sari": 41.55,
+    "bleu": 44.32,
+    "bertscore_f1": 0.8561
+   },
+   "70": {
+    "n": 246,
+    "sari": 43.07,
+    "bleu": 52.84,
+    "bertscore_f1": 0.8772
+   }
+  }
+ }
+}

@@ -1,0 +1,14 @@
+{
+ "test": {
+  "generations": 7582,
+  "bertscore_precision": 0.8913,
+  "bertscore_recall": 0.8206,
+  "bertscore_f1": 0.8529,
+  "sbert_cosine": 0.7735,
+  "copy": 0.0154,
+  "empty": 0.0,
+  "degenerate": 0.01,
+  "echo": 0.0008,
+  "too_long": 0.0058
+ }
+}

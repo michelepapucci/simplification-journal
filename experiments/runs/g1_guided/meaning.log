@@ -1,0 +1,14 @@
+/home/mpapucci/text-simplification-experiments/.venv/lib/python3.10/site-packages/torch/cuda/__init__.py:829: UserWarning: Can't initialize NVML
+  warnings.warn("Can't initialize NVML")
+test {'generations': 7582, 'bertscore_precision': 0.8907, 'bertscore_recall': 0.819, 'bertscore_f1': 0.8519, 'sbert_cosine': 0.7729, 'copy': 0.0166, 'empty': 0.0, 'degenerate': 0.0063, 'echo': 0.0003, 'too_long': 0.0037}
+test references: {'n': 4216, 'sari': 42.9, 'bleu': 33.6, 'bertscore_f1': 0.8219}
+/home/mpapucci/text-simplification-experiments/.venv/lib/python3.10/site-packages/torch/cuda/__init__.py:829: UserWarning: Can't initialize NVML
+  warnings.warn("Can't initialize NVML")
+dev-w1.5 {'generations': 2275, 'bertscore_precision': 0.8878, 'bertscore_recall': 0.82, 'bertscore_f1': 0.851, 'sbert_cosine': 0.7698, 'copy': 0.0237, 'empty': 0.0, 'degenerate': 0.0097, 'echo': 0.0018, 'too_long': 0.0062}
+dev-w1 {'generations': 2275, 'bertscore_precision': 0.8897, 'bertscore_recall': 0.8193, 'bertscore_f1': 0.8514, 'sbert_cosine': 0.7726, 'copy': 0.0123, 'empty': 0.0, 'degenerate': 0.0053, 'echo': 0.0018, 'too_long': 0.0053}
+dev-w2 {'generations': 2275, 'bertscore_precision': 0.8858, 'bertscore_recall': 0.8146, 'bertscore_f1': 0.8471, 'sbert_cosine': 0.7586, 'copy': 0.0268, 'empty': 0.0, 'degenerate': 0.0092, 'echo': 0.0013, 'too_long': 0.0062}
+dev-w3 {'generations': 2275, 'bertscore_precision': 0.8849, 'bertscore_recall': 0.8166, 'bertscore_f1': 0.8477, 'sbert_cosine': 0.7546, 'copy': 0.0338, 'empty': 0.0, 'degenerate': 0.0053, 'echo': 0.0004, 'too_long': 0.0057}
+/home/mpapucci/text-simplification-experiments/.venv/lib/python3.10/site-packages/torch/cuda/__init__.py:829: UserWarning: Can't initialize NVML
+  warnings.warn("Can't initialize NVML")
+test-w3 {'generations': 7582, 'bertscore_precision': 0.884, 'bertscore_recall': 0.8135, 'bertscore_f1': 0.8456, 'sbert_cosine': 0.751, 'copy': 0.0351, 'empty': 0.0, 'degenerate': 0.0082, 'echo': 0.0, 'too_long': 0.0034}
+test-w3 references: {'n': 4216, 'sari': 42.32, 'bleu': 35.16, 'bertscore_f1': 0.8187}

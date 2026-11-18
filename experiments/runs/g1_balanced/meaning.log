@@ -1,0 +1,4 @@
+/home/mpapucci/text-simplification-experiments/.venv/lib/python3.10/site-packages/torch/cuda/__init__.py:829: UserWarning: Can't initialize NVML
+  warnings.warn("Can't initialize NVML")
+test {'generations': 7582, 'bertscore_precision': 0.8913, 'bertscore_recall': 0.8206, 'bertscore_f1': 0.8529, 'sbert_cosine': 0.7735, 'copy': 0.0154, 'empty': 0.0, 'degenerate': 0.01, 'echo': 0.0008, 'too_long': 0.0058}
+test references: {'n': 4216, 'sari': 42.88, 'bleu': 33.4, 'bertscore_f1': 0.8225}
