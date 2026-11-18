@@ -1,0 +1,208 @@
+{
+ "source": {
+  "repo": "mpapucci/impacts",
+  "revision": "489c78edec079421b2c0d777cd3393ad04c96f2c",
+  "part": "wikipedia"
+ },
+ "rules": {
+  "min_original_global": 0.7,
+  "level": "10 * min(floor(10 * score), 9)",
+  "double_filter_proxy": {
+   "chars": "[\"«»“”(]",
+   "max_chars": 400
+  },
+  "language": "langdetect 1.0.9, seed 0, original and simplification 'it'",
+  "degenerate": "a word 4-gram >= 3 times in the simplification and not in the original, or TTR < 0.4",
+  "echo_patterns": [
+   "mantenendo il più possibile",
+   "intatto il significato",
+   "il più possibile il significato",
+   "\\brispond[io] (solamente|solo)\\b",
+   "\\b(la|il|questa|questo) seguente (frase|testo|paragrafo|passaggio)",
+   "\\b(passaggio|testo|paragrafo) fornito",
+   "^\\W*(sommarizzare|riassumendo|semplificando|semplificare)\\b",
+   "^\\W*(certo|sicuro)?[,!.]?\\s*ecco\\b",
+   "\\bpuò essere semplificat[ao]\\b",
+   "\\bfrase (originale|semplificata)\\b",
+   "\\bsemplificazione della (frase|seguente)",
+   "^\\W*simplified\\s*:",
+   "\\bmi dispiace\\b",
+   "^\\W*sulla base (di questo|del|dello|della) (paragrafo|testo|passaggio)",
+   "\\bsemplificat[ao]\\s*:",
+   "\\b(è|sono) stat[aoie] semplificat[aoie]\\b",
+   "\\bsemplificat[ao] (versione|frase|significato)\\b",
+   "\\bsarebbe\\s*:"
+  ],
+  "max_length_ratio_words": 2.0,
+  "target": "tgt_level < src_level (no noise margin)",
+  "token": "<|readability_{tgt_level}|>",
+  "validation_share_of_originals": 0.01,
+  "seed": 42
+ },
+ "steps": [
+  {
+   "step": "release, Wikipedia",
+   "pairs": 764061,
+   "originals": 106680
+  },
+  {
+   "step": "1. test originals held out",
+   "pairs": 740563,
+   "originals": 104105
+  },
+  {
+   "step": "2. original READ-IT global > 70",
+   "pairs": 213703,
+   "originals": 24355
+  },
+  {
+   "step": "3. langdetect list removed",
+   "pairs": 210720,
+   "originals": 24313
+  },
+  {
+   "step": "4. double-filter proxy on the original",
+   "pairs": 94560,
+   "originals": 10866
+  },
+  {
+   "step": "5. exact duplicates removed",
+   "pairs": 94505,
+   "originals": 10866
+  },
+  {
+   "step": "6. original and simplification detected as Italian",
+   "pairs": 93648,
+   "originals": 10816
+  },
+  {
+   "step": "7. no degenerate simplification (repeated 4-gram x3, or TTR < 0.4)",
+   "pairs": 92467,
+   "originals": 10815
+  },
+  {
+   "step": "8. no instruction echo",
+   "pairs": 90351,
+   "originals": 10814
+  },
+  {
+   "step": "9. simplification at most twice the original's words",
+   "pairs": 88389,
+   "originals": 10806
+  },
+  {
+   "step": "10. target: the simplification's level below the original's",
+   "pairs": 81058,
+   "originals": 10762
+  },
+  {
+   "step": "11. split: train",
+   "pairs": 80251,
+   "originals": 10654
+  },
+  {
+   "step": "11. split: validation",
+   "pairs": 807,
+   "originals": 108
+  }
+ ],
+ "rule_overlaps_before_7": {
+  "degenerate": 1181,
+  "echo": 2231,
+  "too_long": 2703
+ },
+ "readit_global_noise": {
+  "near_duplicate_pairs": 36734,
+  "p50": 3.8,
+  "p75": 9.2,
+  "p90": 17.3,
+  "p95": 23.6
+ },
+ "train_target_levels": {
+  "0": 4582,
+  "10": 9874,
+  "20": 11987,
+  "30": 11951,
+  "40": 12039,
+  "50": 11242,
+  "60": 11545,
+  "70": 5411,
+  "80": 1620
+ },
+ "train_source_levels": {
+  "70": 44619,
+  "80": 26512,
+  "90": 9120
+ },
+ "train_source_by_target": {
+  "70": {
+   "0": 3294,
+   "10": 6384,
+   "20": 7257,
+   "30": 7199,
+   "40": 7007,
+   "50": 6597,
+   "60": 6881
+  },
+  "80": {
+   "0": 853,
+   "10": 2704,
+   "20": 3678,
+   "30": 3684,
+   "40": 3948,
+   "50": 3603,
+   "60": 3680,
+   "70": 4362
+  },
+  "90": {
+   "0": 435,
+   "10": 786,
+   "20": 1052,
+   "30": 1068,
+   "40": 1084,
+   "50": 1042,
+   "60": 984,
+   "70": 1049,
+   "80": 1620
+  }
+ },
+ "train_steps_down": {
+  "1": 12863,
+  "2": 11326,
+  "3": 11594,
+  "4": 12189,
+  "5": 12025,
+  "6": 11130,
+  "7": 7050,
+  "8": 1639,
+  "9": 435
+ },
+ "test": {
+  "selection": {
+   "held-out test originals": 2575,
+   "READ-IT global > 70": 2575,
+   "double-filter proxy": 2306,
+   "Italian": 2306
+  },
+  "test_originals": 1000,
+  "dev_originals": 300,
+  "test_by_level": {
+   "70": 418,
+   "80": 582
+  },
+  "dev_by_level": {
+   "70": 125,
+   "80": 175
+  },
+  "test_requests": 7582,
+  "dev_requests": 2275,
+  "references": {
+   "IMPaCTS simplifications of the test originals": 9131,
+   "langdetect list, duplicates": 9056,
+   "Italian": 9013,
+   "degenerate, echo, length": 8469,
+   "level below the original's": 7968
+  },
+  "requests_with_a_reference": 4216
+ }
+}
