@@ -1,0 +1,40 @@
+500 texts: analysis 61s, readability 3s; 0 failed; 1 unscored; wrote /home/mpapucci/text-simplification-experiments/simplification-journal/experiments/outputs/g1_guided_patch/readit-A_0-9.csv
+/home/mpapucci/text-simplification-experiments/.venv/lib/python3.10/site-packages/torch/cuda/__init__.py:829: UserWarning: Can't initialize NVML
+  warnings.warn("Can't initialize NVML")
+500 texts: parse 16s, profiling 0s; 0 empty; wrote /home/mpapucci/text-simplification-experiments/simplification-journal/experiments/outputs/g1_guided_patch/profiling-A_0-9.csv
+500 texts: analysis 54s, readability 2s; 0 failed; 3 unscored; wrote /home/mpapucci/text-simplification-experiments/simplification-journal/experiments/outputs/g1_guided_patch/readit-A_10-18.csv
+/home/mpapucci/text-simplification-experiments/.venv/lib/python3.10/site-packages/torch/cuda/__init__.py:829: UserWarning: Can't initialize NVML
+  warnings.warn("Can't initialize NVML")
+500 texts: parse 10s, profiling 0s; 0 empty; wrote /home/mpapucci/text-simplification-experiments/simplification-journal/experiments/outputs/g1_guided_patch/profiling-A_10-18.csv
+500 texts: analysis 54s, readability 2s; 0 failed; 3 unscored; wrote /home/mpapucci/text-simplification-experiments/simplification-journal/experiments/outputs/g1_guided_patch/readit-A_19-27.csv
+/home/mpapucci/text-simplification-experiments/.venv/lib/python3.10/site-packages/torch/cuda/__init__.py:829: UserWarning: Can't initialize NVML
+  warnings.warn("Can't initialize NVML")
+500 texts: parse 10s, profiling 0s; 0 empty; wrote /home/mpapucci/text-simplification-experiments/simplification-journal/experiments/outputs/g1_guided_patch/profiling-A_19-27.csv
+500 texts: analysis 59s, readability 3s; 0 failed; 1 unscored; wrote /home/mpapucci/text-simplification-experiments/simplification-journal/experiments/outputs/g1_guided_patch/readit-A_all.csv
+/home/mpapucci/text-simplification-experiments/.venv/lib/python3.10/site-packages/torch/cuda/__init__.py:829: UserWarning: Can't initialize NVML
+  warnings.warn("Can't initialize NVML")
+500 texts: parse 15s, profiling 0s; 0 empty; wrote /home/mpapucci/text-simplification-experiments/simplification-journal/experiments/outputs/g1_guided_patch/profiling-A_all.csv
+500 texts: analysis 62s, readability 3s; 0 failed; 2 unscored; wrote /home/mpapucci/text-simplification-experiments/simplification-journal/experiments/outputs/g1_guided_patch/readit-B_random.csv
+/home/mpapucci/text-simplification-experiments/.venv/lib/python3.10/site-packages/torch/cuda/__init__.py:829: UserWarning: Can't initialize NVML
+  warnings.warn("Can't initialize NVML")
+500 texts: parse 13s, profiling 0s; 0 empty; wrote /home/mpapucci/text-simplification-experiments/simplification-journal/experiments/outputs/g1_guided_patch/profiling-B_random.csv
+500 texts: analysis 60s, readability 2s; 0 failed; 2 unscored; wrote /home/mpapucci/text-simplification-experiments/simplification-journal/experiments/outputs/g1_guided_patch/readit-B_syntax.csv
+/home/mpapucci/text-simplification-experiments/.venv/lib/python3.10/site-packages/torch/cuda/__init__.py:829: UserWarning: Can't initialize NVML
+  warnings.warn("Can't initialize NVML")
+500 texts: parse 12s, profiling 0s; 0 empty; wrote /home/mpapucci/text-simplification-experiments/simplification-journal/experiments/outputs/g1_guided_patch/profiling-B_syntax.csv
+500 texts: analysis 62s, readability 2s; 0 failed; 3 unscored; wrote /home/mpapucci/text-simplification-experiments/simplification-journal/experiments/outputs/g1_guided_patch/readit-base0.csv
+/home/mpapucci/text-simplification-experiments/.venv/lib/python3.10/site-packages/torch/cuda/__init__.py:829: UserWarning: Can't initialize NVML
+  warnings.warn("Can't initialize NVML")
+500 texts: parse 9s, profiling 0s; 0 empty; wrote /home/mpapucci/text-simplification-experiments/simplification-journal/experiments/outputs/g1_guided_patch/profiling-base0.csv
+500 texts: analysis 60s, readability 3s; 0 failed; 1 unscored; wrote /home/mpapucci/text-simplification-experiments/simplification-journal/experiments/outputs/g1_guided_patch/readit-base40.csv
+/home/mpapucci/text-simplification-experiments/.venv/lib/python3.10/site-packages/torch/cuda/__init__.py:829: UserWarning: Can't initialize NVML
+  warnings.warn("Can't initialize NVML")
+500 texts: parse 16s, profiling 0s; 0 empty; wrote /home/mpapucci/text-simplification-experiments/simplification-journal/experiments/outputs/g1_guided_patch/profiling-base40.csv
+readit-A_0-9.csv: every parse matches its text
+readit-A_10-18.csv: every parse matches its text
+readit-A_19-27.csv: every parse matches its text
+readit-A_all.csv: every parse matches its text
+readit-B_random.csv: every parse matches its text
+readit-B_syntax.csv: every parse matches its text
+readit-base0.csv: every parse matches its text
+readit-base40.csv: every parse matches its text

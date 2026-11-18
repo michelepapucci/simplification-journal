@@ -1,0 +1,4 @@
+1000 texts: analysis 122s, readability 5s; 0 failed; 4 unscored; wrote /home/mpapucci/text-simplification-experiments/simplification-journal/experiments/outputs/g1_guided/readit-test-null.csv
+/home/mpapucci/text-simplification-experiments/.venv/lib/python3.10/site-packages/torch/cuda/__init__.py:829: UserWarning: Can't initialize NVML
+  warnings.warn("Can't initialize NVML")
+1000 texts: parse 12s, profiling 0s; 0 empty; wrote /home/mpapucci/text-simplification-experiments/simplification-journal/experiments/outputs/g1_guided/profiling-test-null.csv

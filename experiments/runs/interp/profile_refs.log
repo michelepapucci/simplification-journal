@@ -1,0 +1,3 @@
+/home/mpapucci/text-simplification-experiments/.venv/lib/python3.10/site-packages/torch/cuda/__init__.py:829: UserWarning: Can't initialize NVML
+  warnings.warn("Can't initialize NVML")
+7968 texts: parse 43s, profiling 3s; 0 empty; wrote outputs/interp/profiling-references.csv

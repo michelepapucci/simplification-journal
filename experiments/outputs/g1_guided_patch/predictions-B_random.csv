@@ -1,0 +1,503 @@
+original_sentence_idx,src_level,level,condition,prediction
+105,70,0,B_random,"La zona della Valdonega è un quartiere di Verona, facente parte della II circoscrizione."
+341,80,0,B_random,"È stato costretto a ritirare il 10 novembre 1909, e poi ha presentato il 17 aprile 1909."
+371,80,0,B_random,La colpa è stata rivolta su Maimonide perché ha trascurato di citare le sue fonti.
+553,80,0,B_random,"Solo in rari casi, la femmina depone due covate a stagione."
+581,80,0,B_random,"L'11 luglio 1799, dopo una drammatica e infruttuosa spedizione, rinunciò al dicastero e prese il comando della flotta stanziata presso l'isola di Aix. Tuttavia, i britannici rinforzarono l'embargo, l'ammiraglio si ammalò, e la pace di Amiens impedì alla flotta di lasciare il porto."
+739,80,0,B_random,"Il CEC contattato tradurrà i documenti, se necessario, e li trasmetterà al CEC del Paese del professionista. Il CEC del Paese del professionista cercherà di trovare una soluzione amichevole della controversia attraverso la mediazione di un organismo competente o contattando direttamente il professionista."
+833,80,0,B_random,L'aeroporto di Montichiari ha il maggiore movimento di voli cargo e charter.
+906,70,0,B_random,"Una volta stabilite le salde teste di ponte, le truppe sarebbero passate sotto il comando del generale Wallace. Le forze navali al contrammiraglio Cobb. I reparti aerei e le squadre navali da ricognizione sarebbero rimasti di base a Okinawa, sotto il comando generale dell'aviazione dell'esercito per il Pacifico e del comandante della Quinta Flotta."
+913,70,0,B_random,"Figlio di Agostino Doria e Soprana Grimaldi, nacque a Genova intorno al 1470."
+969,70,0,B_random,La Città Nuova è stata costruita dagli umani intorno alle mura della Città Interna.
+2437,80,0,B_random,"Dopo essersi liberato del movimento, Luigi Filippo chiamò al potere la resistenza."
+2868,80,0,B_random,"La madre e le sorelle sono state fatte anatre dopo la sconfitta. Un fratello, anche pretendente di Turandot, è morto decapitato per non aver risolto gli enigmi."
+2998,70,0,B_random,Nell'intero testo la sua figura domina con il suo slancio eroico.
+3069,80,0,B_random,Il personaggio del Dottor Lo Sapio è stato affiancato dai molti musicisti con cui il suo creatore Vito Miccolis ha collaborato nel corso degli anni.
+3358,80,0,B_random,L'accessibilità alle prestazioni sanitarie è legata alla stipula di un'assicurazione.
+3414,70,0,B_random,L'uso di questi antioidici deve essere moderato e limitato ai casi di effettiva necessità.
+3415,70,0,B_random,Cresce a medie e basse altitudini.
+3488,80,0,B_random,Un episodio dura 40-43 minuti.
+3865,80,0,B_random,"Gastone tenta di riavvicinarsi a Clara, ma questa, ormai innamorata di Filippo, rifiuta sdegnosamente."
+4010,80,0,B_random,"Il Dreadnaught è un veicolo di guerra realizzato nel 1915 e dotato di ruote di diametro 2,2 metri. Il veicolo ha una lunghezza di 10,4 metri e un peso totale di circa 46 tonnellate, potendo trasportare un totale di oltre 80 tonnellate."
+4106,70,0,B_random,"Dal 19 giugno 2018, Delfrati-Rivellino ha guidato la squadra partenopea in Coppa Italia."
+4381,70,0,B_random,"Cosimo iniziò a sostenere la sua influenza attraverso l'egemonizzazione delle cariche pubbliche, la corruzione e le pratiche clientelari."
+4394,80,0,B_random,Lateralmente c'è un piccolo portico con arcate a due campate.
+4396,70,0,B_random,"Durante la stagione, terminata con la retrocessione dei toscani in Serie B, è stato spesso arretrato alla linea a quattro di difesa e utilizzato nel ruolo di terzino sinistro per sopperire alle assenze di Tosto e Raggi."
+4925,70,0,B_random,Jung-In ha deciso di non divorziarsi dopo aver scoperto i sentimenti del marito.
+5305,80,0,B_random,"E, come gliela diede, la si vide riempire dal sangue."
+5387,80,0,B_random,"Il suo ultimo proprietario fu il matematico Giovanni Capasso, che lo ospitò l'Ateneo-Convitto Galileo Galilei di sua fondazione."
+5411,70,0,B_random,La quadriennale d'arte a Roma è stata un evento di arte che si è tenuto a Roma nel 1957. La medaglia d'oro è stata vinta alla XI Triennale a Milano nel 1957.
+5698,70,0,B_random,"Dopo una lunga serie di test, House ha deciso di fare cantare il paziente per testare se il suo cervello ha dei piccoli momenti di black out."
+6011,80,0,B_random,Bones scopre l'origine del terreno della sepoltura tramite i parassiti e gli insetti presenti sul corpo.
+6188,80,0,B_random,Il riferimento al disastro di Černobyl' del 26 aprile 1986 è stato utilizzato da Giussani in precedenza e poi divenne il filo conduttore del raduno di Rimini svoltosi tra il 31 gennaio e il 2 febbraio 1987.
+6443,80,0,B_random,Max e Caroline vogliono sbarazzarsi di un fastidioso uomo che sta inscenando uno spettacolo di burattini.
+6600,80,0,B_random,"Divenne amico del professore Oreste Marini, che frequentò nella sua casa di Castiglione delle Stiviere."
+6665,80,0,B_random,Vera Frankenstein si fa rapire per entrare nel castello di Cagliostro.
+6721,70,0,B_random,"Pertanto, al termine della corsa, è stato necessario girarla di 180 gradi per il viaggio di ritorno."
+6945,80,0,B_random,"Esso è una 1,5-benzodiazepina."
+7025,80,0,B_random,"Più di altri avvoltoi, sono vittime dell'ingestione di frammenti di pallottole."
+7056,80,0,B_random,"Lo spettacolo è stato trasmesso dallo studio 7 di Cologno Monzese, che è stato arredato con una suggestiva scenografia di specchi."
+7256,80,0,B_random,"Steve Rogers continua a vivere alcuni dei momenti più importanti della sua vita. Ha sbarcato in Normandia, ha ucciso sua madre, ha combattuto contro Master Man, ha parlato con il presidente Roosevelt, ha preso il siero del supersoldato, e ha saltato da un ricordo all'altro."
+7406,70,0,B_random,"Il sindaco di Cinisello Emilio Baj Macario conferì la cittadinanza onoraria a Benito Mussolini il 5 ottobre 1924, in occasione della IV edizione della Coppa Baracca, al Campo di Aviazione Clerici."
+7679,80,0,B_random,Era una sorta di campionato britannico di Formula 1.
+7805,80,0,B_random,"Lei, dopo alcune insistenze, cede, ma per permettere all'amato di sopravvivere, lascia la sua bandana."
+7843,70,0,B_random,La città è stata completamente liberata dagli islamisti il 5 luglio 2017.
+7935,80,0,B_random,"Nel periodo in cui il teatro del castello era molto utilizzato, i signori Colonna, che erano generosi nei secoli con gli avezzanesi, hanno permesso ai cittadini di entrare nel fossato che serviva come ingresso laterale."
+7970,70,0,B_random,"In una lettera destinata a un amico, sequestrata dagli inquirenti, Messina Denaro ha rivelato che non aveva mai conosciuto questa figlia."
+8115,80,0,B_random,"Nel 1954, Farina e Gonzalez hanno partecipato al Gran Premio del Belgio, ma hanno finito male."
+8138,80,0,B_random,"Da allora, diversi studiosi di rilevanza internazionale sono entrati a far parte dell'ASPO. L'ASPO ha organizzato altre conferenze a Parigi nel 2003, a Berlino nel 2004 e a Lisbona nel 2005."
+8221,80,0,B_random,"Sulla base del seguente paragrafo, Saputo ha dichiarato che c'erano corazzati nemicoli tra le file. Wainwright ha discusso con i suoi ufficiali e alle 10:15 si arrese. I combattimenti terminarono verso mezzogiorno, e il comandante con lo stato maggiore fu portato dai vincitori in motoscafo a Cabcaben, quartier generale di Honma, dove il 7 maggio fu firmata la resa di tutte le forze americane."
+8367,80,0,B_random,"Ippolito a destra e Leodamante a sinistra; sono figure stanti, osservatori, tradizionali presenti ad indicare l'esemplarità della rappresentazione."
+8664,80,0,B_random,"Il manga e la serie televisiva di anime ""Mashiro-Takagi"" è stato creato da Tatsuya Takagi e Tatsuya Takagi. Tatsuya Takagi è stato anche il co-autore del manga e della serie televisiva di anime ""Mashiro-Takagi"". Tatsuya Takagi è stato anche il co-autore del manga e della serie televisiva di anime ""Mashiro-Takagi"". Tatsuya Takagi è stato anche il co-autore del manga e della serie televisiva di anime ""Mashiro-Takagi"". Tatsuya Takagi è stato"
+8870,80,0,B_random,L'ultimo cingolato prodotto in Italia è stato costruito solo dopo l'8 settembre 1943.
+8996,80,0,B_random,Un gruppo di abitanti del paese di Vigo Cavedine ha aiutato la contessa durante un periodo di esilio. La stessa per sdebitarsi lasciò alle famiglie che l'aiutarono questo feudo che divenne di proprietà fondiaria collettiva non comunale.
+9047,70,0,B_random,"Enrico fu ucciso l'8 ottobre 1291, durante una battuta di caccia."
+9159,80,0,B_random,L'appartamento dei Kramer è stato riprodotto in un studio dove lo scenografo ha costruito il set in base alle dimensioni effettive di un appartamento sulla East 77th Street per ottenere un interno più realistico.
+9634,70,0,B_random,"Il 30 di quel mese è stato reso disponibile un video ufficiale, caricato sul canale del trio, che vede la partecipazione dell'attore Massimo Boldi, che interpreta il padre di Eddy Veerus."
+9896,70,0,B_random,"Nel 1970, all'età di 12 anni, ha iniziato a frequentare l'ambiente dei sound system ispirato dalla musica di Bob Marley e dal dancehall-style di DJ Papa San."
+10180,70,0,B_random,"Lo studio del comportamento dello squalo è stato effettuato utilizzando sommozzatori muniti di telecamere, apparecchiature segnaletiche acustiche e satellitari. Tuttavia, questo gigante del mare rimane quasi sconosciuto."
+10284,70,0,B_random,"Adam, che condivide i suoi stessi sentimenti, bacia. I due, profondamente pentiti per aver compiuto tale gesto, giurano sugli elementi che non si avvicineranno mai più."
+10438,80,0,B_random,La tragedia finale di Therese è portata dalla sua desolazione banale.
+10932,80,0,B_random,Le navi della classe Colossus avevano un'autonomia di 6 680 miglia nautiche alla velocità di crociera di 10 nodi.
+11614,70,0,B_random,L'edificio medievale fu notevolmente alterato nel XVI secolo.
+12207,80,0,B_random,"E ora, con John malato, la maledizione si sarebbe abbattuta su David."
+12448,80,0,B_random,"Furibondo, le si scaglia contro, ma interviene Mr. Eko, che lo mette al tappeto."
+12563,80,0,B_random,"Dopo il 1986, il complesso monastico fu ceduto al Demanio."
+12890,70,0,B_random,"Il riparo del DNA è un fenomeno che si verifica quando le molecole di DNA si isolano l'una dall'altra per proteggere le loro proprietà. Questo processo è catalizzato da questo enzima, che è fondamentale per l'ambito oncologico."
+12896,80,0,B_random,"Tuttavia, dopo anni di vita in comune, cominciarono ad affacciarsi e a lasciare il segno le prime frizioni all'interno della band."
+13621,80,0,B_random,La possibilità di utilizzare contemporaneamente il dispositivo in modalità USB ed in modalità MHL o OTG consente qualche vantaggio tecnologico rispetto a 5 pin.
+13693,80,0,B_random,Barkley è stato uno dei giocatori più popolari di sempre per la tifoseria del suo team.
+14084,70,0,B_random,Nuota a profondità tra i 10 e i 30 metri.
+14661,70,0,B_random,"Mordecai si affeziona molto a Doug. Quando Rigby chiede a Skips di smascherare Doug, la polizia scopre che Doug è in realtà un noto criminale."
+14668,80,0,B_random,Morì il 29 maggio 1929.
+14683,70,0,B_random,"Negli Stati Uniti, la cannabis è stata utilizzata da persone che hanno iniziato un percorso di riabilitazione. Solo il 16% dei consumatori si è recato in queste strutture autonomamente o sotto il consiglio della famiglia e degli amici."
+14819,70,0,B_random,Sua sorella cantava per lui ogni volta che si sentiva impaurito o insicuro.
+14942,80,0,B_random,Il decemviro ha accusato Verginio di aver costretto Verginio a compiere l'orrendo delitto di uccidere sua madre.
+14971,70,0,B_random,"Legato alla fazione di Rinaldo degli Albizzi, che appoggiò la sua candidatura, fece imprigionare Cosimo che poco dopo venne esiliato."
+15098,70,0,B_random,"Nel 2019, gli europei ha vinto la medaglia d'oro nella prova a squadre e l'argento nella stessa edizione di Lillehammer 2020. Nel 2020, ha raggiunto il quarto posto nel doppio e ha vinto anche l'oro biposto nella classifica speciale riservata agli atleti under 23. Nel 2021, ha vinto anche il bronzo under 23 nella rassegna di Sigulda."
+15168,70,0,B_random,Il periodo di riferimento è dal 138 a 180 anni.
+15182,70,0,B_random,Rose è nata nel 1993 e divenne attrice nel 2000. Santino è nato nel 1996.
+15377,70,0,B_random,"Fu poi a Palma di Maiorca, in Spagna, dove ha eseguito il suo primo concerto pubblico. Successivamente, con un altro gruppo musicale, fu sui palcoscenici di tutta Europa e si esibì anche in Giappone."
+15462,80,0,B_random,"I drappeggi delle vesti sono arricchiti di pieghe, mostrano dettagli come le terminazioni a spina di pesce, tipiche dei vestiti cinesi."
+15665,70,0,B_random,Tornato a casa aprì uno studio con più di 100 allievi.
+15899,70,0,B_random,La forma e le ornamentazioni del polline possono essere utili per tassonomicare i generi della tribù.
+16320,80,0,B_random,Il pianeta ha le dimensioni simili a Saturno e orbita intorno alla meno luminosa delle due stelle che compongono il sistema.
+16740,80,0,B_random,Giovanni Gronchi è stato eletto presidente della Repubblica italiana nel 1945.
+16805,70,0,B_random,"Una nuova storia d'amore è quella tra Mara Ferrero ed Ettore Lobascio, figli rispettivamente del barista e bidello Espedito e del preside Salvatore."
+16975,70,0,B_random,Le squadre che non sono state escluse dalla fascia A accedono automaticamente alla fascia B.
+17028,70,0,B_random,"I prigionieri a terra hanno tentato di fuggire nelle campagne circostanti, in seguito visti dai tedeschi che hanno aperto un fitto fuoco sugli inseguiti."
+17173,70,0,B_random,"Il voto del 27 marzo 2014 sulla Risoluzione 68/262 dell'Assemblea generale delle Nazioni Unite, a sostegno della posizione secondo cui la Crimea e Sebastopoli restano parte dell'Ucraina, è stato di 100 a favore contro 11 contrari."
+17320,80,0,B_random,"Nel giugno 1989, una delegazione della Commissione d'indagine parlamentare si reca negli Stati Uniti per interrogare gli ex dirigenti della Lockheed. Gli ex dirigenti hanno confermato solo la responsabilità di Mario Tanassi, ma la Commissione stessa è stata sciolta poco tempo dopo in seguito alla fine della VI legislatura."
+17717,70,0,B_random,Si utilizza un manometro analogico o digitale-differenziale per misurare la pressione del pneumatico.
+17788,70,0,B_random,Il territorio è caratterizzato da valli parallele.
+17968,80,0,B_random,La cornea è più gonfia al mattino perché la ritenzione di liquidi notturna è più alta.
+18131,70,0,B_random,I due si nascondono in bagno dopo aver trovato una busta con foto d'arte da rubare.
+18359,80,0,B_random,"L'uomo ha detto che l'ambizione è causa di molti problemi per l'uomo. La dea Atena gli ha detto che lo terrà al sicuro da Filottete, mascherandolo in modo che l'eroe non lo riconoscerà e osservando, inoltre, che la missione è particolarmente urgente perché un'ambasciata di troiani ha intenzione di cercare di influenzare Filottete a sostenerli."
+18499,70,0,B_random,"Vi si esibì più volte negli anni a venire, e con tale successo da ottenere ancora vivente l'intitolazione a suo nome del Teatro Comunale."
+18673,70,0,B_random,"Dal Cervaro, Zungoli e Savignano sono rispettivamente l'alta, la media e la bassa valle del Cervaro."
+18797,80,0,B_random,Il primo riconquistò Dinant a fine maggio e il secondo prese Huy poco dopo.
+18845,70,0,B_random,L'attività della alfa-amilasi rende gli zuccheri presenti in una farina già disponibili durante la fase dell'impasto con l'acqua.
+19875,70,0,B_random,"Nel febbraio 1594, i signori di Guisa e la Lega Cattolica testimoniavano l'attaccamento di Enrico IV."
+19914,70,0,B_random,"Dopo quasi otto anni di vita con gli spagnoli, la pace è stata rotta da Nuno de Guzman, che in cerca di ricchezze, ha ucciso la rivolta."
+20055,80,0,B_random,Giuseppe è stato salvato e vengono raccolti da mercanti che lo portano in Egitto dove lo vendono come schiavo.
+20270,80,0,B_random,"Anche dopo la rivincita francese, i vecchi distretti non erano più necessari come livello di autogoverno locale."
+20348,80,0,B_random,"Lena è un bambino che vive con un padre che è un uomo serio e onesto ma anaffettivo, e una madre che è depressa e bulimica. La madre è la causa del rapporto di Lena con il cibo, che è vissuto come una sostituto delle mancanti soddisfazioni sentimentali e lavorative."
+20846,80,0,B_random,"L'estate 2010 ha introdotto UFC 116, dove Brock Lesnar ha difeso il suo UFC Heavyweight title contro Shane Carwin, registrando 1,25 milioni di acquisti."
+21707,70,0,B_random,"Dopo la retrocessione in Serie C1 del Como, passò al Brescia, dove cambiò il suo ruolo da seconda punta a centrocampista e giocò tra Serie A e Serie B fino al 1996."
+21788,80,0,B_random,"L'assioma fondamentale della religione protestante è stato in mente mentre si trovava nella torre del convento, leggendo e meditando sulla lettera di San Paolo ai Romani."
+21800,70,0,B_random,Fu tra i primi a partecipare alle Cinque Giornate di Milano.
+21968,80,0,B_random,"Il primo volo di un Trislander di serie è stato fatto nel 1971. Hanno prodotto 73 Trislander fino al 1982 quando la Britten-Norman, che era stata acquistata dalla Pilatus Aircraft, ha finito di produrre. La Pilatus Aircraft ha venduto la licenza alla statunitense International Aviation Corporation, che ha cambiato il nome del produttore a Tri-Commutair. Tri-Commutair ha prodotto altri 12 Trislander."
+22103,80,0,B_random,"Nel 1980, il nome stazionava tra i primi venti nomi più diffusi in Turchia. Tra gli anni ottanta e la metà degli anni novanta, il nome stazionava tra i primi cinque nomi più diffusi in Turchia. Tra i primi cinque e i primi cinquanta, il nome stazionava tra i primi cinque nomi più diffusi in Turchia. Tra i primi cinque e i primi cento, il nome stazionava tra i primi cinque nom"
+22158,70,0,B_random,La scienza è la ricerca della conoscenza attraverso l'uso di prove e l'analisi.
+22311,80,0,B_random,I suoi abitanti sostennero numerose lotte durante la guerra accesasi tra Re Ferrante d'Aragona e i Baroni ribelli.
+22566,80,0,B_random,"Dal 2011, le esportazioni italiane in Giappone hanno avuto un'accelerazione. Questo è dovuto in parte al rafforzamento dello yen e alla flessione delle importazioni dal Giappone."
+22851,70,0,B_random,Non rinunciasse alle sue caratteristiche personali.
+23072,80,0,B_random,Il prezzo viene misurato in unità monetarie locali divise per unità di misura di lavoro dell'elettricità prodotta.
+23110,80,0,B_random,"La collezione di oggetti raccolti nella seconda metà dell'Ottocento da Placido de Sangro, duca di Martina e donato alla città di Napoli nel 1911 dal nipote di questi, Placido de Sangro conte dei Marsi, riflette il clima d'entusiasmo e di rinnovato interesse verso le cosiddette arti minori che si diffuse in Europa all'epoca."
+23165,70,0,B_random,Vincent e J.T. hanno cercato di riconoscere l'odore del sangue dell'uomo deceduto nel distretto. Hanno ripercorso il percorso fatto dall'uomo prima di morire e sono arrivati nel vicolo dove ha avuto una colluttazione con qualcuno. Qui hanno trovato il cellulare del defunto e il cadavere di un altro uomo senza impronte digitali.
+23203,70,0,B_random,"Non potendo contare sui genitori, Arnold ha creato un piccolo mercatino dell'usato per raccolgere soldi. Arnold ha anche creato un piccolo mercatino di usato per raccolgere soldi. Arnold ha anche creato un piccolo mercatino di usato per raccolgere soldi. Arnold ha anche creato un piccolo mercatino di usato per raccolgere soldi. Arnold ha anche creato un piccolo mercatino di usato per raccolgere soldi. Arnold ha anche creato un piccolo mercatino di usato"
+23517,80,0,B_random,Un'abitazione in via Carlo Porta è stata particolarmente criticata tra le sue ultime opere.
+23734,80,0,B_random,"Lo stesso stile della lettera, in passato criticato, a un'analisi più sofisticata risulterebbe infine coerente con quello delle lettere indiscutibilmente paoline."
+23939,70,0,B_random,Promuoviamo il pensiero critico fornendo informazioni affidabili sui fenomeni paranormali e soprannaturali ai mezzi di comunicazione e al grande pubblico.
+24139,80,0,B_random,"Data la posizione decentrata dell'edificio, è stato anche utilizzato come lazzaretto durante le epidemie. Le pareti interne, affrescate, sono state coperte da calce."
+24524,80,0,B_random,"Vera ha deciso di continuare gli studi nell'Università di Berna, sperando di poter lavorare come medico chirurgo tra il popolo."
+24655,70,0,B_random,"Un monumento a Milano, eretto da suoi amici nel 1925, lo ricorda nei giardini pubblici Indro Montanelli in Porta Venezia; su esso una targa recita:"
+25025,70,0,B_random,Guido Bellachioma e Paolo Mangone sono stati colpiti da proiettili e sono stati ricoverati in ospedale.
+25433,80,0,B_random,La maggior parte dei presunti sicari arrestati sono stati uccisi in prigione o poco dopo il rilascio.
+25436,80,0,B_random,Il Duce è stato coinvolto direttamente nel delitto di Matteotti. Il capo della squadra responsabile dell'assassinio del deputato socialista è stato scarcerato immediatamente dopo la condanna penale. Gli economici e politici sono stati fortemente sosteggiati da Mussolini a fronte delle sue minacce di divulgare il ruolo di Mussolini nella decisione dell'omicidio.
+25444,80,0,B_random,"L'arma dei carri egizi era quasi esclusivamente l'arco. L'arma ittita era anche provvista di un'asta, che veniva usata sia per il combattimento corpo a corpo che come arma da lancio."
+25603,80,0,B_random,"Peppino Garibaldi si recò a Parigi e creò una Legione Garibaldina. La Legione Garibaldina doveva combattere in favore della Francia. La gioventù repubblicana aderì alla Legione Garibaldina con entusiasmo. La Legione Garibaldina includeva veterani delle precedenti campagne di Grecia e Sudafrica, mazziniani e sindacalisti."
+26131,70,0,B_random,Erminia sa che Paride e Santina Mancuso sono sposati.
+26297,80,0,B_random,La regina ha attuato una politica espansionistica a partire dalla fine del 269.
+26638,70,0,B_random,Le parti dorsali variano dal bruno-grigiastro al fulvo ocraceo.
+26673,80,0,B_random,"In tale contesto, i loro status non sono più ostili o malvagi, ma sono schiavi."
+26687,80,0,B_random,L'aeroporto è stato trasformato in un aeroporto civile.
+26879,80,0,B_random,La vita di un materiale litico è parte della vita di un materiale litico usato nelle costruzioni.
+27300,70,0,B_random,Da quel momento iniziò a credere più concretamente a una carriera da cantante.
+27396,80,0,B_random,La clearance dell'IGF-1 totale è in relazione con i livelli sierici di IGFBP-3.
+28193,80,0,B_random,"Per evitare una disfatta ancora peggiore, non restava a Nasser che una strada."
+28425,70,0,B_random,Ha iniziato a montare a sei anni con i genitori.
+28587,70,0,B_random,"Il Giardino dei Principi, Il Verziere e Il Giardino delle Erbe Piccole sono tre tipi di giardini che sono stati studiati e documentati in modo meticoloso. Questi studi hanno portato alla creazione di una mostra temporanea di questi tre tipi di giardini. In seguito, questi stessi giardini sono stati realizzati nella grande spianata che si affaccia verso il Lago Maggiore."
+28695,80,0,B_random,Le stelle di neutroni che ruotano a velocità molto rapide hanno campi magnetici che concentrano le loro radiazioni in fasci stretti.
+28730,80,0,B_random,Lei e le sue sorelle sono state condotte nel carcere di Marassi per accusa di spionaggio. Le sorelle Codevilla del Trio Capinere erano invidiose del loro successo. Le sorelle Codevilla del Trio Capinere hanno denunciato le loro sorelle. Le sorelle Codevilla del Trio Capinere sono state obbligate a fare da interpreti negli interrogatori dei partigiani e degli altri detenuti politici a causa della loro conoscenza della lingua tedesca.
+29076,80,0,B_random,Fu l'ultimo spagnolo a ricoprire il ruolo di Governatore Reale del Cile.
+29435,80,0,B_random,Il sito è in stretto rapporto con il bosco delle Querce.
+30126,70,0,B_random,Le truppe del Reggimento di Patrizi che avevano fatto arrivare da Buenos Aires si sarebbero pronunciate a favore della nuova autorità politica. Le disarmarono e destituirono gli ufficiali. I soldati sono stati sorteggiati con il metodo della decimazione e hanno lavorato nelle miniere di Potosí.
+30170,70,0,B_random,"Il loro numero è cresciuto in modo limitato, ma abbastanza per diventare una giurisdizione ecclesiastica separata nel 1939."
+30436,80,0,B_random,Gli animali umani sono superiori agli altri animali perché hanno un'anima immortale.
+30467,70,0,B_random,La squadra gioca le partite casalinghe allo stadio comunale G. Negrini.
+30500,80,0,B_random,"Al termine della spiegazione, i due sentono una voce giovanile che augura a Holmes la buonanotte."
+30582,80,0,B_random,Nell'indecifrabile sguardo di Lucrezia e nella gestualità delle sue mani si può forse cogliere un'incertezza circa i suoi reali sentimenti.
+30841,80,0,B_random,"Tom Scott, che sarebbe stato il band leader del tour; e la sezione ritmica costituita da Andy Newmark e Willie Weeks, entrambi conosciuti da Harrison mentre lavoravano all'album di Ron Wood in luglio."
+30907,80,0,B_random,I creditori postergati possono essere soddisfatti solo dopo l'integrale soddisfacimento degli altri creditori.
+31203,70,0,B_random,"Nel primo decennio '80, l'FBT iniziò a dedicarsi sia alla produzione che alla commercializzazione di marchi esteri. Tra i contratti in esclusiva italiana, la ditta riuscì a guadagnarsi note marchi come Pearl e Renkus-heinz."
+31252,80,0,B_random,I contadini e i pastori avevano l'unico mezzo di sostentamento se furono arrestati.
+31358,80,0,B_random,È un comune in Germania. Appartiene al circondario di Sömmerda ed è amministrato dalla Verwaltungsgemeinschaft Gramme-Vippach.
+31458,80,0,B_random,L'interno è dominato da muri curvi e volte con tre intergradienti ovali.
+31773,80,0,B_random,"Dopo un breve periodo di pace, Lecco si alleò con Federico II di Svevia, nipote del Barbarossa. Tuttavia, i milanesi assediarono il castello sul colle di Santo Stefano e lo rasero al suolo nel 1250. Il borgo fu poi rasato nel 1296 per ordine di Matteo I Visconti che lo disprese di non fare più risorgere."
+31971,80,0,B_random,"La rubrica del Bugle dedicata ai supereroi, The Pulse, ha trasferito Urich. Urich inizia a collaborare con Kat Farrell e Jessica Jones per smascherare Osborn come Goblin e farlo arrestare, che è l'obiettivo in cui riesce sebbene, nello scontro che segue tra l'Uomo Ragno, Luke Cage, la SWAT e il criminale, per poco non resta ucciso."
+32011,80,0,B_random,"L'etimologia deriva dalle due località poste nella zona iniziale e finale della stessa, le terme di Liquiñe a nord e l'istmo di Ofqui a sud."
+32453,70,0,B_random,John J. Malone è un avvocato di Chicago che affronta i casi polizieschi. Lee Tracy interpreta Malone.
+32475,80,0,B_random,Arturo dice a Fofò che Flora è tornata in Svizzera perché ha litigato con Lima e ha preso i fiori e i cioccolatini.
+32477,80,0,B_random,"Villegas, Ayerbe e Lucifero sono tutte famiglie che sono ancora in Crotone e Basilicata."
+32603,80,0,B_random,"La pace raggiunta con la formula d'unione fu rotta tra il 447 e il 448 con la predicazione del monaco Eutiche, sostenitore di Cirillo e antinestoriano."
+33302,70,0,B_random,La cappella di San Giovanni Battista è una cappella di grandi dimensioni che fronteggia una cappella simile dedicata alla Madonna del Popolo.
+33421,80,0,B_random,"Militare a Napoli, operando nel 1480-81 al seguito del duca di Calabria in Toscana e partecipando alla riconquista di Otranto."
+33638,80,0,B_random,Nel corso degli anni Novès si è costruito la fama di lavoratore rigoroso e che non lascia nulla all'improvvisazione.
+33741,80,0,B_random,"Delfino si è trasferito alla dirigenziale nel mondo della scherma dopo la sua carriera di atleta. Ha iniziato come presidente del Club Scherma Torino e poi del Circolo Scherma Ivrea, dove ha mantenuto la presidenza fino alla morte."
+34119,70,0,B_random,I loro compagni sospettavano che il capo stesse diventando più ricco spartendole le cifre.
+34261,80,0,B_random,"Navez ha acquisito una notevole fama nell'arte del ritratto, ma ha anche avuto successo in quadri storici e mitologici."
+34648,80,0,B_random,"Nel 1983, Mozer è stato convocato in una partita di calcio brasiliana per la prima volta."
+34682,80,0,B_random,Non riusciamo a porre rimedio a ciò che è accaduto.
+34693,80,0,B_random,L'attività di regolazione genica può modificare il fenotipo dell'individuo o della progenie.
+34726,80,0,B_random,"San Francesco Fogolla, San Francesco Saverio e San Giuseppe a sinistra; San Paolo, Santa Teresa di Lisieux e San Guido Maria Conforti a destra."
+35098,80,0,B_random,"Al di sopra dei 20°, il sigaro matura molto velocemente. Se la temperatura rimane troppo alta, può causare danni alla conservazione del sigaro."
+35268,70,0,B_random,I Neomorfi hanno movimenti frenetici simili a quelli delle mantidi e dei babbuini.
+35350,70,0,B_random,"Inghilterra, Nuova Zelanda e una quarta squadra diversa di volta in volta sono le squadre che partecipano al Four Nations fin dalla sua inaugurazione nel 1999."
+35362,70,0,B_random,L'antroposfera è la parte dell'ambiente che è stata creata e organizzata da esso.
+35590,70,0,B_random,"Carmine ha dedotto rapidamente che suo compagno di cella ha rubato la sua ragazza. Filippo si è ostinato a commettere troppi errori, e non è un criminale come Ciro e il resto della sua banda."
+35917,70,0,B_random,"Un corvo riporta in vita Ashe dopo essere riemerso dall'acqua. Ashe incontra Sarah, che comprende di avere un forte legame psichico."
+36148,80,0,B_random,"Il nuovo tunnel del Fréjus ha permesso di collegare rapidamente Torino, Rivoli e la Val di Susa con la Francia."
+36333,80,0,B_random,"Il Conte Rosso è stato affondato nel 1941. Due siluri sono stati lanciati dal sommergibile inglese HMS Upholder, che ha portato 1297 persone in mare. Le persone sono state aggrappate ad una tavola di legno per più di cinque ore."
+36510,70,0,B_random,"Nel neonato pretermine, lo pneumopericardio è associato a grave patologia polmonare dopo essere stato sottoposto ad una rianimazione o in presenza di ventilazione assistita."
+36881,80,0,B_random,L'analisi del segnale fNIRS richiede di considerare l'insieme di effetti di interferenza fisiologica per escludere possibili effetti non strettamente legati al principio dell'accoppiamento neuro-vascolare.
+36893,70,0,B_random,"Dal 1994 Telecom Italia pubblica un catalogo periodico contenente tutte le serie di schede emesse, dalle più comuni alle più rare."
+36972,80,0,B_random,"L'attività giovanile di Cappello è difficile da indagare perché le sue opere sono assenti nelle guide di Francesco Paglia e Giulio Antonio Averoldi, entrambe edite prima del suo ritorno a Brescia."
+37089,70,0,B_random,"Don Peppino salvò la vita a tante persone nel rispetto inalienabile dei diritti umani, della libertà di pensiero e del valore assoluto della vita."
+37284,80,0,B_random,"Il seguente è un mimetico, corpo di colore rosso con macchie biancastre, tozzo. Ha una macchia nera sulla pinna dorsale estesa tra l'ottava e la decima spina."
+37371,80,0,B_random,Il Museo d'arte ospita una straordinaria collezione di arte moderna russa e uzbeka.
+37580,70,0,B_random,"Noncurante del pericolo, Parker ha deciso di andare da sola con Sam."
+37684,70,0,B_random,Jag tar det jag vill ha è il secondo singolo della cantante svedese Sandra Dahlberg.
+37882,80,0,B_random,La ripetizione del segno è fatto in tre gruppi di tre segni.
+37888,80,0,B_random,I Merinidi divennero consapevoli della cospirazione wattaside e li massacrarono.
+37952,80,0,B_random,"Fiona ha voluto andare a vivere con Steve, ma ha avuto un'opposizione rabbiosa da parte di sua madre, Monica. Fiona ha lasciato la famiglia e ha affidato tutta la famiglia a Monica."
+37994,80,0,B_random,Non c'è alcuna prova che lo Shakespeare di Stratford fosse in possesso dell'elevato livello culturale necessario per scrivere le opere a lui attribuite.
+38096,70,0,B_random,"Il dentista e tre di loro si ammalarono di AIDS e morirono, e almeno uno dei rimanenti ha sviluppato l'AIDS. Cinque dei pazienti non erano soggetti a nessun fattore di rischio HIV, a parte le frequenti visite dentistiche a causa di infezioni."
+38185,70,0,B_random,"Proveniente da Wichita, nel Kansas, ha rappresentato la squadra femminile dell'Università di Wichita, realizzando 3.469 punti tra il 1978 e il 1981."
+38389,80,0,B_random,Non è del tutto esatto annoverare questa fase come rococò.
+38392,70,0,B_random,"Se questo programma non si può compilare, è sconosciuto al momento della compilazione."
+39205,80,0,B_random,"Napoleone arrivò alle porte della Polonia. Kościuszko scrisse una lettera a lui, chiedendo garanzie per la costituzione di una democrazia parlamentare e confini nazionali, sia pur provvisori. L'imperatore non ha risposto."
+39706,80,0,B_random,Ha tenuto la carica fino al 1945.
+40196,70,0,B_random,Katy Perry è anziana e in una casa moderna con il suo marito.
+40237,70,0,B_random,Il battito cardiaco è regolato dal sistema nervoso.
+40406,80,0,B_random,"Nel corso degli anni, grazie anche a un deciso intervento pubblico, si ebbe una diffusa industrializzazione della regione."
+41207,70,0,B_random,Il frutto è considerato un frutto intrinsecamente biologico e riconosciuto dal 2008 come Presidio Slow Food.
+41281,80,0,B_random,Mantenne stretti rapporti epistolari con Benvenuto Cellini.
+41412,80,0,B_random,La latente frattura tra la concezione di vassallaggio nella mente del sovrano d'Aragona e l'idea di libero giudicato che avevano gli Arborea è stata sottolineata dalla corte di Barcellona. I figli del giudice non avevano titoli perché il giudice qualsiasi sarebbe stato inferiore al giudice stesso.
+41573,80,0,B_random,"Il 22 novembre 2010, dopo aver vinto il suo ottavo titolo mondiale, Pacquiao è stato onorato nuovamente dal Congresso filippino."
+41755,70,0,B_random,La forza di Aphrodite è simile alla giustizia.
+41825,80,0,B_random,"Suo figlio François-Hubert e suo nipote Jean-Germain erano pittori che condivise la soddisfazione di condividere gli applausi che meritavano suo figlio, che divenne membro dell'Académie royale de peinture et de sculpture."
+42557,70,0,B_random,Questo tipo di filtro viene spesso utilizzato per trasmettere solo la componente infrarossa della luce.
+42624,70,0,B_random,"Nonostante la sospensione, Lombardi continua a indagare e racconta al PM Marra che secondo lui a uccidere Lucia Ferro non è stato Menduni."
+42902,70,0,B_random,"Nel 2018, ha vinto la medaglia di bronzo nello slalom gigante, si è classificato 8a sia nel supergigante che nella combinata, e non ha completato lo slalom speciale."
+42988,70,0,B_random,"Il 26 agosto 1697, papa Innocenzo XII lo trasferì, quarantanovenne, alla sede diocesana di Agrigento con dignità di arcivescovo, a titolo personale."
+43300,80,0,B_random,Qui scorge due logore figure che riconoscono il padre e la sorella.
+43353,70,0,B_random,"Quando i sottointervalli sono abbastanza diversi da rendere nota la prima cifra, questa viene spostata in fondo all'intervallo."
+43655,70,0,B_random,"Unici nel loro genere, costituiscono un patrimonio rurale – storico e culturale di inestimabile valore."
+43851,70,0,B_random,La comunità montana di riferimento non fa riferimento al Mergozzolo ma al Mottarone.
+44030,70,0,B_random,"L'Unité d'Habitation era una casa in cui tutti gli esseri umani erano inclusi. Uno degli aspetti più rivoluzionari dell'Unité d'Habitation era l'innovativa concezione della singola cellula abitativa, non più contraddistinta dal contesto sociale di chi la abita."
+44283,70,0,B_random,Damon non è innamorato di Rebekah.
+44317,70,0,B_random,La funzione di distribuzione di probabilità evolve nel tempo come descritta dall'equazione di Fokker-Planck.
+44477,80,0,B_random,Keno ha liberato Jarrod perché era l'unico a dimostrargli vera amicizia.
+44545,70,0,B_random,"Nel 1972, Gianni Ravera fondò Publispei. Nel 1980, Carlo Andrea Bixio rileva il 50% del pacchetto azionario della società, la più importante nel campo dell'organizzazione di eventi. Con Ravera e Bixio, si pone l'obiettivo di rilanciare il Festival di Sanremo, che ha realizzato 13 edizioni."
+44779,80,0,B_random,"L'attuale nome è stato dato dopo la solenne canonizzazione delle due fondatrici, celebrata da papa Pio XII il 18 maggio 1950."
+44867,80,0,B_random,"Jules è spaventata dai ritratti macabri che il ragazzo fa. Quando Angie le conferma che il ragazzo ha talento, Jules passa a preoccuparsi per il futuro del ragazzo."
+44898,80,0,B_random,La scuola fiamminga e la scuola francese raggiunsero l'apice con Vauban alla corte di Luigi XIV di Francia.
+44966,80,0,B_random,Sono tre i vescovi documentati di questa diocesi.
+45174,70,0,B_random,"Il concerto di Monaco era più lungo di quello di Seoul perché si è pensato di organizzare due concerti, uno di musica classica e uno più pop, ma alla fine si è deciso di unirli entrambi realizzando una maratona musicale di quasi nove ore."
+45298,70,0,B_random,La rappresentazione di un fenomeno che dipende da più grandezze è chiamata spazio dei colori.
+45483,80,0,B_random,"Nella legislazione fiscale italiana, il problema dei rifiuti è stato quasi esclusivamente trattato."
+45960,80,0,B_random,Si è dedicato alla rivisitazione in chiave contemporanea e jazzistica del repertorio ebraico italiano.
+45979,80,0,B_random,Schopenhauer pone all'uomo un compito morale di liberazione dal dolore.
+46180,80,0,B_random,"Nella stagione 1992-1993, ha debuttato nella partita Toluca-Morelia 0-0. Nel resto della stagione, ha giocato 10 partite, di cui tre da titolare."
+46585,70,0,B_random,"Infine, coloro che erano in grado di leggere e scrivere erano 1.493."
+46737,80,0,B_random,"Friedrich Nicolaus, il progetto è stato presentato alla fine degli anni trenta e ha ricevuto un certo interesse nell'RLM. L'RLM ha approvato il progetto e ha assegnato il nuovo velivolo la designazione ufficiale Hs 128. L'azienda è stata richiesta di fornire due prototipi per le valutazioni."
+47099,80,0,B_random,Le statuette femminili che si riferiscono al culto della Grande Dea indossano spesso vistosi ornamenti.
+47133,70,0,B_random,"La band ha un nome che deriva dall'intervallo musicale di quarta aumentata, che è molto presente nella cultura musicale mediterranea e che caratterizza inconfondibilmente il loro suono."
+47139,70,0,B_random,È necessario che c'è un sbalzo termico di almeno 10 gradi Celsius per apprezzare sui termogrammi le anomalie termiche eventualmente presenti.
+47402,80,0,B_random,"La chiesa di San Valentino Martire è un edificio sacro situato nel centro di Salara, cittadina della provincia di Rovigo e sede dell'omonimo comune."
+47467,80,0,B_random,"Quella sottostante, di colore rosso, indica le ore alla francese. Quella superiore, di colore grigio, indica le ore all'italiana."
+47755,80,0,B_random,"Collaboratore e responsabile dell'Ufficio Tecnico della Città del Vaticano, ha progettato strutturalmente numerose chiese nella Roma del secondo dopoguerra."
+47964,70,0,B_random,L'opera è stata eseguita il 31 ottobre 1492.
+48220,80,0,B_random,"Il conte d'Armagnac e di Fezensac è stato tenuto da Arnaldo Bernardo fino alla sua morte nel 1222. Père Anselme ha confermato che nel 1226, Pietro Gerardo ha preso il titolo di conte d'Armagnac e di Fezensac, ma ha usurpato il titolo a Bernardo V, il figlio legittimo di Gerardo IV."
+48985,80,0,B_random,"La Vergine sale al cielo in atteggiamento assorto, sorretta e guidata da quattro Angeli festanti e da un Cherubino sotto i piedi."
+49280,70,0,B_random,"Nelle ultime settimane, tutti i membri del centro dirigente sono stati arrestati. Per poco non è finito in trappola, quindi gli domandava di scoprire se un'affittuaria di stanze che risponde al nome di Anna Petrovna Kutuzova e ostenta sentimenti progressisti con gli studenti, i suoi pensionati, non è al soldo della polizia."
+49585,80,0,B_random,"La presidenza di Cala durò quarantadue giorni, dopo di che lasciò la squadra per motivi di gestione."
+49838,80,0,B_random,"Il primo T34VM1 è stato utilizzato nelle serie di pre-produzione, mentre il secondo T34VM1 è stato utilizzato per le produzioni in larga scala."
+49990,80,0,B_random,L'originale cannone Royal Ordnance M68 a canna rigata da 105 mm è stato sostituito con un pezzo RUAG L50 Compact Tank Gun da 120/50 mm.
+51030,70,0,B_random,"Le imbarcazioni inizialmente erano lasciate libere di galleggiare sullo specchio d'acqua. Il visitatore doveva guidare la propria per mezzo di un remo o di un'apposita pedaliera. Successivamente, i barconi sono stati collegati tra loro per mezzo di una catena, in modo che il percorso fosse univoco e fluido."
+51167,80,0,B_random,"L'indipendenza eritrea iniziò a formarsi già all'inizio degli anni '60, ma solo nel 1960 fu ufficialmente fondata l'ELF al Cairo da Idris Muhammad Adam e da altri intellettuali e studenti eritrei."
+51269,80,0,B_random,"Il Prof. Kanō ha evoluto il sistema tradizionale basato su onorificenze, che è ancora in uso al Dai Nippon Butoku Kai, che prevede l'assegnazione di titoli onorifici a seconda dell'esperienza del praticante."
+51496,80,0,B_random,"In un altro caso si sarebbe dovuto utilizzare una bottiglia di una bevanda zuccherata in polvere, mescolata con perossido di idrogeno, e di altri materiali organici."
+51508,80,0,B_random,Roma ha attaccato la classifica dei suddetti ducali e violato: Parma e Fiorentina
+51520,70,0,B_random,"La battaglia di Colombo fu una battaglia di combattimento di guerra civile americana del 1865. Fu la prima battaglia di guerra civile americana. Fu combattuta tra l'Unione e il Confederato. Fu combattuta nella Georgia. Fu combattuta la domenica di Pasqua, il 16 aprile 1865.
+
+La battaglia di Colombo fu combattuta tra l'Unione e il Confederato. Fu combattuta nella Georgia. Fu combattuta la domenica di Pasqua, il"
+51538,80,0,B_random,Claudio Fogolin era un buon amico di Lancia.
+51638,70,0,B_random,"Poco dopo la formazione della primitiva comunità cristiana, si è sentito il bisogno di dare un volto e un nome al primo evangelizzatore."
+51969,80,0,B_random,L'interno è decorato a stucco con motivi di gusto rococo.
+52373,80,0,B_random,La Centrale idroelettrica Farfa 1 è stata costruita nel 1900 e serve come bacino di carico.
+52488,80,0,B_random,"La versione cinematografica del Joker è stata distribuita nelle sale statunitensi il 12 dicembre 2000. Alcune scene di violenza presenti vennero ridisegnate per smorzare il tono della pellicola, come la morte del Joker, per la versione cinematografica, morto per una scarica elettrica."
+52756,80,0,B_random,"Dopo la morte del marchese, Assunta sposò Giorgio Almirante in chiesa nel 1969."
+53145,80,0,B_random,"Raj riceve da Emily un regalo che lei gli aveva comprato per San Valentino prima che si lasciassero, un sestante. La dermatologa lo chiama al cellulare e gli chiede di andarla a trovare a casa sua come amico, ma Penny gli fa capire che lo sta manipolando per tornare con lui."
+53195,80,0,B_random,"L'ala era più spessa e meno pronunciata rispetto ai precedenti modelli. L'ala era posizionata sotto la fusoliera e rinforzata da una doppia coppia di aste di controvento, una per lato. Il pilota occupava un abitacolo aperto posizionato sotto l'ala."
+53228,70,0,B_random,"Nel 1668, il re di Spagna, Leopoldo I, gli divenne principe del Sacro Romano Impero."
+53308,80,0,B_random,Il nome fu coniato dal maggiore generale Henning von Tresckow nel 1941.
+53845,70,0,B_random,Il modificatore molecolare può distruggere questo materiale.
+53926,70,0,B_random,I numeri primi sono i numeri interi che hanno solo due divisori: 1 e loro stessi.
+54224,80,0,B_random,"L'elemento di danza, proprio dell'opera-ballo, va ben oltre il valzer della festa di fidanzamento e la ridda infernale delle Villi."
+54361,70,0,B_random,L'Unione europea è nata nel 1992 con il Trattato di Maastricht.
+54955,80,0,B_random,L'unificazione dell'Italia nel 1861 portò a molte delle prime opere di Verdi essere re-interpretate per dimostrare la presenza di messaggi rivoluzionari che probabilmente non erano stati voluti né dal compositore né dai suoi librettisti.
+55263,80,0,B_random,La sua magnitudine pari a 5 fa sì che possa essere scorta solo con un cielo sufficientemente libero dagli effetti dell'inquinamento luminoso.
+55296,80,0,B_random,La notizia della rivoluzione viennese ha portato a una guardia civica improvvisata che ha preso possesso delle mura e delle porte il 20 marzo 1848.
+55633,80,0,B_random,Le stazioni sotterranee hanno decorazioni artistiche.
+55804,80,0,B_random,Lo sviluppo dei canali e delle gallerie oltrepassava i 40 km e presentava una varietà di problemi tecnici.
+56085,80,0,B_random,"Dal 1950 al 1960, le ricerche di giacimenti sfruttabili sono state effettuate a livello nazionale."
+56258,80,0,B_random,"Le due mogli portarono in dote nuove terre. La Zaccaria ha una clausola secondo cui, in caso di estinzione della discendenza del marito, quegli stessi beni sarebbero ritornati nella sua famiglia di origine."
+56353,80,0,B_random,"Nell'autunno del 1553, cadde la stessa Vercelli, che fu occupata per solo due giorni da un colpo di mano del Brissac."
+56417,80,0,B_random,"Nel dopo-scuola, i bambini frequentano un gruppo Scout per apprendere nuove capacità."
+56453,80,0,B_random,"La famiglia di Raisa, una famiglia di ebrei ortodossi polacchi, ha avuto ulteriori complicazioni. L'ebraicità di Rimini appariva dubbia, ma Rimini la rivendicherà con forza, partecipando con la moglie alla vita della comunità ebraica di Chicago."
+56582,70,0,B_random,Le persone comuni sono trasformate in assassini sanguinari.
+56718,80,0,B_random,"Il prezzo di un biglietto ferroviario può essere determinato in base alla distanza percorsa e alla classe di trasporto utilizzata quando non è in modo forfettario per linea o sezione di linea per arei, o consente di muoversi su una intera tratta ferroviaria."
+57025,80,0,B_random,Il tempo di viaggio e i costi sono diminuiti drammaticamente quando le tecnologie dei trasporti migliorarono tra il XVIII e il primo XX secolo.
+57054,70,0,B_random,Il browser più veloce è il 10% più veloce di Google Chrome e Opera.
+57101,80,0,B_random,La tecnica di comunicazione tra i processi è dispendiosa di risorse perché ogni processo deve eseguire le proprie chiamate di sistema per comunicare con altri processi.
+57377,80,0,B_random,Non è concesso portare armi addosso e non sono concesso i diritti politici.
+57558,70,0,B_random,"Dal 1861 al 1865, circa 73.000 persone sono state uccise per operazioni di repressione militare, armi o scontri."
+58469,80,0,B_random,"Sibilla era rimasta vedova nel 1177 di Guglielmo Spadalunga, perito dopo un breve matrimonio."
+58809,70,0,B_random,Nordsteien ha guidato la squadra di calcio della Norvegia contro Israele e Macedonia.
+58830,70,0,B_random,"Il disastro ha causato la devastazione delle opere di bonifica idraulica, la trasformazione delle Valli Grandi Veronesi e di altre zone del Polesine in paludi e acquitrini, il disalveamento del Tartaro e la riduzione della portata del ramo principale dell'Adige."
+58855,80,0,B_random,Una creatura con Doppio Attacco infligge i danni da combattimento prima delle altre creature.
+58894,70,0,B_random,"Nel secolo VI, i monaci coltivarono la vite per produrre vino per utilizzare durante le liturgie."
+58929,80,0,B_random,Vengono usati come sostituto dello zucchero per i diabetici e le persone che hanno bisogno di controllare il peso.
+59797,80,0,B_random,L'ampia cantoria in controfacciata è stata costruita da Aristide Cavaillé-Coll nel 1867-1968.
+60263,70,0,B_random,"Lavora come insegnante e conosce Friedrich Bhaer, un insegnante tedesco molto colto, attento ai problemi sociali."
+60328,70,0,B_random,"Mentre tutti cercano Scooby Dee e il Fantasma, ottengono un cane che assomiglia esattamente a Scooby Dee."
+60429,70,0,B_random,"Il sovrano angioino perseguì solo il proprio interesse e stipulò un nuovo trattato con il califfo. Il tributo è stato raddoppiato e Carlo ha ricevuto anche l'intera indennità di guerra, così come l'espulsione da Tunisi di tutti i nobili ribelli che si erano rifugiati lì."
+60493,80,0,B_random,"L'effetto della lavorazione eseguita con l'uncinetto Tunisino è proprio quello di un tessuto, con una trama molto fitta."
+60564,80,0,B_random,"Erickson ordina a un soldato di eliminare Chris, che è diventato pericoloso per i segreti della società."
+61056,80,0,B_random,Carlton ha vinto il campionato per tre anni di fila due anni dopo.
+61198,70,0,B_random,"Situato sulla sponda nord-occidentale del Lago d'Iseo, dista 43 chilometri dal capoluogo orobico."
+61884,80,0,B_random,"La gara termina sullo 0-0 dopo i tempi supplementari e, dopo la parata di Stevan Stojanović sul tentativo di Manuel Amoros, la sfida dal dischetto è in discesa per la Stella Rossa."
+61988,70,0,B_random,Robert Adam progettò una struttura elegante con negozi vicino a un ponte che probabilmente vide durante la sua visita in Italia.
+62064,70,0,B_random,"La Vergine, mentre sale al cielo, viene incoronata dalla Santissima Trinità."
+62328,80,0,B_random,Il programma legge e scrive i formati Netpbm.
+62508,80,0,B_random,"Kieron Gillen, un cofondatore del sito, è stato un collaboratore regolare fino al 30 settembre 2010."
+62562,80,0,B_random,"Nel cielo serale, la sua osservazione migliore è nei mesi tra dicembre e maggio."
+62632,70,0,B_random,"Il campo in cui i semi del kamma vengono portati a maturazione è l'interminabile processo delle rinascite, chiamato samsara."
+62894,80,0,B_random,"Dopo una piccola parentesi di Lorenzo Vaccaro, un allievo del Fanzago, i lavori ripresero solo dopo quasi cinquant'anni, nel 1736, con il figlio Domenico Antonio Vaccaro."
+62943,80,0,B_random,La storia del Crédit Agricole risale alla fine del XIX secolo.
+63005,80,0,B_random,"Il percorso di Francesco verso una vita più armoniosa in contemporanea all'incontro con Ilaria, conosciuta in un negozio di fiori, è completato dopo tante storie vissute con troppa leggerezza."
+63429,80,0,B_random,"Nel cielo serale, la sua osservazione migliore è nei mesi tra dicembre e maggio."
+63497,80,0,B_random,"Durante la guerra di Parma del 1551, le truppe pontificie distrussero il maniero parziale."
+63526,70,0,B_random,"I loro discendenti multiculturali si identificano come una comunità distinta ma, per gli estranei, la loro lingua e cultura sono indistinguibili da quelle dei figiani nativi."
+63639,80,0,B_random,"Nausicaä è un personaggio di fantasia americana. È stato creato da artisti come Bill Watterson, Bill Travers, Bill Weir, Bill Weir Jr., Bill Weir Jr., Bill Weir Jr., Bill Weir Jr., Bill Weir Jr., Bill Weir Jr., Bill Weir Jr., Bill Weir Jr., Bill Weir Jr., Bill Weir Jr., Bill Weir Jr., Bill Weir Jr., Bill Weir Jr., Bill Weir Jr., Bill Weir Jr., Bill Weir Jr., Bill Weir Jr., Bill Weir Jr., Bill Weir Jr"
+63688,70,0,B_random,"La chiesa di San Francesco è tra i monumenti che delimitano piazza del Popolo, di cui costituisce lo scenografico sfondo, cuore della città di Ascoli Piceno."
+63880,80,0,B_random,"Con il crescente supporto della popolazione e il basso numero di truppe regolari portoghesi, FRELIMO ha avanzato rapidamente a sud verso Meponda e Mandimba."
+64029,80,0,B_random,Era solito agire all'interno dell'area di rigore.
+64377,80,0,B_random,Questo luogo è stato visitato da molteplici viaggiatori.
+64398,70,0,B_random,La chiesa di Notre-Dame-des-Neiges si trova a Machaby a 696 metri s.l.m. nel comune di Arnad e è un santuario valdostano.
+64675,80,0,B_random,La nuova versione del Blood Bowl è stata introdotta nel 1994 e ha cambiato radicalmente il sistema di gioco per attrarre un pubblico più ampio di giocatori più giovani.
+64834,70,0,B_random,"Benvenuti riesce a rialzarsi prima dello scadere del conteggio, ma è incapace di proseguire. L'arbitro non può che decretare il knock-out tecnico in favore dell'argentino."
+64857,80,0,B_random,"Sorprendentemente, la Ferrari ha vinto la gara di Le Mans."
+64984,80,0,B_random,"La proprietà è frazionata in piccole aziende che producono oltre al mais, anche una certa quantità di frumento e di orzo."
+65085,80,0,B_random,Le coppe sono congiunte e trattenute da una fascia orizzontale.
+65194,70,0,B_random,"Mentre l'ispettore Vyner di Scotland Yard interroga Mary e Anna sul signor Green, Mary informa zia Rosamund dell'affetto che Edith nutre per Marigold."
+65434,70,0,B_random,"La leggenda di Croagh Patrick è connessa alla montagna sacra irlandese, che il santo nel 441 d.C. avrebbe trascorso quaranta giorni, gettando una campana dalla sommità del monte nell'attuale Baia di Clew per cacciare via i serpenti e le impurità, formando le isole che la contraddistinguono."
+65671,80,0,B_random,La battaglia di Doolin fu una battaglia particolarmente cruenta che si prolungò dall'alba alla notte. Le forze combinate del Leinster e di Dublino persero non meno di 4.000 uomini.
+65715,80,0,B_random,"Un strano morbo ha preso il bestiame, i polli morirono, le carcasse sono diventate avvizzite, la moglie è stata impazzita e viveva in un solaio."
+66129,80,0,B_random,I pompieri non potevano raggiungere il luogo dove l'acqua era in alto perché la strada era divelta.
+66904,80,0,B_random,"All'inizio, Checco ha vinto soldi vendendo un elettrodomestico alla sua famiglia e cugine. Ha poi acquistato una lunga serie di oggetti lussuosi con i soldi guadagnati. L'unico acquisto che non ha effettuato è stato quello di un'automobile nuova, perché adora la sua BMW vecchia di vent'anni e preferisce spendere il suo denaro nella manutenzione di quella."
+66983,80,0,B_random,"Appartenente all'ordine dei frati cappuccini, fu missionario apostolico in Europa centrale."
+67413,70,0,B_random,"La combinazione di più corde, moschettoni e cordini consente la realizzazione di paranchi o altri sistemi complessi per il recupero di pericolanti o il disincaglio delle canoe."
+67534,70,0,B_random,Sogno credeva che l'Italia necessitasse di una repubblica presidenziale e quindi di una riforma costituzionale simile a quella che il generale Charles de Gaulle aveva ottenuto in Francia con l'instaurazione della Quinta Repubblica.
+67946,70,0,B_random,La sconfitta contro la Francia e il pareggio 3-3 contro l'Inghilterra impedirono alla Scozia di vincere il torneo.
+68320,80,0,B_random,"Nel 1427, D'Angiò li diede in feudo ai nobili Zurlo-Marino Caracciolo di Napoli. Nel 1461, il castello di Nusco passò di nuovo ai Joinville e, successivamente, ai Brancaccio d'Azzia, ai Carafa, ai Cotugno, ai Cossa, ai Cerasa e, infine, ai Caracciolo."
+68614,70,0,B_random,"Nel mentre, Sandro scopre che Denise è incinta e la aggredisce, ma viene salvata da Arianna e Claudio. Denise si sente male e in ospedale Irene e Gabriele promettono di prendersi cura di lei, ospitandola a villa Ferrante."
+68798,70,0,B_random,"Una delle grandi leggende riguarda il paese di Crespino, che è legata a Fetonte, una figura della mitologia greca."
+68911,70,0,B_random,"La parola in antichità descriveva un taglio di carne, per poi passare ad indicare la gelatina di carne ed infine, a partire dal XVIII secolo, un piatto di crauti bolliti con carne."
+69102,70,0,B_random,"Le femmine mantengono lo stesso piumaggio, i maschi perdono le perlature diventando simili agli ancestrali."
+69175,80,0,B_random,"Villeneuve fu infuriato al parco chiuso. Ha presentato il suo lavoro scuro in volto alla premiazione, e ha lasciato subito dopo aver ricevuto il trofeo. Poi ha presentato i microfoni per accusare pubblicamente Pironi di infedeltà ai patti."
+69256,70,0,B_random,"La base del rabdomiosarcoma è la trasformazione tumorale dei rabdomioblasti, cellule che danno origine ai muscoli scheletrici volontari."
+69333,70,0,B_random,"La pala d'altare è tardo gotica, risalente al XV secolo."
+69630,80,0,B_random,Il diritto è un diritto privato.
+70010,70,0,B_random,"Per quanto riguarda l'attribuzione dei premi, viene effettuata secondo il piazzamento in gara, il posizionamento in classifica in ogni cluster, i record del mondo battuti."
+70023,80,0,B_random,"La politica del Quattrocento si basava sull'equazione terra-esercizio del potere, che permetteva a una manciata di case patrizie di governare interi acri e appezzamenti dell'ex Comitato Teatino."
+70621,80,0,B_random,"Sotto una coltre di ceneri e lapilli dall'eruzione del Vesuvio nel 79, fu riportato alla luce dagli scavi archeologici promossi dai Borbone."
+70686,80,0,B_random,"Il 6 gennaio, la delegazione dei militari di Newburgh fu accolta da un comitato del Congresso. Il giorno successivo, il comitato conferì a Morris che con lo stato attuale di tassazione non esisteva possibilità di trovare la copertura finanziaria per evitare il possibile disastro."
+70751,70,0,B_random,"La massa d'acqua nel canale è soggetta alla forza centrifuga. La forza centrifuga tende a spostare la massa d'acqua verso il lato concavo, dove la velocità della corrente e quindi la sua capacità di erodere i sedimenti sono maggiori."
+70774,80,0,B_random,La facilità della distribuzione era principalmente dovuta alle procedure guidate che si trovavano negli strumenti di configurazione.
+70888,70,0,B_random,"Crassula dentata è una pianta succulenta endemica della provincia del Capo, in Sudafrica."
+70895,70,0,B_random,"Le macchine erano simili, di rodiggio 1-3-0 con le tre ruote motrici, da 1.404 mm."
+71511,80,0,B_random,Il re ha incontrato l'invenzione e ha promesso il potere e il tesoro.
+71803,70,0,B_random,"La parte anteriore del GAZ-MM è stata per lo più accartocciata, ma il GAZ-51 non è stato gravemente danneggiato."
+71895,80,0,B_random,"Dal 1621 al 1623, Gonzalo Fernández de Córdoba comandò l'esercito spagnolo nel Palatinato. Nel 1622, combatté la battaglia di Wimpfen e la battaglia di Höchst, sconfiggendo Ernst von Mansfeld e Cristiano di Brunswick, e partecipò agli assedi di Bacharach e di Heidelberg, sconfiggendo ancora una volta i suoi avversari protestanti anglo-tedeschi."
+72024,70,0,B_random,La giovane Yvonne non trovò nessun lavoro a Hollywood.
+72320,80,0,B_random,Il suo nome deriva da quello dello zio Harry.
+72368,80,0,B_random,Il complesso dei Palazzi Vaticani è un inestimabile valore storico e artistico.
+72380,70,0,B_random,Il paese è stato ricostruito in un'altra zona.
+73193,80,0,B_random,"La dimensione delle chiavi di Cryptolocker è notevole, quindi gli analisti e tutti coloro colpiti dal worm hanno ritenuto difficile eradicare."
+73745,70,0,B_random,"Nella vita di William, non c'è alcuna prova che conoscesse l'italiano."
+73781,80,0,B_random,"Sicignano è l'unica frazione sicignanese che non trova la linea degli Alburni. Dalla frazione dista circa 12 chilometri, 7 da Galdo e Zuppino, 8 da Scorzo, 10 da Terranova, 17 da Pertosa, 20 da Polla, 30 da Buccino, e circa 70 da Salerno e circa 60 da Potenza."
+73858,80,0,B_random,"Cassio Longino, a quel punto, si diresse con sei legioni e seimila cavalieri verso Tolosa."
+74129,70,0,B_random,I sei fuggiaschi decidono di attraversare il Canada per rifugiarsi negli Stati Uniti.
+75220,80,0,B_random,"Il Greenwich Village e l'East Village di Manhattan hanno creato quattro piccoli locali, chiamati teatri Off-Off-Broadway, per ascoltare testi che non sono mai stati ascoltati e dare visibilità agli emarginati del sistema dello spettacolo, artisti in fuga dalla società conformista, strutturalmente diversi dai colleghi inseriti nel consueto sistema professionale."
+75609,80,0,B_random,"Come teorico legale e sociale, si appoggia a un approccio conservatore e tradizionalista."
+76151,80,0,B_random,La stella di Taurus è visibile in tutti gli emisferi. Il periodo migliore per la sua osservazione nel cielo serale ricade nei mesi compresi tra settembre e febbraio.
+76612,70,0,B_random,Il termine è entrato nel linguaggio comune e conseguentemente nel gergo dei media.
+76677,70,0,B_random,"Nell'inchiesta, i generali Emilio Spaziante e Vito Bardi sono stati accusati. Spaziante era già in pensione all'epoca dell'inchiesta, e Bardi era già indagato con esito negativo da Woodcock nell'ambito dell'inchiesta P4 del 2011."
+76682,70,0,B_random,Ha partecipato al torneo di Tianjin dove ha raggiunto la finale prima di perdere a Caroline Garcia in due set.
+76792,80,0,B_random,"Un amico di Iglesias, Nicolás de Piérola, ha lanciato un colpo di stato che ha avuto successo, dicendo che era il comandante in capo supremo. Dal 23 dicembre 1879, egli ha sostituito il presidente Prado, che è stato anche cacciato dallo stesso popolo che lo ha ritenuto responsabile della guerra."
+77238,70,0,B_random,"Lo staff del ristorante è composto da giovani e attraenti donne nord coreane vestite con il costume tradizionale, il Chosŏn-ot."
+77526,70,0,B_random,Sembra in realtà celare un segreto.
+77541,70,0,B_random,Il versante destro del gruppo montuoso delle tre Levanne raggiunge l'altezza di 3619 metri.
+77667,80,0,B_random,Partecipò alla nomina alla carica di console e fu eletto nel 184 a.C. con Publio Claudio Pulcro.
+77774,70,0,B_random,"A diciassette anni, dopo una bevuta con gli amici, è stato coinvolto in una rissa in cui è stato tagliato profondamente appena sopra il labbro superiore a causa di un filo spinato. La ferita è stata ricucita con diversi punti, lasciando una cicatrice che si porta dietro da quel giorno."
+77830,70,0,B_random,"All'età di 3 anni, fu investito del titolo di Principe delle Asturie."
+77951,70,0,B_random,La Real Maestranza nissena è rimasta l'unico riferimento forte dell'identità economica della città nissena.
+78046,80,0,B_random,"Il castello Schlandersberg era il simbolo dei signori di Schlandersberg, che risiedevano dal 1200 al 1771 nel castello Schlandersberg, che era il centro abitato dominante."
+78105,70,0,B_random,"Nonostante la mancanza di cavalli e la disorganizzazione generale, le forze imperiali non raggiunsero Padova fino a settembre."
+78345,80,0,B_random,"Nonostante questo cauto ottimismo, il generale von Moltke decise di recarsi personalmente al fronte per valutare la situazione."
+78422,80,0,B_random,Ovviamente Tangshan è compresa nella zona delimitata dalle isosisme in cui i danni del terremoto sono stati di più elevata intensità.
+78713,80,0,B_random,"Gli esseri umani che sono simili a gatti, cani, donne, orsi e altro ancora."
+79185,80,0,B_random,Emil Kraepelin ha studiato le sculture della villa e ha rilevato affinità con i disegni dei catatonici.
+79204,80,0,B_random,"Il capitale prestato viene rimborsato integralmente alla scadenza. Gli interessi formula_1, formula_2..., formula_3, maturati sullo stesso nei vari periodi, vengono corrisposti periodicamente, in via anticipata o posticipata."
+79787,70,0,B_random,"Maria Carolina ha inviato i ritratti in miniatura richiesti dalle corti dell'epoca per conoscere le sembianze delle future spose. Ha fatto in modo che Francesco ricevesse il ritratto di Maria Teresa, e Ferdinando quello di Luisa Amalia."
+80269,80,0,B_random,Uthumphon fu informato che alcuni nobili stanno rivolte contro Ekathat.
+80540,80,0,B_random,"Grazie a Firebird, riesce a riprendere i suoi passi."
+80615,70,0,B_random,"Conta 2 presenze per la. Esordì il 16 settembre 1956, subentrando a Harald Hennum nella vittoria per 3-1 contro."
+80804,80,0,B_random,Il nome che più si faceva come promesso sposo era quello di Simeone di Sluck.
+80893,80,0,B_random,La croce è stata trasportata alla riva di Giaffa e poi è stata portata su una barca che è stata affidata alla Divina Provvidenza.
+81327,80,0,B_random,"È Pepita a vendere il marito, ricavando una grossa cifra con cui può spendere le sue spese folli."
+81566,80,0,B_random,"Il rimborso effettuato dalle poste in caso di mancata ricezione di plichi anche molto importanti, specialmente vaglia o raccomandate, era del massimo di dieci volte superiore all'affrancatura."
+81977,80,0,B_random,"L'avvio alla liquidazione dei tre enti è stato dato con la nomina di un commissario, Rosalba Alessi, che non ha ancora completato la privatizzazione."
+82549,70,0,B_random,"Il secondo piano è illuminato da due bifore ornate di capitelli ionici e mascheroni muliebri in chiave d'arco, spostate sui lati estremi, ed al centro presenta un'edicola con nicchia destinata a contenere una statua del santo protettore. L'ultimo piano presenta invece quattro finestre ovali decorate con un motivo a cartoccio e allineate alle aperture delle bifore sottostanti."
+82624,80,0,B_random,"Nel periodo in cui i regni britannici si formarono nella parte occidentale dell'Inghilterra, le loro strutture giuridiche erano state modificate dalla giurisdizione provinciale romana. Tuttavia, i regni britannici hanno anche avuto contatti con quelli che si formarono nello stesso periodo in Irlanda, che non era mai stata soggetta al dominio romano."
+82815,70,0,B_random,"Nel 2003-04, ha realizzato 3 punti in 13 partite. Tuttavia, il lock-out della NHL lo ha costruito a giocare la stagione 2004-05 con i Wilkes-Barre/Scranton."
+83026,80,0,B_random,Bule Naipi era membro della Gioventù Comunista.
+83323,80,0,B_random,"Vercelli ha vinto il secondo turno del 1995 con il 56,7% dei voti."
+83801,70,0,B_random,E adesso si scopre che aveva anche una relazione extraconiugale con la giovane Susan.
+83878,70,0,B_random,"Oryzias latipes, conosciuto comunemente come pesce del riso o medaka, è un piccolo pesce d'acqua dolce e salmastra."
+84054,80,0,B_random,L'attacco fallì e le forze di Tautvilas si ritirarono per difendersi nel castello di Vykintas.
+84073,70,0,B_random,"Il cardinale Giovanni Centini era il figlio maggiore di Angela e Giovanni Centini. Era il nipote del cardinale Felice Centini. Era documentato solo a partire dal 1614 quando, per via di un viaggio a Roma, ha delegato un certo Silvio Benassi a rappresentarlo come padrino in un battesimo."
+84418,70,0,B_random,La curva è espressa implicitamente dall'equazione formula_17. Una sua parametrizzazione è data da formula_18. L'angolo di rotazione è dato esplicitamente da formula_20.
+84538,70,0,B_random,Ha un ottimo rapporto con il torneo RMK Championships di Memphis.
+85171,80,0,B_random,"L'erede di Lancaster, Edoardo di Lancaster, cadde sul campo di battaglia o subito dopo, e alcuni giorni dopo, nella notte in cui Edoardo rientrò a Londra, Enrico VI, già prigioniero, fu assassinato."
+85384,80,0,B_random,"Le vincitrici sono promosse, le ultime due classificate retrocesse in club."
+85696,70,0,B_random,"Brady era già riuscito nell'intento con Olivia Trelawney, ma lei era anche trattata con antipatia dalla polizia. La polizia credeva che Brady abbia lasciato aperta con le chiavi inserite l'auto usata dal killer, cosa che lei invece aveva sempre negato."
+85920,70,0,B_random,"Croci, cornici, gigli stilizzati, rosette, stelle, mezzelune, corde ritorte, mani reggendo una spada, scudi con spada, spade, arcate, bastoni da anziano, mani, ancore, scene di torneo, ruote, scene di caccia, singole figure umane, figure di animali e altre scene."
+86211,80,0,B_random,"Quell'anno, il giocatore di hockey americano John Cunningham si trasferì nella International-American Hockey League dai Cleveland Barons e subito nella stagione 1936-1937 ebbe modo di esordire anche in National Hockey League disputando una ventina di incontri con i New York Americans."
+86267,70,0,B_random,"Dopo le dichiarazioni dell'uomo quasi impazzito per essere stato costretto da John Doe a violentare e uccidere la donna, il giorno seguente una modella che si è occupata maniacalmente del proprio aspetto esteriore è stata trovata morta, con il volto mutilato, nel proprio letto sopra il quale è stata scritta la parola superbia, quinto peccato capitale ad essere punito."
+86271,80,0,B_random,"Questo permetterà una crescita minore dell'osso, rispetto a quello cartilagineo."
+86299,80,0,B_random,"La sentenza di condanna del 2014 ha favorito la tesi innocentista perché ha eliminato il riferimento alla mezzanotte e alle 2 di notte, rendendo difficile l'omicidio effettuato in una manciata di minuti."
+86353,80,0,B_random,L'interno a nave unica fu allargato a tre navate e decorato in uno stile eclettico completamente diverso dall'originale.
+87161,70,0,B_random,Loos ha applicato le teorie sulla separazione degli ambienti che ha conosciuto durante il suo viaggio in America.
+87298,70,0,B_random,Il castello di Mangona è stato il nome dell'omonima contea che ha preso il nome dal castello di Mangona.
+87521,70,0,B_random,Lasciò la Germania nel 1909 per mettersi al servizio delle popolazioni della Sicilia e della Calabria.
+87852,70,0,B_random,La Carità è rappresentata come una donna circondata da fanciulli che accudisce.
+87876,80,0,B_random,"I suoi metodi hanno influenzato Erasmo, che visitò Oxford nel 1498 e ricevette una pensione annuale da Colet più tardi."
+88396,80,0,B_random,"La politica di Rodolfo ebbe successo solo nei territori vicini alla base del potere di Rodolfo, che era la Germania occidentale sud-occidentale."
+88643,80,0,B_random,I regni degli imperatori Nintoku e Buretsu sono stati descritti come fabbricazioni storiche senza una critica particolareggiata.
+88780,80,0,B_random,"Abd al-Malik rimase un alleato del re d'Aragona nel castello di Rueda fino al 1130. Alla sua morte, gli succedette ai domini di Rueda de Jalón, il suo discendente Abu Ya'far Ahmad ibn Hud Saif al-Dawla chiamato nelle cronache cristiane Zafadola, che dominò la piazza tra il 1130 e il 1146."
+88945,80,0,B_random,Parecchi sottoraggruppamenti recentemente proposti hanno avuto convincenti dimostrazioni.
+89013,80,0,B_random,"Durante anni molto critici nella storia europea, l'armonia tra le due parti della monarchia e il governo costituzionale in Austria è stata mantenuta."
+89156,70,0,B_random,"Terminata l'epidemia, Richard e Kahlan raggiungono il villaggio del popolo del fango per fare le loro congratulazioni."
+89175,70,0,B_random,"Marco Filippeschi, il sindaco di Pisa, Manfredi Fabrizio, il presidente della tenuta di San Rossore, Giovanni Paolo Benotto, l'arcivescovo di Pisa, e Giuseppe Betori, l'arcivescovo di Firenze e presidente della Conferenza episcopale toscana, hanno tutti parlato agli scout."
+89629,70,0,B_random,La zona è composta da zone molto diverse e fisicamente separate.
+90218,80,0,B_random,"Marina e Sara sono molto sospettose perché la madre non permette ai figli di fare uscite prolungate. Hanno indagato e hanno scoperto che la madre ha organizzato una festa di Halloween a cui ha invitato tutti i suoi amici, tranne i suoi figli e la sorella perché pensava che fossero rozzi e le possano rovinare la reputazione."
+90253,80,0,B_random,"In caso di accesso al torneo ottenuto da una o entrambe le finaliste tramite piazzamento in campionato, a venire ripescata sarebbe stata la settima classificata."
+91469,70,0,B_random,"Nel 1521, Papa Pio V ordinò agli interrogatori di tenere due omelie nella cattedrale di Capodistria. La prima omelia invitava i fedeli a denunciare e a punire duramente i luterani. La seconda omelia affermò che la carestia che colpiva allora la città andava interpretata come una punizione divina per i peccati degli abitanti eretici."
+91728,70,0,B_random,Il vento in coda al momento dell'atterraggio era di circa.
+92035,70,0,B_random,L'arresto di Lucious per l'omicidio di Bunkie fa credere a Jamal che sia stata Cookie a confessarlo.
+92771,70,0,B_random,"Nel 1998 e nel 1999, l'azienda di Nižnevartovsk si trasferì in, ma non riuscì a ottenere risultati significativi nelle due stagioni di permanenza."
+93466,70,0,B_random,"Infine, coloro che erano in grado di leggere e scrivere erano 3.189."
+93468,70,0,B_random,"Nella Grande Boucle, si è classificato quarto nella diciottesima frazione."
+93665,80,0,B_random,"55 Cancri b è un pianeta extrasolare. Come la gran parte dei pianeti extrasolari conosciuti, 55 Cancri b fu scoperto rilevando le variazioni della velocità radiale della sua stella, causate dalla gravità dello stesso pianeta."
+93728,80,0,B_random,"Capiago Intimiano è un comune relativamente nuovo, ottenuto dalla fusione nel 1928 di due comuni precedenti."
+94032,70,0,B_random,"Sulla parete di un portale rettangolare si accede tramite tre gradini, su uno dei quali si legge l'iscrizione."
+94181,80,0,B_random,Comincia a aiutare le Prescelte a eliminare i demoni.
+94251,80,0,B_random,"L'urna fu riaperta nel tempietto del Morigia, che fu trovata vuota, tranne che per tre falangi che risultarono combaciare con i resti rinvenuti sotto la porta murata."
+94426,70,0,B_random,"Dopo una lunga militanza, Pereni e Bonfanti dicono addio alla loro casacca. Giovanni Simonini, Pietro Ghedin, Claudio Turchetto, Giovanni Picat Re e Valerio Majo arrivano ai piedi dell'Etna."
+94641,80,0,B_random,"Il 99,37% della popolazione è bianca."
+94716,80,0,B_random,"Il Trani ha partecipato al campionato di Terza Serie nazionale e ha partecipato alla Coppa Italia, ma è stato estromesso dalla Coppa Italia dopo una sconfitta per 1-3."
+94798,70,0,B_random,"Mozzanica rifugia nella sua officina creativa per produrre medaglioni, bassorilievi, sculture funerarie."
+94808,70,0,B_random,"Il 26 aprile 2007, la FIFA ha riferito che il processo decisionale non era ancora stato completato e che fino ad allora la questione era stata affrontata solo a livello amministrativo dal segretariato generale."
+94849,70,0,B_random,"Il santo è arrivato nella zona del Goleto, in una piana di Sant'Angelo di Lombardi, nel 1133. Ha vissuto in una fessura di un albero e ha iniziato a costruire un monastero femminile. Tuttavia, è stato anche costruito un piccolo convento maschile, dove i monaci avevano il compito di vegliare e gestire economicamente le monache, che vivevano in clausura."
+94966,70,0,B_random,"Il 29,5% delle famiglie avevano bambini sotto l'età di 18 anni che vivono con loro. Il 60,6% delle famiglie erano coppie di sposi che vivono insieme. Il 8,2% delle famiglie avevano un capofamiglia femminile senza il marito. Il 27,8% delle famiglie non erano famiglie."
+95365,80,0,B_random,"Ippolito Nievo ha iniziato una corrispondenza con il cugino Carlo. Più tardi, ha iniziato anche a scrivere a Bice, indirizzando le lettere sia a Milano, sia a Bellagio, a villa Gobio, dove fu più volte ospite, nei rari periodi di riposo."
+95427,80,0,B_random,"Senza di esso, non c'era motivo di regolare il libero commercio internazionale."
+95587,70,0,B_random,Gli scrittori biblici avevano una concezione della coscienza strutturata e organizzata.
+95672,80,0,B_random,"Un acido molto forte che ionizza per formare l'anione perfluoroottansolfonato, noto con la sigla PFOS."
+95887,70,0,B_random,Il nome proviene dal poeta giambico Archiloco.
+96026,80,0,B_random,"Nel 1922, la Repubblica Sociale Italiana ha visto la penuria di armi. Tuttavia, l'Esercito Nazionale Repubblicano e il fronte dei partigiani hanno utilizzato le armi in quantità minime."
+96036,70,0,B_random,"Nel 2014, Tommaso Giulini ha preso la società e cambiato il nome del campo da golf. Ha anche cambiato il campo da golf in un campo di calcio."
+96205,80,0,B_random,"Nel 1986, la cometa 1986 OO apparve nel perielio. In ben cinque dei dodici transiti al perielio in cui la cometa non è stata osservata, erano state previste condizioni favorevoli all'osservazione, con la cometa che avrebbe dovuto raggiungere la quinta magnitudine se avesse manifestato il livello di attività riscontrato nei transiti in cui è stata osservata."
+96233,70,0,B_random,"San Vito Marina, Ortona Marina e Castel di Sangro sono tre stazioni ferroviarie in Italia. San Vito Marina e Ortona Marina sono collegati da una stazione ferroviaria chiamata San Vito Marina, mentre Castel di Sangro è collegato a San Vito Marina e Ortona Marina."
+96311,80,0,B_random,"Nonostante i sudtirolesi chiedessero l'annessione alla Germania, tale annessione non fu mai attuata."
+96353,70,0,B_random,"La Malfa ha illustrato ai presenti un programma in sette punti. Il programma è stato approvato in una riunione propedeutica a Milano, sette giorni prima, da Vinciguerra, Albasini Scrosati e Damiani, nonché i delegati per Torino, Vicenza, Parma, Bergamo, Genova e Roma stessa."
+96803,80,0,B_random,"In Giappone, come in altri stati asiatici e nei paesi oceanici, c'era un 1600 Monoalbero con carburatore a doppio corpo."
+97091,80,0,B_random,L'ultimo capitolo è nobile ed eterno.
+97568,70,0,B_random,"I due hanno iniziato a creare fumetti per la National di notte, ma non erano ancora noti."
+97787,70,0,B_random,"I fratelli incontrano uno sceriffo ferito e lo portano all'ospedale. All'ospedale, incontrano gli uomini che hanno la loro oscurità interiore."
+97928,80,0,B_random,"Nonostante il torneo in corso non sia stato completato, le Utah Predators sono state dichiarate campione della stagione."
+98185,70,0,B_random,I Whips hanno perso la finale contro i Los Angeles Wolves.
+98323,80,0,B_random,Ryota sembra il più deciso di tutti ad effettuare lo scambio.
+98368,80,0,B_random,"Nel 1914, l'Italia decise di diventare un partito nazionalista."
+98556,80,0,B_random,"Raccolta, quella del Mitelli, che a sua volta ebbe ampia diffusione."
+98568,80,0,B_random,"A un certo punto, il dolcetto inizialmente contenuto nella confezione è stato sostituito da piccoli doni."
+98716,70,0,B_random,"I soccorritori, con l'aiuto del paramedico Chuck Sereika, trarranno in salvo Jimeno e, ore più tardi, anche McLoughlin, vivo per miracolo."
+99051,70,0,B_random,Sella Chianzutan è una corsa non competitiva in montagna.
+99277,80,0,B_random,Il settore bancario ha avuto un ruolo importante nella riforma.
+99779,80,0,B_random,La 18/40 PS è stata lanciata nel 1912.
+100149,70,0,B_random,Il cranio si allargava all'apice anteriore per formare una sorta di quadrato.
+100165,80,0,B_random,"Il carrello d'atterraggio delle prime edizioni era molto simile al Blériot, ma presto fu semplificato e dotato di pattini per prevenire il rischio di cappottate."
+100234,80,0,B_random,"Per l'ipotesi 3, formula 12, tramite il legame cinematico sopra espresso."
+100339,70,0,B_random,"Antonio era docile e disponibile con i corsari. Ma poi, con estrema freddezza, non esitò ad approfittare dell'improvvisa opportunità di liberarsi."
+100745,80,0,B_random,"La vicinanza del fiume ha portato alla creazione di un nuovo polo cittadino nella basilica di San Pietro in Vaticano, centro di pellegrinaggi."
+100844,70,0,B_random,Non brevettare l'invenzione.
+100984,70,0,B_random,"Quando la ragazza ringrazia Jacobi per averla portata al magazzino, alcuni giornalisti non perdono tempo e attaccano Pietro."
+101205,80,0,B_random,"Dipper rifiuta, ma Bill dice che il ragazzo cadrà se sarà pronto a fare un accordo."
+101742,70,0,B_random,"Nella stagione 2016-17, ha partecipato per la prima volta ad una competizione europea, la Challenge Cup, uscendo agli ottavi di finale."
+101875,80,0,B_random,"Nel corso della sua amministrazione, il sistema finanziario ha accelerato notevolmente."
+101937,70,0,B_random,La velocità di rotazione delle stelle interne al centro della galassia non potrebbe mantenere se non c'era una massa pari a un miliardo di masse solari nel centro.
+101939,80,0,B_random,Il corso del fiume varia per profondità/altitudine.
+102380,80,0,B_random,"Joe la libera, lei lo colpisce e cerca di scappare."
+103699,80,0,B_random,Il direttore artistico attuale di Messina è Enrique Arturo Diemecke.
+103944,70,0,B_random,"Il SeaSat, che arrivava al peso di 1.800,0 kg, era dotato di seguenti strumenti scientifici per raggiungere i sopraelencati obbiettivi:"
+104255,80,0,B_random,"Ricciardi ha visto gli ex voto ancora da esaminare prima dell'esposizione. Uno di essi è proprio quello a cui stava lavorando Nicola, e il commissario ha scoperto un nome inciso."
+104790,80,0,B_random,Le sostanze psicotrope possono inalterabilmente danneggiare la sfera luminosa di emanazioni del corpo energetico e il corpo fisico.
+105116,70,0,B_random,"La città era composta da 76,33% di bianchi, 0,63% di afroamericani, 0,63% di nativi americani, 19,84% di altre razze, e 2,57% di due o più razze."
+105145,80,0,B_random,"Trevor accetta come ripiego la mansione non particolarmente redditizia di custode del cinema. Mona, in ritardo con le rate del mutuo e senza più una fonte di entrate, chiede un prestito piuttosto oneroso."
+105633,80,0,B_random,"Nel 2021, le prime tre squadre classificate in 1 sono state promosse."
+105686,70,0,B_random,Sospetti cade su Davide che era stato visto da dei testimoni la sera prima litigare con la ragazza.
+105703,80,0,B_random,L'atrio è decorato con ritratti dei sovrani Partenopei.
+106671,70,0,B_random,"Nel 2009, durante un giorno di festa normale, ci sono stati in media 27.300 persone."
+106702,70,0,B_random,La Sacra Corona d'Ungheria è stata trasferita dal Museo Nazionale Ungherese a Budapest il 1o gennaio 2000.
+107059,70,0,B_random,"Nel 1952, la Germania Est ha vinto la Coppa del Mondo con 40 medaglie d'oro, 25 d'argento e 25 di bronzo. La Germania ha vinto anche la Coppa del Mondo del 1952, 1954, 1958 e 1962. La Germania ha vinto anche la Coppa del Mondo del 1956, 1960, 1964, 1968 e 1972"
+107098,70,0,B_random,"Nel 1991-1992, il successo in Coppa Svizzera è stato ottenuto ai supplementari contro il Berna per 1-0 sul campo di Baden."
+107131,70,0,B_random,Erik arruolarsi nella Royal Air Force e divenne pilota di bombardieri. Alex morì in Unione Sovietica il 11 luglio 1943. Guus morì ghigliottinato il 25 dicembre 1944 in un campo di concentramento a Wolfenbüttel.
+107171,80,0,B_random,"Si trova nella parte orientale della costellazione, vicino al centro della grande nebulosa IC 1805."
+107502,80,0,B_random,Gatsu e Caska tornarono da Sant'Albione. I due apprendevano da Rickert che Godor era morto qualche tempo prima e era sepolto nel cimitero delle spade.
+107544,80,0,B_random,"Con i due elementi, Set e Apophis sconfiscono e distruggono la Piramide Rossa, che era il luogo dove il dio del male ha preso il potere. Apophis, il serpente del caos, stava cercando di evadere dalla sua prigione nella Duat."
+107676,70,0,B_random,"Nel video girato tra l'8 e il 10 agosto 1998 a Los Angeles, in California e a Malibu Beach, Madonna gioca con il suo fidanzato a scacchi e alla fine butta per terra la tavola con il gioco, che significa la fine della loro relazione."
+107902,80,0,B_random,"Se non è l'autore del documento, può limitarsi a dichiarare di non conoscerne la scrittura o la sottoscrizione."

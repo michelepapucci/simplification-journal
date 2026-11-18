@@ -1,0 +1,29 @@
+`torch_dtype` is deprecated! Use `dtype` instead!
+/home/mpapucci/text-simplification-experiments/.venv/lib/python3.10/site-packages/peft/tuners/tuners_utils.py:1222: UserWarning: Model has `tie_word_embeddings=True` and a tied layer is part of the adapter, but `ensure_weight_tying` is not set to True. This can lead to complications, for example when merging the adapter or converting your model to formats other than safetensors. Check the discussion here: https://github.com/huggingface/peft/issues/2777
+  warnings.warn(msg)
+/home/mpapucci/text-simplification-experiments/.venv/lib/python3.10/site-packages/torch/cuda/__init__.py:829: UserWarning: Can't initialize NVML
+  warnings.warn("Can't initialize NVML")
+probe data: 2343 train / 261 dev sentences (8s)
+/home/mpapucci/text-simplification-experiments/.venv/lib/python3.10/site-packages/torch/cuda/__init__.py:829: UserWarning: Can't initialize NVML
+  warnings.warn("Can't initialize NVML")
+layer 4: dev UUAS by epoch [0.408, 0.453, 0.461, 0.474, 0.483, 0.473, 0.483, 0.472, 0.483, 0.476, 0.481, 0.49, 0.476, 0.479, 0.477]
+layer 8: dev UUAS by epoch [0.564, 0.602, 0.592, 0.606, 0.615, 0.602, 0.612, 0.606, 0.596, 0.609, 0.602, 0.608, 0.597, 0.608, 0.602]
+layer 12: dev UUAS by epoch [0.598, 0.605, 0.631, 0.617, 0.606, 0.605, 0.616, 0.614, 0.625, 0.628, 0.607, 0.614, 0.619, 0.627, 0.62]
+layer 16: dev UUAS by epoch [0.567, 0.592, 0.616, 0.609, 0.621, 0.625, 0.612, 0.617, 0.598, 0.616, 0.61, 0.624, 0.616, 0.612, 0.6]
+layer 20: dev UUAS by epoch [0.449, 0.536, 0.55, 0.539, 0.538, 0.523, 0.5, 0.507, 0.479, 0.498, 0.485, 0.493, 0.487, 0.487, 0.459]
+layer 24: dev UUAS by epoch [0.251, 0.337, 0.419, 0.461, 0.456, 0.464, 0.426, 0.396, 0.41, 0.385, 0.333, 0.375, 0.3, 0.37, 0.342]
+layer 28: dev UUAS by epoch [0.274, 0.357, 0.38, 0.394, 0.391, 0.395, 0.362, 0.376, 0.38, 0.356, 0.369, 0.345, 0.36, 0.319, 0.34]
+originals@40: 1000 texts, mean UUAS by layer [0.347, 0.47, 0.502, 0.49, 0.425, 0.347, 0.254] (8s)
+originals@30: 1000 texts, mean UUAS by layer [0.348, 0.469, 0.501, 0.489, 0.424, 0.347, 0.253] (8s)
+originals@20: 1000 texts, mean UUAS by layer [0.349, 0.47, 0.5, 0.488, 0.424, 0.345, 0.253] (8s)
+originals@10: 1000 texts, mean UUAS by layer [0.349, 0.469, 0.5, 0.488, 0.422, 0.343, 0.254] (8s)
+originals@0: 1000 texts, mean UUAS by layer [0.348, 0.469, 0.499, 0.485, 0.419, 0.339, 0.254] (8s)
+/home/mpapucci/text-simplification-experiments/simplification-journal/experiments/interp/probe.py:168: RuntimeWarning: Mean of empty slice
+  out[li] = [np.nanmean([r[k] for r in rows]) for k in ("uuas", "rho", "pred_len", "pred_max", "gold_len")]
+fixed@40: 1000 texts, mean UUAS by layer [0.461, 0.596, 0.624, 0.62, 0.542, 0.457, 0.387] (9s)
+fixed@30: 1000 texts, mean UUAS by layer [0.462, 0.597, 0.622, 0.619, 0.543, 0.456, 0.388] (9s)
+fixed@20: 1000 texts, mean UUAS by layer [0.461, 0.598, 0.621, 0.619, 0.542, 0.456, 0.387] (9s)
+fixed@10: 1000 texts, mean UUAS by layer [0.462, 0.597, 0.62, 0.617, 0.539, 0.454, 0.385] (9s)
+fixed@0: 1000 texts, mean UUAS by layer [0.462, 0.597, 0.619, 0.616, 0.538, 0.45, 0.383] (9s)
+references: 7968 texts, mean UUAS by layer [0.484, 0.612, 0.628, 0.62, 0.542, 0.462, 0.399] (70s)
+outputs: 7582 texts, mean UUAS by layer [0.473, 0.606, 0.627, 0.62, 0.546, 0.462, 0.391] (66s)

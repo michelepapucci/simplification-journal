@@ -1,0 +1,1283 @@
+{
+ "criterion": {
+  "min_arcs": 100,
+  "margin": 0.1,
+  "min_heads": 3
+ },
+ "models": {
+  "g1_guided": {
+   "syntax_heads": {
+    "candidates": 247,
+    "confirmed_pairs": 189,
+    "heads": [
+     10,
+     19,
+     38,
+     50,
+     51,
+     52,
+     55,
+     56,
+     59,
+     61,
+     62,
+     63,
+     65,
+     66,
+     68,
+     72,
+     75,
+     76,
+     77,
+     79,
+     84,
+     85,
+     87,
+     88,
+     89,
+     90,
+     94,
+     95,
+     96,
+     97,
+     100,
+     105,
+     106,
+     108,
+     111,
+     112,
+     117,
+     122,
+     126,
+     129,
+     130,
+     144,
+     145,
+     148,
+     149,
+     156,
+     157,
+     163,
+     169,
+     171,
+     172,
+     176,
+     177,
+     184,
+     185,
+     186,
+     188,
+     189,
+     193,
+     195,
+     198,
+     199,
+     208,
+     209,
+     212,
+     213,
+     234,
+     240,
+     247,
+     249,
+     250,
+     251,
+     255,
+     257,
+     258,
+     266,
+     267,
+     269,
+     274,
+     275,
+     277,
+     279,
+     283,
+     284,
+     285,
+     289,
+     291,
+     298,
+     301,
+     304,
+     305,
+     313,
+     316,
+     317,
+     323,
+     324,
+     329,
+     330,
+     334,
+     343,
+     350,
+     375,
+     376,
+     377,
+     384,
+     386,
+     403,
+     410
+    ],
+    "n_heads": 108,
+    "found": true,
+    "best_per_relation": {
+     "acl": {
+      "relation": "acl",
+      "head": 96,
+      "layer": 6,
+      "index": 0,
+      "acc_heldout": 0.504,
+      "baseline_heldout": 0.199,
+      "arcs_heldout": 2836
+     },
+     "advcl": {
+      "relation": "advcl",
+      "head": 90,
+      "layer": 5,
+      "index": 10,
+      "acc_heldout": 0.492,
+      "baseline_heldout": 0.179,
+      "arcs_heldout": 1328
+     },
+     "appos": {
+      "relation": "appos",
+      "head": 96,
+      "layer": 6,
+      "index": 0,
+      "acc_heldout": 0.497,
+      "baseline_heldout": 0.206,
+      "arcs_heldout": 465
+     },
+     "ccomp": {
+      "relation": "ccomp",
+      "head": 279,
+      "layer": 17,
+      "index": 7,
+      "acc_heldout": 0.37,
+      "baseline_heldout": 0.145,
+      "arcs_heldout": 732
+     },
+     "compound": {
+      "relation": "compound",
+      "head": 55,
+      "layer": 3,
+      "index": 7,
+      "acc_heldout": 0.967,
+      "baseline_heldout": 0.818,
+      "arcs_heldout": 214
+     },
+     "conj": {
+      "relation": "conj",
+      "head": 208,
+      "layer": 13,
+      "index": 0,
+      "acc_heldout": 0.614,
+      "baseline_heldout": 0.248,
+      "arcs_heldout": 4963
+     },
+     "nsubj": {
+      "relation": "nsubj",
+      "head": 87,
+      "layer": 5,
+      "index": 7,
+      "acc_heldout": 0.803,
+      "baseline_heldout": 0.57,
+      "arcs_heldout": 605
+     },
+     "nummod": {
+      "relation": "nummod",
+      "head": 94,
+      "layer": 5,
+      "index": 14,
+      "acc_heldout": 0.741,
+      "baseline_heldout": 0.545,
+      "arcs_heldout": 374
+     },
+     "obj": {
+      "relation": "obj",
+      "head": 87,
+      "layer": 5,
+      "index": 7,
+      "acc_heldout": 0.956,
+      "baseline_heldout": 0.559,
+      "arcs_heldout": 4339
+     },
+     "obl": {
+      "relation": "obl",
+      "head": 384,
+      "layer": 24,
+      "index": 0,
+      "acc_heldout": 0.543,
+      "baseline_heldout": 0.42,
+      "arcs_heldout": 7574
+     },
+     "parataxis": {
+      "relation": "parataxis",
+      "head": 129,
+      "layer": 8,
+      "index": 1,
+      "acc_heldout": 0.321,
+      "baseline_heldout": 0.029,
+      "arcs_heldout": 137
+     },
+     "xcomp": {
+      "relation": "xcomp",
+      "head": 95,
+      "layer": 5,
+      "index": 15,
+      "acc_heldout": 0.766,
+      "baseline_heldout": 0.501,
+      "arcs_heldout": 1181
+     }
+    },
+    "heads_per_layer": {
+     "0": 1,
+     "1": 1,
+     "2": 1,
+     "3": 9,
+     "4": 8,
+     "5": 8,
+     "6": 7,
+     "7": 4,
+     "8": 2,
+     "9": 6,
+     "10": 4,
+     "11": 7,
+     "12": 4,
+     "13": 4,
+     "14": 1,
+     "15": 6,
+     "16": 5,
+     "17": 7,
+     "18": 4,
+     "19": 5,
+     "20": 5,
+     "21": 2,
+     "23": 3,
+     "24": 2,
+     "25": 2
+    },
+    "relations_tested": [
+     "acl",
+     "advcl",
+     "advmod",
+     "amod",
+     "appos",
+     "ccomp",
+     "compound",
+     "conj",
+     "fixed",
+     "flat",
+     "nmod",
+     "nsubj",
+     "nummod",
+     "obj",
+     "obl",
+     "parataxis",
+     "xcomp"
+    ]
+   }
+  },
+  "g1": {
+   "syntax_heads": {
+    "candidates": 246,
+    "confirmed_pairs": 186,
+    "heads": [
+     10,
+     19,
+     30,
+     38,
+     50,
+     51,
+     52,
+     55,
+     56,
+     57,
+     59,
+     61,
+     62,
+     63,
+     65,
+     66,
+     68,
+     72,
+     75,
+     76,
+     77,
+     79,
+     84,
+     85,
+     87,
+     88,
+     89,
+     90,
+     94,
+     95,
+     96,
+     97,
+     100,
+     105,
+     106,
+     108,
+     111,
+     112,
+     122,
+     126,
+     129,
+     130,
+     144,
+     145,
+     148,
+     149,
+     156,
+     157,
+     163,
+     169,
+     171,
+     172,
+     176,
+     177,
+     184,
+     185,
+     186,
+     188,
+     189,
+     193,
+     195,
+     198,
+     199,
+     208,
+     209,
+     212,
+     213,
+     234,
+     240,
+     247,
+     249,
+     250,
+     251,
+     255,
+     257,
+     258,
+     266,
+     267,
+     269,
+     274,
+     275,
+     277,
+     279,
+     283,
+     284,
+     285,
+     287,
+     289,
+     291,
+     298,
+     301,
+     304,
+     305,
+     313,
+     316,
+     317,
+     323,
+     324,
+     329,
+     330,
+     334,
+     343,
+     350,
+     375,
+     376,
+     377,
+     384,
+     386,
+     403
+    ],
+    "n_heads": 109,
+    "found": true,
+    "best_per_relation": {
+     "acl": {
+      "relation": "acl",
+      "head": 96,
+      "layer": 6,
+      "index": 0,
+      "acc_heldout": 0.504,
+      "baseline_heldout": 0.199,
+      "arcs_heldout": 2836
+     },
+     "advcl": {
+      "relation": "advcl",
+      "head": 90,
+      "layer": 5,
+      "index": 10,
+      "acc_heldout": 0.503,
+      "baseline_heldout": 0.179,
+      "arcs_heldout": 1328
+     },
+     "appos": {
+      "relation": "appos",
+      "head": 96,
+      "layer": 6,
+      "index": 0,
+      "acc_heldout": 0.484,
+      "baseline_heldout": 0.206,
+      "arcs_heldout": 465
+     },
+     "ccomp": {
+      "relation": "ccomp",
+      "head": 279,
+      "layer": 17,
+      "index": 7,
+      "acc_heldout": 0.372,
+      "baseline_heldout": 0.145,
+      "arcs_heldout": 732
+     },
+     "compound": {
+      "relation": "compound",
+      "head": 55,
+      "layer": 3,
+      "index": 7,
+      "acc_heldout": 0.967,
+      "baseline_heldout": 0.818,
+      "arcs_heldout": 214
+     },
+     "conj": {
+      "relation": "conj",
+      "head": 208,
+      "layer": 13,
+      "index": 0,
+      "acc_heldout": 0.614,
+      "baseline_heldout": 0.248,
+      "arcs_heldout": 4963
+     },
+     "flat": {
+      "relation": "flat",
+      "head": 30,
+      "layer": 1,
+      "index": 14,
+      "acc_heldout": 0.868,
+      "baseline_heldout": 0.763,
+      "arcs_heldout": 3195
+     },
+     "nsubj": {
+      "relation": "nsubj",
+      "head": 87,
+      "layer": 5,
+      "index": 7,
+      "acc_heldout": 0.797,
+      "baseline_heldout": 0.57,
+      "arcs_heldout": 605
+     },
+     "nummod": {
+      "relation": "nummod",
+      "head": 94,
+      "layer": 5,
+      "index": 14,
+      "acc_heldout": 0.746,
+      "baseline_heldout": 0.545,
+      "arcs_heldout": 374
+     },
+     "obj": {
+      "relation": "obj",
+      "head": 87,
+      "layer": 5,
+      "index": 7,
+      "acc_heldout": 0.956,
+      "baseline_heldout": 0.559,
+      "arcs_heldout": 4339
+     },
+     "obl": {
+      "relation": "obl",
+      "head": 384,
+      "layer": 24,
+      "index": 0,
+      "acc_heldout": 0.541,
+      "baseline_heldout": 0.42,
+      "arcs_heldout": 7574
+     },
+     "parataxis": {
+      "relation": "parataxis",
+      "head": 106,
+      "layer": 6,
+      "index": 10,
+      "acc_heldout": 0.299,
+      "baseline_heldout": 0.029,
+      "arcs_heldout": 137
+     },
+     "xcomp": {
+      "relation": "xcomp",
+      "head": 95,
+      "layer": 5,
+      "index": 15,
+      "acc_heldout": 0.765,
+      "baseline_heldout": 0.501,
+      "arcs_heldout": 1181
+     }
+    },
+    "heads_per_layer": {
+     "0": 1,
+     "1": 2,
+     "2": 1,
+     "3": 10,
+     "4": 8,
+     "5": 8,
+     "6": 7,
+     "7": 3,
+     "8": 2,
+     "9": 6,
+     "10": 4,
+     "11": 7,
+     "12": 4,
+     "13": 4,
+     "14": 1,
+     "15": 6,
+     "16": 5,
+     "17": 8,
+     "18": 4,
+     "19": 5,
+     "20": 5,
+     "21": 2,
+     "23": 3,
+     "24": 2,
+     "25": 1
+    },
+    "relations_tested": [
+     "acl",
+     "advcl",
+     "advmod",
+     "amod",
+     "appos",
+     "ccomp",
+     "compound",
+     "conj",
+     "fixed",
+     "flat",
+     "nmod",
+     "nsubj",
+     "nummod",
+     "obj",
+     "obl",
+     "parataxis",
+     "xcomp"
+    ]
+   }
+  }
+ },
+ "head_overlap": {
+  "both": 106,
+  "only_guided": 2,
+  "only_g1": 3
+ },
+ "probe": {
+  "dev_uuas_best_epoch": {
+   "4": 0.4897819277831423,
+   "8": 0.6145864670419092,
+   "12": 0.6307072679879528,
+   "16": 0.624918452759336,
+   "20": 0.5498238992662594,
+   "24": 0.46431206849948853,
+   "28": 0.3952256092371124
+  },
+  "best_layer": 12,
+  "train_sentences": 2343,
+  "test_uuas": {
+   "original": 0.502,
+   "reference": 0.63
+  },
+  "attention_vs_probe": {
+   "dist": 0.592,
+   "long": 0.6,
+   "ent": 0.333
+  }
+ },
+ "validation": {
+  "dist": {
+   "readit_syntax": {
+    "rho": 0.495,
+    "partial_length": 0.161
+   },
+   "readit_global": {
+    "rho": 0.487,
+    "partial_length": 0.157
+   },
+   "parse_mean_dep_len": {
+    "rho": 0.584,
+    "partial_length": 0.311
+   },
+   "parse_max_dep_len": {
+    "rho": 0.749,
+    "partial_length": 0.311
+   },
+   "parse_mean_max_depth": {
+    "rho": 0.599,
+    "partial_length": -0.048
+   },
+   "avg_links_len": {
+    "rho": 0.556,
+    "partial_length": 0.305
+   },
+   "max_links_len": {
+    "rho": 0.648,
+    "partial_length": 0.276
+   },
+   "avg_max_depth": {
+    "rho": 0.598,
+    "partial_length": -0.051
+   },
+   "subordinate_proposition_dist": {
+    "rho": 0.374,
+    "partial_length": -0.026
+   },
+   "length": {
+    "rho": 0.986
+   }
+  },
+  "long": {
+   "readit_syntax": {
+    "rho": 0.495,
+    "partial_length": 0.151
+   },
+   "readit_global": {
+    "rho": 0.488,
+    "partial_length": 0.153
+   },
+   "parse_mean_dep_len": {
+    "rho": 0.585,
+    "partial_length": 0.271
+   },
+   "parse_max_dep_len": {
+    "rho": 0.75,
+    "partial_length": 0.29
+   },
+   "parse_mean_max_depth": {
+    "rho": 0.595,
+    "partial_length": -0.023
+   },
+   "avg_links_len": {
+    "rho": 0.561,
+    "partial_length": 0.286
+   },
+   "max_links_len": {
+    "rho": 0.653,
+    "partial_length": 0.281
+   },
+   "avg_max_depth": {
+    "rho": 0.594,
+    "partial_length": -0.024
+   },
+   "subordinate_proposition_dist": {
+    "rho": 0.37,
+    "partial_length": -0.02
+   },
+   "length": {
+    "rho": 0.976
+   }
+  },
+  "ent": {
+   "readit_syntax": {
+    "rho": 0.498,
+    "partial_length": 0.41
+   },
+   "readit_global": {
+    "rho": 0.49,
+    "partial_length": 0.401
+   },
+   "parse_mean_dep_len": {
+    "rho": 0.366,
+    "partial_length": 0.234
+   },
+   "parse_max_dep_len": {
+    "rho": 0.349,
+    "partial_length": 0.167
+   },
+   "parse_mean_max_depth": {
+    "rho": 0.437,
+    "partial_length": 0.314
+   },
+   "avg_links_len": {
+    "rho": 0.372,
+    "partial_length": 0.248
+   },
+   "max_links_len": {
+    "rho": 0.378,
+    "partial_length": 0.233
+   },
+   "avg_max_depth": {
+    "rho": 0.437,
+    "partial_length": 0.313
+   },
+   "subordinate_proposition_dist": {
+    "rho": 0.388,
+    "partial_length": 0.3
+   },
+   "length": {
+    "rho": 0.332
+   }
+  },
+  "probe_len_L12": {
+   "readit_syntax": {
+    "rho": 0.445,
+    "partial_length": 0.236
+   },
+   "readit_global": {
+    "rho": 0.438,
+    "partial_length": 0.232
+   },
+   "parse_mean_dep_len": {
+    "rho": 0.623,
+    "partial_length": 0.449
+   },
+   "parse_max_dep_len": {
+    "rho": 0.657,
+    "partial_length": 0.428
+   },
+   "parse_mean_max_depth": {
+    "rho": 0.505,
+    "partial_length": 0.236
+   },
+   "avg_links_len": {
+    "rho": 0.634,
+    "partial_length": 0.479
+   },
+   "max_links_len": {
+    "rho": 0.669,
+    "partial_length": 0.487
+   },
+   "avg_max_depth": {
+    "rho": 0.504,
+    "partial_length": 0.235
+   },
+   "subordinate_proposition_dist": {
+    "rho": 0.325,
+    "partial_length": 0.139
+   },
+   "length": {
+    "rho": 0.575
+   }
+  }
+ },
+ "validation_n": 4481,
+ "step_2_1": {
+  "by_level": {
+   "0": {
+    "dist": 3.652,
+    "long": 0.1951,
+    "ent": 0.6639,
+    "probe_len": 1.9973,
+    "achieved": 21.5391,
+    "units": 16.332
+   },
+   "10": {
+    "dist": 4.3368,
+    "long": 0.2384,
+    "ent": 0.667,
+    "probe_len": 2.0981,
+    "achieved": 27.7266,
+    "units": 20.38
+   },
+   "20": {
+    "dist": 4.8155,
+    "long": 0.2702,
+    "ent": 0.672,
+    "probe_len": 2.1174,
+    "achieved": 32.112,
+    "units": 23.195
+   },
+   "30": {
+    "dist": 5.2294,
+    "long": 0.2942,
+    "ent": 0.6768,
+    "probe_len": 2.202,
+    "achieved": 38.7318,
+    "units": 25.418
+   },
+   "40": {
+    "dist": 5.4848,
+    "long": 0.3102,
+    "ent": 0.6806,
+    "probe_len": 2.236,
+    "achieved": 41.8511,
+    "units": 26.906
+   },
+   "50": {
+    "dist": 5.676,
+    "long": 0.3241,
+    "ent": 0.6835,
+    "probe_len": 2.2933,
+    "achieved": 49.7498,
+    "units": 27.718
+   },
+   "60": {
+    "dist": 5.9505,
+    "long": 0.339,
+    "ent": 0.6855,
+    "probe_len": 2.352,
+    "achieved": 56.7222,
+    "units": 29.288
+   },
+   "70": {
+    "dist": 6.4243,
+    "long": 0.3641,
+    "ent": 0.6886,
+    "probe_len": 2.4298,
+    "achieved": 63.4353,
+    "units": 31.8849
+   }
+  },
+  "dist": {
+   "rho_achieved_global": 0.437,
+   "partial_length": 0.24,
+   "rho_requested_level": 0.363,
+   "within_original_vs_level": 0.447,
+   "within_original_vs_achieved": 0.48
+  },
+  "long": {
+   "rho_achieved_global": 0.44,
+   "partial_length": 0.223,
+   "rho_requested_level": 0.367,
+   "within_original_vs_level": 0.452,
+   "within_original_vs_achieved": 0.482
+  },
+  "ent": {
+   "rho_achieved_global": 0.407,
+   "partial_length": 0.32,
+   "rho_requested_level": 0.319,
+   "within_original_vs_level": 0.352,
+   "within_original_vs_achieved": 0.416
+  },
+  "probe_len": {
+   "rho_achieved_global": 0.301,
+   "partial_length": 0.099,
+   "rho_requested_level": 0.256,
+   "within_original_vs_level": 0.29,
+   "within_original_vs_achieved": 0.319
+  }
+ },
+ "step_2_2": {
+  "originals": {
+   "40": {
+    "dist": {
+     "mean": 6.8655,
+     "relative_to_40": 0.0,
+     "ci95": [
+      0.0,
+      0.0
+     ]
+    },
+    "long": {
+     "mean": 0.3853,
+     "relative_to_40": 0.0,
+     "ci95": [
+      0.0,
+      0.0
+     ]
+    },
+    "ent": {
+     "mean": 0.7064,
+     "relative_to_40": 0.0,
+     "ci95": [
+      0.0,
+      0.0
+     ]
+    },
+    "best_head_accuracy": {
+     "acl": 0.487,
+     "advcl": 0.467,
+     "appos": 0.444,
+     "ccomp": 0.357,
+     "compound": 0.984,
+     "conj": 0.525,
+     "nsubj": 0.767,
+     "nummod": 0.715,
+     "obj": 0.914,
+     "obl": 0.611,
+     "parataxis": 0.359,
+     "xcomp": 0.751
+    },
+    "probe_uuas": 0.5015,
+    "probe_len": 3.0642
+   },
+   "30": {
+    "dist": {
+     "mean": 6.8745,
+     "relative_to_40": 0.0013,
+     "ci95": [
+      0.0012,
+      0.0014
+     ]
+    },
+    "long": {
+     "mean": 0.3858,
+     "relative_to_40": 0.0012,
+     "ci95": [
+      0.0012,
+      0.0013
+     ]
+    },
+    "ent": {
+     "mean": 0.7068,
+     "relative_to_40": 0.0006,
+     "ci95": [
+      0.0006,
+      0.0006
+     ]
+    },
+    "best_head_accuracy": {
+     "acl": 0.483,
+     "advcl": 0.467,
+     "appos": 0.444,
+     "ccomp": 0.364,
+     "compound": 0.984,
+     "conj": 0.523,
+     "nsubj": 0.762,
+     "nummod": 0.715,
+     "obj": 0.918,
+     "obl": 0.614,
+     "parataxis": 0.367,
+     "xcomp": 0.749
+    },
+    "probe_uuas": 0.5006,
+    "probe_len": 3.0759
+   },
+   "20": {
+    "dist": {
+     "mean": 6.8779,
+     "relative_to_40": 0.0018,
+     "ci95": [
+      0.0017,
+      0.0019
+     ]
+    },
+    "long": {
+     "mean": 0.386,
+     "relative_to_40": 0.0017,
+     "ci95": [
+      0.0016,
+      0.0018
+     ]
+    },
+    "ent": {
+     "mean": 0.7067,
+     "relative_to_40": 0.0005,
+     "ci95": [
+      0.0004,
+      0.0005
+     ]
+    },
+    "best_head_accuracy": {
+     "acl": 0.486,
+     "advcl": 0.465,
+     "appos": 0.444,
+     "ccomp": 0.36,
+     "compound": 0.984,
+     "conj": 0.527,
+     "nsubj": 0.762,
+     "nummod": 0.715,
+     "obj": 0.917,
+     "obl": 0.613,
+     "parataxis": 0.359,
+     "xcomp": 0.749
+    },
+    "probe_uuas": 0.5001,
+    "probe_len": 3.0879
+   },
+   "10": {
+    "dist": {
+     "mean": 6.8814,
+     "relative_to_40": 0.0023,
+     "ci95": [
+      0.0022,
+      0.0024
+     ]
+    },
+    "long": {
+     "mean": 0.3861,
+     "relative_to_40": 0.0021,
+     "ci95": [
+      0.002,
+      0.0023
+     ]
+    },
+    "ent": {
+     "mean": 0.7064,
+     "relative_to_40": 0.0001,
+     "ci95": [
+      0.0,
+      0.0001
+     ]
+    },
+    "best_head_accuracy": {
+     "acl": 0.486,
+     "advcl": 0.471,
+     "appos": 0.438,
+     "ccomp": 0.357,
+     "compound": 0.984,
+     "conj": 0.526,
+     "nsubj": 0.762,
+     "nummod": 0.715,
+     "obj": 0.918,
+     "obl": 0.61,
+     "parataxis": 0.352,
+     "xcomp": 0.751
+    },
+    "probe_uuas": 0.5003,
+    "probe_len": 3.0995
+   },
+   "0": {
+    "dist": {
+     "mean": 6.8874,
+     "relative_to_40": 0.0032,
+     "ci95": [
+      0.003,
+      0.0033
+     ]
+    },
+    "long": {
+     "mean": 0.3865,
+     "relative_to_40": 0.003,
+     "ci95": [
+      0.0028,
+      0.0032
+     ]
+    },
+    "ent": {
+     "mean": 0.7058,
+     "relative_to_40": -0.0008,
+     "ci95": [
+      -0.0009,
+      -0.0007
+     ]
+    },
+    "best_head_accuracy": {
+     "acl": 0.485,
+     "advcl": 0.471,
+     "appos": 0.45,
+     "ccomp": 0.35,
+     "compound": 0.984,
+     "conj": 0.523,
+     "nsubj": 0.762,
+     "nummod": 0.724,
+     "obj": 0.919,
+     "obl": 0.611,
+     "parataxis": 0.328,
+     "xcomp": 0.746
+    },
+    "probe_uuas": 0.4987,
+    "probe_len": 3.1548
+   }
+  },
+  "fixed": {
+   "40": {
+    "dist": {
+     "mean": 5.4849,
+     "relative_to_40": 0.0,
+     "ci95": [
+      0.0,
+      0.0
+     ]
+    },
+    "long": {
+     "mean": 0.3102,
+     "relative_to_40": 0.0,
+     "ci95": [
+      0.0,
+      0.0
+     ]
+    },
+    "ent": {
+     "mean": 0.6806,
+     "relative_to_40": 0.0,
+     "ci95": [
+      0.0,
+      0.0
+     ]
+    },
+    "best_head_accuracy": {
+     "acl": 0.52,
+     "advcl": 0.5,
+     "appos": 0.443,
+     "ccomp": 0.36,
+     "compound": 0.964,
+     "conj": 0.64,
+     "nsubj": 0.828,
+     "nummod": 0.679,
+     "obj": 0.953,
+     "obl": 0.563,
+     "parataxis": 0.227,
+     "xcomp": 0.802
+    },
+    "probe_uuas": 0.6236,
+    "probe_len": 2.2339
+   },
+   "30": {
+    "dist": {
+     "mean": 5.485,
+     "relative_to_40": 0.0,
+     "ci95": [
+      -0.0001,
+      0.0001
+     ]
+    },
+    "long": {
+     "mean": 0.3102,
+     "relative_to_40": -0.0,
+     "ci95": [
+      -0.0001,
+      0.0001
+     ]
+    },
+    "ent": {
+     "mean": 0.681,
+     "relative_to_40": 0.0005,
+     "ci95": [
+      0.0005,
+      0.0006
+     ]
+    },
+    "best_head_accuracy": {
+     "acl": 0.518,
+     "advcl": 0.5,
+     "appos": 0.462,
+     "ccomp": 0.34,
+     "compound": 0.964,
+     "conj": 0.639,
+     "nsubj": 0.836,
+     "nummod": 0.679,
+     "obj": 0.953,
+     "obl": 0.563,
+     "parataxis": 0.227,
+     "xcomp": 0.81
+    },
+    "probe_uuas": 0.6218,
+    "probe_len": 2.2421
+   },
+   "20": {
+    "dist": {
+     "mean": 5.486,
+     "relative_to_40": 0.0002,
+     "ci95": [
+      0.0001,
+      0.0003
+     ]
+    },
+    "long": {
+     "mean": 0.3103,
+     "relative_to_40": 0.0002,
+     "ci95": [
+      0.0001,
+      0.0004
+     ]
+    },
+    "ent": {
+     "mean": 0.6812,
+     "relative_to_40": 0.0008,
+     "ci95": [
+      0.0007,
+      0.0009
+     ]
+    },
+    "best_head_accuracy": {
+     "acl": 0.518,
+     "advcl": 0.503,
+     "appos": 0.443,
+     "ccomp": 0.34,
+     "compound": 0.964,
+     "conj": 0.636,
+     "nsubj": 0.828,
+     "nummod": 0.67,
+     "obj": 0.951,
+     "obl": 0.564,
+     "parataxis": 0.227,
+     "xcomp": 0.802
+    },
+    "probe_uuas": 0.6209,
+    "probe_len": 2.2434
+   },
+   "10": {
+    "dist": {
+     "mean": 5.4882,
+     "relative_to_40": 0.0006,
+     "ci95": [
+      0.0004,
+      0.0008
+     ]
+    },
+    "long": {
+     "mean": 0.3104,
+     "relative_to_40": 0.0006,
+     "ci95": [
+      0.0004,
+      0.0008
+     ]
+    },
+    "ent": {
+     "mean": 0.6815,
+     "relative_to_40": 0.0013,
+     "ci95": [
+      0.0012,
+      0.0014
+     ]
+    },
+    "best_head_accuracy": {
+     "acl": 0.518,
+     "advcl": 0.503,
+     "appos": 0.462,
+     "ccomp": 0.333,
+     "compound": 0.964,
+     "conj": 0.636,
+     "nsubj": 0.836,
+     "nummod": 0.679,
+     "obj": 0.953,
+     "obl": 0.559,
+     "parataxis": 0.182,
+     "xcomp": 0.806
+    },
+    "probe_uuas": 0.6203,
+    "probe_len": 2.2485
+   },
+   "0": {
+    "dist": {
+     "mean": 5.4958,
+     "relative_to_40": 0.002,
+     "ci95": [
+      0.0017,
+      0.0023
+     ]
+    },
+    "long": {
+     "mean": 0.3108,
+     "relative_to_40": 0.002,
+     "ci95": [
+      0.0016,
+      0.0023
+     ]
+    },
+    "ent": {
+     "mean": 0.6823,
+     "relative_to_40": 0.0025,
+     "ci95": [
+      0.0023,
+      0.0026
+     ]
+    },
+    "best_head_accuracy": {
+     "acl": 0.52,
+     "advcl": 0.51,
+     "appos": 0.453,
+     "ccomp": 0.34,
+     "compound": 0.964,
+     "conj": 0.636,
+     "nsubj": 0.828,
+     "nummod": 0.679,
+     "obj": 0.956,
+     "obl": 0.556,
+     "parataxis": 0.227,
+     "xcomp": 0.798
+    },
+    "probe_uuas": 0.6195,
+    "probe_len": 2.2584
+   }
+  }
+ }
+}

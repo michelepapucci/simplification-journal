@@ -1,0 +1,26 @@
+`torch_dtype` is deprecated! Use `dtype` instead!
+/home/mpapucci/text-simplification-experiments/.venv/lib/python3.10/site-packages/peft/tuners/tuners_utils.py:1222: UserWarning: Model has `tie_word_embeddings=True` and a tied layer is part of the adapter, but `ensure_weight_tying` is not set to True. This can lead to complications, for example when merging the adapter or converting your model to formats other than safetensors. Check the discussion here: https://github.com/huggingface/peft/issues/2777
+  warnings.warn(msg)
+/home/mpapucci/text-simplification-experiments/.venv/lib/python3.10/site-packages/torch/cuda/__init__.py:829: UserWarning: Can't initialize NVML
+  warnings.warn("Can't initialize NVML")
+25/500 originals (13s)
+50/500 originals (28s)
+75/500 originals (40s)
+100/500 originals (54s)
+125/500 originals (68s)
+150/500 originals (81s)
+175/500 originals (94s)
+200/500 originals (106s)
+225/500 originals (117s)
+250/500 originals (129s)
+275/500 originals (142s)
+300/500 originals (153s)
+325/500 originals (171s)
+350/500 originals (187s)
+375/500 originals (200s)
+400/500 originals (211s)
+425/500 originals (226s)
+450/500 originals (243s)
+475/500 originals (255s)
+500/500 originals (268s)
+identical to the level-40 output: {'base40': 1.0, 'base0': 0.1, 'A_0-9': 0.842, 'A_10-18': 0.096, 'A_19-27': 0.088, 'A_all': 1.0, 'B_syntax': 0.246, 'B_random': 0.442}

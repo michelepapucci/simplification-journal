@@ -1,0 +1,18 @@
+`torch_dtype` is deprecated! Use `dtype` instead!
+/home/mpapucci/text-simplification-experiments/.venv/lib/python3.10/site-packages/peft/tuners/tuners_utils.py:1222: UserWarning: Model has `tie_word_embeddings=True` and a tied layer is part of the adapter, but `ensure_weight_tying` is not set to True. This can lead to complications, for example when merging the adapter or converting your model to formats other than safetensors. Check the discussion here: https://github.com/huggingface/peft/issues/2777
+  warnings.warn(msg)
+/home/mpapucci/text-simplification-experiments/.venv/lib/python3.10/site-packages/torch/cuda/__init__.py:829: UserWarning: Can't initialize NVML
+  warnings.warn("Can't initialize NVML")
+vocabulary: 3047 word items with a class: {'out': 1570, 'FO': 1015, 'AU': 401, 'AD': 61}
+g1: 7582 outputs
+fixed text under <|readability_0|>: 1000 originals
+fixed text under <|readability_10|>: 1000 originals
+fixed text under <|readability_20|>: 1000 originals
+fixed text under <|readability_30|>: 1000 originals
+fixed text under <|readability_40|>: 1000 originals
+fixed text under <|readability_50|>: 1000 originals
+fixed text under <|readability_60|>: 1000 originals
+fixed text under <|readability_70|>: 1000 originals
+fixed text under <|readability_80|>: 1000 originals
+fixed text under <|readability_90|>: 1000 originals
+fixed text under <|readability_any|>: 1000 originals

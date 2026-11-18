@@ -1,0 +1,6 @@
+/home/mpapucci/text-simplification-experiments/.venv/lib/python3.10/site-packages/torch/cuda/__init__.py:829: UserWarning: Can't initialize NVML
+  warnings.warn("Can't initialize NVML")
+originals: 1000 texts in 8s
+references: 7968 texts in 40s
+outputs: 7582 texts in 40s
+training: 2000 texts in 11s

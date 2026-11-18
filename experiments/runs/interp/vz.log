@@ -1,0 +1,33 @@
+`torch_dtype` is deprecated! Use `dtype` instead!
+/home/mpapucci/text-simplification-experiments/.venv/lib/python3.10/site-packages/peft/tuners/tuners_utils.py:1222: UserWarning: Model has `tie_word_embeddings=True` and a tied layer is part of the adapter, but `ensure_weight_tying` is not set to True. This can lead to complications, for example when merging the adapter or converting your model to formats other than safetensors. Check the discussion here: https://github.com/huggingface/peft/issues/2777
+  warnings.warn(msg)
+/home/mpapucci/text-simplification-experiments/.venv/lib/python3.10/site-packages/torch/cuda/__init__.py:829: UserWarning: Can't initialize NVML
+  warnings.warn("Can't initialize NVML")
+  originals@40 0/1000 (0s)
+  originals@40 500/1000 (46s)
+originals@40: 1000 texts in 104s; exactness min over layers 0.99999
+  fixed@40 0/1000 (0s)
+  fixed@40 500/1000 (127s)
+fixed@40: 1000 texts in 252s; exactness min over layers 0.99999
+  originals@20 0/1000 (0s)
+  originals@20 500/1000 (59s)
+originals@20: 1000 texts in 108s; exactness min over layers 0.99999
+  fixed@20 0/1000 (0s)
+  fixed@20 500/1000 (64s)
+fixed@20: 1000 texts in 123s; exactness min over layers 0.99999
+  originals@0 0/1000 (0s)
+  originals@0 500/1000 (48s)
+originals@0: 1000 texts in 95s; exactness min over layers 0.99999
+  fixed@0 0/1000 (0s)
+  fixed@0 500/1000 (60s)
+fixed@0: 1000 texts in 120s; exactness min over layers 0.99999
+  references 0/2000 (0s)
+  references 500/2000 (58s)
+  references 1000/2000 (113s)
+  references 1500/2000 (167s)
+references: 2000 texts in 224s; exactness min over layers 0.99999
+  outputs 0/2000 (0s)
+  outputs 500/2000 (50s)
+  outputs 1000/2000 (105s)
+  outputs 1500/2000 (156s)
+outputs: 2000 texts in 210s; exactness min over layers 0.99999

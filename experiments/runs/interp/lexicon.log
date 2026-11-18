@@ -1,0 +1,11 @@
+127685 texts
+/home/mpapucci/text-simplification-experiments/.venv/lib/python3.10/site-packages/torch/cuda/__init__.py:829: UserWarning: Can't initialize NVML
+  warnings.warn("Can't initialize NVML")
+512/127685 texts, 2s
+20992/127685 texts, 136s
+41472/127685 texts, 222s
+61952/127685 texts, 311s
+82432/127685 texts, 399s
+102912/127685 texts, 497s
+123392/127685 texts, 583s
+wrote /home/mpapucci/text-simplification-experiments/simplification-journal/experiments/outputs/interp/lexicon.tsv: 63154 forms in 600s
